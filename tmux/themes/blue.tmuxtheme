@@ -1,0 +1,63 @@
+# Powerline Blue Block - Tmux Theme
+# Inspired by vim-powerline: https://github.com/Lokaltog/powerline
+
+FG_COLOUR=colour252
+BG_COLOUR=colour234
+
+MAIN_COLOUR=colour30
+MID_COLOUR=colour20
+EXTREM_COLOUR=colour4
+
+# Status update interval
+set -g status-interval 1
+
+# Basic status bar style
+set -g status-style bg=$BG_COLOUR,fg=$FG_COLOUR,nobold
+
+# Left side of status bar
+set -g status-left-length 100
+set -g status-left "#[bg=$EXTREM_COLOUR] #S #[bg=$MID_COLOUR] #(whoami) #[bg=$MAIN_COLOUR] #I:#P #[bg=$BG_COLOUR]"
+
+# Right side of status bar
+set -g status-right-length 100
+set -g status-right "#[bg=$MAIN_COLOUR] %H:%M:%S #[bg=$MID_COLOUR] %Y-%m-%d #[bg=$EXTREM_COLOUR] #H "
+
+# Window status
+set -g window-status-format " #I:#W#F "
+set -g window-status-current-format " #I:#W " # No need for the #F since the current window is coloured
+
+# Current window status
+set -g window-status-current-style bg=$MAIN_COLOUR,fg=$FG_COLOUR
+
+# Window with activity status
+# fg and bg are flipped here due to a bug in tmux
+set -g window-status-activity-style bg=$FG_COLOUR,fg=$BG_COLOUR
+
+# Window separator
+set -g window-status-separator ""
+
+# Window status alignment
+set -g status-justify centre
+
+# Pane border
+set -g pane-border-style bg=default,fg=$BG_COLOUR
+
+# Active pane border
+set -g pane-active-border-style bg=default,fg=$MAIN_COLOUR
+
+# Pane number indicator
+set -g display-panes-colour $BG_COLOUR
+set -g display-panes-active-colour $FG_COLOUR
+
+# Clock mode
+set -g clock-mode-colour $MAIN_COLOUR
+set -g clock-mode-style 24
+
+# Message
+set -g message-style bg=$MAIN_COLOUR,fg=colour0
+
+# Command message
+set -g message-command-style bg=$BG_COLOUR,fg=$FG_COLOUR
+
+# Mode
+set -g mode-style bg=$MAIN_COLOUR,fg=$FG_COLOUR
