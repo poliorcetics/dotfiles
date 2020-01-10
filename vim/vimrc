@@ -7,7 +7,7 @@ endif
 
 let $vrtp = &rtp
 
-set rtp=$DIRCONFIG/vim;$vrtp
+set rtp=$DIRCONFIG/vim,$vrtp
 
 source $DIRCONFIG/vim/rcs/base.vim
 source $DIRCONFIG/vim/rcs/filetypes.vim

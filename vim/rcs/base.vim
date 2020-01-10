@@ -33,7 +33,7 @@ endif
 " Backup dirs
 set nobackup
 set writebackup
-:set backupdir=$vim_backup_dir/,/tmp
+set backupdir=$vim_backup_dir/,/tmp
 set backupskip=/tmp/*
 
 if has("mac")
@@ -104,15 +104,15 @@ noremap <leader>; :Ntree<cr>
 syntax enable
 let c_comment_strings = 1
 set background=dark
+set t_Co=256
 
 try
-    colorscheme desert
+  colorscheme desert
 catch
 endtry
 
 try
-    set rtp+=$DIRCONFIG/vim/themes/peaksea/
-    colorscheme peaksea
+  colorscheme peaksea
 catch
 endtry
 
@@ -130,8 +130,8 @@ set number
 set relativenumber
 set cursorline
 set cursorlineopt=number,line
-" If possible, keep 7 lines below/above the cursor when moving with j/k
-set scrolloff=7
+" If possible, keep a few lines below/above the cursor when moving with j/k or Up/Down at the edge of the screen
+set scrolloff=5
 set signcolumn=yes
 
 " Line number
@@ -139,7 +139,8 @@ highlight LineNr ctermbg=233 ctermfg=181
 highlight CursorLineNr cterm=NONE ctermbg=233 ctermfg=226
 
 " Active parts
-highlight CursorLine cterm=NONE ctermbg=237
+highlight clear CursorLine
+highlight CursorLine ctermbg=236
 highlight StatusLine cterm=NONE ctermbg=52 ctermfg=250
 highlight! link TabLineSel StatusLine
 
