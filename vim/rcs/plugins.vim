@@ -4,7 +4,7 @@ if empty($DIRCONFIG)
 endif
 
 " Put plugins here
-call plug#begin($DIRCONFIG . "vim/plugged")
+call plug#begin($DIRCONFIG . "/vim/plugged")
 
 Plug 'itchyny/lightline.vim'
 "Plug 'maximbaz/lightline-ale'
