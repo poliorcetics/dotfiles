@@ -34,7 +34,7 @@ endif
 set nobackup
 set writebackup
 set backupdir=$vim_backup_dir/,/tmp
-set backupskip=/tmp/*
+set backupskip=$vim_tmp_dir/*,/tmp/*
 
 if has("mac")
   set backupdir+=/private/tmp/*
@@ -46,7 +46,7 @@ set directory=$vim_swap_dir/,/tmp
 
 " Persitent undo means you can undo after closing a buffer/Vim
 try
-  set undodir=$vim_undo_dir
+  set undodir=$vim_undo_dir/
   set undofile
 catch
 endtry
@@ -81,8 +81,8 @@ if has("mac")
 endif
 
 " Generic directories, language directories and files
-set wildignore+=.git/*,.hg/*,.svn/*,.vscode/*
-set wildignore+=__pycache__/*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.vscode/*
+set wildignore+=*/__pycache__/*
 set wildignore+=*.swp,*.o,*.obj,*~,*.pyc
 
 """"
@@ -91,7 +91,7 @@ set wildignore+=*.swp,*.o,*.obj,*~,*.pyc
 
 " Tree style
 let g:netrw_liststyle = 3
-let g:netrw_list_hide = &wildignore
+let g:netrw_list_hide = "\.DS_Store$,\.Trash/$,\.localized$,\.Xauthority$,\.CFUserTextEncoding$,\.git/$,\.vscode/$"
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 nnoremap <leader>n :Explore<cr>
@@ -149,7 +149,9 @@ highlight StatusLineNC cterm=NONE ctermbg=233 ctermfg=58
 highlight! link TabLine StatusLineNC
 
 " Fillers
-highlight SignColumn cterm=NONE ctermbg=233
+highlight clear SignColum
+highlight clear TabLineFill
+highlight SignColumn ctermbg=233
 highlight! link TabLineFill SignColumn
 
 " Sepatator
