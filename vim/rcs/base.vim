@@ -1,6 +1,5 @@
 if empty($DIRCONFIG)
-  let $DIRCONFIG = ~/.config/
-  silent !mkdir -p $DIRCONFIG
+  silent ! DIRCONFIG=$HOME/.config/ && export DIRCONFIG && mkdir -p $DIRCONFIG
 endif
 
 " History size for Vim

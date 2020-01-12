@@ -1,6 +1,5 @@
 if empty($DIRCONFIG)
-  let $DIRCONFIG = ~/.config/
-  silent !mkdir -p $DIRCONFIG
+  silent ! DIRCONFIG=$HOME/.config/ && export DIRCONFIG && mkdir -p $DIRCONFIG
 endif
 
 " Put plugins here
@@ -8,6 +7,7 @@ call plug#begin($DIRCONFIG . "/vim/plugged")
 
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
 Plug 'airblade/vim-gitgutter'
 
 " Tagbar needs universal-ctags: https://github.com/universal-ctags/ctags to work correctly
@@ -97,7 +97,7 @@ let g:lightline#ale#indicator_warnings = "[W] "
 let g:lightline#ale#indicator_errors = "[E] "
 
 """"
-" Git gutter
+" Gitgutter
 """"
 
 " Update time
@@ -120,3 +120,13 @@ noremap <silent> <F12> :TagbarToggle<cr>
 noremap <silent> <F11> :TagbarOpen fj<cr>
 noremap <silent> <F10> :TagbarSetFoldlevel 99<cr>
 noremap <silent> <F9> :TagbarSetFoldlevel 1<cr>
+
+""""
+" vim-markdown
+""""
+
+let g:markdown_fenced_languages = ['python', 'c', 'cpp', 'rust']
+
+let g:markdown_syntax_conceal = 1
+" Warning: may slow Vim, reduce as needed
+let g:markdown_minlines = 100
