@@ -116,6 +116,14 @@ augroup git_gutter_conf
   autocmd BufWritePost,InsertLeave * GitGutter
 augroup END
 
+noremap <leader>: :GitGutterNextHunk<cr>
+noremap <leader>= :GitGutterPrevHunk<cr>
+
+highlight GitGutterAdd ctermfg=2 ctermbg=233
+highlight GitGutterChange ctermfg=3 ctermbg=233
+highlight GitGutterDelete ctermfg=1 ctermbg=233
+highlight GitGutterChangeDelete ctermfg=5 ctermbg=233
+
 """"
 " TagBar
 """"
@@ -207,6 +215,12 @@ let g:multi_cursor_next_key            = '<C-d>'
 let g:multi_cursor_prev_key            = '<C-q>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
+
+highlight multiple_cursors_cursor cterm=NONE ctermfg=7 ctermbg=160
+highlight multiple_cursors_visual cterm=NONE ctermfg=7 ctermbg=88
+
+" https://github.com/terryma/vim-multiple-cursors#settings
+" let g:multi_cursor_exit_from_insert_mode = 1
 
 nnoremap <silent> <C-a> :MultipleCursorsFind <C-R>/<CR>
 vnoremap <silent> <C-a> :MultipleCursorsFind <C-R>/<CR>
