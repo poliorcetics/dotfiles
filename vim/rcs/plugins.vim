@@ -33,6 +33,7 @@ Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'rust-lang/rust.vim'
 
 Plug 'terryma/vim-multiple-cursors'
+Plug 'cohama/lexima.vim'
 
 call plug#end()
 " Stop putting plugins here
@@ -209,3 +210,11 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 nnoremap <silent> <C-a> :MultipleCursorsFind <C-R>/<CR>
 vnoremap <silent> <C-a> :MultipleCursorsFind <C-R>/<CR>
+
+""""
+" Lexima
+""""
+
+call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'latex'})
+call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'latex'})
+call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'latex'})
