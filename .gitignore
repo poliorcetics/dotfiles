@@ -1,9 +1,6 @@
 *
-!*/
 !README.md
 !install.sh
 !.gitignore
-!vim/*
-!tmux/*
-
-rust/*
+!vim/
+!tmux/
