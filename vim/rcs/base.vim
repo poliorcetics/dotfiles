@@ -283,12 +283,11 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<cr>:%s/<C-R>=@/<cr>//g
 " Search
 """"
 
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+" Map space to search
 noremap <space> /
-noremap <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
-noremap <silent> <leader><cr> :noh<cr>
+noremap <silent> <leader><cr> :let @/ = ""<cr>
 
 """"
 " Navigating windows, tabs and buffer
@@ -309,14 +308,8 @@ noremap <C-j> <C-w>h
 noremap <C-l> <C-w>l
 
 " Fast move
-noremap <C-"> 5-
-noremap <C-'> 5+
-
-" Move to next {/}
-noremap [[ ?{<cr>w99[{
-noremap ][ /}<cr>b99]}
-noremap ]] j0[[%/{<cr>
-noremap [] k$][%?}<cr>
+noremap ;k 5-
+noremap ;l 5+
 
 " Close the current buffer
 noremap <leader>bd :Bclose<cr>:tabclose<cr>gT
