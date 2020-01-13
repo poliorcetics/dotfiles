@@ -30,6 +30,10 @@ endfunction
 
 Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 
+Plug 'rust-lang/rust.vim'
+
+Plug 'terryma/vim-multiple-cursors'
+
 call plug#end()
 " Stop putting plugins here
 
@@ -105,11 +109,10 @@ set updatetime=100
 
 let g:gitgutter_map_keys = 0
 let g:gitgutter_enabled = 1
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
 augroup git_gutter_conf
   autocmd!
-  autocmd BufWritePost * GitGutter
+  autocmd BufWritePost,InsertLeave * GitGutter
 augroup END
 
 """"
@@ -130,3 +133,79 @@ let g:markdown_fenced_languages = ['python', 'c', 'cpp', 'rust']
 let g:markdown_syntax_conceal = 1
 " Warning: may slow Vim, reduce as needed
 let g:markdown_minlines = 100
+
+""""
+" rust
+""""
+
+let g:autofmt_autosave = 1
+" See :h ale-integration-rust
+let g:ale_linters = {'rust': ['rls', 'cargo', 'rustc', 'rustfmt']}
+
+" https://github.com/majutsushi/tagbar/wiki#universal-ctags-variant
+let g:rust_use_custom_ctags_defs = 1
+let g:tagbar_type_rust = {
+  \ 'ctagsbin' : 'ctags',
+  \ 'ctagstype' : 'rust',
+  \ 'kinds' : [
+      \ 'n:modules',
+      \ 's:structures:1',
+      \ 'i:interfaces',
+      \ 'c:implementations',
+      \ 'f:functions:1',
+      \ 'g:enumerations:1',
+      \ 't:type aliases:1:0',
+      \ 'v:constants:1:0',
+      \ 'M:macros:1',
+      \ 'm:fields:1:0',
+      \ 'e:enum variants:1:0',
+      \ 'P:methods:1',
+  \ ],
+  \ 'sro': '::',
+  \ 'KIND2SCOPE' : {
+      \ 'n': 'module',
+      \ 's': 'struct',
+      \ 'i': 'interface',
+      \ 'c': 'implementation',
+      \ 'f': 'function',
+      \ 'g': 'enum',
+      \ 't': 'typedef',
+      \ 'v': 'variable',
+      \ 'M': 'macro',
+      \ 'm': 'field',
+      \ 'e': 'enumerator',
+      \ 'P': 'method',
+  \ },
+\ }
+
+""""
+" YouCompleteMe
+""""
+
+let g:ycm_complete_in_comments = 1
+
+" Preview window management
+let g:ycm_add_preview_to_compleopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 2
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+let g:ycm_key_list_stop_completion = ['<Left>', '<Right>']
+let g:ycm_key_detailed_diagnostics = '<leader>d'
+
+""""
+" Multiple cursors
+""""
+
+let g:multi_cursor_use_default_mapping = 0
+let g:multi_cursor_start_word_key      = '<C-d>'
+let g:multi_cursor_select_all_word_key = '<C-s>'
+let g:multi_cursor_start_key           = 'g<C-d>'
+let g:multi_cursor_select_all_key      = 'g<C-s>'
+let g:multi_cursor_next_key            = '<C-d>'
+let g:multi_cursor_prev_key            = '<C-q>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+nnoremap <silent> <C-a> :MultipleCursorsFind <C-R>/<CR>
+vnoremap <silent> <C-a> :MultipleCursorsFind <C-R>/<CR>
