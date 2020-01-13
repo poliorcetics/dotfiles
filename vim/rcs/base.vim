@@ -128,6 +128,17 @@ set ruler
 set number
 set relativenumber
 set cursorline
+
+" The cursor column can slow down Vim so it's deactivated each time a buffer is left
+" The state is remembered and reactivated when coming back to the buffer
+augroup cursor_draw_per_window
+  autocmd!
+  au WinLeave * setlocal nocursorline nocursorcolumn
+  au WinEnter * setlocal cursorline | call UpdateCursorColumn()
+augroup END
+
+nnoremap <silent> <leader>k :call ToggleCursorColumn()<cr>
+
 set cursorlineopt=number,line
 " If possible, keep a few lines below/above the cursor when moving with j/k or Up/Down at the edge of the screen
 set scrolloff=5
@@ -139,7 +150,9 @@ highlight CursorLineNr cterm=NONE ctermbg=233 ctermfg=226
 
 " Active parts
 highlight clear CursorLine
+highlight clear CursorColumn
 highlight CursorLine ctermbg=236
+highlight! link CursorColumn CursorLine
 highlight StatusLine cterm=NONE ctermbg=52 ctermfg=250
 highlight! link TabLineSel StatusLine
 
@@ -447,6 +460,25 @@ cnoremap <C-K> <C-U>
 """"
 " Helper functions
 """"
+
+" Toggle the 'cursorcolumn' setting
+function! ToggleCursorColumn()
+  if exists("b:cursorColumnIsActive")
+    set nocursorcolumn
+    unlet b:cursorColumnIsActive
+  else
+    set cursorcolumn
+    let b:cursorColumnIsActive = 1
+  endif
+endfunction
+
+function! UpdateCursorColumn()
+  if exists("b:cursorColumnIsActive")
+    set cursorcolumn
+  else
+    set nocursorcolumn
+  endif
+endfunction
 
 " Returns true if paste mode is enabled
 function! HasPaste()
