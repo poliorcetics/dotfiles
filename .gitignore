@@ -1,1 +1,7 @@
-openvpn/
+*
+!*/
+!README.md
+!install.sh
+!.gitignore
+!vim/*
+!tmux/*
