@@ -147,7 +147,6 @@ let g:markdown_minlines = 100
 " rust
 """"
 
-let g:autofmt_autosave = 1
 " See :h ale-integration-rust
 let g:ale_linters = {'rust': ['rls', 'cargo', 'rustc', 'rustfmt']}
 
@@ -171,7 +170,7 @@ let g:tagbar_type_rust = {
       \ 'P:methods:1',
   \ ],
   \ 'sro': '::',
-  \ 'KIND2SCOPE' : {
+  \ 'kind2scope' : {
       \ 'n': 'module',
       \ 's': 'struct',
       \ 'i': 'interface',
@@ -210,6 +209,19 @@ highlight PmenuSel cterm=NONE ctermbg=176 ctermfg=232
 " Multiple cursors
 """"
 
+" NOTE: Trying to enter " in multi cursor seems to fail and greatly slow down
+" the plugin.
+" FIX: Copy '"' and use 'p' or 'P' to paste it in the correct place
+
+" https://github.com/terryma/vim-multiple-cursors#interactions-with-other-plugins
+function! Multiple_cursors_before()
+  let b:lexima_disabled = 1
+endfunction
+
+function! Multiple_cursors_after()
+  unlet b:lexima_disabled
+endfunction
+
 let g:multi_cursor_use_default_mapping = 0
 let g:multi_cursor_start_word_key      = '<C-d>'
 let g:multi_cursor_select_all_word_key = '<C-s>'
@@ -233,6 +245,11 @@ vnoremap <silent> <C-a> :MultipleCursorsFind <C-R>/<CR>
 " Lexima
 """"
 
+" Latex rules
 call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'latex'})
 call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'latex'})
 call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'latex'})
+
+" Rust rules
+call lexima#add_rule({'char': '<Space>', 'at': 'let\%#', 'input_after': ';', 'filetype': 'rust'})
+call lexima#add_rule({'char': '<Space>', 'at': 'fn\%#', 'input_after': '{<CR>}', 'filetype': 'rust'})
