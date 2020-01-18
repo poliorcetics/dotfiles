@@ -128,6 +128,10 @@ highlight GitGutterChangeDelete ctermfg=5 ctermbg=233
 " TagBar
 """"
 
+let g:tagbar_autoshowtag = 1
+let g:tagbar_autopreview = 1
+let g:tagbar_previewwin_pos = 'botright'
+
 noremap <silent> <F12> :TagbarToggle<cr>
 noremap <silent> <F11> :TagbarOpen fj<cr>
 noremap <silent> <F10> :TagbarSetFoldlevel 99<cr>
