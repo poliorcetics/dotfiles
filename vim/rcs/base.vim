@@ -16,17 +16,20 @@ let $vim_swap_dir = $vim_tmp_dir . "/swap"
 
 if empty(glob($vim_backup_dir))
   silent !mkdir -p $vim_backup_dir
-  silent !echo '!.gitignore' > $vim_backup_dir/.gitignore
+  silent !echo '*' > $vim_backup_dir/.gitignore
+  silent !echo '!.gitignore' >> $vim_backup_dir/.gitignore
 endif
 
 if empty(glob($vim_undo_dir))
   silent !mkdir -p $vim_undo_dir
-  silent !echo '!.gitignore' > $vim_undo_dir/.gitignore
+  silent !echo '*' > $vim_undo_dir/.gitignore
+  silent !echo '!.gitignore' >> $vim_undo_dir/.gitignore
 endif
 
 if empty(glob($vim_swap_dir))
   silent !mkdir -p $vim_swap_dir
-  silent !echo '!.gitignore' > $vim_swap_dir/.gitignore
+  silent !echo '*' > $vim_swap_dir/.gitignore
+  silent !echo '!.gitignore' >> $vim_swap_dir/.gitignore
 endif
 
 " Backup dirs
@@ -43,9 +46,16 @@ endif
 " List of directory names for the swap files
 set directory=$vim_swap_dir/,/tmp
 
+if has("mac")
+  set directory+=/private/tmp/*
+endif
+
 " Persitent undo means you can undo after closing a buffer/Vim
 try
-  set undodir=$vim_undo_dir/
+  set undodir=$vim_undo_dir/,/tmp
+  if has("mac")
+    set undodir+=/private/tmp/*
+  endif
   set undofile
 catch
 endtry
