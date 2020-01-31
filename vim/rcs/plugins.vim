@@ -131,6 +131,7 @@ highlight GitGutterChangeDelete ctermfg=5 ctermbg=233
 let g:tagbar_autoshowtag = 1
 let g:tagbar_autopreview = 1
 let g:tagbar_previewwin_pos = 'botright'
+let g:tagbar_sort = 0
 
 noremap <silent> <F12> :TagbarToggle<cr>
 noremap <silent> <F11> :TagbarOpen fj<cr>
@@ -253,7 +254,3 @@ vnoremap <silent> <C-a> :MultipleCursorsFind <C-R>/<CR>
 call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'latex'})
 call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'latex'})
 call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'latex'})
-
-" Rust rules
-call lexima#add_rule({'char': '<Space>', 'at': 'let\%#', 'input_after': ';', 'filetype': 'rust'})
-call lexima#add_rule({'char': '<Space>', 'at': 'fn\%#', 'input_after': '{<CR>}', 'filetype': 'rust'})
