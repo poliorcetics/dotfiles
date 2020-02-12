@@ -206,6 +206,10 @@ let g:ycm_autoclose_preview_window_after_completion = 2
 " let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_stop_completion = ['<Left>', '<Right>']
 let g:ycm_key_detailed_diagnostics = '<leader>d'
+let g:ycm_seed_identifiers_with_syntax = 1
+
+nnoremap <silent> <F7> :YcmCompleter GetType<cr>
+nnoremap <silent> <F8> :YcmCompleter GetDoc<cr>
 
 highlight Pmenu cterm=NONE ctermbg=182 ctermfg=234
 highlight PmenuSel cterm=NONE ctermbg=176 ctermfg=232
