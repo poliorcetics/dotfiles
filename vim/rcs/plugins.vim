@@ -30,7 +30,10 @@ endfunction
 
 Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 
-Plug 'rust-lang/rust.vim'
+" Conditional Rust install
+if !empty($CARGO_HOME) || !empty($RUSTUP_HOME)
+  Plug 'rust-lang/rust.vim'
+endif
 
 Plug 'terryma/vim-multiple-cursors'
 Plug 'cohama/lexima.vim'
@@ -149,47 +152,50 @@ let g:markdown_syntax_conceal = 1
 let g:markdown_minlines = 100
 
 """"
-" rust
+" Rust
 """"
 
-" See :h ale-integration-rust
-let g:ale_linters = {'rust': ['rls', 'cargo', 'rustc', 'rustfmt']}
+" Conditional Rust install
+if !empty($CARGO_HOME) || !empty($RUSTUP_HOME)
+  " See :h ale-integration-rust
+  let g:ale_linters = {'rust': ['rls', 'cargo', 'rustc', 'rustfmt']}
 
-" https://github.com/majutsushi/tagbar/wiki#universal-ctags-variant
-let g:rust_use_custom_ctags_defs = 1
-let g:tagbar_type_rust = {
-  \ 'ctagsbin' : 'ctags',
-  \ 'ctagstype' : 'rust',
-  \ 'kinds' : [
-      \ 'n:modules',
-      \ 's:structures:1',
-      \ 'i:interfaces',
-      \ 'c:implementations',
-      \ 'f:functions:1',
-      \ 'g:enumerations:1',
-      \ 't:type aliases:1:0',
-      \ 'v:constants:1:0',
-      \ 'M:macros:1',
-      \ 'm:fields:1:0',
-      \ 'e:enum variants:1:0',
-      \ 'P:methods:1',
-  \ ],
-  \ 'sro': '::',
-  \ 'kind2scope' : {
-      \ 'n': 'module',
-      \ 's': 'struct',
-      \ 'i': 'interface',
-      \ 'c': 'implementation',
-      \ 'f': 'function',
-      \ 'g': 'enum',
-      \ 't': 'typedef',
-      \ 'v': 'variable',
-      \ 'M': 'macro',
-      \ 'm': 'field',
-      \ 'e': 'enumerator',
-      \ 'P': 'method',
-  \ },
-\ }
+  " https://github.com/majutsushi/tagbar/wiki#universal-ctags-variant
+  let g:rust_use_custom_ctags_defs = 1
+  let g:tagbar_type_rust = {
+    \ 'ctagsbin' : 'ctags',
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \ 'n:modules',
+        \ 's:structures:1',
+        \ 'i:interfaces',
+        \ 'c:implementations',
+        \ 'f:functions:1',
+        \ 'g:enumerations:1',
+        \ 't:type aliases:1:0',
+        \ 'v:constants:1:0',
+        \ 'M:macros:1',
+        \ 'm:fields:1:0',
+        \ 'e:enum variants:1:0',
+        \ 'P:methods:1',
+    \ ],
+    \ 'sro': '::',
+    \ 'kind2scope' : {
+        \ 'n': 'module',
+        \ 's': 'struct',
+        \ 'i': 'interface',
+        \ 'c': 'implementation',
+        \ 'f': 'function',
+        \ 'g': 'enum',
+        \ 't': 'typedef',
+        \ 'v': 'variable',
+        \ 'M': 'macro',
+        \ 'm': 'field',
+        \ 'e': 'enumerator',
+        \ 'P': 'method',
+    \ },
+  \ }
+endif
 
 """"
 " YouCompleteMe
