@@ -6,3 +6,5 @@
 !tmux/
 !vim/**
 !tmux/**
+!sh/
+!sh/**
