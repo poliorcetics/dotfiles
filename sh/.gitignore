@@ -1,2 +1,9 @@
 *
 !.gitignore
+!README.md
+!profile
+!install.sh
+!options
+!bash
+!bin
+!common
