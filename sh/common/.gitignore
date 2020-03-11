@@ -1,0 +1,4 @@
+*
+!.gitignore
+!basic.sh
+!modules/rust.sh
