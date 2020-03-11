@@ -1,0 +1,79 @@
+# NOTE: All backgrounds (*_G) are ignored at the moment for the bash shell,
+# they exists as a forward compatibility precaution
+
+BASH_THEME_ERROR_CODE_F=1
+BASH_THEME_ERROR_CODE_G=0
+export BASH_THEME_ERROR_CODE_F
+export BASH_THEME_ERROR_CODE_G
+
+BASH_THEME_USER_F=2
+BASH_THEME_USER_G=0
+export BASH_THEME_USER_F
+export BASH_THEME_USER_G
+
+BASH_THEME_HOST_F=2
+BASH_THEME_HOST_G=0
+export BASH_THEME_HOST_F
+export BASH_THEME_HOST_G
+
+BASH_THEME_PATH_F=6
+BASH_THEME_PATH_G=0
+export BASH_THEME_PATH_F
+export BASH_THEME_PATH_G
+
+BASH_THEME_GIT_CLEAN_F=2
+BASH_THEME_GIT_CLEAN_G=0
+export BASH_THEME_GIT_CLEAN_F
+export BASH_THEME_GIT_CLEAN_G
+
+BASH_THEME_GIT_DIRTY_F=1
+BASH_THEME_GIT_DIRTY_G=0
+export BASH_THEME_GIT_DIRTY_F
+export BASH_THEME_GIT_DIRTY_G
+
+BASH_THEME_BANG_F=3
+BASH_THEME_BANG_G=0
+export BASH_THEME_BANG_F
+export BASH_THEME_BANG_G
+
+# Function that builds the bash prompt using the active theme
+function make_bash_prompt {
+  local last_result=$?
+  # unicode "✗"
+  local fancyx='\342\234\227'
+  # unicode "✓"
+  local checkmark='\342\234\223'
+
+  PS1=""
+
+  # Adding the return code if different from 0
+  if test $last_result -ne 0; then
+    PS1+="\[$(tput setaf $BASH_THEME_ERROR_CODE_F)\]"
+    PS1+="$last_result"
+    PS1+="\[$(tput sgr0)\]:"
+  fi
+
+  # username
+  PS1+="\[$(tput setaf $BASH_THEME_USER_F)\]\u"
+  PS1+="\[$(tput sgr0)\]@"
+  # host
+  PS1+="\[$(tput setaf $BASH_THEME_HOST_F)\]\h"
+  PS1+="\[$(tput sgr0)\]"
+  # path, using the custom path shortener if possible, else the full path provided by bash
+  local true_path=$(pwd | sed "s:$HOME:~:")
+  PS1+=":\[$(tput setaf $BASH_THEME_PATH_F)\]"
+  PS1+="$($DIRCONFIG/sh/bin/path_shortener $true_path 2>/dev/null || printf $true_path)"
+  PS1+="\[$(tput sgr0)\]"
+
+  # Git state if in a git directory
+  local git_current_branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
+  local git_dirty_state=`git rev-parse 2>/dev/null && ((git diff --no-ext-diff --quiet --exit-code 2> /dev/null && printf "$(tput setaf $BASH_THEME_GIT_CLEAN_F)$checkmark$(tput sgr0)") || printf "$(tput setaf $BASH_THEME_GIT_DIRTY_F)$fancyx$(tput sgr0)")`
+  local git_user=`git config --get user.name 2>/dev/null`
+
+  if test $git_current_branch; then
+    PS1+=":\[$(tput bold)\]$git_user - $git_current_branch(`printf $git_dirty_state`)$(tput sgr0)"
+  fi
+
+  # Final addition to the prompt
+  PS1+="\n\[$(tput setaf $BASH_THEME_BANG_F)\]\$\[$(tput sgr0)\] "
+}
