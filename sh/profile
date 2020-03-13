@@ -15,16 +15,6 @@ for option in `find $DIRCONFIG/sh/options -maxdepth 1 -iname "[^.]*[^.md]" -type
 done
 builtin unset _mod
 
-# Shell specific file
-shell_rc=""
-if ! builtin test -z ${ZSH_NAME+x}; then
-  shell_rc=$DIRCONFIG/sh/zsh/zshrc
-elif ! builtin test -z ${BASH+x}; then
-  shell_rc=$DIRCONFIG/sh/bash/bashrc
-fi
-builtin source $shell_rc 2>/dev/null || builtin echo "Could not load rc file: $shell_rc" >&2
-builtin unset shell_rc
-
 # If the user has a personal bin directory, use it as first element in the path
 # Else, avoid cluttering the path
 if builtin test -d $HOME/bin; then
@@ -57,3 +47,13 @@ if builtin test -d $DIRCONFIG/sh/bin; then
       ;;
   esac
 fi
+
+# Shell specific file
+shell_rc=""
+if ! builtin test -z ${ZSH_NAME+x}; then
+  shell_rc=$DIRCONFIG/sh/zsh/zshrc
+elif ! builtin test -z ${BASH+x}; then
+  shell_rc=$DIRCONFIG/sh/bash/bashrc
+fi
+builtin source $shell_rc 2>/dev/null || builtin echo "Could not load rc file: $shell_rc" >&2
+builtin unset shell_rc
