@@ -9,7 +9,7 @@ builtin test -d $DIRCONFIG || mkdir -p $DIRCONFIG
 builtin source $DIRCONFIG/sh/common/basic.sh
 
 # Loading the optional modules
-for option in `find $DIRCONFIG/sh/options -type f -iname "[^.]*[^.md]" -depth 1`; do
+for option in `find $DIRCONFIG/sh/options -maxdepth 1 -iname "[^.]*[^.md]" -type f`; do
   _mod=$DIRCONFIG/sh/common/modules/$(basename $option).sh
   builtin source $_mod 2>/dev/null || builtin echo "Failed to load module $_mod" >&2
 done

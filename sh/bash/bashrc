@@ -2,7 +2,7 @@
 shopt -s checkwinsize
 
 # Loading completions from the appropriate directory
-for compl in `find $DIRCONFIG/sh/bash/completions -type f -iname "[^.]*.bash-completions" -depth 1`; do
+for compl in `find $DIRCONFIG/sh/bash/completions -maxdepth 1 -iname "[^.]*.bash-completions" -type f`; do
   builtin source $compl 2>/dev/null || builtin echo "Failed to load completion $compl" >&2
 done
 
@@ -10,7 +10,7 @@ done
 builtin source $DIRCONFIG/sh/bash/themes/default_theme.bash_theme
 
 # Load the customization options
-for custom in `find $DIRCONFIG/sh/bash/custom -type f -iname "[^.]*.bash" -depth 1`; do
+for custom in `find $DIRCONFIG/sh/bash/custom -maxdepth 1 -iname "[^.]*.bash" -type f`; do
   builtin source $custom 2>/dev/null || builtin echo "Failed to load custom $custom" >&2
 done
 
