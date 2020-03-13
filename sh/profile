@@ -47,3 +47,13 @@ if builtin test -d $HOME/.bin; then
       ;;
   esac
 fi
+if builtin test -d $DIRCONFIG/sh/bin; then
+  case :$PATH: in
+    *:$DIRCONFIG/sh/bin:*)
+      ;;
+    *)
+      PATH=$DIRCONFIG/sh/bin:$PATH
+      builtin export PATH
+      ;;
+  esac
+fi

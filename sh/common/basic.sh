@@ -48,6 +48,5 @@ elif builtin test "$OSTYPE" = "linux-gnu"; then
   builtin alias la='ls -haF --color=auto';
   builtin alias l='ls -lhaF --color=auto';
   builtin alias ll='ls -lhF --color=auto';
-# builtin alias lm='clear; ls -lhaF --color=auto';
 
 fi

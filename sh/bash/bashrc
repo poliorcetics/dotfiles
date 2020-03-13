@@ -19,4 +19,5 @@ if ! builtin test -z ${BASH_THEME+x}; then
   builtin source $DIRCONFIG/sh/bash/themes/"$BASH_THEME".bash_theme 2>/dev/null || builtin echo "Failed to load theme: $BASH_THEME" >&2
 fi
 
-builtin export PROMPT_COMMAND='make_bash_prompt'
+PROMPT_COMMAND='make_bash_prompt'
+builtin export PROMPT_COMMAND
