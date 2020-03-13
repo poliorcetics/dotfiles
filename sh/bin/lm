@@ -7,6 +7,13 @@ if builtin test $# -eq 0; then
     builtin exit
 fi
 
+colorOptionLs=""
+if builtin test `uname -s` = "Darwin"; then
+  colorOptionLs="-G"
+elif builtin test "$OSTYPE" = "linux-gnu"; then
+  colorOptionLs="--color=always"
+fi
+
 # Colors to make a more readable output
 dirCol=$(tput setaf 40)$(tput setab 7)
 resetColor=$(tput sgr0)
@@ -29,7 +36,7 @@ while builtin test $# -ne 0; do
     printf "${dirCol}${_source}${resetColor}\n"
   fi
   # Display the content of the wanted dir
-  ls -lhaF "$_source"
+  ls -lhaF $colorOptionLs "$_source"
 
   shift
 done
