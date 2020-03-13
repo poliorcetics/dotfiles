@@ -28,6 +28,7 @@ local_shell_rc=$DIRCONFIG/sh/profile
 builtin echo "Linking $shell_rc file from $local_shell_rc"
 ln -s $local_shell_rc $shell_rc
 
+( cd $DIRCONFIG/sh/bin && make $DIRCONFIG )
 builtin unset shell_rc
 builtin unset old_shell_rc
 builtin unset shell_file
