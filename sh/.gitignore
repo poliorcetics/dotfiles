@@ -3,7 +3,11 @@
 !README.md
 !profile
 !install.sh
+!options
 !options/**
+!bash
 !bash/**
+!bin
 !bin/**
+!common
 !common/**

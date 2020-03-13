@@ -71,7 +71,7 @@ function make_bash_prompt {
   local git_user=`git config --get user.name 2>/dev/null`
 
   if test $git_current_branch; then
-    PS1+=":\[$(tput bold)\]$git_user - $git_current_branch(`printf $git_dirty_state`)$(tput sgr0)"
+    PS1+=":\[$(tput bold)\]$git_user - $git_current_branch$(tput sgr0)(`printf $git_dirty_state`$(tput sgr0))"
   fi
 
   # Final addition to the prompt
