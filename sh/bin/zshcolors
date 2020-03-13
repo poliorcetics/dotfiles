@@ -1,0 +1,4 @@
+#!/bin/zsh
+for ((i = 0; i < 256; i++ ));
+  for ((j = 0; j < 256; j++ ));
+    print -P "F=$j\tK=$i\t%K{$i}%F{$j}COLOR color%f%k"
