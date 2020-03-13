@@ -2,38 +2,38 @@
 clear
 
 # Display the current working directory if no argument is given
-if [ $# -eq 0 ]; then
+if builtin test $# -eq 0; then
     $0 "$(pwd)"
-    exit
+    builtin exit
 fi
 
 # Colors to make a more readable output
-dirCol="\e[40;7m"
-resetColor="\e[0m"
+dirCol=$(tput setaf 40)$(tput setab 7)
+resetColor=$(tput sgr0)
 
 # While there are arguments
-while test $# -ne 0; do
+while builtin test $# -ne 0; do
   # Getting the full path the given file or dir
-  if test -d "$1";  then
-    source=$(cd -P "$1" && pwd)
+  if builtin test -d "$1";  then
+    _source=$(builtin cd -P "$1" && pwd)
     # If the path is not the root, add a '/' at the end to mark it as a path
-    if test "$source" != "/"; then
-      source="$source/"
+    if builtin test "$_source" != "/"; then
+      _source="$_source/"
     fi
   else
-    source="$(cd -P $(dirname $1) && pwd)/$(basename $1)"
+    _source="$(builtin cd -P $(dirname $1) && pwd)/$(basename $1)"
   fi
 
   # Display the selected dir if necessary
-  if test -d "$source"; then
-    printf "${dirCol}${source}${resetColor}\n"
+  if builtin test -d "$_source"; then
+    printf "${dirCol}${_source}${resetColor}\n"
   fi
   # Display the content of the wanted dir
-  ls -lhaFG "$source"
+  ls -lhaF "$_source"
 
   shift
 done
 
-unset dirCol
-unset resetColor
-unset source
+builtin unset dirCol
+builtin unset resetColor
+builtin unset _source
