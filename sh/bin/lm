@@ -15,7 +15,7 @@ elif builtin test "$OSTYPE" = "linux-gnu"; then
 fi
 
 # Colors to make a more readable output
-dirCol=$(tput setaf 40)$(tput setab 7)
+dirCol=$(tput smso)
 resetColor=$(tput sgr0)
 
 # While there are arguments
