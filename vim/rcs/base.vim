@@ -166,6 +166,10 @@ highlight! link CursorColumn CursorLine
 highlight StatusLine cterm=NONE ctermbg=52 ctermfg=250
 highlight! link TabLineSel StatusLine
 
+" Folding
+highlight clear Folded
+highlight Folded cterm=None ctermbg=95
+
 " Inactive parts
 highlight StatusLineNC cterm=NONE ctermbg=233 ctermfg=58
 highlight! link TabLine StatusLineNC
@@ -278,6 +282,12 @@ set linebreak
 set autoindent
 set smartindent
 set wrap
+
+" Folding
+set foldmethod=indent
+set foldnestmax=5
+set nofoldenable
+set foldlevel=2
 
 """"
 " Visual mode related
