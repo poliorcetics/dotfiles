@@ -9,7 +9,7 @@ else
   echo "Found DIRCONFIG: $DIRCONFIG"
 fi
 
-shell_file=""
+shell_file="profile"
 if ! test -z ${ZSH_NAME+x}; then
   shell_file=zshrc
 elif ! test -z ${BASH+x}; then
