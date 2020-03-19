@@ -7,46 +7,46 @@ LC_MONETARY=$LANG
 LC_MESSAGES=$LANG
 LC_ALL=$LANG
 # Exports are separated to ensure bash-compatibility
-builtin export LANG
-builtin export LC_NUMERIC
-builtin export LC_TIME
-builtin export LC_COLLATE
-builtin export LC_MONETARY
-builtin export LC_MESSAGES
-builtin export LC_ALL
+export LANG
+export LC_NUMERIC
+export LC_TIME
+export LC_COLLATE
+export LC_MONETARY
+export LC_MESSAGES
+export LC_ALL
 
 # Some basic aliases
-builtin alias c='clear'
-builtin alias grep='grep --colour=always'
-builtin alias git='LANG=en_GB.UTF-8 git'
-builtin alias rd='rmdir'
-builtin alias shistory='history | grep --colour=always'
+alias c='clear'
+alias grep='grep --colour=always'
+alias git='LANG=en_GB.UTF-8 git'
+alias rd='rmdir'
+alias shistory='history | grep --colour=always'
 
 # OS Specific aliases
-if builtin test `uname -s` = "Darwin"; then
-  builtin alias fd='open .'
+if test `uname -s` = "Darwin"; then
+  alias fd='open .'
 
-  builtin alias ls='ls -FG';
-  builtin alias la='ls -haFG';
-  builtin alias l='ls -lhaFG';
-  builtin alias ll='ls -lhFG';
+  alias ls='ls -FG';
+  alias la='ls -haFG';
+  alias l='ls -lhaFG';
+  alias ll='ls -lhFG';
 
   # show/hide system files
-  builtin alias showsystemfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
-  builtin alias hidesystemfiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
+  alias showsystemfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
+  alias hidesystemfiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
 
-  builtin alias xcode='open -a Xcode'
+  alias xcode='open -a Xcode'
 
-  if test `builtin command -v brew`; then
-    builtin alias bu='brew upgrade && brew cleanup'
-    builtin alias bl='brew list -1'
+  if test `command -v brew`; then
+    alias bu='brew upgrade && brew cleanup'
+    alias bl='brew list -1'
   fi
 
-elif builtin test "$OSTYPE" = "linux-gnu"; then
+elif test "$OSTYPE" = "linux-gnu"; then
 
-  builtin alias ls='ls -F --color=auto';
-  builtin alias la='ls -haF --color=auto';
-  builtin alias l='ls -lhaF --color=auto';
-  builtin alias ll='ls -lhF --color=auto';
+  alias ls='ls -F --color=auto';
+  alias la='ls -haF --color=auto';
+  alias l='ls -lhaF --color=auto';
+  alias ll='ls -lhF --color=auto';
 
 fi

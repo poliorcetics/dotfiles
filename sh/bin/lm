@@ -2,15 +2,15 @@
 clear
 
 # Display the current working directory if no argument is given
-if builtin test $# -eq 0; then
+if test $# -eq 0; then
     $0 "$(pwd)"
-    builtin exit
+    exit
 fi
 
 colorOptionLs=""
-if builtin test `uname -s` = "Darwin"; then
+if test `uname -s` = "Darwin"; then
   colorOptionLs="-G"
-elif builtin test "$OSTYPE" = "linux-gnu"; then
+elif test "$OSTYPE" = "linux-gnu"; then
   colorOptionLs="--color=always"
 fi
 
@@ -19,20 +19,20 @@ dirCol=$(tput smso)
 resetColor=$(tput sgr0)
 
 # While there are arguments
-while builtin test $# -ne 0; do
+while test $# -ne 0; do
   # Getting the full path the given file or dir
-  if builtin test -d "$1";  then
-    _source=$(builtin cd -P "$1" && pwd)
+  if test -d "$1";  then
+    _source=$(cd -P "$1" && pwd)
     # If the path is not the root, add a '/' at the end to mark it as a path
-    if builtin test "$_source" != "/"; then
+    if test "$_source" != "/"; then
       _source="$_source/"
     fi
   else
-    _source="$(builtin cd -P $(dirname $1) && pwd)/$(basename $1)"
+    _source="$(cd -P $(dirname $1) && pwd)/$(basename $1)"
   fi
 
   # Display the selected dir if necessary
-  if builtin test -d "$_source"; then
+  if test -d "$_source"; then
     printf "${dirCol}${_source}${resetColor}\n"
   fi
   # Display the content of the wanted dir
@@ -41,6 +41,6 @@ while builtin test $# -ne 0; do
   shift
 done
 
-builtin unset dirCol
-builtin unset resetColor
-builtin unset _source
+unset dirCol
+unset resetColor
+unset _source
