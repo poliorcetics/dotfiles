@@ -1,0 +1,92 @@
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
+
+[filter "hawser"]
+  clean = git hawser clean %f
+  smudge = git hawser smudge %f
+  required = true
+
+[filter "lfs"]
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+
+[core]
+  editor = nvim 
+  excludesfile = ~/.config/git/gitignore # May change depending on the system
+
+[ui]
+  color = auto
+
+[color "branch"]
+  current = green
+  local = yellow
+  remote = red
+
+[color "diff"]
+  meta = yellow
+  frag = magenta
+  old = red
+  new = green
+
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = red
+
+[merge]
+  tool = "nvim -d"
+
+[status]
+  showUntrackedFiles = all
+
+[alias]
+  a = add
+  p = pull
+  pr = pull --rebase
+  ps = push
+  s = status
+  # Local status
+  sl = status .
+  cp = cherry-pick
+  co = checkout
+  cb = checkout -b
+  cl = clone
+  ci = commit
+  cm = commit -m
+  br = branch
+  unstage = reset HEAD --
+  # Pretty log graph for a project
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+  squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+
+[pull]
+  rebase = true
+
+[core]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  line-numbers = true
+  features = side-by-side line-numbers decorations
+  syntax-theme = Dracula
+  plus-style = syntax "#002300"
+  plus-emph-style = syntax "#005600"
+  minus-style = syntax "#3f0001"
+
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+  hunk-header-decoration-style = cyan box ul
+
+[delta "line-numbers"]
+  line-numbers-left-style = cyan
+  line-numbers-right-style = cyan
+  line-numbers-minus-style = bold 124
+  line-numbers-plus-style = bold 28

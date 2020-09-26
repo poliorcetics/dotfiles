@@ -8,3 +8,5 @@
 !starship.toml
 !zsh
 !zsh/**.zsh
+!git/
+!git/**
