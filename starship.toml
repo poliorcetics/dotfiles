@@ -1,0 +1,114 @@
+prompt_order = [
+    # "custom.failure",
+    "username",
+    "hostname",
+    "custom.pwd",
+    "git_branch",
+    "git_commit",
+    "git_state",
+    "git_status",
+    "python",
+    "rust",
+    "cmd_duration",
+    "line_break",
+    "jobs",
+    "battery",
+    "character",
+]
+
+# Active modules
+
+[battery]
+full_symbol = ""
+charging_symbol = ""
+discharging_symbol = ""
+
+[character]
+style_success = "green"
+style_failure = "red"
+
+[cmd_duration]
+show_milliseconds = true
+style = "yellow"
+
+# [custom.failure]
+# command = "echo -n $?"
+# description = "Prints the last error code when it was different from 0."
+# when = "true"
+# style = "red"
+# suffix = "] "
+# prefix = "["
+
+[custom.pwd]
+command = "path_shortener"
+description = "Prints the current working directory by compacting it."
+when = "true"
+style = "cyan"
+suffix = " "
+
+[git_branch]
+symbol = " "
+style = "purple"
+
+[package]
+symbol = " "
+
+[python]
+symbol = " "
+
+[rust]
+symbol = " "
+
+# Disabled modules
+[aws]
+disabled = true
+[conda]
+disabled = true
+[crystal]
+disabled = true
+[directory]
+disabled = true
+[docker_context]
+disabled = true
+[dotnet]
+disabled = true
+[elixir]
+disabled = true
+[elm]
+disabled = true
+[env_var]
+disabled = true
+[erlang]
+disabled = true
+[golang]
+disabled = true
+[java]
+disabled = true
+[julia]
+disabled = true
+[kubernetes]
+disabled = true
+[hg_branch]
+disabled = true
+[nim]
+disabled = true
+[nix_shell]
+disabled = true
+[nodejs]
+disabled = true
+[ocaml]
+disabled = true
+[php]
+disabled = true
+[purescript]
+disabled = true
+[ruby]
+disabled = true
+[singularity]
+disabled = true
+[terraform]
+disabled = true
+[time]
+disabled = true
+[zig]
+disabled = true
