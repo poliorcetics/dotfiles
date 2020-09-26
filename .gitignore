@@ -6,3 +6,5 @@
 !nvim/
 !nvim/**
 !starship.toml
+!zsh
+!zsh/**.zsh
