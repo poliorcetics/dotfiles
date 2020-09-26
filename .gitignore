@@ -10,3 +10,5 @@
 !zsh/**.zsh
 !git/
 !git/**
+!kitty/
+!kitty/**
