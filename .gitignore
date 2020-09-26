@@ -3,3 +3,5 @@
 !.gitignore
 !tmux/
 !tmux/**
+!nvim/
+!nvim/**
