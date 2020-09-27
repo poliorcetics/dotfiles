@@ -5,6 +5,7 @@ let g:netrw_list_hide = g:netrw_list_hide.'.*\.swp$,\.Trash/$,target/$,'
 let g:netrw_list_hide = g:netrw_list_hide.'\.localized$,\.Xauthority$,'
 let g:netrw_list_hide = g:netrw_list_hide.'\.CFUserTextEncoding$,\.git/$,'
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+let g:netrw_home = stdpath('data')
 
 " change filechar for folding, vertical split, and message sepator
 set fillchars=fold:\ ,vert:\│,msgsep:‾

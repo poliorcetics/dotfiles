@@ -19,7 +19,7 @@ function run_all_updates() {
     echo "======================="
     echo ""
 
-    cg install --list | rg '([\w-]+) v\S+:' -r '$1' | xargs cg install
+    cargo install --list | rg '([\w-]+) v\S+:' -r '$1' | xargs cargo install
 
     for var in "$@"; do
         case $var in
