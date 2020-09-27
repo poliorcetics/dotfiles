@@ -6,9 +6,11 @@ prompt_order = [
     "git_branch",
     "git_commit",
     "git_state",
-    "git_status",
+    # "git_status",
+    # "custom.git_dirty",
     "python",
     "rust",
+    "package",
     "cmd_duration",
     "line_break",
     "jobs",
@@ -19,13 +21,13 @@ prompt_order = [
 # Active modules
 
 [battery]
-full_symbol = ""
 charging_symbol = ""
 discharging_symbol = ""
+full_symbol = ""
 
 [character]
-style_success = "green"
 style_failure = "red"
+style_success = "green"
 
 [cmd_duration]
 show_milliseconds = true
@@ -39,24 +41,36 @@ style = "yellow"
 # suffix = "] "
 # prefix = "["
 
+# [custom.git_dirty]
+# command = "echo ✗"
+# description = "Display a red cross when the current git repo is dirty."
+# prefix = ""
+# suffix = " "
+# style = "red"
+# when = "! ( test -d '.git' && git diff --quiet && git status -s >/dev/null )"
+
 [custom.pwd]
 command = "path_shortener"
 description = "Prints the current working directory by compacting it."
-when = "true"
 style = "cyan"
 suffix = " "
+when = "true"
 
 [git_branch]
-symbol = " "
 style = "purple"
+symbol = " "
 
 [package]
+style = "208"
 symbol = " "
 
 [python]
+python_binary = "python3"
+style = "yellow"
 symbol = " "
 
 [rust]
+style = "red"
 symbol = " "
 
 # Disabled modules
@@ -79,6 +93,9 @@ disabled = true
 [env_var]
 disabled = true
 [erlang]
+disabled = true
+# The following takes too long to run on big repo
+[git_status]
 disabled = true
 [golang]
 disabled = true
