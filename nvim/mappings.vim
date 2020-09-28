@@ -8,17 +8,14 @@ function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
+ 
+" inoremap <silent><expr> <TAB>
+"     \ pumvisible() ? "\<C-n>" :
+"     \ <SID>check_back_space() ? "\<TAB>" :
+"     \ completion#trigger_completion()
 
-inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ completion#trigger_completion()
-
-" Quicker way to open command window
-nnoremap q; q:
-
-" Quicker <Esc> in insert mode
-inoremap ùù <Esc>
+" Quicker <Esc>
+noremap ùù <Esc>
 
 " Paste non-linewise text above or below current cursor,
 " see https://stackoverflow.com/a/1346777/6064933
@@ -35,9 +32,9 @@ nnoremap <silent> <leader>q :x<cr>
 " nnoremap <silent> ]l :lnext<cr>zv
 " nnoremap <silent> [L :lfirst<cr>zv
 " nnoremap <silent> ]L :llast<cr>zv
-" nnoremap <silent> [q :cprevious<cr>zv
-" nnoremap <silent> ]q :cnext<cr>zv
-" nnoremap <silent> [Q :cfirst<cr>zv
+nnoremap <silent> <F5> :cprevious<cr>zv
+nnoremap <silent> <F6> :cnext<cr>zv
+nnoremap <silent> <F4> :cfirst<cr>zv
 " nnoremap <silent> ]Q :clast<cr>zv
 
 " Insert a blank line below or above current line (do not move the cursor),
@@ -59,21 +56,8 @@ xnoremap $ g_
 " Jump to matching pairs easily in normal mode
 nnoremap <Tab> %
 
-" Resize windows using <Alt> and h,j,k,l, inspiration from
-" https://vim.fandom.com/wiki/Fast_window_resizing_with_plus/minus_keys
-" (bottom page). If you enable mouse support, shorcuts below may not be
-" necessary.
-" nnoremap <M-h> <C-w><
-" nnoremap <M-l> <C-w>>
-" nnoremap <M-j> <C-W>-
-" nnoremap <M-k> <C-W>+
-
-" Fast window switching, inspiration from
-" https://stackoverflow.com/a/4373470/6064933
-nnoremap <M-left> <C-w>h
-nnoremap <M-right> <C-w>l
-nnoremap <M-down> <C-w>j
-nnoremap <M-up> <C-w>k
+" Close current fold
+nnoremap <leader>f :foldclose<cr>
 
 " Continuous visual shifting (does not exit Visual mode), `gv` means
 " to reselect previous visual area, see https://superuser.com/q/310417/736190
@@ -150,9 +134,6 @@ noremap <silent> <leader><leader> :tabnext<cr>
 noremap <silent> <leader>tn :tabnew<cr>
 noremap <silent> <leader>to :tabonly<cr>
 noremap <silent> <leader>tc :tabclose<cr>
-noremap <leader>tm :tabmove
-noremap <leader>tt :tabnext
-noremap <leader>to :tabedit
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
