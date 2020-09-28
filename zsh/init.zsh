@@ -60,6 +60,13 @@ eval "$(zoxide init zsh)"
 # Completion
 # ----------
 
+# Upper/Lower key search history
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
+
 export fpath=( $DIRCONFIG/zsh $fpath )
 autoload -Uz compinit
 compinit

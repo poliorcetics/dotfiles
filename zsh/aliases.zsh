@@ -20,8 +20,8 @@ alias hexdump='hx' # crate: hx
 alias objdump='bingrep' # crate: bingrep
 
 alias ls='exa -F --colour-scale --time-style long-iso';
-alias la='exa -haF --colur-scale --time-style long-iso';
-alias l='exa -lhaF --colour-scale --time-style long-iso';
+alias la='exa -haF --colour-scale --time-style long-iso';
+alias ll='exa -lhaF --colour-scale --time-style long-iso';
 alias l='exa -lhF --colour-scale --time-style long-iso';
 
 alias lg='exa -lhaF --colour-scale --time-style long-iso --git';
