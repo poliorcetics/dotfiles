@@ -28,14 +28,14 @@ nnoremap <silent> <leader>w :update<cr>:w!<cr>
 nnoremap <silent> <leader>q :x<cr>
 
 " Navigation in the location and quickfix list
-" nnoremap <silent> [l :lprevious<cr>zv
-" nnoremap <silent> ]l :lnext<cr>zv
-" nnoremap <silent> [L :lfirst<cr>zv
-" nnoremap <silent> ]L :llast<cr>zv
+nnoremap <silent> <F9> :lprevious<cr>zv
+nnoremap <silent> <F10> :lnext<cr>zv
+nnoremap <silent> <F11> :lfirst<cr>zv
+nnoremap <silent> <F12> :llast<cr>zv
 nnoremap <silent> <F5> :cprevious<cr>zv
 nnoremap <silent> <F6> :cnext<cr>zv
-nnoremap <silent> <F4> :cfirst<cr>zv
-" nnoremap <silent> ]Q :clast<cr>zv
+nnoremap <silent> <F7> :cfirst<cr>zv
+nnoremap <silent> <F8> :clast<cr>zv
 
 " Insert a blank line below or above current line (do not move the cursor),
 " see https://stackoverflow.com/a/16136133/6064933
@@ -118,7 +118,8 @@ vnoremap <silent> * :<C-u>call utils#VisualSelection('', '')<cr>/<C-R>=@/<cr><cr
 vnoremap <silent> # :<C-u>call utils#VisualSelection('', '')<cr>:%s/<C-R>=@/<cr>//g
 
 " Close the current buffer
-noremap <leader>bd :Bclose<cr>:tabclose<cr>gT
+noremap <leader>bd :bdel<cr>:tabclose<cr>gT
+noremap <leader>bc :bdel<cr>
 
 " Close all the buffers
 noremap <leader>ba :bufdo bd<cr>
