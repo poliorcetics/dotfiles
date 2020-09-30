@@ -10,8 +10,6 @@ call plug#begin(g:PLUGIN_HOME)
 Plug 'justinmk/vim-sneak'
 
 Plug 'mg979/vim-visual-multi'
-
-Plug 'itchyny/vim-cursorword'
 "}}
 
 "{{ LSP related plugins
@@ -26,10 +24,16 @@ Plug 'nvim-lua/completion-nvim'
 
 " Diagnostic navigation and settings for built-in LSP
 Plug 'nvim-lua/diagnostic-nvim'
+
+" Semantic highlighting for C/C++
+" Plug 'jackguo380/vim-lsp-cxx-highlight'
 "}}
 
 "{{ UI: Color, theme etc.
 Plug 'ntk148v/vim-horizon'
+Plug 'norcalli/nvim-colorizer.lua'
+
+Plug 'itchyny/vim-cursorword'
 "}}
 
 "{{ Plugin to deal with URL
@@ -69,24 +73,78 @@ filetype plugin indent on
 
 "{ Plugin settings
 "{{ Auto-completion related
+nnoremap <silent> <c-F1> <cmd>lua vim.lsp.buf.definition()<cr>
+nnoremap <silent> K      <cmd>lua vim.lsp.buf.hover()<cr>
+nnoremap <silent> gD     <cmd>lua vim.lsp.buf.implementation()<cr>
+nnoremap <silent> <c-k>  <cmd>lua vim.lsp.buf.signature_help()<cr>
+nnoremap <silent> 1gD    <cmd>lua vim.lsp.buf.type_definition()<cr>
+nnoremap <silent> gr     <cmd>lua vim.lsp.buf.references()<cr>
+nnoremap <silent> g0     <cmd>lua vim.lsp.buf.document_symbol()<cr>
+nnoremap <silent> gW     <cmd>lua vim.lsp.buf.workspace_symbol()<cr>
+nnoremap <silent> gd     <cmd>lua vim.lsp.buf.declaration()<cr>
+
 " Configure lsp
 " https://github.com/neovim/nvim-lspconfig#rust_analyzer
 lua <<EOF
 
 -- nvim_lsp object
-local nvim_lsp = require'nvim_lsp'
+local nvim_lsp = require 'nvim_lsp'
+local util = require 'nvim_lsp/util'
 
--- function to attach completion and diagnostics
--- when setting up lsp
+-- function to attach completion and diagnostics when setting up lsp
 local on_attach = function(client)
-    require'completion'.on_attach(client)
-    require'diagnostic'.on_attach(client)
+    require 'completion'.on_attach(client)
+    require 'diagnostic'.on_attach(client)
 end
 
 -- Enable rust_analyzer
-nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
+nvim_lsp.rust_analyzer.setup {
+    on_attach = on_attach;
+    filetypes = { "rust"; "rs" };
+    root_dir = util.root_pattern("Cargo.toml");
+}
+
+-- Enable clangd
+nvim_lsp.clangd.setup {
+    cmd = { "/usr/local/opt/llvm/bin/clangd"; "--background-index" };
+    filetypes = { "c"; "cpp" };
+    root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt");
+    on_attach = on_attach;
+    -- Enable semantic highlighting for C/C++
+    -- init_options = {
+    --     highlight = {
+    --     }
+    -- }
+}
 
 EOF
+
+"{{{ clangd and compile_commands.json
+" - https://clang.llvm.org/docs/JSONCompilationDatabase.html
+"
+" CMAKE:
+"
+"   cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+"
+" compile_commands.json will be written to your build directory. You should
+" symlink it (or copy it) to the root of your project, if they are different.
+"
+"   ln -s ~/myproject-build/compile_commands.json ~/myproject/
+"
+" BEAR MAKE:
+"
+" - https://github.com/rizsotto/Bear
+" - Use the following command to generate it for `make` based compilation:
+"
+"   make clean; bear make
+"
+" COMPILEDB MAKE:
+"
+" - https://github.com/nickdiego/compiledb
+" - Use the following command to generate the `compile_commands.json` file:
+"
+"   compiledb make
+"}}}
 
 " Visualize diagnostics
 let g:diagnostic_enable_virtual_text = 1
@@ -109,7 +167,6 @@ let g:markdown_fenced_languages = [
     \ 'bash=sh',
     \ 'c',
     \ 'cpp',
-    \ 'c++',
     \ ]
 "}}
 
@@ -127,7 +184,6 @@ let g:VM_maps['Find Subword Under'] = '<C-d>'
 let g:VM_maps["Add Cursor Up"]      = '<C-p>'
 let g:VM_maps["Add Cursor Down"]    = '<C-m>'
 let g:VM_maps["Exit"]               = '<Esc>'
-
 "}}
 
 "{{ Navigation and tags
