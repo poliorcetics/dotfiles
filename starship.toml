@@ -1,22 +1,19 @@
-prompt_order = [
-    # "custom.failure",
-    "username",
-    "hostname",
-    "custom.pwd",
-    "git_branch",
-    "git_commit",
-    "git_state",
-    # "git_status",
-    # "custom.git_dirty",
-    "python",
-    "rust",
-    "package",
-    "cmd_duration",
-    "line_break",
-    "jobs",
-    "battery",
-    "character",
-]
+format = """\
+    ${username}\
+    ${hostname}\
+    ${custom.pwd}\
+    ${git_branch}\
+    ${git_commit}\
+    ${git_state}\
+    ${python}\
+    ${rust}\
+    ${package}\
+    ${cmd_duration}\
+    ${line_break}\
+    ${jobs}\
+    ${battery}\
+    ${character}\
+    """
 
 # Active modules
 
@@ -26,34 +23,18 @@ discharging_symbol = ""
 full_symbol = ""
 
 [character]
-style_failure = "red"
-style_success = "green"
+error_symbol = "[✖](bold red) "
+success_symbol = "[❯](bold green) "
 
 [cmd_duration]
 show_milliseconds = true
 style = "yellow"
 
-# [custom.failure]
-# command = "echo -n $?"
-# description = "Prints the last error code when it was different from 0."
-# when = "true"
-# style = "red"
-# suffix = "] "
-# prefix = "["
-
-# [custom.git_dirty]
-# command = "echo ✗"
-# description = "Display a red cross when the current git repo is dirty."
-# prefix = ""
-# suffix = " "
-# style = "red"
-# when = "! ( test -d '.git' && git diff --quiet && git status -s >/dev/null )"
-
 [custom.pwd]
 command = "path_shortener"
 description = "Prints the current working directory by compacting it."
 style = "cyan"
-suffix = " "
+format = "[$output]($style) "
 when = "true"
 
 [git_branch]
