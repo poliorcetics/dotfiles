@@ -5,7 +5,7 @@ let g:netrw_list_hide = g:netrw_list_hide.'.*\.swp$,\.Trash/$,target/$,'
 let g:netrw_list_hide = g:netrw_list_hide.'\.localized$,\.Xauthority$,'
 let g:netrw_list_hide = g:netrw_list_hide.'\.CFUserTextEncoding$,\.git/$,'
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-let g:netrw_home = stdpath('data')
+let g:netrw_home = expand(stdpath('data'))
 
 " change filechar for folding, vertical split, and message sepator
 set fillchars=fold:\ ,vert:\│,msgsep:‾
@@ -32,23 +32,23 @@ endif
 set noswapfile
 
 " Set up backup directory
-let g:backupdir = expand(stdpath('data') . '/backup')
-if !isdirectory(g:backupdir)
-   call mkdir(g:backupdir, 'p')
+let $backupdir = expand(stdpath('data') . '/backup')
+if !isdirectory($backupdir)
+   call mkdir($backupdir, 'p')
 endif
-set backupdir=g:backupdir,/tmp,/private/tmp
-set backupskip+=g:backupdir/*,/tmp/*,/private/tmp/*
+set backupdir=$backupdir,/tmp,/private/tmp
+set backupskip+=$backupdir/*,/tmp/*,/private/tmp/*
 
 " Copy the original file to backupdir and overwrite it
 set backupcopy=auto
 
 " Set up undo directory
-let g:undodir = expand(stdpath('data') . '/undo')
-if !isdirectory(g:undodir)
-   call mkdir(g:undodir, 'p')
+let $undodir = expand(stdpath('data') . '/undo')
+if !isdirectory($undodir)
+   call mkdir($undodir, 'p')
 endif
-set undodir=g:undodir,/tmp,/private/tmp
-" Persistent undo means you can undo after closing a buffer/Vim/NeoVim
+set undodir=$undodir,/tmp,/private/tmp
+" Persistent undo means you can undo after closing a buffer/tab/Vim/NeoVim
 set undofile
 
 " General tab settings
@@ -79,6 +79,8 @@ set signcolumn=yes
 
 " List all items and start selecting matches in cmd completion
 set wildmode=list:full
+set wildmenu
+set wildoptions=pum,tagfile
 
 " Show current line where the cursor is
 set cursorline
