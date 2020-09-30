@@ -21,6 +21,14 @@ function run_all_updates() {
 
     cargo install --list | rg '([\w-]+) v\S+:' -r '$1' | xargs cargo install
 
+
+    echo ""
+    echo "Updating Pip packages"
+    echo "====================="
+    echo ""
+
+    pip3 list | rg '(\S+)\s+\d+.\d+.\d+' -r '$1' | xargs pip3 install --upgrade
+
     for var in "$@"; do
         case $var in
             "--ra")
