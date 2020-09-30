@@ -23,8 +23,8 @@ discharging_symbol = ""
 full_symbol = ""
 
 [character]
-error_symbol = "[✖](bold red) "
-success_symbol = "[❯](bold green) "
+error_symbol = "[✖](bold red)"
+success_symbol = "[❯](bold green)"
 
 [cmd_duration]
 show_milliseconds = true
