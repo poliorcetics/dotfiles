@@ -2,21 +2,6 @@
 " NetRW
 nnoremap <leader>n :Explore<cr>
 
-" Trigger completion with <tab>
-" found in :help completion
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
- 
-" inoremap <silent><expr> <TAB>
-"     \ pumvisible() ? "\<C-n>" :
-"     \ <SID>check_back_space() ? "\<TAB>" :
-"     \ completion#trigger_completion()
-
-" Quicker <Esc>
-noremap ùù <Esc>
-
 " Paste non-linewise text above or below current cursor,
 " see https://stackoverflow.com/a/1346777/6064933
 nnoremap <leader>p m`o<ESC>p``
@@ -28,14 +13,11 @@ nnoremap <silent> <leader>w :update<cr>:w!<cr>
 nnoremap <silent> <leader>q :x<cr>
 
 " Navigation in the location and quickfix list
-nnoremap <silent> <F9> :lprevious<cr>zv
-nnoremap <silent> <F10> :lnext<cr>zv
-nnoremap <silent> <F11> :lfirst<cr>zv
-nnoremap <silent> <F12> :llast<cr>zv
-nnoremap <silent> <F5> :cprevious<cr>zv
-nnoremap <silent> <F6> :cnext<cr>zv
-nnoremap <silent> <F7> :cfirst<cr>zv
-nnoremap <silent> <F8> :clast<cr>zv
+nnoremap <silent> W :lprev<cr>zv
+nnoremap <silent> X :lnext<cr>zv
+nnoremap <silent> Z :cprev<cr>zv
+nnoremap <silent> E :cnext<cr>zv
+nnoremap <silent> <leader>x :cclose<cr>:lclose<cr>
 
 " Insert a blank line below or above current line (do not move the cursor),
 " see https://stackoverflow.com/a/16136133/6064933
@@ -55,9 +37,7 @@ xnoremap $ g_
 
 " Jump to matching pairs easily in normal mode
 nnoremap <Tab> %
-
-" Close current fold
-nnoremap <leader>f :foldclose<cr>
+vnoremap <Tab> %
 
 " Continuous visual shifting (does not exit Visual mode), `gv` means
 " to reselect previous visual area, see https://superuser.com/q/310417/736190
