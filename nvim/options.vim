@@ -123,7 +123,12 @@ set confirm
 set visualbell noerrorbells
 
 " The level we start to fold
+set foldlevelstart=0
 set foldlevel=0
+set foldnestmax=2
+" Default fold method. For some languages, like Python, using 'indent' is
+" smarter, see 'after/ftplugin/python.vim'.
+set foldmethod=syntax
 
 " The number of command and search history to keep
 set history=500
@@ -138,7 +143,7 @@ set title
 set shortmess+=c
 
 " Completion behaviour
-set completeopt=menuone,noinsert,noselect
+set completeopt=menu,menuone,noinsert
 set completeopt-=preview  " Disable the preview window
 
 " Settings for popup menu
