@@ -1,18 +1,24 @@
-# Environnement variables
+# Environment variables
 # =======================
+
+export HISTORY_IGNORE=fg
 
 export DIRCONFIG=$HOME/.config
 export ZSH=$DIRCONFIG/zsh
 
-case :$HOME/bin: in
+case :/usr/local/bin: in
     :$PATH:)
         ;;
     *)
-        export PATH=$HOME/bin:$PATH
+        export PATH=/usr/local/bin:$PATH
         ;;
 esac
 
-export HISTORY_IGNORE=fg
+# Now nvim is in $PATH
+
+export EDITOR=nvim
+
+# Rust environment
 
 export RUSTUP_HOME=$DIRCONFIG/rust/rustup
 export CARGO_HOME=$DIRCONFIG/rust/cargo
@@ -21,7 +27,15 @@ case :$CARGO_HOME/bin: in
     :$PATH:)
         ;;
     *)
-        export PATH=$PATH:$CARGO_HOME/bin
+        export PATH=$CARGO_HOME/bin:$PATH
+        ;;
+esac
+
+case :$HOME/bin: in
+    :$PATH:)
+        ;;
+    *)
+        export PATH=$HOME/bin:$PATH
         ;;
 esac
 
@@ -51,6 +65,9 @@ eval "$(zoxide init zsh)"
 
 # ZSH
 # ===
+
+bindkey ^A beginning-of-line
+bindkey ^E end-of-line
 
 # Highlighter
 # -----------

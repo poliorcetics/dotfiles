@@ -5,6 +5,7 @@ function run_all_completions() {
     swift package completion-tool generate-zsh-script > $DIRCONFIG/zsh/_swift
     rustup completions zsh cargo > $DIRCONFIG/zsh/_cargo
     rustup completions zsh > $DIRCONFIG/zsh/_rustup
+    pip3 completion --zsh > $DIRCONFIG/zsh/_pip3
 }
 
 function run_all_updates() {
