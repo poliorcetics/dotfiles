@@ -21,8 +21,8 @@ nnoremap <silent> <leader>x :cclose<cr>:lclose<cr>
 
 " Insert a blank line below or above current line (do not move the cursor),
 " see https://stackoverflow.com/a/16136133/6064933
-nnoremap <expr> oo 'm`' . v:count1 . 'o<Esc>``'
-nnoremap <expr> OO 'm`' . v:count1 . 'O<Esc>``'
+nnoremap <expr> <leader>o 'm`' . v:count1 . 'o<Esc>``'
+nnoremap <expr> <leader>O 'm`' . v:count1 . 'O<Esc>``'
 
 " Insert a space after current character
 nnoremap <Space><Space> a<Space><ESC>h
@@ -43,6 +43,12 @@ vnoremap <Tab> %
 " to reselect previous visual area, see https://superuser.com/q/310417/736190
 xnoremap < <gv
 xnoremap > >gv
+
+" Folding
+nnoremap z<Up> zk
+nnoremap z<Down> zj
+nnoremap z<Left> [z
+nnoremap z<Right> ]z
 
 " When completion menu is shown, use <cr> to select an item and do not add an
 " annoying newline. Otherwise, <enter> is what it is. For more info , see

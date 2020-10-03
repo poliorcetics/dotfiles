@@ -15,13 +15,13 @@ colorscheme horizon
 "}}
 
 "{{ LSP/Floating windows
-hi Pmenu ctermbg=247 ctermfg=124 guibg=#4b4b4b guifg=#f1f1f1
+hi Pmenu ctermbg=247 ctermfg=124 guibg=#3d4545 guifg=#f1f1f1
 hi link NormalFloat Pmenu
 
 hi link LspDiagnosticsError Error
 hi link LspDiagnosticsErrorSign Error
 hi link LspDiagnosticsErrorFloating NormalFloat 
-hi LspDiagnosticsErrorFloating ctermfg=160 guifg=#870000
+hi LspDiagnosticsErrorFloating ctermfg=160 guifg=#cd3700
 
 hi WarningMsg ctermfg=226 guifg=#ffff00
 
