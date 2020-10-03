@@ -119,7 +119,7 @@ set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz
 " Ask for confirmation when handling unsaved or read-only files
 set confirm
 
-" Do not use visual and errorbells
+" Do not use visual and error bells
 set visualbell noerrorbells
 
 " The level we start to fold
@@ -175,7 +175,7 @@ set synmaxcol=200
 
 set nostartofline
 
-" Hide buffer when abandonned
+" Hide buffer when abandoned
 set hid
 " Show matching brackets
 set showmatch
