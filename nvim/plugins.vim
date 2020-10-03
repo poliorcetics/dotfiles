@@ -41,9 +41,11 @@ Plug 'itchyny/vim-cursorword'
 Plug 'itchyny/vim-highlighturl'
 "}}
 
-"{{ File editting plugin
+"{{ File editing plugin
 " Comment plugin
 Plug 'tpope/vim-commentary'
+
+Plug 'jiangmiao/auto-pairs'
 "}}
 
 "{{ Git related plugins
@@ -73,15 +75,18 @@ filetype plugin indent on
 
 "{ Plugin settings
 "{{ Auto-completion related
-nnoremap <silent> <c-F1> <cmd>lua vim.lsp.buf.definition()<cr>
-nnoremap <silent> K      <cmd>lua vim.lsp.buf.hover()<cr>
-nnoremap <silent> gD     <cmd>lua vim.lsp.buf.implementation()<cr>
-nnoremap <silent> <c-k>  <cmd>lua vim.lsp.buf.signature_help()<cr>
-nnoremap <silent> 1gD    <cmd>lua vim.lsp.buf.type_definition()<cr>
-nnoremap <silent> gr     <cmd>lua vim.lsp.buf.references()<cr>
-nnoremap <silent> g0     <cmd>lua vim.lsp.buf.document_symbol()<cr>
-nnoremap <silent> gW     <cmd>lua vim.lsp.buf.workspace_symbol()<cr>
-nnoremap <silent> gd     <cmd>lua vim.lsp.buf.declaration()<cr>
+nnoremap <silent> lm <cmd>lua vim.lsp.buf.definition()<cr>
+nnoremap <silent> ll <cmd>lua vim.lsp.buf.hover()<cr>
+nnoremap <silent> li <cmd>lua vim.lsp.buf.implementation()<cr>
+nnoremap <silent> ls <cmd>lua vim.lsp.buf.signature_help()<cr>
+nnoremap <silent> lt <cmd>lua vim.lsp.buf.type_definition()<cr>
+nnoremap <silent> lr <cmd>lua vim.lsp.buf.references()<cr>
+nnoremap <silent> ld <cmd>lua vim.lsp.buf.document_symbol()<cr>
+nnoremap <silent> lw <cmd>lua vim.lsp.buf.workspace_symbol()<cr>
+nnoremap <silent> lc <cmd>lua vim.lsp.buf.declaration()<cr>
+
+nnoremap <leader>rl :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<cr>:edit<cr>:lua print("Server ready:", vim.lsp.buf.server_ready())
+
 
 " Configure lsp
 " https://github.com/neovim/nvim-lspconfig#rust_analyzer
@@ -97,18 +102,18 @@ local on_attach = function(client)
     require 'diagnostic'.on_attach(client)
 end
 
--- Enable rust_analyzer
+-- Enable Rust Analyzer
 nvim_lsp.rust_analyzer.setup {
     on_attach = on_attach;
-    filetypes = { "rust"; "rs" };
-    root_dir = util.root_pattern("Cargo.toml");
+    filetypes = { "rust"; "rs"; };
+    root_dir = util.root_pattern("Cargo.toml", ".git");
 }
 
 -- Enable clangd
 nvim_lsp.clangd.setup {
     cmd = { "/usr/local/opt/llvm/bin/clangd"; "--background-index" };
-    filetypes = { "c"; "cpp" };
-    root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt");
+    filetypes = { "c"; "cpp"; };
+    root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git");
     on_attach = on_attach;
     -- Enable semantic highlighting for C/C++
     -- init_options = {
@@ -116,6 +121,26 @@ nvim_lsp.clangd.setup {
     --     }
     -- }
 }
+
+-- Enable PyLS
+nvim_lsp.pyls.setup {
+    filetypes = { "python"; "py"; };
+    on_attach = on_attach;
+    configurationSources = { "pyflakes" };
+    plugins = {
+        maccabe = { enabled = false; };
+        pycodestyle = { enabled = false; };
+        pydocstyle = { enabled = false; };
+        pylint = { enabled = false; };
+        yapf = { enabled = false; };
+    };
+}
+
+vim.api.nvim_command [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
+vim.api.nvim_command [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
+vim.api.nvim_command [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
+vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]]
+vim.api.nvim_command [[autocmd Filetype * setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
 
 EOF
 
