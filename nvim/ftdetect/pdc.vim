@@ -1,4 +1,4 @@
-augroup det_md
-    autocmd!
-    autocmd BufRead,BufNewFile *.pdc set filetype=markdown
-augroup END
+aug det_md
+    au!
+    au BufRead,BufNewFile *.pdc set filetype=markdown
+aug END
