@@ -41,7 +41,6 @@ alias g='git'
 
 alias showsystemfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
 alias hidesystemfiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
-alias xcode='open -a Xcode'
 
 # Homebrew
 # --------

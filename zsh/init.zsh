@@ -1,7 +1,24 @@
+# ZSH Options
+# ===========
+
+setopt extended_history         # Record timestamp of command in HISTFILE
+setopt hist_find_no_dups        # Ignore duplicates when searching history
+setopt hist_ignore_all_dups     # Don't save duplicates
+setopt hist_ignore_space        # Ignore commands that start with space
+setopt hist_verify              # Show command with history expansion to user before running it
+setopt share_history            # Share command history data
+
 # Environment variables
-# =======================
+# =====================
+
+export ZSH_CACHE_DIR=$HOME/.local/share/zsh
+test -d $ZSH_CACHE_DIR || mkdir -p $ZSH_CACHE_DIR
 
 export HISTORY_IGNORE=fg
+export SAVEHIST=100000
+export HISTSIZE=$SAVEHIST
+export HISTFILE=$ZSH_CACHE_DIR/.zsh_history
+export HISTTIMEFORMAT="[%F %T] "
 
 export DIRCONFIG=$HOME/.config
 export ZSH=$DIRCONFIG/zsh
