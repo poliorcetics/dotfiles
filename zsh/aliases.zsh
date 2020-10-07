@@ -28,7 +28,7 @@ alias lg='exa -lhaF --colour-scale --time-style long-iso --git';
 alias llg='exa -lhF --colour-scale --time-style long-iso --git';
 alias lmg='lm --git'; # 'lm' comes from a personal Rust crate in ~/bin/perso_lm
 
-alias shistory='history | rg'
+alias shistory='history 1 | rg'
 
 # Git
 # -----

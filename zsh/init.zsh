@@ -1,12 +1,20 @@
 # ZSH Options
 # ===========
 
+# History options
+
 setopt extended_history         # Record timestamp of command in HISTFILE
 setopt hist_find_no_dups        # Ignore duplicates when searching history
 setopt hist_ignore_all_dups     # Don't save duplicates
 setopt hist_ignore_space        # Ignore commands that start with space
 setopt hist_verify              # Show command with history expansion to user before running it
+setopt inc_append_history       # Write to HISTFILE as soon as the command are entered
 setopt share_history            # Share command history data
+
+# Globbing options
+
+setopt no_case_glob             # Ignore case when globbing
+setopt no_case_match            # Ignore case when matching
 
 # Environment variables
 # =====================
