@@ -319,6 +319,9 @@ nnoremap <silent> E :cnext<cr>zv
 nnoremap <silent> <leader>x :cclose<cr>:lclose<cr>
 "}}
 
+"{{ Marks
+nnoremap <silent> ; '
+"}}
 "{{ Modifications from outside Insert mode
 " Insert a blank line below or above current line (do not move the cursor),
 " see https://stackoverflow.com/a/16136133/6064933
@@ -406,13 +409,14 @@ nnoremap <silent> <leader>ev :tabnew $MYVIMRC <bar> tcd %:h<cr>
 nnoremap <silent> <leader>sv :silent update $MYVIMRC <bar> source $MYVIMRC <bar>
             \ echomsg "Nvim config successfully reloaded!"<cr>
 " Remove trailing whitespace characters
-nnoremap <silent> <leader>k :call utils#StripTrailingWhitespaces()<cr>:w<cr>
+nnoremap <silent> <leader>k :call utils#StripTrailingWhitespaces()<cr>
 
 " NetRW
 nnoremap <leader>n :Explore<cr>
 " Change current working directory locally and print cwd after that,
 " see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
 nnoremap <silent> <leader>cd :lcd %:p:h<cr>:pwd<cr>
+nnoremap <leader>w :w<cr>
 "}}
 "}
 
@@ -460,7 +464,7 @@ end
 nvim_lsp.rust_analyzer.setup {
     filetypes = { "rust"; "rs"; };
     on_attach = on_attach;
-    root_dir = util.root_pattern("Cargo.toml", ".git");
+    root_dir = util.root_pattern("Cargo.toml", ".git") or dirname;
 }
 
 -- Enable clangd
@@ -468,7 +472,6 @@ nvim_lsp.clangd.setup {
     cmd = { "/usr/local/opt/llvm/bin/clangd"; "--background-index" };
     filetypes = { "c"; "cpp"; };
     on_attach = on_attach;
-    root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git");
 }
 
 -- Enable PyLS
@@ -490,10 +493,16 @@ vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.buf.document_highligh
 vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.util.show_line_diagnostics()]]
 vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.util.show_line_diagnostics()]]
 vim.api.nvim_command [[au CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
-vim.api.nvim_command [[au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]]
 vim.api.nvim_command [[au Filetype *  setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
 
 EOF
+
+"{{{ Formatting autocommands for the LSPs. This is defined here so specific filetypes can remove it. 
+aug formatting_autocommands
+    au!
+    au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
+aug END
+"}}}
 
 "{{{ clangd and compile_commands.json
 " - https://clang.llvm.org/docs/JSONCompilationDatabase.html
@@ -557,6 +566,8 @@ let g:vista_echo_cursor_strategy = 'both'
 nnoremap <silent> ù :Vista focus<cr>
 nnoremap <silent> <F12> :Vista!!<cr>
 nnoremap <silent> <F11> :Vista toc<cr>
+
+hi link VistaColon Normal
 
 aug vista_autocommand_for_search
     au!
