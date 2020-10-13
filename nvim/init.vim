@@ -93,6 +93,7 @@ set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:+
 set number relativenumber               " Line number and relative line number
 set scrolloff=5                         " Minimum lines to keep above and below cursor when scrolling
 set showmatch                           " Show matching brackets
+set signcolumn=yes:1                    " Width of the signcolumn in multiples of 2
 set splitbelow splitright               " Split window below/right when creating horizontal/vertical windows
 set synmaxcol=200                       " Text after this column number is not highlighted
 set title                               " SHow current file in the terminal title
@@ -320,7 +321,8 @@ nnoremap <silent> <leader>x :cclose<cr>:lclose<cr>
 "}}
 
 "{{ Marks
-nnoremap <silent> ; '
+nnoremap <silent> ; `
+nnoremap <silent> ;; ``
 "}}
 "{{ Modifications from outside Insert mode
 " Insert a blank line below or above current line (do not move the cursor),
@@ -409,7 +411,8 @@ nnoremap <silent> <leader>ev :tabnew $MYVIMRC <bar> tcd %:h<cr>
 nnoremap <silent> <leader>sv :silent update $MYVIMRC <bar> source $MYVIMRC <bar>
             \ echomsg "Nvim config successfully reloaded!"<cr>
 " Remove trailing whitespace characters
-nnoremap <silent> <leader>k :call utils#StripTrailingWhitespaces()<cr>
+nnoremap <silent> <leader>k :call utils#StripTrailingWhitespaces() <bar>
+            \ echomsg "Stripped trailing whitespaces"<cr>
 
 " NetRW
 nnoremap <leader>n :Explore<cr>
@@ -497,10 +500,10 @@ vim.api.nvim_command [[au Filetype *  setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
 
 EOF
 
-"{{{ Formatting autocommands for the LSPs. This is defined here so specific filetypes can remove it. 
+"{{{ Formatting autocommands for the LSPs. This is defined here so specific filetypes can remove it.
 aug formatting_autocommands
     au!
-    au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
+    au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
 aug END
 "}}}
 
