@@ -19,14 +19,15 @@ alias diff='delta' # crate: git-delta
 alias hexdump='hx' # crate: hx
 alias objdump='bingrep' # crate: bingrep
 
-alias ls='exa -F --colour-scale --time-style long-iso';
-alias la='exa -haF --colour-scale --time-style long-iso';
-alias ll='exa -lhaF --colour-scale --time-style long-iso';
-alias l='exa -lhF --colour-scale --time-style long-iso';
+alias ls='exa -F --colour-scale --time-style long-iso --group-directories-first';
+alias la='exa -haF --colour-scale --time-style long-iso --group-directories-first';
+alias ll='exa -lhaF --colour-scale --time-style long-iso --group-directories-first';
+alias l='exa -lhF --colour-scale --time-style long-iso --group-directories-first';
 
-alias lg='exa -lhaF --colour-scale --time-style long-iso --git';
-alias llg='exa -lhF --colour-scale --time-style long-iso --git';
+alias lg='exa -lhaF --colour-scale --time-style long-iso --git --group-directories-first';
+alias llg='exa -lhF --colour-scale --time-style long-iso --git --group-directories-first';
 alias lmg='lm --git'; # 'lm' comes from a personal Rust crate in ~/bin/perso_lm
+                      # and already has the --group-directories-first option
 
 alias shistory='history 1 | rg'
 
