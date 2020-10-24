@@ -472,7 +472,13 @@ nvim_lsp.rust_analyzer.setup {
 
 -- Enable clangd
 nvim_lsp.clangd.setup {
-    cmd = { "/usr/local/opt/llvm/bin/clangd"; "--background-index" };
+    cmd = {
+        "/usr/local/opt/llvm/bin/clangd";
+        "--background-index";
+        "--recovery-ast";
+        "--clang-tidy";
+        "--header-insertion=never";
+    };
     filetypes = { "c"; "cpp"; };
     on_attach = on_attach;
 }
