@@ -31,8 +31,8 @@ export HISTTIMEFORMAT="[%F %T] "
 export DIRCONFIG=$HOME/.config
 export ZSH=$DIRCONFIG/zsh
 
-case :/usr/local/bin: in
-    :$PATH:)
+case :$PATH: in
+    *:/usr/local/bin:*)
         ;;
     *)
         export PATH=/usr/local/bin:$PATH
@@ -48,16 +48,16 @@ export EDITOR=nvim
 export RUSTUP_HOME=$DIRCONFIG/rust/rustup
 export CARGO_HOME=$DIRCONFIG/rust/cargo
 
-case :$CARGO_HOME/bin: in
-    :$PATH:)
+case :$PATH: in
+    *:$CARGO_HOME/bin:*)
         ;;
     *)
         export PATH=$CARGO_HOME/bin:$PATH
         ;;
 esac
 
-case :$HOME/bin: in
-    :$PATH:)
+case :$PATH: in
+    *:$HOME/bin:*)
         ;;
     *)
         export PATH=$HOME/bin:$PATH

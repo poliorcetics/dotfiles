@@ -6,7 +6,7 @@
 
 alias grep='rg' # crate: ripgrep
 alias rgi='rg --no-ignore' # Also the ripgrep crate, this is a helpful shortcut
-alias cat='bat' # crate: bat
+alias cat='bat -p' # crate: bat
 alias ls='exa' # crate: exa
 alias find='fd' # crate: fd-find
 alias fdi='fd -I' # Also the fd-find crate
