@@ -44,6 +44,8 @@
 
 [alias]
   a = add
+  d = diff
+  ds = diff --staged
   p = pull
   pr = pull --rebase
   ps = push
@@ -54,9 +56,9 @@
   co = checkout
   cb = checkout -b
   cl = clone
-  ci = commit
+  c = commit
   cm = commit -m
-  br = branch
+  b = branch
   unstage = reset HEAD --
   # Pretty log graph for a project
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
