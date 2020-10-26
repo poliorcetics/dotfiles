@@ -591,7 +591,6 @@ let g:VM_maps["Add Cursor Up"]      = '<C-p>'
 let g:VM_maps["Add Cursor Down"]    = '<C-m>'
 let g:VM_maps["Exit"]               = '<Esc>'
 "}}
-"}
 
 "{{ UI plugins
 lua << EOF
@@ -613,7 +612,7 @@ let g:lightline = {
     \              [ 'readonly',
     \                'filename',
     \                'modified', ],
-    \              [ 'method',   ], ],
+    \              [ 'vista_info' ], ],
     \    'right': [ [ 'percent', 'lineinfo' ],
     \               [ 'fileformat', 'fileencoding', 'filetype' ] ]
     \ },
@@ -622,7 +621,7 @@ let g:lightline = {
     \    'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
     \ },
     \ 'component_function': {
-    \    'method': 'NearestMethodOrFunction'
+    \    'vista_info': 'VistaStatusLine',
     \ },
     \ 'component_visible_condition': {
     \    'readonly': '(&filetype!="help"&& &readonly)',
@@ -664,7 +663,7 @@ hi link LspDiagnosticsHintFloating NormalFloat
 "}
 
 "{ FUNCTIONS
-function! NearestMethodOrFunction() abort
+function! VistaStatusLine() abort
     return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 "}
