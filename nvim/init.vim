@@ -445,6 +445,9 @@ nnoremap <silent> lr <cmd>lua vim.lsp.buf.references()<cr>
 nnoremap <silent> ld <cmd>lua vim.lsp.buf.document_symbol()<cr>
 nnoremap <silent> lw <cmd>lua vim.lsp.buf.workspace_symbol()<cr>
 nnoremap <silent> lc <cmd>lua vim.lsp.buf.declaration()<cr>
+" Mark the current position in the file to be able to jump back to it quickly
+" if formatting makes the cursor jump around. 
+nnoremap <silent> lf <cmd>mark L<cr><cmd>lua vim.lsp.buf.formatting_sync()<cr>
 
 nnoremap <leader>rl :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<cr>:edit<cr>:lua print("Server ready:", vim.lsp.buf.server_ready())<cr>
 
@@ -505,13 +508,6 @@ vim.api.nvim_command [[au CursorMoved <buffer> lua vim.lsp.buf.clear_references(
 vim.api.nvim_command [[au Filetype *  setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
 
 EOF
-
-"{{{ Formatting autocommands for the LSPs. This is defined here so specific filetypes can remove it.
-aug formatting_autocommands
-    au!
-    au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-aug END
-"}}}
 
 "{{{ clangd and compile_commands.json
 " - https://clang.llvm.org/docs/JSONCompilationDatabase.html
