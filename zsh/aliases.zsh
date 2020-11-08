@@ -66,6 +66,7 @@ alias cgbr='cargo build --release'
 alias cgtr='cargo test --release'
 alias cgrr='cargo run --release'
 alias cgxr='cargo check --release'
+alias cgxt='cargo check --tests'
 
 # Other
 # -----
