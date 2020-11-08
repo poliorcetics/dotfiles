@@ -387,6 +387,7 @@ vnoremap <silent> # :<C-u>call utils#VisualSelection('', '')<cr>:%s/<C-R>=@/<cr>
 "{{ Tabs
 " Useful mappings for managing tabs
 noremap <silent> <leader><leader> :tabnext<cr>
+noremap <silent> <leader>; :tabprev<cr>
 noremap <silent> <leader>tn :tabnew<cr>
 noremap <silent> <leader>to :tabonly<cr>
 noremap <silent> <leader>tc :tabclose<cr>
@@ -449,7 +450,6 @@ nnoremap <silent> lf <cmd>lua vim.lsp.buf.formatting_sync()<cr>
 
 nnoremap <leader>rl :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<cr>:edit<cr>:lua print("Server ready:", vim.lsp.buf.server_ready())<cr>
 
-
 " Configure lsp
 " https://github.com/neovim/nvim-lspconfig#rust_analyzer
 lua <<EOF
@@ -479,6 +479,7 @@ nvim_lsp.clangd.setup {
         "--recovery-ast";
         "--clang-tidy";
         "--header-insertion=never";
+        "--completion-parse=auto";
     };
     filetypes = { "c"; "cpp"; };
     on_attach = on_attach;
