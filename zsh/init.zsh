@@ -87,7 +87,6 @@ source $ZSH/aliases.zsh
 # Needs to be after `$CARGO_HOME/bin` is in $PATH
 eval "$(zoxide init zsh)"
 
-
 # ZSH
 # ===
 
@@ -120,6 +119,11 @@ kitty + complete setup zsh | source /dev/stdin
 # -------
 
 source $ZSH/update_functions.zsh
+
+# SKIM
+# ====
+
+SKIM_DEFAULT_COMMAND="git ls-tree -r --name-only HEAD || fd --type f"
 
 # STARSHIP
 # ==

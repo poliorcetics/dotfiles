@@ -54,6 +54,11 @@ Plug 'liuchengxu/vista.vim'             " Tags/LSP symbols navigation/tree
 Plug 'justinmk/vim-sneak'               " Super fast movement with s/S
 Plug 'mg979/vim-visual-multi'           " Multi cursor editing
 Plug 'wellle/targets.vim'               " VERY powerful plugin that should be properly studied to be used fully
+Plug 'lotabout/skim', {                 
+    \ 'dir': '~/.local/skim',
+    \ 'do': './install'
+    \ }                                 " Helper for the fuzzy finder
+Plug 'lotabout/skim.vim'                " Fuzzy finder
 " UI plugins (color, theme)
 Plug 'ntk148v/vim-horizon'              " Horizon theme
 Plug 'itchyny/lightline.vim'            " Status line
@@ -591,6 +596,13 @@ let g:VM_maps['Find Subword Under'] = '<C-d>'
 let g:VM_maps["Add Cursor Up"]      = '<C-p>'
 let g:VM_maps["Add Cursor Down"]    = '<C-m>'
 let g:VM_maps["Exit"]               = '<Esc>'
+
+" Skim fuzzy finder
+let $SKIM_DEFAULT_COMMAND = "git ls-tree -r --name-only HEAD || fd --type f"
+let g:fzf_command_prefix = 'SK'
+
+nnoremap <leader>rg :SKRg<cr>
+nnoremap <leader>fd :SKFiles .<cr>
 "}}
 
 "{{ UI plugins
