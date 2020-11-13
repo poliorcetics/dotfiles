@@ -467,13 +467,18 @@ local util = require 'nvim_lsp/util'
 local on_attach = function(client)
     require 'completion'.on_attach(client)
     require 'diagnostic'.on_attach(client)
+    vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
+    vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
+    vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.util.show_line_diagnostics()]]
+    vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.util.show_line_diagnostics()]]
+    vim.api.nvim_command [[au CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
+    vim.api.nvim_command [[au Filetype *  setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
 end
 
 -- Enable Rust Analyzer
 nvim_lsp.rust_analyzer.setup {
     filetypes = { "rust"; "rs"; };
     on_attach = on_attach;
-    root_dir = util.root_pattern("Cargo.toml", ".git") or dirname;
 }
 
 -- Enable clangd
@@ -503,13 +508,6 @@ nvim_lsp.pyls.setup {
         yapf = { enabled = false; };
     };
 }
-
-vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
-vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
-vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.util.show_line_diagnostics()]]
-vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.util.show_line_diagnostics()]]
-vim.api.nvim_command [[au CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
-vim.api.nvim_command [[au Filetype *  setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
 
 EOF
 
@@ -564,9 +562,9 @@ let g:vista_executive_for = {
     \ 'cpp': 'nvim_lsp',
     \ 'rust': 'nvim_lsp',
     \ }
-let g:vista#executives = [ 'ale', 'ctags', 'nvim_lsp' ]
+let g:vista#executives = [ 'ctags', 'nvim_lsp' ]
 let g:vista#extensions = [ 'markdown', 'rst']
-let g:vista#finders = [ 'fzf', ]
+let g:vista#finders = [ 'sk', ]
 let g:vista_cursor_delay = 100
 let g:vista_blink = [0, 0]
 let g:vista_top_level_blink = [0, 0]
@@ -580,7 +578,7 @@ hi link VistaColon Normal
 
 aug vista_autocommand_for_search
     au!
-    au FileType vista,vista_kind nnoremap <buffer> <silent> / :<c-u>call vista#finder#fzf#Run()<CR>
+    au FileType vista,vista_kind nnoremap <buffer> <silent> / :<c-u>call vista#finder#skim#Run()<CR>
 aug END
 "}}}
 "}}
@@ -598,7 +596,7 @@ let g:VM_maps["Add Cursor Down"]    = '<C-m>'
 let g:VM_maps["Exit"]               = '<Esc>'
 
 " Skim fuzzy finder
-let $SKIM_DEFAULT_COMMAND = "git ls-tree -r --name-only HEAD || fd --type f"
+let $SKIM_DEFAULT_COMMAND = "git ls-files -co --exclude-standard || fd --type f"
 let g:fzf_command_prefix = 'SK'
 
 nnoremap <leader>rg :SKRg<cr>
