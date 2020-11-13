@@ -73,4 +73,5 @@ alias cgxt='cargo check --tests'
 
 alias vim='nvim'
 alias nv='nvim'
+alias nvs='nvim $(sk)'
 alias ..='z ..'

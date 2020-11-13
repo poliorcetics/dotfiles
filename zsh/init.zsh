@@ -123,7 +123,7 @@ source $ZSH/update_functions.zsh
 # SKIM
 # ====
 
-SKIM_DEFAULT_COMMAND="git ls-tree -r --name-only HEAD || fd --type f"
+SKIM_DEFAULT_COMMAND="git ls-files -co --exclude-standard || fd --type f"
 
 # STARSHIP
 # ==
