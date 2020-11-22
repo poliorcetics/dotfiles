@@ -48,7 +48,6 @@ Plug 'cespare/vim-toml'                 " TOML language support
 Plug 'neovim/nvim-lspconfig'            " Collections of common configurations for the Nvim LSP Client
 Plug 'tjdevries/lsp_extensions.nvim'    " Extensions to built-in LSP (like inlay type hints)
 Plug 'nvim-lua/completion-nvim'         " Autocompletion framework for built-in LSP
-Plug 'nvim-lua/diagnostic-nvim'         " Diagnostic navigation and settings
 Plug 'liuchengxu/vista.vim'             " Tags/LSP symbols navigation/tree
 " Movement plugins
 Plug 'justinmk/vim-sneak'               " Super fast movement with s/S
@@ -317,10 +316,6 @@ xnoremap > >gv
 "}}
 
 "{{ Location/Quickfix list navigation
-nnoremap <silent> W :lprev<cr>zv
-nnoremap <silent> X :lnext<cr>zv
-nnoremap <silent> Z :cprev<cr>zv
-nnoremap <silent> E :cnext<cr>zv
 " Close the quickfix/location window
 nnoremap <silent> <leader>x :cclose<cr>:lclose<cr>
 "}}
@@ -442,16 +437,30 @@ let g:signify_sign_change = '~'         " Change the sign for certain operations
 "}}
 
 "{{ LSP/Autocompletion plugins
+" The most useful ones for me
+nnoremap <silent> lp <cmd>lua vim.lsp.buf.code_action()<cr>
 nnoremap <silent> lm <cmd>lua vim.lsp.buf.definition()<cr>
 nnoremap <silent> ll <cmd>lua vim.lsp.buf.hover()<cr>
+nnoremap <silent> lf <cmd>lua vim.lsp.buf.formatting_sync()<cr>
+nnoremap <silent> lk <cmd>lua vim.lsp.buf.rename()<cr>
+nnoremap <silent> W <cmd>lua vim.lsp.diagnostic.goto_prev {wrap=true} <cr>
+nnoremap <silent> X <cmd>lua vim.lsp.diagnostic.goto_next {wrap=true} <cr>
+
+" xnoremap <silent> lp <cmd>lua vim.lsp.buf.range_code_action(nil, vim.api.nvim_eval("getpos(\"'<\")"), vim.api.nvim_eval("getpos(\"'>\")"))<cr>
+" xnoremap <silent> lf <cmd>lua vim.lsp.buf.range_formatting(nil, vim.api.nvim_eval("getpos(\"'<\")"), vim.api.nvim_eval("getpos(\"'>\")"))<cr>
+
+" Less useful but still cool
+nnoremap <silent> lci <cmd>lua vim.lsp.buf.incoming_calls()<cr>
+nnoremap <silent> lco <cmd>lua vim.lsp.buf.outgoing_calls()<cr>
+
+" Miscellaneous
+nnoremap <silent> ld <cmd>lua vim.lsp.buf.declaration()<cr>
+nnoremap <silent> lc <cmd>lua vim.lsp.buf.document_symbol()<cr>
 nnoremap <silent> li <cmd>lua vim.lsp.buf.implementation()<cr>
 nnoremap <silent> ls <cmd>lua vim.lsp.buf.signature_help()<cr>
 nnoremap <silent> lt <cmd>lua vim.lsp.buf.type_definition()<cr>
 nnoremap <silent> lr <cmd>lua vim.lsp.buf.references()<cr>
-nnoremap <silent> ld <cmd>lua vim.lsp.buf.document_symbol()<cr>
 nnoremap <silent> lw <cmd>lua vim.lsp.buf.workspace_symbol()<cr>
-nnoremap <silent> lc <cmd>lua vim.lsp.buf.declaration()<cr>
-nnoremap <silent> lf <cmd>lua vim.lsp.buf.formatting_sync()<cr>
 
 nnoremap <leader>rl :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<cr>:edit<cr>:lua print("Server ready:", vim.lsp.buf.server_ready())<cr>
 
@@ -459,30 +468,29 @@ nnoremap <leader>rl :lua vim.lsp.stop_client(vim.lsp.get_active_clients())<cr>:e
 " https://github.com/neovim/nvim-lspconfig#rust_analyzer
 lua <<EOF
 
--- nvim_lsp object
-local nvim_lsp = require 'nvim_lsp'
-local util = require 'nvim_lsp/util'
+-- lspconfig object
+local lspconfig = require("lspconfig")
 
 -- function to attach completion and diagnostics when setting up lsp
 local on_attach = function(client)
-    require 'completion'.on_attach(client)
-    require 'diagnostic'.on_attach(client)
-    vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
-    vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
-    vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.util.show_line_diagnostics()]]
-    vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.util.show_line_diagnostics()]]
+    require("completion").on_attach(client)
+    -- vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
+    -- vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
+    vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
+    vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
     vim.api.nvim_command [[au CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
     vim.api.nvim_command [[au Filetype *  setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
 end
 
+
 -- Enable Rust Analyzer
-nvim_lsp.rust_analyzer.setup {
+lspconfig.rust_analyzer.setup {
     filetypes = { "rust"; "rs"; };
     on_attach = on_attach;
 }
 
 -- Enable clangd
-nvim_lsp.clangd.setup {
+lspconfig.clangd.setup {
     cmd = {
         "/usr/local/opt/llvm/bin/clangd";
         "--background-index";
@@ -496,7 +504,7 @@ nvim_lsp.clangd.setup {
 }
 
 -- Enable PyLS
-nvim_lsp.pyls.setup {
+lspconfig.pyls.setup {
     configurationSources = { "pyflakes" };
     filetypes = { "python"; "py"; };
     on_attach = on_attach;
@@ -558,11 +566,11 @@ let g:markdown_fenced_languages = [
 let g:vista_icon_indent = ["▸ ", ""]
 let g:vista_default_executive = 'ctags'
 let g:vista_executive_for = {
-    \ 'c': 'nvim_lsp',
-    \ 'cpp': 'nvim_lsp',
-    \ 'rust': 'nvim_lsp',
+    \ 'c': 'lspconfig',
+    \ 'cpp': 'lspconfig',
+    \ 'rust': 'lspconfig',
     \ }
-let g:vista#executives = [ 'ctags', 'nvim_lsp' ]
+let g:vista#executives = [ 'ctags', 'lspconfig' ]
 let g:vista#extensions = [ 'markdown', 'rst']
 let g:vista#finders = [ 'sk', ]
 let g:vista_cursor_delay = 100
@@ -596,6 +604,10 @@ let g:VM_maps["Add Cursor Down"]    = '<C-m>'
 let g:VM_maps["Exit"]               = '<Esc>'
 
 " Skim fuzzy finder
+
+" The untracked and non-ignored will be at the bottom of the list.
+" This is good because they are most of the time the ones I want when working
+" on something that has a dirty git state.
 let $SKIM_DEFAULT_COMMAND = "git ls-files -co --exclude-standard || fd --type f"
 let g:fzf_command_prefix = 'SK'
 
@@ -648,28 +660,20 @@ let g:lightline = {
 colorscheme horizon
 
 "{{ LSP/Floating windows
-hi Pmenu ctermbg=247 ctermfg=124 guibg=#3d4545 guifg=#f1f1f1
 hi link NormalFloat Pmenu
-
-hi link LspDiagnosticsError Error
-hi link LspDiagnosticsErrorSign Error
-hi link LspDiagnosticsErrorFloating NormalFloat
-hi LspDiagnosticsErrorFloating ctermfg=160 guifg=#cd3700
-
+hi Pmenu ctermbg=247 ctermfg=124 guibg=#3d4545 guifg=#f1f1f1
 hi WarningMsg ctermfg=226 guifg=#ffff00
 
-hi link LspDiagnosticsWarning WarningMsg
-hi link LspDiagnosticsWarningSign WarningMsg
-hi link LspDiagnosticsWarningFloating NormalFloat
-hi LspDiagnosticsWarningFloating ctermfg=226 guifg=#ffff00
+hi link LspDiagnosticsDefaultError       Error
+hi link LspDiagnosticsDefaultWarning     WarningMsg
+hi link LspDiagnosticsDefaultInformation NormalFloat
+hi link LspDiagnosticsDefaultHint        NormalFloat
 
-hi link LspDiagnosticsInformation NormalFloat
-hi link LspDiagnosticsInformationSign NormalFloat
-hi link LspDiagnosticsInformationFloating NormalFloat
+hi link LspDiagnosticsFloatingError NormalFloat
+hi LspDiagnosticsFloatingError ctermfg=160 guifg=#cd3700
 
-hi link LspDiagnosticsHint NormalFloat
-hi link LspDiagnosticsHintSign NormalFloat
-hi link LspDiagnosticsHintFloating NormalFloat
+hi link LspDiagnosticsFloatingWarning NormalFloat
+hi LspDiagnosticsFloatingWarning ctermfg=226 guifg=#ffff00
 "}}
 "}
 
