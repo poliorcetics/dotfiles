@@ -81,6 +81,11 @@ export LC_ALL="en_GB.UTF-8"
 
 source $ZSH/aliases.zsh
 
+# Functions
+# ---------
+
+source $ZSH/funcs.zsh
+
 # Zoxide
 # ------
 
@@ -95,6 +100,7 @@ bindkey ^E end-of-line
 
 # Highlighter
 # -----------
+
 # Update with brew
 [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || true
 
@@ -123,10 +129,13 @@ source $ZSH/update_functions.zsh
 # SKIM
 # ====
 
-SKIM_DEFAULT_COMMAND="git ls-files -co --exclude-standard || fd --type f"
+# The untracked and non-ignored will be at the bottom of the list.
+# This is good because they are most of the time the ones I want when working
+# on something that has a dirty git state.
+export SKIM_DEFAULT_COMMAND="git ls-files -co --exclude-standard || fd --type f"
 
 # STARSHIP
-# ==
+# ========
 
 # https://github.com/starship/starship
 # See also: ../starship.toml for the configuration.
