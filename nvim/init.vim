@@ -613,6 +613,7 @@ let g:fzf_command_prefix = 'SK'
 
 nnoremap <leader>rg :SKRg<cr>
 nnoremap <leader>fd :SKFiles .<cr>
+nnoremap <leader>re :SKBLines<cr>
 "}}
 
 "{{ UI plugins
