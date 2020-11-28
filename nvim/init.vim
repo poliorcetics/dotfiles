@@ -645,6 +645,7 @@ let g:lightline = {
     \    'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
     \ },
     \ 'component_function': {
+    \    'filename': 'LightlineFilename',
     \    'vista_info': 'VistaStatusLine',
     \ },
     \ 'component_visible_condition': {
@@ -681,5 +682,9 @@ hi LspDiagnosticsFloatingWarning ctermfg=226 guifg=#ffff00
 "{ FUNCTIONS
 function! VistaStatusLine() abort
     return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+function! LightlineFilename() abort
+    return expand('%')
 endfunction
 "}
