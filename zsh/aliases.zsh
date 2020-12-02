@@ -32,10 +32,15 @@ alias lmg='lm --git'; # 'lm' comes from a personal Rust crate in ~/bin/perso_lm
 alias shistory='history 1 | rg'
 
 # Git
-# -----
+# ---
 
 alias git='LANG=en_GB.UTF-8 git'
 alias g='git'
+
+# Pijul
+# -----
+
+alias pj='pijul'
 
 # Apple
 # -----
