@@ -89,8 +89,6 @@ source $ZSH/funcs.zsh
 # Zoxide
 # ------
 
-# The fuzzy finder to use with the `zi` command
-export _ZO_FUZZY_FINDER_CMD="skim"
 # Needs to be after `$CARGO_HOME/bin` is in $PATH
 eval "$(zoxide init zsh)"
 
