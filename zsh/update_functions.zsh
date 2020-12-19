@@ -38,7 +38,7 @@ function run_all_updates() {
                 echo "======================"
                 echo ""
 
-                ( z ~/Projects/rust/rust-analyzer \
+                ( cd ~/Projects/rust/rust-analyzer \
                     && g checkout master \
                     && g pull \
                     && cg xtask install --server )
