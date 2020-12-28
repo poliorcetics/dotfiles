@@ -2,10 +2,10 @@
 # =======
 
 function run_all_completions() {
-    swift package completion-tool generate-zsh-script > $DIRCONFIG/zsh/_swift
-    rustup completions zsh cargo > $DIRCONFIG/zsh/_cargo
-    rustup completions zsh > $DIRCONFIG/zsh/_rustup
-    pip3 completion --zsh > $DIRCONFIG/zsh/_pip3
+    swift package completion-tool generate-zsh-script > $XDG_CONFIG_HOME/zsh/_swift
+    rustup completions zsh cargo > $XDG_CONFIG_HOME/zsh/_cargo
+    rustup completions zsh > $XDG_CONFIG_HOME/zsh/_rustup
+    pip3 completion --zsh > $XDG_CONFIG_HOME/zsh/_pip3
 }
 
 function run_all_updates() {

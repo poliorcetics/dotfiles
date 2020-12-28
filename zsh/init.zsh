@@ -28,8 +28,8 @@ export HISTSIZE=$SAVEHIST
 export HISTFILE=$ZSH_CACHE_DIR/.zsh_history
 export HISTTIMEFORMAT="[%F %T] "
 
-export DIRCONFIG=$HOME/.config
-export ZSH=$DIRCONFIG/zsh
+export XDG_CONFIG_HOME=$HOME/.config
+export ZSH=$XDG_CONFIG_HOME/zsh
 
 case :$PATH: in
     *:/usr/local/bin:*)
@@ -45,8 +45,8 @@ export EDITOR=nvim
 
 # Rust environment
 
-export RUSTUP_HOME=$DIRCONFIG/rust/rustup
-export CARGO_HOME=$DIRCONFIG/rust/cargo
+export RUSTUP_HOME=$XDG_CONFIG_HOME/rust/rustup
+export CARGO_HOME=$XDG_CONFIG_HOME/rust/cargo
 
 case :$PATH: in
     *:$CARGO_HOME/bin:*)
@@ -114,7 +114,7 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^[[A" history-beginning-search-backward-end
 bindkey "^[[B" history-beginning-search-forward-end
 
-export fpath=( $DIRCONFIG/zsh $fpath )
+export fpath=( $XDG_CONFIG_HOME/zsh $fpath )
 autoload -Uz compinit
 compinit
 
