@@ -53,7 +53,7 @@ Plug 'liuchengxu/vista.vim'             " Tags/LSP symbols navigation/tree
 Plug 'justinmk/vim-sneak'               " Super fast movement with s/S
 Plug 'mg979/vim-visual-multi'           " Multi cursor editing
 Plug 'wellle/targets.vim'               " VERY powerful plugin that should be properly studied to be used fully
-Plug 'lotabout/skim', {                 
+Plug 'lotabout/skim', {
     \ 'dir': '~/.local/skim',
     \ 'do': './install'
     \ }                                 " Helper for the fuzzy finder
@@ -558,8 +558,10 @@ augroup END
 
 let g:markdown_fenced_languages = [
     \ 'rs=rust', 'rust',
+    \ 'py=python', 'python',
     \ 'bash=sh', 'zsh=sh',
-    \ 'c',       'cpp',
+    \ 'c', 
+    \ 'cpp',
     \ ]
 
 "{{{ Vista
