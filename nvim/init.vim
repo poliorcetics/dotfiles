@@ -446,9 +446,6 @@ nnoremap <silent> lk <cmd>lua vim.lsp.buf.rename()<cr>
 nnoremap <silent> W <cmd>lua vim.lsp.diagnostic.goto_prev {wrap=true} <cr>
 nnoremap <silent> X <cmd>lua vim.lsp.diagnostic.goto_next {wrap=true} <cr>
 
-" xnoremap <silent> lp <cmd>lua vim.lsp.buf.range_code_action(nil, vim.api.nvim_eval("getpos(\"'<\")"), vim.api.nvim_eval("getpos(\"'>\")"))<cr>
-" xnoremap <silent> lf <cmd>lua vim.lsp.buf.range_formatting(nil, vim.api.nvim_eval("getpos(\"'<\")"), vim.api.nvim_eval("getpos(\"'>\")"))<cr>
-
 " Less useful but still cool
 nnoremap <silent> lci <cmd>lua vim.lsp.buf.incoming_calls()<cr>
 nnoremap <silent> lco <cmd>lua vim.lsp.buf.outgoing_calls()<cr>
@@ -474,8 +471,6 @@ local lspconfig = require("lspconfig")
 -- function to attach completion and diagnostics when setting up lsp
 local on_attach = function(client)
     require("completion").on_attach(client)
-    -- vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
-    -- vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
     vim.api.nvim_command [[au CursorHold  <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
     vim.api.nvim_command [[au CursorHoldI <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()]]
     vim.api.nvim_command [[au CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
