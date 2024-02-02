@@ -40,3 +40,13 @@ sed -i -E "s:home.username = \".*\";:home.username = \"$USER\";:" ~/.config/home
 sed -i -E "s:home.homeDirectory = \".*\";:home.homeDirectory = \"$HOME\";:" ~/.config/home-manager
 sed -i -E "s:home.cacheHome = \".*\";:home.cacheHome = \"$HOME/.local/cache\";:" ~/.config/home-manager
 ```
+
+### macOS apps
+
+On macOS, I like installing a few more apps. Since it's annoying to do it manually then track them for updates, I use [`homebrew`](https://brew.sh/):
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install --cask appcleaner db-browser-for-sqlite firefox monitorcontrol orbstack transmission tunnelblick vlc zulip
+```
