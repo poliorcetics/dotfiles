@@ -119,8 +119,52 @@
   #
   #  /etc/profiles/per-user/alexis/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    #: EDITOR = "emacs";
+  # Those variables are only defined once, opening a new shell does not redefine them I think
+  home.sessionVariables = rec {
+    EDITOR = "hx";
+    VISUAL = "hx";
+
+    LESS = "-R";
+    LESSHISTFILE = "-";
+
+    VIRTUAL_ENV_DISABLE_PROMPT = 1;
+
+    # XDG setup
+    XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+    XDG_RUNTIME_DIR = "/var/tmp/$(id -u)";
+    # Put all dirs in .local because I like having $HOME as clean as possible
+    XDG_CACHE_HOME = "${config.home.homeDirectory}/.local/cache";
+    XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
+    XDG_STATE_HOME = "${config.home.homeDirectory}/.local/state";
+
+    JJ_CONFIG = "${XDG_CONFIG_HOME}/jj/config.toml";
+
+    # Kubernetes, is a mess regarding what use which env var but let's try to make it work
+    KUBECONFIG = "${XDG_CONFIG_HOME}/kube/config";
+    KUBECACHEDIR = "${XDG_CACHE_HOME}/kube";
+
+    # NPM, incapable of answering to `XDG` spec and creating at least 3 dirs in ~/
+    NPM_CONFIG_USERCONFIG = "${XDG_CONFIG_HOME}/npm/npmrc";
+
+    PYTHONSTARTUP = "${XDG_CONFIG_HOME}/python/rc.py";
+
+    # Rust
+    RUSTUP_HOME = "${XDG_CACHE_HOME}/rustup";
+    CARGO_HOME = "${XDG_DATA_HOME}/cargo";
+
+    STARSHIP_CACHE = "${XDG_CACHE_HOME}/starship";
+
+    SOLARGRAPH_CACHE = "${XDG_CACHE_HOME}/solargraph"; # Ruby LSP
+
+    TERMINFO = "${XDG_DATA_HOME}/terminfo";
+    TERMINFO_DIRS = "${XDG_DATA_HOME}/terminfo:/usr/share/terminfo";
+
+    WORKON_HOME = "${XDG_CACHE_HOME}/virtualenvs";
+
+    ZELLIJ_CONFIG_DIR = "${XDG_CONFIG_HOME}/zellij";
+    ZELLIJ_CONFIG_FILE = "${XDG_CONFIG_HOME}/zellij/config.kdl";
+
+    _ZO_DATA_DIR = "${XDG_STATE_HOME}/zoxide";
   };
 
   # Let Home Manager install and manage itself.
