@@ -38,7 +38,6 @@ ln -s $HOME/repos/me/dotfiles $HOME/.config/home-manager
 # 6. Fix the user infos
 sed -i -E "s:home.username = \".*\";:home.username = \"$USER\";:" ~/.config/home-manager
 sed -i -E "s:home.homeDirectory = \".*\";:home.homeDirectory = \"$HOME\";:" ~/.config/home-manager
-sed -i -E "s:home.cacheHome = \".*\";:home.cacheHome = \"$HOME/.local/cache\";:" ~/.config/home-manager
 ```
 
 ### macOS apps

@@ -4,7 +4,6 @@
   # Home Manager needs a bit of information about you and the paths it should manage.
   home.username = "alexis";
   home.homeDirectory = "/Users/alexis";
-  xdg.cacheHome = "/Users/alexis/.local/cache";
 
   # This value determines the Home Manager release that your configuration is compatible with. This
   # helps avoid breakage when a new Home Manager release introduces backwards incompatible changes.
