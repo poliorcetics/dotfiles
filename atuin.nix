@@ -6,11 +6,6 @@
 {
   programs.atuin.enable = true;
 
-  programs.atuin.enableBashIntegration = true;
-  programs.atuin.enableFishIntegration = true;
-  programs.atuin.enableNushellIntegration = true;
-  programs.atuin.enableZshIntegration = true;
-
   programs.atuin.flags = [ "--disable-up-arrow" ];
 
   # Settings: <https://atuin.sh/docs/config/>
