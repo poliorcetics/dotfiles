@@ -1,6 +1,6 @@
 # Atuin configuration
 #
-# https://atuin.sh
+# <https://atuin.sh>
 
 { config, ... }:
 {
@@ -13,7 +13,7 @@
 
   programs.atuin.flags = [ "--disable-up-arrow" ];
 
-  # Settings: https://atuin.sh/docs/config/
+  # Settings: <https://atuin.sh/docs/config/>
   programs.atuin.settings = {
     update_check = false;
     sync_frequency = "24h";
