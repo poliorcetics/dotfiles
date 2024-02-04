@@ -9,6 +9,9 @@ I use [`nushell`](https://www.nushell.sh/) as my primary shell but I do **not** 
 Anyway, onwards to the installation:
 
 ```sh
+# 0. Install dev tools
+xcode-select --install
+
 # 1. Install nix (package manager)
 #
 # See: https://nixos.org/download
