@@ -69,6 +69,7 @@ let
     starship
     tealdeer
     tokei
+    topgrade
     tree-sitter
     watchexec
     zellij
