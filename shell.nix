@@ -29,7 +29,7 @@
 
       command nu
     '';
-    historyFile = "${config.home.homeDirectory}/.config/bash/history";
+    historyFile = "${config.xdg.configHome}/bash/history";
   };
 
   programs.zsh = {
@@ -37,6 +37,6 @@
     sessionVariables = config.home.sessionVariables;
     initExtra = config.programs.bash.initExtra;
     dotDir = ".config/zsh";
-    history.path = "${config.home.homeDirectory}/.config/zsh/history";
+    history.path = "${config.xdg.configHome}/zsh/history";
   };
 }
