@@ -228,7 +228,6 @@ let
     # TODO: directories for which to import the files directly since home-manager doesn't handle them well
     # - .config/fish
     # - .config/helix
-    # - .config/nix
     # - .config/npm
     # - .config/nushell
     # - .config/pijul
@@ -245,4 +244,8 @@ let
 
     # Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
     xdg.configFile."jj/config.toml".source = ./jj/config.toml;
+
+    # Usually tracking nix config is done via the user config in nixOS, or nix-darwin on macOS but I
+    # don't want to have to install it too. This works for now.
+    xdg.configFile."nix/nix.conf".source = ./nix/nix.conf;
   }
