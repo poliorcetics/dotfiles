@@ -36,7 +36,7 @@ let
     prettier # Code formatter, notably for Web technologies
   ];
 
-  pythonPackages = with pkgs.python311Packages; [
+  pythonPackages = with pkgs.python3Packages; [
     python
     pip
   ];
