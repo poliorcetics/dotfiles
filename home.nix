@@ -103,6 +103,24 @@ let
     home.username = "alexis";
     home.homeDirectory = "/Users/alexis";
 
+    home.activation = if !pkgs.stdenv.isDarwin then {} else {
+      # Bacon doesn't respect XDG spec on macOS, force it to
+      linkBaconConfig = ''
+        run mkdir -p "${config.xdg.configHome}/bacon"
+        run ln -s "${config.xdg.configHome}/bacon" "${config.home.homeDirectory}/Library/Application Support/org.dystroy.bacon" || true
+      '';
+      # Same for Nushell
+      linkNushellConfig = ''
+        run mkdir -p "${config.xdg.configHome}/nushell"
+        run ln -s "${config.xdg.configHome}/nushell" "${config.home.homeDirectory}/Library/Application Support/nushell" || true
+      '';
+      # Same for Pijul
+      linkPijulConfig = ''
+        run mkdir -p "${config.xdg.configHome}/pijul"
+        run ln -s "${config.xdg.configHome}/pijul" "${config.home.homeDirectory}/Library/Application Support/pijul" || true
+      '';
+    };
+
     # XDG setup
     xdg.enable = true;
     xdg.configHome = "${config.home.homeDirectory}/.config";
