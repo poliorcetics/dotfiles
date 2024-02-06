@@ -11,5 +11,10 @@ cm = ["commit", "-m"]
 d = ["describe"]
 s = ["status"]
 
+[template-aliases]
+# Override the default short ID to use the absolute shortest, making it easier to use `-r <id>`
+# in various `jj` commands
+'format_short_id(id)' = 'id.shortest()'
+
 [ui]
 default-command = "status"
