@@ -250,6 +250,13 @@ let
 
     programs.tealdeer.enable = true;
 
+    programs.zellij = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+    };
+
     # TODO: directories for which to import the files directly since home-manager doesn't handle them well
     # - .config/fish
     # - .config/helix
@@ -261,7 +268,6 @@ let
     # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
     # - kitty
     # - topgrade
-    # - zellij
 
     # === FILES ===
 
