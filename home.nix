@@ -13,6 +13,7 @@ let
     ./gh.nix
     ./git.nix
     ./shell.nix
+    ./starship.nix
   ];
 
   # TODO: missing: cargo-upgrades cargo-instruments
@@ -261,7 +262,6 @@ let
     # - kitty
     # - topgrade
     # - zellij
-    # - starship
 
     # === FILES ===
 
