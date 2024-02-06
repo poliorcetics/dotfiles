@@ -2,7 +2,7 @@
 #
 # Main documentation: <https://nix-community.github.io/home-manager/index.xhtml>
 # All options: <https://nix-community.github.io/home-manager/options.xhtml>
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   # Imports other Nix files from the repo to configure various elements
@@ -96,6 +96,9 @@ let
     yaml-language-server # LSP for YAML
   ];
 
+  # Import my helper functions
+  funcs = import ./functions.nix { inherit config lib pkgs; };
+
   in
 
   {
@@ -105,22 +108,22 @@ let
     home.username = "alexis";
     home.homeDirectory = "/Users/alexis";
 
-    home.activation = if !pkgs.stdenv.isDarwin then {} else {
+    home.activation = {
       # Bacon doesn't respect XDG spec on macOS, force it to
-      linkBaconConfig = ''
-        run mkdir -p "${config.xdg.configHome}/bacon"
-        run ln -s "${config.xdg.configHome}/bacon" "${config.home.homeDirectory}/Library/Application Support/org.dystroy.bacon" || true
-      '';
+      linkBaconConfig = funcs.createAppSupportSymlink {
+        xdg_subdir = "bacon";
+        app_support_link = "org.dystroy.bacon";
+      };
       # Same for Nushell
-      linkNushellConfig = ''
-        run mkdir -p "${config.xdg.configHome}/nushell"
-        run ln -s "${config.xdg.configHome}/nushell" "${config.home.homeDirectory}/Library/Application Support/nushell" || true
-      '';
+      linkNushellConfig = funcs.createAppSupportSymlink {
+        xdg_subdir = "nushell";
+        app_support_link = "nushell";
+      };
       # Same for Pijul
-      linkPijulConfig = ''
-        run mkdir -p "${config.xdg.configHome}/pijul"
-        run ln -s "${config.xdg.configHome}/pijul" "${config.home.homeDirectory}/Library/Application Support/pijul" || true
-      '';
+      linkPijulConfig = funcs.createAppSupportSymlink {
+        xdg_subdir = "pijul";
+        app_support_link = "pijul";
+      };
     };
 
     # XDG setup
