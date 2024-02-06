@@ -9,6 +9,7 @@ email = "ab_jujutsu@poliorcetiq.eu"
 c = ["commit"]
 cm = ["commit", "-m"]
 d = ["describe"]
+l = ["log"]
 s = ["status"]
 
 [template-aliases]
@@ -18,3 +19,17 @@ s = ["status"]
 
 [ui]
 default-command = "status"
+
+diff.tool = ["difft", "--color=always", "$left", "$right"]
+
+diff-editor = "scm-diff-editor"
+merge-editor = "scm-diff-editor"
+
+[merge-tools.scm-diff-editor]
+edit-args = ["--dir-diff", "$left", "$right"]
+merge-args = [
+    "--dir-diff",
+    "--output", "$output",
+    "--base", "$base",
+    "$left", "$right",
+]
