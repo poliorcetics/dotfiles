@@ -41,6 +41,12 @@ ln -s $HOME/repos/me/dotfiles $HOME/.config/home-manager
 # 6. Fix the user infos
 sed -i -E "s:home.username = \".*\";:home.username = \"$USER\";:" ~/.config/home-manager
 sed -i -E "s:home.homeDirectory = \".*\";:home.homeDirectory = \"$HOME\";:" ~/.config/home-manager
+
+# 7. Compile home-manager setup
+home-manager switch
+
+# 8. In a new terminal
+~/.local/bin/hm.nu rust installs
 ```
 
 ### macOS apps
@@ -48,7 +54,7 @@ sed -i -E "s:home.homeDirectory = \".*\";:home.homeDirectory = \"$HOME\";:" ~/.c
 On macOS, I like installing a few more apps. Since it's annoying to do it manually then track them for updates, I use [`homebrew`](https://brew.sh/):
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-brew install --cask alacritty appcleaner db-browser-for-sqlite firefox kitty monitorcontrol orbstack transmission tunnelblick vlc zulip
+~/.local/bin/hm.nu brew init
 ```
+
+I could use `home-manager` for some of those, but it doesn't sign nor install them in `/Applications` correctly so I prefer not to.
