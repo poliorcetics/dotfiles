@@ -269,6 +269,13 @@ let
       enableZshIntegration = true;
     };
 
+    # Avoid zoxide nushell integration as long as I'm not on a version with the changes from
+    # <https://github.com/ajeetdsouza/zoxide/pull/663>
+    programs.zoxide = {
+      enable = true;
+      enableNushellIntegration = false;
+    };
+
     # TODO: directories for which to import the files directly since home-manager doesn't handle them well
     # - .config/fish
     # - .config/helix
