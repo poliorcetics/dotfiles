@@ -12,6 +12,7 @@ let
     ./bat.nix
     ./gh.nix
     ./git.nix
+    ./helix.nix
     ./shell.nix
     ./starship.nix
     ./topgrade.nix
@@ -274,7 +275,6 @@ let
 
     # TODO: directories for which to import the files directly since home-manager doesn't handle them well
     # - .config/fish
-    # - .config/helix
     # - .config/npm
     # - .config/pijul
 
