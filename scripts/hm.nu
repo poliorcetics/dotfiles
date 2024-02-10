@@ -47,6 +47,20 @@ export module main {
             casks
         }
     }
+
+    export def "iosevka build" [] {
+        cd $env.XDG_CACHE_HOME
+
+        git clone https://github.com/be5invis/Iosevka.git --single-branch --branch main --depth 1 iosevka
+
+        cd iosevka
+        let plans = "private-build-plans.toml"
+
+        ln -s $"($env.XDG_CONFIG_HOME | path join home-manager iosevka $plans)" $"(pwd | path join $plans)"
+
+        nix shell nixpkgs#nodejs_21 nixpkgs#ttfautohint-nox --command npm install   --verbose
+        nix shell nixpkgs#nodejs_21 nixpkgs#ttfautohint-nox --command npm run build --verbose -- contents::IosevkaCustom
+    }
 }
 
 export use main

@@ -1,0 +1,54 @@
+# See <https://typeof.net/Iosevka/customizer>
+
+[buildPlans.IosevkaCustom]
+family = "Iosevka Custom"
+spacing = "term"
+serifs = "sans"
+noCvSs = true
+exportGlyphNames = true
+
+[buildPlans.IosevkaCustom.variants.design]
+number-sign = "slanted"
+percent = "rings-segmented-slash"
+bar = "force-upright"
+lig-ltgteq = "slanted"
+
+[buildPlans.IosevkaCustom.ligations]
+enables = [
+    # === Positioning ===
+    "center-ops", # Vertically align some of the operators (like *) to the center position it is before or after a "center" operator (like +)
+
+    # === Actual ligations ===
+    # Arrows
+    "arrow-l", # Enable ligation set that forms left-pointing arrows.
+    "arrow-r", # Enable ligation set that forms right-pointing arrows.
+    "arrow-lr", # Enable ligation set that forms dual-pointing arrows.
+    "couter-arrow-l", # Enable ligation set that forms left-pointing counter-arrows.
+    "couter-arrow-r", # Enable ligation set that forms right-pointing counter-arrows.
+
+    # Equality
+    "eqeqeq", # Enable special ligation for === with triple lines.
+    "eqeq", # Enable ligation for == and ===.
+
+    # Inequality
+    "exeqeqeq", # Enable special ligation for !=== with triple lines.
+    "exeqeq", # Enable special ligation for !== with triple lines.
+    "exeq", # Enable ligation for != and !==.
+
+    # HTML
+    "html-comment", # Enable ligation for <!-- and <!---.
+
+    # Kern: gather same symbols closer
+    "kern-bars", # Move consecutive bars closer, like for ||, ||| and //.
+    "kern-dotty", # Move connecting dotty punctuations closer, like for ::, ::: and ... .
+
+    # < and > in ligations
+    "ltgt-diamong-tag", # Enable ligation for <> as diamond-shaped empty HTML/XML tag.
+    "llgg", # Enable ligation for <<, >> and other angle-bracket chaining.
+    "llggeq", # Enable ligation for <<=, >>= as shift operator.
+
+    # Continuous patterns
+    "minus-minus", # Make 2 or more contiguous hyphen-minuses (like --, --- and ----) connected as a straight solid line.
+    "plus-plus", # Make 2 or more contiguous plus signs (like ++, +++ and ++++) connected.
+    "tilde-tilde", # Make 2 or more contiguous ASCII tildes (like ~~, ~~~ and ~~~~) connected as a wave line.
+]
