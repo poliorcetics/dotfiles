@@ -42,6 +42,12 @@ in
     run mkdir -p ~/repos/work/pub/
   '';
 
+  # `zellij setup ...` fails in Bash/Zsh if the config file doesn't exist
+  zellijFile = ''
+    run mkdir -p ${config.home.sessionVariables.ZELLIJ_CONFIG_DIR}
+    run touch ${config.home.sessionVariables.ZELLIJ_CONFIG_FILE}
+  '';
+
   # === Nushell Files ===
 
   # Create default nushell files
