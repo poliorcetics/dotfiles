@@ -3,29 +3,30 @@
 { config, lib, ... }:
 let
 
-  nuConfig = lib.readFile ./nushell/config.nu;
-
-  xch = config.xdg.configHome;
-
   initExtra = ''
-    # TODO: Check this is used on Linux too ?
-    if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-      source $HOME/.nix-profile/etc/profile.d/nix.sh
+    if [ -z "$__INIT_EXTRA_ALREADY_DONE" ]; then
+      # TODO: Check this is used on Linux too ?
+      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+        source $HOME/.nix-profile/etc/profile.d/nix.sh
+      fi
+
+      if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+          source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      fi
+
+      mkdir -p "$XDG_RUNTIME_DIR"
+
+      export PATH="${config.home.homeDirectory}/.local/bin:${config.home.sessionVariables.CARGO_HOME}/bin:${config.xdg.dataHome}/npm/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+      export PATH="$(${lib.getExe config.programs.nushell.package} --commands '$env.PATH | uniq | str join :')"
+
+      if [ -f "${xch}/.env" ]; then
+        source "${xch}/.env"
+      fi
+
+      export __INIT_EXTRA_ALREADY_DONE=1
     fi
 
-    if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
-        source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-    fi
-
-    mkdir -p "$XDG_RUNTIME_DIR"
-    export PATH="$HOME/.local/bin:$CARGO_HOME/bin:$XDG_DATA_HOME/npm/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
-    export PATH="$(${lib.getExe config.programs.nushell.package} --commands '$env.PATH | uniq | str join :')"
-
-    if [ -f "$XDG_CONFIG_HOME/.env" ]; then
-      source "$XDG_CONFIG_HOME/.env"
-    fi
-
-    command nu
+    ${lib.getExe config.programs.nushell.package}
   '';
 
   shAliases = {
@@ -34,6 +35,8 @@ let
     ll = "eza -lhaF --colour-scale all --time-style long-iso --group-directories-first";
     lm = "clear; ll";
   };
+
+  xch = config.xdg.configHome;
 
 in
 {
@@ -91,6 +94,8 @@ in
 
   xdg.configFile."nushell/config.nu".text = let
     aliasesStr = lib.concatStringsSep "\n" (lib.mapAttrsToList (k: v: "alias ${k} = ${v}") config.home.shellAliases);
+
+    nuConfig = lib.readFile ./nushell/config.nu;
   in
     ''
       source-env ${xch}/nushell/defaults/config.nu
