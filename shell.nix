@@ -1,7 +1,27 @@
 # Shell configurations
 
 { config, lib, ... }:
+let
+
+  xch = config.xdg.configHome;
+
+in
 {
+  home.shellAliases = {
+    # Simply shorter commands
+    cg = "cargo";
+    g = "git";
+    j = "just";
+    k = "kubectl";
+    p = "poetry";
+    pj = "pijul";
+    vc = "virtctl";
+    # With arguments
+    rgi = "rg --no-ignore --hidden";
+    rgh = "rg --hidden";
+    fdi = "fd -IH";
+  };
+
   programs.bash = {
     enable = true;
     sessionVariables = config.home.sessionVariables;
@@ -32,7 +52,13 @@
 
       command nu
     '';
-    historyFile = "${config.xdg.configHome}/bash/history";
+    historyFile = "${xch}/bash/history";
+    shellAliases = {
+      ls = "eza -F --colour-scale all --time-style long-iso --group-directories-first";
+      la = "eza -haF --colour-scale all --time-style long-iso --group-directories-first";
+      ll = "eza -lhaF --colour-scale all --time-style long-iso --group-directories-first";
+      lm = "clear; ll";
+    };
   };
 
   programs.zsh = {
@@ -40,6 +66,7 @@
     sessionVariables = config.home.sessionVariables;
     initExtra = config.programs.bash.initExtra;
     dotDir = ".config/zsh";
-    history.path = "${config.xdg.configHome}/zsh/history";
+    history.path = "${xch}/zsh/history";
+    shellAliases = config.programs.bash.shellAliases;
   };
 }
