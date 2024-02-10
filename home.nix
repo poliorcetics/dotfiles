@@ -275,7 +275,6 @@ let
 
     # TODO: directories for which to import the files directly since home-manager doesn't handle them well
     # - .config/fish
-    # - .config/npm
     # - .config/pijul
 
     # TODO: programs to port the config for
@@ -292,6 +291,12 @@ let
     # Usually tracking nix config is done via the user config in nixOS, or nix-darwin on macOS but I
     # don't want to have to install it too. This works for now.
     xdg.configFile."nix/nix.conf".source = ./nix/nix.conf;
+
+    # NPM has ways to configure it to not use ~/.npm but it's apparently buggy, let's hope this one works
+    xdg.configFile."npm/npmrc".text = ''
+      cache=~/.local/cache/npm
+      prefix=~/.local/share/npm
+    '';
 
     # Workaround to ensure the python history is not in ~/
     xdg.configFile."python/rc.py".source = ./python/rc.py;
