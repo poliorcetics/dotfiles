@@ -13,6 +13,7 @@ let
     ./gh.nix
     ./git.nix
     ./helix.nix
+    ./kitty.nix
     ./shell.nix
     ./starship.nix
     ./topgrade.nix
@@ -237,6 +238,8 @@ let
     };
 
     # === PROGRAMS ===
+    #
+    # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
@@ -262,10 +265,6 @@ let
       enable = true;
       enableNushellIntegration = false;
     };
-
-    # TODO: programs to port the config for
-    # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
-    # - kitty
 
     # === FILES ===
 
