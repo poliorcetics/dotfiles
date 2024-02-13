@@ -92,6 +92,12 @@ in
     }
 
     {
+      name = "just";
+      auto-format = false;
+      inherit indent;
+    }
+
+    {
       name = "markdown";
       text-width = 150;
 
