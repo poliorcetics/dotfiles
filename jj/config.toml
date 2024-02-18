@@ -10,6 +10,7 @@ c = ["commit"]
 cm = ["commit", "-m"]
 d = ["describe"]
 l = ["log"]
+r = ["rebase"]
 s = ["status"]
 
 [git]
