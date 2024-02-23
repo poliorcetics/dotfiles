@@ -37,7 +37,7 @@ export module main {
 
     export module brew {
         export def casks [] {
-            brew install --cask appcleaner db-browser-for-sqlite firefox kitty monitorcontrol orbstack transmission tunnelblick vlc zulip
+            brew install --cask appcleaner db-browser-for-sqlite firefox kitty macs-fan-control monitorcontrol orbstack rectangle transmission tunnelblick vlc zulip
         }
 
         # Install brew on macOS
