@@ -21,6 +21,7 @@ export module main {
     # Do the cargo crates and rustup toolchain installs
     export def "rust installs" [] {
         # Rustup
+        rustup toolchain install stable
         rustup toolchain install nightly
 
         # Regular cargo installs
