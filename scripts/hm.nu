@@ -38,6 +38,10 @@ export module main {
     export module brew {
         export def casks [] {
             brew install --cask appcleaner db-browser-for-sqlite firefox kitty macs-fan-control monitorcontrol orbstack rectangle transmission tunnelblick vlc zulip
+
+            # Link kitty terminfo to their new place
+            let link_dir = $env.XDG_DATA_HOME | path join "terminfo/78"
+            /bin/ln -s /Applications/kitty.app/Contents/Resources/terminfo/78/xterm-kitty ($link_dir | path join xterm-kitty)
         }
 
         # Install brew on macOS
