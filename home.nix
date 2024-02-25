@@ -219,7 +219,7 @@ let
       PYTHONSTARTUP = "${config.xdg.configHome}/python/rc.py";
 
       # Rust
-      RUSTUP_HOME = "${config.xdg.cacheHome}/rustup";
+      RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
 
       STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
