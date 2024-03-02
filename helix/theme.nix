@@ -19,6 +19,8 @@ let
     bg = "#553308";
     fg = "#cc7c1d";
   };
+  unnecessary = { modifiers = ["dim"]; };
+  deprecated = { modifiers = ["crossed_out"]; };
 
   default = {
     fg = "#f3f6f4";
@@ -112,6 +114,8 @@ in
   "diagnostic.hint" = { underline.color = hint.fg; } // mod_underline // mod_bold;
   "diagnostic.info" = { underline.color = info.fg; } // mod_underline // mod_bold;
   "diagnostic.warning" = { underline.color = warning.fg; } // mod_underline // mod_bold;
+  "diagnostic.unnecessary" = unnecessary;
+  "diagnostic.deprecated" = deprecated;
   "error" = { fg = error.fg; bg = inline_diagnostics.bg; };
   "hint" = { fg = hint.fg; bg = inline_diagnostics.bg; };
   "info" = { fg = info.fg; bg = inline_diagnostics.bg; };
