@@ -108,6 +108,13 @@
         left = "goto_prev_change";
       };
 
+      "`" = {
+        up = "goto_first_change";
+        down = "goto_last_change";
+        right = "goto_next_change";
+        left = "goto_prev_change";
+      };
+
       "]" = {
         d = "no_op";
         D = "no_op";
