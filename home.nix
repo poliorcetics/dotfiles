@@ -268,8 +268,13 @@ let
 
     # === FILES ===
 
-    # Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
-    xdg.configFile."jj/config.toml".source = ./jj/config.toml;
+    # - Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
+    # - JJ signing can be configured by either embedding the key or giving the absolute path to the
+    #   .pub key file. Since `intoTOML` is not a builtin, I chose to do a search-and-replace for now
+    xdg.configFile."jj/config.toml".text = builtins.replaceStrings
+      ["%SIGNING_SSH_KEY%"]
+      ["${config.home.homeDirectory}/.ssh/id_signing.pub"]
+      (builtins.readFile ./jj/config.toml);
 
     # Usually tracking nix config is done via the user config in nixOS, or nix-darwin on macOS but I
     # don't want to have to install it too. This works for now.
