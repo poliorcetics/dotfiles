@@ -7,7 +7,7 @@
   programs.git.enable = true;
 
   programs.git.userName = "Alexis (Poliorcetics) Bourget";
-  programs.git.userEmail = "ab_github_default@poliorcetiq.eu";
+  programs.git.userEmail = "ab_github@poliorcetiq.eu";
 
   programs.git.aliases = {
     a = "add";
