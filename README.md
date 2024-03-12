@@ -50,6 +50,22 @@ home-manager switch
 # 8. In a new terminal
 ~/.local/bin/hm.nu rust installs # Custom rust program installs
 ~/.local/bin/hm.nu iosevka build # Custom font
+
+# 9. Generate new SSH keys for authentication and signing
+#
+# Add to GitHub: <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account>
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "COMMENT"
+ssh-keygen -t ed25519 -f ~/.ssh/id_signing -C "COMMENT - Signing"
+
+ssh-agent -s
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+ssh-add --apple-use-keychain ~/.ssh/id_signing
+
+# 10. Sync Atuin
+#
+# Docs: <https://docs.atuin.sh/guide/sync/#login>
+atuin login -u "<USER>"
+atuin sync -f
 ```
 
 ### macOS apps
@@ -65,8 +81,4 @@ I could use `home-manager` for some of those, but it doesn't sign nor install th
 
 ### After the install
 
-- Generate an SSH key to have access to GitHub:
-  - [Make a new key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-  - [Add to GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=cli)
-- Connect Atuin to sync history: [Atuin - Login](https://docs.atuin.sh/guide/sync/#login)
 - Connect Matrix account
