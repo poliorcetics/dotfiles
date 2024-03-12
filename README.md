@@ -17,8 +17,8 @@ xcode-select --install
 # See: https://nixos.org/download
 bash <(curl -L https://nixos.org/nix/install) --daemon
 
-# 2. Add the home-manager channel
-#
+# 2. Add unstable and home-manager channels
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable
 # See: https://nix-community.github.io/home-manager/#sec-install-standalone
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
@@ -69,3 +69,4 @@ I could use `home-manager` for some of those, but it doesn't sign nor install th
   - [Make a new key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
   - [Add to GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=cli)
 - Connect Atuin to sync history: [Atuin - Login](https://docs.atuin.sh/guide/sync/#login)
+- Connect Matrix account
