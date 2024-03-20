@@ -75,7 +75,6 @@ let
     topgrade # Upgrade everything
     tree-sitter # Make semantic things
     watchexec # Execute in loops based on FS changes
-    zellij # `tmux` reinvented
     zoxide # `cd`, but with jumps and shortcuts
   ];
 
@@ -231,9 +230,6 @@ let
 
       WORKON_HOME = "${config.xdg.cacheHome}/virtualenvs";
 
-      ZELLIJ_CONFIG_DIR = "${config.xdg.configHome}/zellij";
-      ZELLIJ_CONFIG_FILE = "${config.xdg.configHome}/zellij/config.kdl";
-
       _ZO_DATA_DIR = "${config.xdg.stateHome}/zoxide";
     };
 
@@ -256,8 +252,6 @@ let
     programs.gitui.enable = true;
 
     programs.tealdeer.enable = true;
-
-    programs.zellij.enable = true;
 
     # Avoid zoxide nushell integration as long as I'm not on a version with the changes from
     # <https://github.com/ajeetdsouza/zoxide/pull/663>
