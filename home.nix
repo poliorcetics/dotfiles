@@ -68,6 +68,7 @@ let
     procs # `ps` reinvented
     ripgrep # `grep` but 1000x better
     rnr # Rename things in bulk
+    rust-bindgen # Generates Rust translation of C files
     sd # `sed` but understandable
     starship # A shell prompt for the stars
     tealdeer # Quick explanations of commands
