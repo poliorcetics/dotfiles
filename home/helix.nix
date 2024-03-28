@@ -4,7 +4,7 @@
 #
 # I always use latest master so docs are at <https://docs.helix-editor.com/master/>.
 
-{ config, ... }:
+{ config, lib, pkgs, helix, ... }:
 {
   programs.helix.enable = true;
 

@@ -6,8 +6,6 @@
 {
   programs.atuin.enable = true;
 
-  programs.atuin.flags = [ "--disable-up-arrow" ];
-
   # Settings: <https://atuin.sh/docs/config/>
   programs.atuin.settings = {
     update_check = false;

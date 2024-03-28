@@ -6,17 +6,16 @@ let
   initExtra = ''
     if [ -z "$__INIT_EXTRA_ALREADY_DONE" ]; then
       # TODO: Check this is used on Linux too ?
-      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-        source $HOME/.nix-profile/etc/profile.d/nix.sh
-      fi
+      # if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+      #   source $HOME/.nix-profile/etc/profile.d/nix.sh
+      # fi
 
-      if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
-          source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-      fi
+      # if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+      #     source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      # fi
 
       mkdir -p "$XDG_RUNTIME_DIR"
 
-      export PATH="${config.home.homeDirectory}/.local/bin:${config.home.sessionVariables.CARGO_HOME}/bin:${config.xdg.dataHome}/npm/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
       export PATH="$(${lib.getExe config.programs.nushell.package} --commands '$env.PATH | uniq | str join :')"
 
       if [ -f "${xch}/.env" ]; then
@@ -46,7 +45,7 @@ in
     g = "git";
     j = "just";
     k = "kubectl";
-    p = "poetry";
+    po = "poetry";
     pj = "pijul";
     vc = "virtctl";
     # With arguments

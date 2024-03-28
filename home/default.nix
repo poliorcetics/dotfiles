@@ -2,7 +2,7 @@
 #
 # Main documentation: <https://nix-community.github.io/home-manager/index.xhtml>
 # All options: <https://nix-community.github.io/home-manager/options.xhtml>
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, userDetails, ... }:
 
 let
   # Imports other Nix files from the repo to configure various elements
@@ -88,6 +88,7 @@ let
     git # Git itself
     git-lfs # Support LFS in git
     marksman # LSP for Markdown
+    nil # LSP for nix
     ninja # Compile C & C++ things
     poetry # Project manager / venv manager for Python
     yaml-language-server # LSP for YAML
@@ -106,11 +107,16 @@ let
     home.stateVersion = "24.05"; # Please read the comment before changing.
 
     # Home Manager needs a bit of information about you and the paths it should manage.
-    home.username = "alexis";
-    home.homeDirectory = "/Users/alexis";
+    home.username = userDetails.username;
+    home.homeDirectory = userDetails.home;
 
     # Scripts to run on `home-manager switch`
     home.activation = import ./home-manager/activation.nix { inherit config lib pkgs; };
+    home.sessionPath = [
+      "${userDetails.home}/.local/bin"
+      "${config.home.sessionVariables.CARGO_HOME}/bin"
+      "${config.xdg.dataHome}/npm/bin"
+    ];
 
     # XDG setup
     xdg.enable = true;
@@ -138,6 +144,23 @@ let
         #: (pkgs.writeShellScriptBin "my-hello" ''
         #:   echo "Hello, ${config.home.username}!"
         #: '')
+
+        # Keep the .nu to indicate this should not be run often after installing a new machine
+        (pkgs.writeScriptBin "hm.nu" (builtins.readFile ./scripts/hm.nu))
+        (pkgs.writeScriptBin "hn" (builtins.readFile ./scripts/hn.nu))
+        (pkgs.writeScriptBin "systemfiles" (builtins.readFile ./scripts/systemfiles.nu))
+
+        # Voluntarily override the helix from the nixpkgs source to allow building the one from master
+        # or any other dev branch easily
+        (lib.hiPrio (pkgs.writeShellScriptBin "hx" ''
+          cargo_hx="${config.home.sessionVariables.CARGO_HOME}/bin/hx"
+          default_hx="${lib.getExe config.programs.helix.package}"
+          if test -x "$cargo_hx"; then
+            "$cargo_hx" "$@"
+          else
+            "$default_hx" "$@"
+          fi
+        ''))
       ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage plain files is
@@ -152,22 +175,6 @@ let
       #:    org.gradle.console=verbose
       #:    org.gradle.daemon.idletimeout=3600000
       #:  '';
-
-      ".local/bin/hm.nu" = {
-        # Keep the .nu to indicate this should not be run often after installing a new machine
-        source = ./scripts/hm.nu;
-        executable = true;
-      };
-
-      ".local/bin/hn" = {
-        source = ./scripts/hn.nu;
-        executable = true;
-      };
-
-      ".local/bin/systemfiles" = {
-        source = ./scripts/systemfiles.nu;
-        executable = true;
-      };
     };
 
     # Home Manager can also manage your environment variables through 'home.sessionVariables'. If
@@ -266,8 +273,8 @@ let
     # - JJ signing can be configured by either embedding the key or giving the absolute path to the
     #   .pub key file. Since `intoTOML` is not a builtin, I chose to do a search-and-replace for now
     xdg.configFile."jj/config.toml".text = builtins.replaceStrings
-      ["%SIGNING_SSH_KEY%"]
-      ["${config.home.homeDirectory}/.ssh/id_signing.pub"]
+      ["%DISPLAY_NAME%"         "%EMAIL%"          "%SIGNING_SSH_KEY%"]
+      [userDetails.displayName  userDetails.email  "${config.home.homeDirectory}/.ssh/id_signing.pub"]
       (builtins.readFile ./jj/config.toml);
 
     # Usually tracking nix config is done via the user config in nixOS, or nix-darwin on macOS but I
