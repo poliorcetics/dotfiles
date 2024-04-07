@@ -34,7 +34,6 @@ in {
         "git_repos"
 
         "nix"
-        "home_manager"
         "rustup"
         "cargo"
 
