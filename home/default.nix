@@ -161,6 +161,10 @@ let
           "hx"
           (lib.getExe config.programs.helix.package)
           "${config.home.sessionVariables.CARGO_HOME}/bin/hx")
+        (funcs.overrideNixProvidedBinary
+          "rust-analyzer"
+          "${pkgs.rustup}/bin/rust-analyzer"
+          "${config.home.sessionVariables.CARGO_HOME}/bin/rust-analyzer")
       ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage plain files is
