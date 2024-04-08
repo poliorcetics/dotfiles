@@ -10,8 +10,8 @@ let
 in
 {
   users.users.${username} = {
-      name = username;
-      home = "/Users/${username}";
+    inherit (userDetails) home;
+    name = username;
   };
 
   # Manage Homebrew casks through nix-darwin.
@@ -41,9 +41,8 @@ in
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = [
-  ];
-  environment.darwinConfig = "${userDetails.home}/.config/nix/flake.nix";
+  # environment.systemPackages = [];
+  # environment.darwinConfig = "${userDetails.home}/.config/nix/flake.nix";
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
