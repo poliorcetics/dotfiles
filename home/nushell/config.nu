@@ -58,6 +58,14 @@ $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD | append {|
     }
 })
 
+$env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD | append {|_prev, new|
+    if (which direnv | is-empty) {
+        return
+    }
+
+    direnv export json | from json | default {} | load-env
+})
+
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 
