@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, funcs, ... }:
 
 let 
 
@@ -8,9 +8,6 @@ let
   zoxide = lib.getExe config.programs.zoxide.package;
 
   xch = config.xdg.configHome;
-
-  # Import my helper functions
-  funcs = import ./functions.nix { inherit config lib pkgs; };
 
 in
 {
