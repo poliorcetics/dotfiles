@@ -4,7 +4,7 @@
 #
 # I always use latest master so docs are at <https://docs.helix-editor.com/master/>.
 
-{ config, lib, pkgs, helix, ... }:
+{ config, ... }:
 {
   programs.helix.enable = true;
 
@@ -17,6 +17,9 @@
     # VCS
     .git
     .jj
+
+    # Direnv
+    .direnv
 
     # Python
     .mypy_cache

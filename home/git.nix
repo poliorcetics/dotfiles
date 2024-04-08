@@ -171,7 +171,7 @@
     ".TemporaryItems"
     ".Trashes"
     ".VolumeIcon.icns"
-    ".com.apple.timemachine.donotpresent  "
+    ".com.apple.timemachine.donotpresent"
 
     # Directories potentially created on remote AFP share
     ".AppleDB"
@@ -206,6 +206,9 @@
 
     # Jujutsu
     ".jj"
+
+    # Direnv
+    ".direnv"
   ];
 
   # Allow an override of the user-wide config for each machines. Can notably be used to change the
