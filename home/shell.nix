@@ -44,10 +44,7 @@ in
     cg = "cargo";
     g = "git";
     j = "just";
-    k = "kubectl";
     po = "poetry";
-    pj = "pijul";
-    vc = "virtctl";
     # With arguments
     rgi = "rg --no-ignore --hidden";
     rgh = "rg --hidden";
