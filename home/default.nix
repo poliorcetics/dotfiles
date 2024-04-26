@@ -160,6 +160,10 @@ let
           (lib.getExe config.programs.helix.package)
           "${config.home.sessionVariables.CARGO_HOME}/bin/hx")
         (funcs.overrideNixProvidedBinary
+          "nu"
+          (lib.getExe config.programs.nushell.package)
+          "${config.home.sessionVariables.CARGO_HOME}/bin/nu")
+        (funcs.overrideNixProvidedBinary
           "rust-analyzer"
           "${pkgs.rustup}/bin/rust-analyzer"
           "${config.home.sessionVariables.CARGO_HOME}/bin/rust-analyzer")
