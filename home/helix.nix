@@ -4,11 +4,11 @@
 #
 # I always use latest master so docs are at <https://docs.helix-editor.com/master/>.
 
-{ config, ... }:
+{ config, lib, pkgs, ... }:
 {
   programs.helix.enable = true;
 
-  programs.helix.languages = import ./helix/languages.nix { inherit config; };
+  programs.helix.languages = import ./helix/languages.nix { inherit config lib pkgs; };
   programs.helix.settings = import ./helix/config.nix {};
   programs.helix.themes.poliorcetics = import ./helix/theme.nix {};
 
