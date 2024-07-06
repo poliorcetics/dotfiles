@@ -51,8 +51,8 @@ in
     automatic = true;
     options = "--delete-older-than 30d";
     interval = {
-      Hour = 24;
-      Minute = 00;
+      Hour = 23;
+      Minute = 59;
     };
   };
 
