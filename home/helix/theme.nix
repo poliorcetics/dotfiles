@@ -138,6 +138,8 @@ in
   "ui.menu" = { fg = text; bg = popup; };
   "ui.menu.scroll" = { fg = text; bg = popup; };
   "ui.menu.selected" = selected;
+  "ui.picker.header" = { fg = text; } // mod_underline;
+  "ui.picker.header.active" = { fg = selected.fg; } // mod_underline;
   "ui.popup" = { fg = text; bg = popup; };
   "ui.selection" = { bg = selection_secondary; };
   "ui.selection.primary" = { bg = selection_primary; };
