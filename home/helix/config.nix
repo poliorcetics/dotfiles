@@ -17,6 +17,11 @@
     # preview-completion-insert = false;
     rulers = [100 120 150];
 
+    # === Diagnostics ===
+    # Minimum severity of diagnostics rendered at the end of a line
+    end-of-line-diagnostics = "hint";
+    inline-diagnostics.cursor-line = "info"; # Show warnings and errors on the cursor line inline
+
     # === LSP ===
     lsp.display-inlay-hints = true;
 
