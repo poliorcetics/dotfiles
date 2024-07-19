@@ -5,15 +5,6 @@ let
 
   initExtra = ''
     if [ -z "$__INIT_EXTRA_ALREADY_DONE" ]; then
-      # TODO: Check this is used on Linux too ?
-      # if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-      #   source $HOME/.nix-profile/etc/profile.d/nix.sh
-      # fi
-
-      # if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
-      #     source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-      # fi
-
       mkdir -p "$XDG_RUNTIME_DIR"
 
       export PATH="$($HOME/.nix-profile/bin/nu --commands '$env.PATH | uniq | str join :')"
