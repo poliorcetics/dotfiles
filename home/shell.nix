@@ -16,7 +16,8 @@ let
       export __INIT_EXTRA_ALREADY_DONE=1
     fi
 
-    $HOME/.nix-profile/bin/nu
+    # Replace the default shell with nu
+    builtin exec $HOME/.nix-profile/bin/nu
   '';
 
   shAliases = {
