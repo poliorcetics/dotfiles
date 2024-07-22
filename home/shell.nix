@@ -84,23 +84,26 @@ in
     source-env ${xch}/nushell/defaults/env.nu
   '';
 
-  xdg.configFile."nushell/config.nu".text = let
-    aliasesStr = lib.concatStringsSep "\n" (lib.mapAttrsToList (k: v: "alias ${k} = ${v}") config.home.shellAliases);
+  xdg.configFile."nushell/config.nu".text =
+    let
+      aliasesStr = lib.concatStringsSep "\n" (lib.mapAttrsToList (k: v: "alias ${k} = ${v}") config.home.shellAliases);
 
-    nuConfig = lib.readFile ./nushell/config.nu;
-  in
+      nuConfig = lib.readFile ./nushell/config.nu;
+
+      nu = "${xch}/nushell";
+    in
     ''
-      source-env ${xch}/nushell/defaults/config.nu
+      source-env ${nu}/defaults/config.nu
 
       ${nuConfig}
 
       ${aliasesStr}
 
-      source ${xch}/nushell/extras/zoxide.nu
-      source ${xch}/nushell/extras/starship.nu
+      source ${nu}/extras/zoxide.nu
+      source ${nu}/extras/starship.nu
       # https://atuin.sh/docs
       #
       # Waiting on https://github.com/nushell/nushell/issues/10414
-      source ${xch}/nushell/extras/atuin.nu
+      source ${nu}/extras/atuin.nu
     '';
 }
