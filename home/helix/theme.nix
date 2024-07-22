@@ -224,7 +224,8 @@ in
   "string" = string;
   "string.escape" = { fg = text; } // mod_bold;
   "string.regexp" = { fg = text; } // mod_bold;
-  "string.special" = { fg = string; } // mod_underline;
+  "string.special" = { fg = special; } // mod_underline;
+  "string.special.path" = special;
   "symbol" = { bg = placeholder.bg; };
   "tag" = keyword;
   "tag.error" = error.fg;
