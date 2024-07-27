@@ -1,11 +1,21 @@
 # Language config for helix
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, userDetails, ... }:
 let
   indent = { tab-width = 4; unit = "    "; };
 in
 {
   language-server = {
     clangd.args = [ "--background-index" ];
+
+    nixd = {
+      command = "nixd";
+      args = [ "--inlay-hints" ];
+
+      # <https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md>
+      # By default there is no home-manager options completion, thus you can add this entry.
+      # TODO: make this work on Linux
+      config.home-manager.expr = ''(builtins.getFlake "${userDetails.home}/.config/home-manager").darwinConfigurations.mac.options'';
+    };
 
     rust-analyzer.config = {
       # Use in local configs:
@@ -112,6 +122,7 @@ in
       name = "nix";
       auto-format = false;
       formatter.command = lib.getExe pkgs.nixpkgs-fmt;
+      language-servers = [ "nixd" ];
     }
 
     {
