@@ -5,6 +5,8 @@ let
 in
 {
   language-server = {
+    clangd.args = [ "--background-index" ];
+
     rust-analyzer.config = {
       # Use in local configs:
       #
@@ -60,8 +62,6 @@ in
     };
 
     yaml-language-server.config.yaml.keyOrdering = false;
-    clangd.args = ["--background-index"];
-    clangd.args = [ "--background-index" ];
   };
 
   language = [
