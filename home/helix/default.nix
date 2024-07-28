@@ -8,9 +8,9 @@
 {
   programs.helix.enable = true;
 
-  programs.helix.languages = import ./helix/languages.nix { inherit config lib pkgs userDetails; };
-  programs.helix.settings = import ./helix/config.nix {};
-  programs.helix.themes.poliorcetics = import ./helix/theme.nix {};
+  programs.helix.languages = import ./languages.nix { inherit config lib pkgs userDetails; };
+  programs.helix.settings = import ./config.nix {};
+  programs.helix.themes.poliorcetics = import ./theme.nix {};
 
   # Helix-specific ignore file
   xdg.configFile."helix/ignore".text = ''
