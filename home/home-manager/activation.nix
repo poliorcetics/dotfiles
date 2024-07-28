@@ -11,24 +11,6 @@ let
 
 in
 {
-  # === ~/Library/Application Support/ symlinks on macOS ===
-
-  # Bacon doesn't respect XDG spec on macOS, force it to
-  linkBaconConfig = funcs.createAppSupportSymlink {
-    xdg_subdir = "bacon";
-    app_support_link = "org.dystroy.bacon";
-  };
-  # Same for Nushell
-  linkNushellConfig = funcs.createAppSupportSymlink {
-    xdg_subdir = "nushell";
-    app_support_link = "nushell";
-  };
-  # Same for Pijul
-  linkPijulConfig = funcs.createAppSupportSymlink {
-    xdg_subdir = "pijul";
-    app_support_link = "pijul";
-  };
-
   # === Usual directories ===
 
   # Create my expected directories
