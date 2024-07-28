@@ -1,4 +1,4 @@
-{ config, lib, funcs, ... }:
+{ config, lib, ... }:
 
 let
 
@@ -41,5 +41,10 @@ in
       run ${nu} --commands "${atuin}    init nu      | save -f ${atuinNu}"
       run ${nu} --commands "${starship} init nu      | save -f ${nudir}/extras/starship.nu"
       run ${nu} --commands "${zoxide}   init nushell | save -f ${nudir}/extras/zoxide.nu"
+    '';
+
+  nushellCompletions = ''
+    run mkdir -p "${nudir}/completions"
+    run ${nu} ${./../scripts/install-completions.nu} "${nudir}/completions"
   '';
 }
