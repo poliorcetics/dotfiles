@@ -16,6 +16,12 @@ in
   # Manage Homebrew casks through nix-darwin.
   #
   # Needs Homebrew to be installed separately.
+  #
+  # When doing this, `./dotfiles.sh update` will ensure the apps are installed if not.
+  # To activate auto-updates, read the documentation linked below.
+  #
+  # You can find all configuration options here:
+  # <https://daiderd.com/nix-darwin/manual/index.html#opt-homebrew.enable>
   homebrew = {
     enable = true;
     casks = [
