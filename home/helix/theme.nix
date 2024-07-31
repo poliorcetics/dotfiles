@@ -219,7 +219,7 @@ in
   "operator" = operator;
   "parameter" = text;
   "punctuation" = attribute;
-  "punctuation.special" = { fg = text; } // mod_bold;
+  "punctuation.special" = { fg = attribute; } // mod_bold;
   "special" = { fg = special; } // mod_bold;
   "string" = string;
   "string.escape" = { fg = text; } // mod_bold;
