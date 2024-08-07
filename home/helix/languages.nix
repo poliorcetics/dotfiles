@@ -121,7 +121,7 @@ in
     {
       name = "nix";
       auto-format = false;
-      formatter.command = lib.getExe pkgs.nixpkgs-fmt;
+      formatter.command = "nixfmt";
       language-servers = [ "nixd" ];
     }
 

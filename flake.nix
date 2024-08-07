@@ -22,6 +22,7 @@
     self,
     home-manager,
     nix-darwin,
+    nixpkgs,
     ...
   }:
 
@@ -63,5 +64,13 @@
     darwinPackages = self.darwinConfigurations."mac".pkgs;
 
     checks.aarch64-darwin.canBuild = mac.system;
+
+    formatter =
+    let
+      makeFmt = system: { ${system} = (import nixpkgs { inherit system; }).nixfmt-rfc-style; };
+    in
+    makeFmt "aarch64-darwin"
+    // makeFmt "aarch64-linux"
+    // makeFmt "x86_64-linux";
   };
 }
