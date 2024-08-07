@@ -15,9 +15,12 @@ let
     ./helix
     ./jujutsu.nix
     ./kitty.nix
+    ./npm.nix
+    ./python
     ./shell.nix
     ./starship.nix
     ./topgrade.nix
+    ./zoxide.nix
   ];
 
   cargoPackages = with pkgs; [
@@ -195,7 +198,9 @@ let
     #
     #  /etc/profiles/per-user/alexis/etc/profile.d/hm-session-vars.sh
     #
-    # Those variables are only defined once, opening a new shell does not redefine them I think
+    # Those variables are only defined once, opening a new shell does not redefine them I think.
+    #
+    # The `imports` list above can also define additional members.
     home.sessionVariables = {
       EDITOR = "hx";
       VISUAL = "hx";
@@ -203,13 +208,9 @@ let
       LESS = "-R";
       LESSHISTFILE = "-";
 
-      VIRTUAL_ENV_DISABLE_PROMPT = 1;
-
       # Where the tempdirs are created, if at all respected. The other XDG env vars are created
       # by the `xdg.enable = true` earlier
       XDG_RUNTIME_DIR = "/var/tmp/$(id -u)";
-
-      JJ_CONFIG = "${config.xdg.configHome}/jj/config.toml";
 
       # Kubernetes, is a mess regarding what use which env var but let's try to make it work
       KUBECONFIG = "${config.xdg.configHome}/kube/config";
@@ -223,25 +224,12 @@ let
       LESS_TERMCAP_ue = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end underline
       LESS_TERMCAP_us = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi green_underline')"; # start underline
 
-      # NPM, incapable of answering to `XDG` spec and creating at least 3 dirs in ~/
-      NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
-
-      PYTHONSTARTUP = "${config.xdg.configHome}/python/rc.py";
-
       # Rust
       RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
 
-      STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
-
-      SOLARGRAPH_CACHE = "${config.xdg.cacheHome}/solargraph"; # Ruby LSP
-
       TERMINFO = "${config.xdg.dataHome}/terminfo";
       TERMINFO_DIRS = "${config.xdg.dataHome}/terminfo:/usr/share/terminfo";
-
-      WORKON_HOME = "${config.xdg.cacheHome}/virtualenvs";
-
-      _ZO_DATA_DIR = "${config.xdg.stateHome}/zoxide";
     };
 
     # === PROGRAMS ===
@@ -263,22 +251,4 @@ let
     programs.gitui.enable = true;
 
     programs.tealdeer.enable = true;
-
-    # Avoid zoxide nushell integration as long as I'm not on a version with the changes from
-    # <https://github.com/ajeetdsouza/zoxide/pull/663>
-    programs.zoxide = {
-      enable = true;
-      enableNushellIntegration = false;
-    };
-
-    # === FILES ===
-
-    # NPM has ways to configure it to not use ~/.npm but it's apparently buggy, let's hope this one works
-    xdg.configFile."npm/npmrc".text = ''
-      cache=~/.local/cache/npm
-      prefix=~/.local/share/npm
-    '';
-
-    # Workaround to ensure the python history is not in ~/
-    xdg.configFile."python/rc.py".source = ./python/rc.py;
   }

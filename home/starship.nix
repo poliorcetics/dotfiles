@@ -2,8 +2,10 @@
 #
 # <https://starship.rs>
 
-{ lib, ... }:
+{ config, lib, ... }:
 {
+  home.sessionVariables.STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
+
   programs.starship.enable = true;
 
   # Settings: <https://starship.rs/config/>
@@ -55,7 +57,7 @@
     };
 
     git_branch = {
-      format ="[$symbol$branch(:$remote_branch)]($style) ";
+      format = "[$symbol$branch(:$remote_branch)]($style) ";
       style = "purple";
     };
 
