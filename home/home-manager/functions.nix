@@ -5,14 +5,16 @@
   # ```nix
   # overrideNixProvideBinary "hx" (lib.getExe config.programs.helix.package) "${config.home.sessionVariables.CARGO_HOME}/bin/hx";
   # ```
-  overrideNixProvidedBinary = name: nix_pkg: replacement_path: (
-    lib.hiPrio (pkgs.writeShellScriptBin name ''
-      if test -x "${replacement_path}"; then
-        "${replacement_path}" "$@"
-      else
-        "${nix_pkg}" "$@"
-      fi
-    '')
-  );
-    
+  overrideNixProvidedBinary =
+    name: nix_pkg: replacement_path:
+    (lib.hiPrio (
+      pkgs.writeShellScriptBin name ''
+        if test -x "${replacement_path}"; then
+          "${replacement_path}" "$@"
+        else
+          "${nix_pkg}" "$@"
+        fi
+      ''
+    ));
+
 }

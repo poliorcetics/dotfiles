@@ -2,7 +2,12 @@
 #
 # <https://github.com/martinvonz/jj>
 
-{ config, pkgs, userDetails, ... }:
+{
+  config,
+  pkgs,
+  userDetails,
+  ...
+}:
 let
   generateToml = (pkgs.formats.toml { }).generate;
 
@@ -12,18 +17,47 @@ let
     aliases = {
       b = [ "branch" ];
       c = [ "commit" ];
-      cm = [ "commit" "-m" ];
+      cm = [
+        "commit"
+        "-m"
+      ];
       d = [ "diff" ];
-      dt = [ "diff" "--tool" "difft" ];
+      dt = [
+        "diff"
+        "--tool"
+        "difft"
+      ];
       ds = [ "describe" ];
       g = [ "git" ];
-      gf = [ "git" "fetch" ];
-      gp = [ "git" "push" ];
-      gpa = [ "git" "push" "--all" ];
+      gf = [
+        "git"
+        "fetch"
+      ];
+      gp = [
+        "git"
+        "push"
+      ];
+      gpa = [
+        "git"
+        "push"
+        "--all"
+      ];
       l = [ "log" ];
-      lb = [ "log" "-r" "current()" ];
-      lm = [ "log" "-r" "::@" ];
-      lo = [ "log" "-r" "open()" ];
+      lb = [
+        "log"
+        "-r"
+        "current()"
+      ];
+      lm = [
+        "log"
+        "-r"
+        "::@"
+      ];
+      lo = [
+        "log"
+        "-r"
+        "open()"
+      ];
       r = [ "rebase" ];
       s = [ "status" ];
       sq = [ "squash" ];
@@ -84,4 +118,3 @@ in
   # Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
   xdg.configFile."jj/config.toml".source = generateToml "jj-config.toml" settings;
 }
-

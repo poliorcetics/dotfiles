@@ -4,13 +4,26 @@
 #
 # I always use latest master so docs are at <https://docs.helix-editor.com/master/>.
 
-{ config, lib, pkgs, userDetails, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  userDetails,
+  ...
+}:
 {
   programs.helix.enable = true;
 
-  programs.helix.languages = import ./languages.nix { inherit config lib pkgs userDetails; };
-  programs.helix.settings = import ./config.nix {};
-  programs.helix.themes.poliorcetics = import ./theme.nix {};
+  programs.helix.languages = import ./languages.nix {
+    inherit
+      config
+      lib
+      pkgs
+      userDetails
+      ;
+  };
+  programs.helix.settings = import ./config.nix { };
+  programs.helix.themes.poliorcetics = import ./theme.nix { };
 
   # Helix-specific ignore file
   xdg.configFile."helix/ignore".text = ''

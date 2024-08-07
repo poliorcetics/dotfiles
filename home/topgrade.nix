@@ -8,7 +8,8 @@ let
 
   helixRepo = "${config.xdg.cacheHome}/helix-repo";
 
-in {
+in
+{
   programs.topgrade.enable = true;
 
   # Settings: <https://github.com/topgrade-rs/topgrade/blob/main/config.example.toml>

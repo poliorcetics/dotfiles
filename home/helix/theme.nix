@@ -19,8 +19,12 @@ let
     bg = "#553308";
     fg = "#cc7c1d";
   };
-  unnecessary = { modifiers = ["dim"]; };
-  deprecated = { modifiers = ["crossed_out"]; };
+  unnecessary = {
+    modifiers = [ "dim" ];
+  };
+  deprecated = {
+    modifiers = [ "crossed_out" ];
+  };
 
   default = {
     fg = "#f3f6f4";
@@ -52,7 +56,9 @@ let
     bg = "#0c0c0c";
   };
 
-  mode = { bg = "#665c54"; };
+  mode = {
+    bg = "#665c54";
+  };
   mode_insert = "#8ec07c";
   mode_normal = "#d3869b";
   mode_select = "#fabd2f";
@@ -68,7 +74,9 @@ let
     bg = "#161616";
   };
 
-  inline_diagnostics = { bg = "#1e1e1e"; };
+  inline_diagnostics = {
+    bg = "#1e1e1e";
+  };
 
   # Markup
   heading = "#fb4934";
@@ -105,59 +113,150 @@ let
     bg = "#6a329f";
   };
 
-  mod_bold = { modifiers = ["bold"]; };
-  mod_underline = { underline = { style = "line"; }; };
+  mod_bold = {
+    modifiers = [ "bold" ];
+  };
+  mod_underline = {
+    underline = {
+      style = "line";
+    };
+  };
 
 in
 {
-  "diagnostic.error" = { underline.color = error.fg; } // mod_underline // mod_bold;
-  "diagnostic.hint" = { underline.color = hint.fg; } // mod_underline // mod_bold;
-  "diagnostic.info" = { underline.color = info.fg; } // mod_underline // mod_bold;
-  "diagnostic.warning" = { underline.color = warning.fg; } // mod_underline // mod_bold;
+  "diagnostic.error" = {
+    underline.color = error.fg;
+  } // mod_underline // mod_bold;
+  "diagnostic.hint" = {
+    underline.color = hint.fg;
+  } // mod_underline // mod_bold;
+  "diagnostic.info" = {
+    underline.color = info.fg;
+  } // mod_underline // mod_bold;
+  "diagnostic.warning" = {
+    underline.color = warning.fg;
+  } // mod_underline // mod_bold;
   "diagnostic.unnecessary" = unnecessary;
   "diagnostic.deprecated" = deprecated;
-  "error" = { fg = error.fg; bg = inline_diagnostics.bg; };
-  "hint" = { fg = hint.fg; bg = inline_diagnostics.bg; };
-  "info" = { fg = info.fg; bg = inline_diagnostics.bg; };
-  "warning" = { fg = warning.fg; bg = inline_diagnostics.bg; };
-  "ui" = { fg = text; bg = default.bg; };
-  "ui.background" = { bg = default.bg; };
-  "ui.bufferline" = { fg = text; bg = statusline_inactive.bg; };
-  "ui.bufferline.active" = { fg = text; bg = statusline; } // mod_bold;
-  "ui.bufferline.background" = { bg = default.bg; };
-  "ui.cursor" = { bg = cursor; };
-  "ui.cursor.match" = { bg = cursor_match; };
-  "ui.cursor.primary" = { modifiers = ["reversed"]; };
-  "ui.cursorline.primary" = { bg = cursorline_primary; };
-  "ui.cursorline.secondary" = { bg = cursorline_secondary; };
-  "ui.gutter.selected" = { bg = selected.bg; };
-  "ui.help" = { bg = help; };
-  "ui.highlight" = { bg = cursorline_primary; };
+  "error" = {
+    fg = error.fg;
+    bg = inline_diagnostics.bg;
+  };
+  "hint" = {
+    fg = hint.fg;
+    bg = inline_diagnostics.bg;
+  };
+  "info" = {
+    fg = info.fg;
+    bg = inline_diagnostics.bg;
+  };
+  "warning" = {
+    fg = warning.fg;
+    bg = inline_diagnostics.bg;
+  };
+  "ui" = {
+    fg = text;
+    bg = default.bg;
+  };
+  "ui.background" = {
+    bg = default.bg;
+  };
+  "ui.bufferline" = {
+    fg = text;
+    bg = statusline_inactive.bg;
+  };
+  "ui.bufferline.active" = {
+    fg = text;
+    bg = statusline;
+  } // mod_bold;
+  "ui.bufferline.background" = {
+    bg = default.bg;
+  };
+  "ui.cursor" = {
+    bg = cursor;
+  };
+  "ui.cursor.match" = {
+    bg = cursor_match;
+  };
+  "ui.cursor.primary" = {
+    modifiers = [ "reversed" ];
+  };
+  "ui.cursorline.primary" = {
+    bg = cursorline_primary;
+  };
+  "ui.cursorline.secondary" = {
+    bg = cursorline_secondary;
+  };
+  "ui.gutter.selected" = {
+    bg = selected.bg;
+  };
+  "ui.help" = {
+    bg = help;
+  };
+  "ui.highlight" = {
+    bg = cursorline_primary;
+  };
   "ui.linenr" = linenr;
   "ui.linenr.selected" = selected;
-  "ui.menu" = { fg = text; bg = popup; };
-  "ui.menu.scroll" = { fg = text; bg = popup; };
+  "ui.menu" = {
+    fg = text;
+    bg = popup;
+  };
+  "ui.menu.scroll" = {
+    fg = text;
+    bg = popup;
+  };
   "ui.menu.selected" = selected;
-  "ui.picker.header.column" = { fg = text; } // mod_underline;
-  "ui.picker.header.column.active" = { fg = selected.fg; } // mod_underline;
-  "ui.popup" = { fg = text; bg = popup; };
-  "ui.selection" = { bg = selection_secondary; };
-  "ui.selection.primary" = { bg = selection_primary; };
-  "ui.statusline" = { fg = text; bg = statusline; };
+  "ui.picker.header.column" = {
+    fg = text;
+  } // mod_underline;
+  "ui.picker.header.column.active" = {
+    fg = selected.fg;
+  } // mod_underline;
+  "ui.popup" = {
+    fg = text;
+    bg = popup;
+  };
+  "ui.selection" = {
+    bg = selection_secondary;
+  };
+  "ui.selection.primary" = {
+    bg = selection_primary;
+  };
+  "ui.statusline" = {
+    fg = text;
+    bg = statusline;
+  };
   "ui.statusline.inactive" = statusline_inactive;
-  "ui.statusline.insert" = { fg = mode_insert; bg = mode.bg; } // mod_bold;
-  "ui.statusline.normal" = { fg = mode_normal; bg = mode.bg; } // mod_bold;
-  "ui.statusline.select" = { fg = mode_select; bg = mode.bg; } // mod_bold;
+  "ui.statusline.insert" = {
+    fg = mode_insert;
+    bg = mode.bg;
+  } // mod_bold;
+  "ui.statusline.normal" = {
+    fg = mode_normal;
+    bg = mode.bg;
+  } // mod_bold;
+  "ui.statusline.select" = {
+    fg = mode_select;
+    bg = mode.bg;
+  } // mod_bold;
   "ui.statusline.separator" = text;
   "ui.text" = text;
   "ui.text.focus" = selected;
   "ui.text.inactive" = text_inactive;
   "ui.text.info" = text;
-  "ui.virtual" = { bg = inline_diagnostics.bg; };
+  "ui.virtual" = {
+    bg = inline_diagnostics.bg;
+  };
   "ui.virtual.indent-guide" = indent_guide;
   "ui.virtual.inlay-hint" = inlay_hint;
-  "ui.virtual.jump-label" = { fg = mode_normal; bg = statusline; } // mod_bold;
-  "ui.virtual.ruler" = { bg = cursorline_primary; };
+  "ui.virtual.jump-label" = {
+    fg = mode_normal;
+    bg = statusline;
+  } // mod_bold;
+  "ui.virtual.ruler" = {
+    bg = cursorline_primary;
+  };
   "ui.virtual.whitespace" = whitespace;
   "ui.virtual.wrap" = inlay_hint;
   "ui.window" = text;
@@ -165,30 +264,42 @@ in
   # Mixed Keys (UI & languages)
 
   "markup" = text;
-  "markup.heading" = { fg = heading; } // mod_bold;
+  "markup.heading" = {
+    fg = heading;
+  } // mod_bold;
   "markup.raw" = markup_raw;
   "markup.raw.inline" = markup_raw;
 
   # Language-only Keys
 
   "attribute" = attribute;
-  "boolean" = { fg = constant; } // mod_bold;
+  "boolean" = {
+    fg = constant;
+  } // mod_bold;
   "clean" = keyword;
   "comment" = comment;
   "comment.block.documentation" = comment_doc;
   "comment.documentation" = comment_doc;
   "constant" = constant;
-  "constant.builtin.boolean" = { fg = constant; } // mod_bold;
-  "constant.character.escape" = { fg = text; } // mod_bold;
+  "constant.builtin.boolean" = {
+    fg = constant;
+  } // mod_bold;
+  "constant.character.escape" = {
+    fg = text;
+  } // mod_bold;
   "constructor" = macro;
   "diff.delta" = diff_delta;
   "diff.delta.moved" = diff_moved;
   "diff.minus" = diff_minus;
   "diff.plus" = diff_plus;
   "embedded" = keyword;
-  "exception" = { fg = keyword; } // mod_underline;
+  "exception" = {
+    fg = keyword;
+  } // mod_underline;
   "field" = field;
-  "file" = { fg = string; } // mod_underline;
+  "file" = {
+    fg = string;
+  } // mod_underline;
   "function" = function;
   "function.macro" = macro;
   "identifier" = text;
@@ -198,11 +309,15 @@ in
   "keyword.control.return" = kw_return;
   "keyword.directive" = attribute;
   "keyword.special" = special;
-  "keyword.storage.modifier.mut" = { fg = keyword; } // mod_underline;
+  "keyword.storage.modifier.mut" = {
+    fg = keyword;
+  } // mod_underline;
   "label" = label;
   "markup.bold" = mod_bold;
   "markup.inline" = markup_raw;
-  "markup.italic" = { modifiers = ["italic"]; };
+  "markup.italic" = {
+    modifiers = [ "italic" ];
+  };
   "markup.label" = label;
   "markup.link.label" = label;
   "markup.link.text" = link_text;
@@ -211,7 +326,9 @@ in
   "markup.list" = markup_list;
   "markup.quote" = markup_quote;
   "markup.raw.block" = markup_raw;
-  "markup.strikethrough" = { modifiers = ["crossed_out"]; };
+  "markup.strikethrough" = {
+    modifiers = [ "crossed_out" ];
+  };
   "markup.underlined" = mod_underline;
   "namespace" = namespace;
   "none" = text;
@@ -219,18 +336,32 @@ in
   "operator" = operator;
   "parameter" = text;
   "punctuation" = attribute;
-  "punctuation.special" = { fg = attribute; } // mod_bold;
-  "special" = { fg = special; } // mod_bold;
+  "punctuation.special" = {
+    fg = attribute;
+  } // mod_bold;
+  "special" = {
+    fg = special;
+  } // mod_bold;
   "string" = string;
-  "string.escape" = { fg = text; } // mod_bold;
-  "string.regexp" = { fg = text; } // mod_bold;
-  "string.special" = { fg = special; } // mod_underline;
+  "string.escape" = {
+    fg = text;
+  } // mod_bold;
+  "string.regexp" = {
+    fg = text;
+  } // mod_bold;
+  "string.special" = {
+    fg = special;
+  } // mod_underline;
   "string.special.path" = special;
-  "symbol" = { bg = placeholder.bg; };
+  "symbol" = {
+    bg = placeholder.bg;
+  };
   "tag" = keyword;
   "tag.error" = error.fg;
   "text" = text;
-  "time" = { modifiers = ["italic"]; };
+  "time" = {
+    modifiers = [ "italic" ];
+  };
   "type" = type;
   "variable" = text;
   "variable.builtin" = keyword;
