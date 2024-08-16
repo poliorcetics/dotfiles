@@ -95,25 +95,6 @@ in
     }
 
     {
-      name = "gherkin";
-      scope = "source.gherkin";
-      injection-regex = "^(gherkin|feature)?$";
-      file-types = [ "feature" ];
-      comment-token = "#";
-      roots = [ ];
-      inherit indent;
-
-      auto-pairs = {
-        "(" = ")";
-        "[" = "]";
-        "{" = "}";
-        "$" = "$";
-        "`" = "`";
-        "\"" = "\"";
-      };
-    }
-
-    {
       name = "just";
       auto-format = false;
       inherit indent;
