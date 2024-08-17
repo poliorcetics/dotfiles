@@ -27,7 +27,10 @@
     inline-diagnostics.cursor-line = "info"; # Show warnings and errors on the cursor line inline
 
     # === LSP ===
-    lsp.display-inlay-hints = true;
+    lsp = {
+      display-inlay-hints = true;
+      display-messages = true;
+    };
 
     # === File Picker ===
     file-picker.hidden = false;
