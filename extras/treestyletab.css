@@ -1,0 +1,21 @@
+/* Custom CSS for TreeStyleTab */
+
+/* Slightly bigger font size */
+tab-item .label {
+    font-size: 1.1em;
+}
+
+/* Slightly bigger indentation */
+:root.left tab-item-substance {
+	margin-left: calc(var(--tab-margin-left) + var(--tab-indent) * 1.1);
+}
+
+/* Only show X for close on hover */
+#tabbar tab-item tab-item-substance:not(:hover) tab-closebox {
+  display: none;
+}
+
+/* Highlight some specific sites */
+tab-item[data-current-uri^="https://github.com"] .label-content {
+  color: #9C27B0;
+}

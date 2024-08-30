@@ -1,0 +1,11 @@
+/*
+Source: <https://github.com/piroor/treestyletab/wiki/Code-snippets-for-custom-style-rules#only-hide-horizontal-tabs-if-tree-style-tabs-sidebar-is-visible>
+
+MUST BE IN "~/Library/Application Support/Firefox/Profiles/PROFILE/chrome/userChrome.css"
+
+Firefox settings in `about:config`: `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`.
+*/
+
+html#main-window body:has(#sidebar-box[sidebarcommand=treestyletab_piro_sakura_ne_jp-sidebar-action][checked=true]:not([hidden=true])) #TabsToolbar {
+  visibility: collapse !important;
+}
