@@ -27,6 +27,7 @@ in
     enable = true;
     casks = [
       "appcleaner"
+      "calibre"
       "db-browser-for-sqlite"
       "discord"
       "firefox"
