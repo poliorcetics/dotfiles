@@ -61,6 +61,10 @@ $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD | append {|
     }
 
     direnv export json | from json | default {} | load-env
+    # Fixes completions of binaries by reworking the path to always be a list of strings
+    if ($env.PATH | describe) == "string" {
+        $env.PATH = ($env.PATH | split row ':')
+    }
 })
 
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
