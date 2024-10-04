@@ -7,7 +7,7 @@ let fish_completer = {|spans|
 let carapace_completer = {|spans: list<string>|
     carapace $spans.0 nushell ...$spans
     | from json
-    | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+    | if ($in | default [] | where value =~ '(.*ERR|^_)$' | is-empty) { $in } else { null }
 }
 
 # This completer will use carapace by default
