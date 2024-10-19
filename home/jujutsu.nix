@@ -15,7 +15,7 @@ let
   settings = {
     # <https://martinvonz.github.io/jj/latest/config/#aliases>
     aliases = {
-      b = [ "branch" ];
+      b = [ "bookmark" ];
       c = [ "commit" ];
       cm = [
         "commit"
