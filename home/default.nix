@@ -229,9 +229,6 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # Programs for which the config is not modified
-  programs.bottom.enable = true;
-
   programs.gitui.enable = true;
 
   programs.tealdeer.enable = true;
