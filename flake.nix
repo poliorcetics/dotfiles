@@ -68,10 +68,6 @@
       darwinConfigurations = {
         inherit mac;
       };
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."mac".pkgs;
-
-      checks.aarch64-darwin.canBuild = mac.system;
 
       formatter =
         let
