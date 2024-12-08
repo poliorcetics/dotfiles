@@ -1,6 +1,5 @@
 # Theme configuration for helix
 
-{ ... }:
 let
 
   error = {

@@ -1,6 +1,5 @@
 # Helix `config.toml`
 
-{ ... }:
 {
   theme = "poliorcetics";
 

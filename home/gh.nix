@@ -2,7 +2,6 @@
 #
 # <https://cli.github.com/manual/>
 
-{ ... }:
 {
   programs.gh.enable = true;
 
