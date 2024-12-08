@@ -4,7 +4,7 @@
 #
 # Config docs: <https://sw.kovidgoyal.net/kitty/conf/>
 
-{ config, ... }:
+{ userDetails, ... }:
 let
 
   # === Fonts ===
@@ -130,7 +130,7 @@ let
   # Docs: <https://sw.kovidgoyal.net/kitty/conf/#advanced>
   advanced = {
     # <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.editor>
-    editor = "${config.home.sessionVariables.CARGO_HOME}/bin/hx";
+    editor = "${userDetails.home}/.nix-profile/bin/hx";
   };
 
   # === OS specific tweaks ===
