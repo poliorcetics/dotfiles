@@ -127,7 +127,6 @@ in
   home.sessionPath = [
     "${userDetails.home}/.local/bin"
     "${config.home.sessionVariables.CARGO_HOME}/bin"
-    "${config.xdg.dataHome}/npm/bin"
     "/opt/homebrew/bin"
   ];
 
