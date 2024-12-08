@@ -42,6 +42,7 @@
         modules = [
           home-manager.darwinModules.home-manager
 
+          ./system/common
           ./system/darwin
 
           {

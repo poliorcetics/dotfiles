@@ -1,8 +1,5 @@
 { pkgs, userDetails, ... }:
 {
-  # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = pkgs.system;
-
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
