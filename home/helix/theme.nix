@@ -241,6 +241,7 @@ in
   } // mod_bold;
   "ui.statusline.separator" = text;
   "ui.text" = text;
+  "ui.text.directory" = special;
   "ui.text.focus" = selected;
   "ui.text.inactive" = text_inactive;
   "ui.text.info" = text;
