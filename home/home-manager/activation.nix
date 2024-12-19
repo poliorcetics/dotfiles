@@ -31,7 +31,7 @@ in
   '';
 
   # Extras files nudir
-  Extras = ''
+  extras = ''
     run mkdir -p ${nudir}/extras/
     run ${nu} --commands "${atuin}    init nu      | save -f ${nudir}/extras/atuin.nu"
     run ${nu} --commands "${starship} init nu      | save -f ${nudir}/extras/starship.nu"
