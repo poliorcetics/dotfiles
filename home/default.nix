@@ -103,6 +103,7 @@ in
     ./shell.nix
     ./starship.nix
     ./topgrade.nix
+    ./xdg.nix
     ./zoxide.nix
   ];
 
