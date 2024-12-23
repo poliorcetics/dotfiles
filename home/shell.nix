@@ -2,7 +2,6 @@
 
 { config, lib, ... }:
 let
-
   initExtra = ''
     if [ -z "$__INIT_EXTRA_ALREADY_DONE" ]; then
       mkdir -p "$XDG_RUNTIME_DIR"
@@ -28,7 +27,6 @@ let
   };
 
   xch = config.xdg.configHome;
-
 in
 {
   home.shellAliases = {
@@ -75,10 +73,6 @@ in
   # which is very slow and should not be done that way (instead a `home.activation` script would
   # probably be preferable, I should make a PR for that)
 
-  xdg.configFile."nushell/env.nu".text = ''
-    source-env ${xch}/nushell/defaults/env.nu
-  '';
-
   xdg.configFile."nushell/config.nu".text =
     let
       aliasesStr = lib.concatStringsSep "\n" (
@@ -90,8 +84,6 @@ in
       nu = "${xch}/nushell";
     in
     ''
-      source-env ${nu}/defaults/config.nu
-
       ${nuConfig}
 
       ${aliasesStr}
