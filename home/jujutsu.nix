@@ -59,6 +59,12 @@ let
         "open()"
       ];
       r = [ "rebase" ];
+      rs = [
+        "rebase"
+        "--source"
+        "all:open_roots()"
+        "--destination"
+      ];
       s = [ "status" ];
       sq = [ "squash" ];
     };
