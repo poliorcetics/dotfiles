@@ -6,7 +6,7 @@ tab-item .label {
 }
 
 /* Slightly bigger indentation */
-:root.left tab-item-substance {
+:root.rtl tab-item-substance {
 	margin-left: calc(var(--tab-margin-left) + var(--tab-indent) * 1.1);
 }
 
