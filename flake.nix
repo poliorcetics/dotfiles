@@ -46,7 +46,7 @@
           ./system/darwin
 
           {
-            # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module> 
+            # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module>
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = false;
 
