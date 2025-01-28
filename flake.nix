@@ -2,18 +2,19 @@
   description = "Poliorcetics' macOS config";
 
   inputs = {
-    # Unstable branch for the win.
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    # Very useful for getting recent packages, try not to use it otherwise,
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Home manager `master` branch follows nixpkgs-unstable.
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix-darwin is for macos
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -24,9 +25,8 @@
       home-manager,
       nix-darwin,
       nixpkgs,
-      ...
+      nixpkgs-unstable,
     }:
-
     let
       # Changing this should be enough to override every places depending on them in the config.
       userDetails = {
@@ -35,6 +35,10 @@
         # Intended in Git/JJ configs.
         displayName = "Alexis (Poliorcetics) Bourget";
         email = "ab_contribs@poliorcetiq.eu";
+      };
+
+      unstablePkgs = import nixpkgs-unstable {
+        system = "aarch64-darwin";
       };
 
       mac = nix-darwin.lib.darwinSystem {
@@ -52,11 +56,13 @@
 
             home-manager.users.${userDetails.username} = import ./home;
             # Pass arguments to home.nix
-            home-manager.extraSpecialArgs.userDetails = userDetails;
+            home-manager.extraSpecialArgs = {
+              inherit userDetails unstablePkgs;
+            };
           }
         ];
         specialArgs = {
-          inherit self userDetails;
+          inherit self userDetails unstablePkgs;
         };
       };
     in

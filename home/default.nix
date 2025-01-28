@@ -7,6 +7,7 @@
   lib,
   pkgs,
   userDetails,
+  unstablePkgs,
   ...
 }:
 let
@@ -38,7 +39,6 @@ let
     # Use rustup from nix but manage rust versions through rustup, not nix
     rustup
 
-    atuin # Magical shell history
     bat # cat(1) on wings
     bottom # like `top`
     delta # Nicer git diffs
@@ -48,7 +48,6 @@ let
     fd # `find` reinvented
     gitui # TUI for git, inspired by `tig`
     hyperfine # benchmarking made easy
-    jujutsu # Nicer VCS than Git
     jless # `less` for JSON
     just # Just a command runner
     mdbook # Make HTML books out of markdown
@@ -65,6 +64,9 @@ let
     tree-sitter # Make semantic things
     watchexec # Execute in loops based on FS changes
     zoxide # `cd`, but with jumps and shortcuts
+  ] ++ [
+    unstablePkgs.atuin # Magical shell history
+    unstablePkgs.jujutsu # Nicer VCS than Git
   ];
 
   miscPackages = with pkgs; [
@@ -77,11 +79,12 @@ let
     git # Git itself
     git-lfs # Support LFS in git
     marksman # LSP for Markdown
-    nixd # LSP for nix, actively maintained contrary to `nil`
     nixfmt-rfc-style # Official formatter for nix
     ninja # Compile C & C++ things
     poetry # Project manager / venv manager for Python
     yaml-language-server # LSP for YAML
+  ] ++ [
+    unstablePkgs.nixd # LSP for nix, actively maintained contrary to `nil`
   ];
 
   # Import my helper functions
