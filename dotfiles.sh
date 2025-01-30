@@ -34,7 +34,7 @@ esac
 ## HELPERS ##
 
 function run-nix () {
-    /run/current-system/sw/bin/nix --extra-experimental-features flakes --extra-experimental-features nix-command "$@"
+    /run/current-system/sw/bin/nix --extra-experimental-features "flakes nix-command pipe-operators" "$@"
 }
 
 function run-linux-macos () {
@@ -52,10 +52,6 @@ function run-linux-macos () {
 ### INITIAL SETUP ##
 
 function _initial-setup-nix-install () {
-    /bin/echo "Writing /etc/nix/nix.conf"
-    /usr/bin/sudo /bin/sh -c "/bin/echo 'experimental-features = nix-command flakes' >> /etc/nix/nix.conf"
-    /usr/bin/sudo /bin/sh -c "/bin/echo 'max-jobs = auto' >> /etc/nix/nix.conf"
-
     /bin/echo "Installing nix"
     /bin/sh <(/usr/bin/curl -L https://nixos.org/nix/install) --daemon
 
