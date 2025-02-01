@@ -59,15 +59,21 @@ in
 mkSystem {
   inherit specialArgs system;
   modules = systemModules ++ [
+    # Add correct home-manager module for platform
     {
       darwin = home-manager.darwinModules.home-manager;
       linux = home-manager.nixosModules.home-manager;
     }
     .${platform}
 
+    # Configure home-manager to pick up both the public and work configurations (if they exist)
+    # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module>
     {
-      # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module>
+      # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useGlobalPkgs>
       home-manager.useGlobalPkgs = true;
+      # Don't allow `users.users.<name>.packages = [ ... ]`, it avoids surprises like adding a
+      # package for only one user.
+      # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useUserPackages>
       home-manager.useUserPackages = false;
 
       home-manager.users.${userDetails.username} = {
