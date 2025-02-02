@@ -19,13 +19,14 @@ let
 
   filterPaths = path: builtins.pathExists "${builtins.toString path}/default.nix";
 
+  mergePublicAndWork =
+    paths: builtins.foldl' (acc: p: if builtins.pathExists p then acc // (import p) else acc) { } paths;
+
   # Merge user details, favoritizing work ones
-  userDetails' =
-    builtins.foldl' (acc: p: if builtins.pathExists p then acc // (import p) else acc) { }
-      [
-        ./public/user.nix
-        ./work/user.nix
-      ];
+  userDetails' = mergePublicAndWork [
+    ./public/user.nix
+    ./work/user.nix
+  ];
   # Adapt the home path to the platform
   userDetails =
     userDetails'
@@ -37,6 +38,7 @@ let
 
   specialArgs = {
     inherit self userDetails;
+    dotfilesDir = "${userDetails.home}/${userDetails.dotfilesSubDir}";
     unstablePkgs = import nixpkgs-unstable {
       inherit system;
     };
