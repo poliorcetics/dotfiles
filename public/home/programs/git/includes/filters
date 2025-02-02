@@ -1,0 +1,14 @@
+[filter "hawser"]
+  clean = "git hawser clean %f"
+  required = true
+  smudge = "git hawser smudge %f"
+
+[filter "lfs"]
+  clean = "git-lfs clean -- %f"
+  process = "git-lfs filter-process"
+  required = true
+  smudge = "git-lfs smudge -- %f"
+
+[filter "media"]
+  clean = "git-media-clean %f"
+  smudge = "git-media-smudge %f"

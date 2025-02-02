@@ -84,7 +84,7 @@ in
     ./programs/bat
     ./programs/direnv
     ./programs/gh
-    ./git.nix
+    ./programs/git
     ./helix
     ./jujutsu.nix
     ./kitty.nix
