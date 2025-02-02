@@ -82,7 +82,7 @@ in
   imports = [
     ./programs/atuin
     ./programs/bat
-    ./direnv.nix
+    ./programs/direnv
     ./gh.nix
     ./git.nix
     ./helix
