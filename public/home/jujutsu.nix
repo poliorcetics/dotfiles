@@ -5,6 +5,7 @@
 {
   config,
   pkgs,
+  unstablePkgs,
   userDetails,
   ...
 }:
@@ -126,6 +127,8 @@ let
 in
 {
   home.sessionVariables.JJ_CONFIG = "${config.xdg.configHome}/jj/config.toml";
+
+  home.packages = [ unstablePkgs.jujutsu ];
 
   # Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
   xdg.configFile."jj/config.toml".source = generateToml "jj-config.toml" settings;
