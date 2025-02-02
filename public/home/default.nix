@@ -81,7 +81,7 @@ in
   # Imports other Nix files from the repo to configure various elements
   imports = [
     ./programs/atuin
-    ./bat.nix
+    ./programs/bat
     ./direnv.nix
     ./gh.nix
     ./git.nix
