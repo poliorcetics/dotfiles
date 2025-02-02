@@ -57,19 +57,22 @@ let
     watchexec # Execute in loops based on FS changes
   ];
 
-  miscPackages = with pkgs; [
-    bear # Compile commands for C & C++ projects
-    carapace # Command completer
-    cmake # Compiler orchestration
-    fish # Used for the carapace completer in nushell
-    marksman # LSP for Markdown
-    nixfmt-rfc-style # Official formatter for nix
-    ninja # Compile C & C++ things
-    poetry # Project manager / venv manager for Python
-    yaml-language-server # LSP for YAML
-  ] ++ [
-    unstablePkgs.nixd # LSP for nix, actively maintained contrary to `nil`
-  ];
+  miscPackages =
+    with pkgs;
+    [
+      bear # Compile commands for C & C++ projects
+      carapace # Command completer
+      cmake # Compiler orchestration
+      fish # Used for the carapace completer in nushell
+      marksman # LSP for Markdown
+      nixfmt-rfc-style # Official formatter for nix
+      ninja # Compile C & C++ things
+      poetry # Project manager / venv manager for Python
+      yaml-language-server # LSP for YAML
+    ]
+    ++ [
+      unstablePkgs.nixd # LSP for nix, actively maintained contrary to `nil`
+    ];
 
   # Import my helper functions
   funcs = import ./home-manager/functions.nix { inherit lib pkgs; };
