@@ -83,7 +83,7 @@ in
     ./programs/atuin
     ./programs/bat
     ./programs/direnv
-    ./gh.nix
+    ./programs/gh
     ./git.nix
     ./helix
     ./jujutsu.nix
