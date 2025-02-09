@@ -1,8 +1,6 @@
 # Language config for helix
-{
-  userDetails,
-  ...
-}:
+  config
+:
 let
   indent = {
     tab-width = 4;
@@ -20,7 +18,7 @@ in
       # <https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md#configuration-overview>
       # By default there is no home-manager options completion, thus you can add this entry.
       # TODO: make this work on Linux
-      config.home-manager.expr = ''(builtins.getFlake "${userDetails.home}/repos/me/dotfiles").darwinConfigurations.mac.options'';
+      config.home-manager.expr = ''(builtins.getFlake "${config.home.homeDirectory}/repos/me/dotfiles").darwinConfigurations.mac.options'';
     };
 
     rust-analyzer.command = "rust-analyzer-wrapper";

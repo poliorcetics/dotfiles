@@ -112,7 +112,7 @@ in
   # Scripts to run on `home-manager switch`
   home.activation = import ./home-manager/activation.nix { inherit config lib; };
   home.sessionPath = [
-    "${userDetails.home}/.local/bin"
+    "${config.home.homeDirectory}/.local/bin"
     "${config.home.sessionVariables.CARGO_HOME}/bin"
     "/opt/homebrew/bin"
   ];
