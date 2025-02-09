@@ -85,9 +85,10 @@ in
     ./programs/direnv
     ./programs/gh
     ./programs/git
+    ./programs/kitty
+
     ./helix
     ./jujutsu.nix
-    ./kitty.nix
     ./npm.nix
     ./python
     ./shell.nix
