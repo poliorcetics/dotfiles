@@ -4,14 +4,17 @@
 #
 # Config docs: <https://sw.kovidgoyal.net/kitty/conf/>
 
-{ config, mkProgramFile, ... }:
+{ config, isLinux, mkProgramFile, ... }:
 {
   imports = [
     (mkProgramFile { } "kitty" "kitty.conf")
     (mkProgramFile { } "kitty" "macos-launch-services-cmdline")
   ];
 
-  programs.kitty.enable = true;
+  # On macOS I use `brew` to manage Kitty
+  programs.kitty.enable = isLinux;
+  # We do manual shell integration
+  programs.kitty.shellIntegration.mode = "disabled";
 
   xdg.configFile."kitty/includes/editor.conf".text = ''
     # <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.editor>
