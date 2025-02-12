@@ -17,6 +17,7 @@ lm = ["log", "-r", "::@"]
 lo = ["log", "-r", "open()"]
 r = ["rebase"]
 s = ["status"]
+sq = ["squash"]
 
 [git]
 push-branch-prefix = "ab/push-"
