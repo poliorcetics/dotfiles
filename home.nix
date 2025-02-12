@@ -93,6 +93,13 @@ let
     home.username = "alexis";
     home.homeDirectory = "/Users/alexis";
 
+    # # XDG setup
+    xdg.configHome = "${config.home.homeDirectory}/.config";
+    # Put all dirs in .local because I like having $HOME as clean as possible
+    xdg.cacheHome = "${config.home.homeDirectory}/.local/cache";
+    xdg.dataHome = "${config.home.homeDirectory}/.local/share";
+    xdg.stateHome = "${config.home.homeDirectory}/.local/state";
+
     # This value determines the Home Manager release that your configuration is compatible with. This
     # helps avoid breakage when a new Home Manager release introduces backwards incompatible changes.
     #
