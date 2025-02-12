@@ -14,9 +14,71 @@
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your environment.
-  home.packages = [
-    # Adds the 'hello' command to your environment. It prints a friendly "Hello, world!" when run.
-    #: pkgs.hello
+  home.packages = with pkgs; [
+    bear
+    carapace
+    cmake
+    direnv
+    fish # Used for the carapac completer in nushell
+    gh
+    git
+    git-lfs
+    kitty
+    ninja
+    poetry
+    python3
+    yaml-language-server
+
+    nodePackages.bash-language-server
+    nodePackages.prettier
+
+    # Rust packages
+    #
+    # Missing: git packages
+    #  - helix
+    #  - rust-analyzer
+    # Missing: cargo-upgrades cargo-instruments apple-codesign (outdated as heck)
+    alacritty
+    atuin
+    bacon
+    bat
+    bottom
+    cargo-binutils
+    cargo-deny
+    cargo-dist
+    cargo-expand
+    cargo-llvm-lines
+    cargo-modules
+    cargo-nextest
+    cargo-outdated
+    cargo-release
+    cargo-show-asm
+    cargo-update
+    cargo-watch
+    delta
+    difftastic
+    du-dust
+    eza
+    fd
+    gitui
+    hyperfine
+    jujutsu
+    jless
+    just
+    mdbook
+    nushell
+    pastel
+    procs
+    ripgrep
+    rnr
+    sd
+    starship
+    tealdeer
+    tokei
+    tree-sitter
+    watchexec
+    zellij
+    zoxide
 
     # It is sometimes useful to fine-tune packages, for example, by applying overrides. You can do
     # that directly here, just don't forget the parentheses. Maybe you want to install Nerd Fonts
