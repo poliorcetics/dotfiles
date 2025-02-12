@@ -1,0 +1,6 @@
+aliases:
+  co: pr checkout
+editor: hx
+git_protocol: ssh
+prompt: enabled
+version: '1'
