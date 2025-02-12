@@ -130,14 +130,6 @@ in
     "/opt/homebrew/bin"
   ];
 
-  # XDG setup
-  xdg.enable = true;
-  xdg.configHome = "${config.home.homeDirectory}/.config";
-  # Put all dirs in .local because I like having $HOME as clean as possible
-  xdg.cacheHome = "${config.home.homeDirectory}/.local/cache";
-  xdg.dataHome = "${config.home.homeDirectory}/.local/share";
-  xdg.stateHome = "${config.home.homeDirectory}/.local/state";
-
   # The home.packages option allows you to install Nix packages into your environment.
   home.packages =
     cargoPackages
@@ -197,10 +189,6 @@ in
 
     LESS = "-R";
     LESSHISTFILE = "-";
-
-    # Where the tempdirs are created, if at all respected. The other XDG env vars are created
-    # by the `xdg.enable = true` earlier
-    XDG_RUNTIME_DIR = "/var/tmp/$(id -u)";
 
     # Kubernetes, is a mess regarding what use which env var but let's try to make it work
     KUBECONFIG = "${config.xdg.configHome}/kube/config";
