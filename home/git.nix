@@ -197,9 +197,6 @@
     # Helix local config files
     ".helix"
 
-    # Bacon: project config file
-    "bacon.toml"
-
     # cacbe for some LSP and builds
     ".cache"
     "compile_commands.json"

@@ -8,7 +8,6 @@ let
   # Imports other Nix files from the repo to configure various elements
   imports = [
     ./atuin.nix
-    ./bacon.nix
     ./bat.nix
     ./direnv.nix
     ./gh.nix
@@ -49,7 +48,6 @@ let
     rustup
 
     atuin # Magical shell history
-    bacon # Wrapper around cargo/rustc for compilation, TUI
     bat # cat(1) on wings
     bottom # like `top`
     delta # Nicer git diffs
