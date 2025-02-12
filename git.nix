@@ -95,8 +95,6 @@
     difftool.prompt = false;
     "difftool \"difftastic\"".cmd = ''difft --tab-width 4 "$BASE" "$LOCAL" "hash" "mode" "$REMOTE" "hash" "mode"'';
 
-    fetch.prune = true;
-
     "color \"branch\"" = {
       current = "green";
       local = "yellow";
@@ -134,10 +132,15 @@
       smudge = "git-lfs smudge -- %f";
     };
 
+    diff.algorithm = "histogram";
+    fetch.prune = true;
     init.defaultBranch = "main";
     merge.conflictstyle = "zdiff3";
     pager.difftool = true;
     pull.rebase = true;
+    push.followtags = true;
+    rebase.autosquash = true;
+    rebase.updateRefs = true;
     rerere.enabled = true;
     status.showUntrackedFiles = "all";
     ui.color = "auto";
