@@ -1,8 +1,7 @@
-{
-  self,
-  pkgs,
-  userDetails,
-  ...
+{ self
+, pkgs
+, userDetails
+, ...
 }:
 
 let
@@ -57,7 +56,7 @@ in
   # Create /etc/*rc that loads the nix-darwin environment.
   programs = {
     # bash.enable = true;
-    zsh.enable = true;  # default shell on macOS
+    zsh.enable = true; # default shell on macOS
     # fish.enable = true;
   };
 
