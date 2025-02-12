@@ -73,6 +73,11 @@ in
     }
 
     {
+      name = "c";
+      inherit indent;
+    }
+
+    {
       name = "gherkin";
       scope = "source.gherkin";
       injection-regex = "^(gherkin|feature)?$";
