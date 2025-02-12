@@ -45,6 +45,8 @@ sed -i -E "s:home.homeDirectory = \".*\";:home.homeDirectory = \"$HOME\";:" ~/.c
 # 7. Compile home-manager setup
 home-manager switch
 
+# 8.pre. Do the homebrew installation, see below
+
 # 8. In a new terminal
 ~/.local/bin/hm.nu rust installs # Custom rust program installs
 ~/.local/bin/hm.nu iosevka build # Custom font
