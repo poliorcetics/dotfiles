@@ -93,7 +93,7 @@
     # <https://difftastic.wilfred.me.uk/git.html>
     diff.tool = "difftastic";
     difftool.prompt = false;
-    "difftool \"difftastic\"".cmd = ''difft --tab-width 4 "$BASE" "$LOCAL" "hash" "mode" "$REMOTE" "hash" "mode"'';
+    "difftool \"difftastic\"".cmd = ''difft --display side-by-side-show-both --tab-width 4 "$BASE" "$LOCAL" "hash" "mode" "$REMOTE" "hash" "mode"'';
 
     "color \"branch\"" = {
       current = "green";
