@@ -1,0 +1,69 @@
+command_timeout = 100
+format = """
+$time\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$python\
+$cmd_duration\
+$nix_shell\
+$line_break\
+$jobs\
+$shell\
+$status\
+$character
+"""
+
+[character]
+error_symbol = "[✖](bold red)"
+success_symbol = "[❯](bold green)"
+
+[cmd_duration]
+show_milliseconds = true
+style = "yellow"
+
+[directory]
+fish_style_pwd_dir_length = 1
+repo_root_style = "bold cyan"
+style = "cyan"
+truncation_length = 1
+
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+style = "purple"
+
+[git_state]
+disabled = false
+
+[git_status]
+disabled = false
+stashed = ""
+style = "yellow"
+
+[nix_shell]
+disabled = false
+format = "via [$symbol$state( \\($name\\))]($style) "
+symbol = "❄️ "
+
+[python]
+python_binary = "python3"
+style = "yellow"
+
+[shell]
+bash_indicator = "b"
+disabled = false
+fish_indicator = "🐠"
+nu_indicator = "🐘"
+zsh_indicator = "z"
+
+[status]
+disabled = false
+format = "[$status]($style) "
+
+[time]
+disabled = false
+format = "[$time]($style) "
+style = "italic white"

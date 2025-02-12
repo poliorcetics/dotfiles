@@ -86,13 +86,13 @@ in
     ./programs/gh
     ./programs/git
     ./programs/kitty
+    ./programs/starship
 
     ./helix
     ./jujutsu.nix
     ./npm.nix
     ./python
     ./shell.nix
-    ./starship.nix
     ./topgrade.nix
     ./xdg.nix
     ./zoxide.nix
