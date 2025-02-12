@@ -150,8 +150,6 @@ let
         #:   echo "Hello, ${config.home.username}!"
         #: '')
 
-        # Keep the .nu to indicate this should not be run often after installing a new machine
-        (pkgs.writeScriptBin "hm.nu" (builtins.readFile ./scripts/hm.nu))
         (pkgs.writeScriptBin "hn" (builtins.readFile ./scripts/hn.nu))
         (pkgs.writeScriptBin "systemfiles" (builtins.readFile ./scripts/systemfiles.nu))
 
