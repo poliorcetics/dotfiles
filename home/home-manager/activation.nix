@@ -53,8 +53,8 @@ in
     atuinNu = "${xch}/nushell/extras/atuin.nu";
   in ''
     run mkdir -p ${xch}/nushell/extras/
-    run ${nu} --commands "${atuin}    init nu | str replace --all 'run-external --redirect-stderr atuin search' 'run-external atuin search'| str replace --all '| complete | \$in.stderr | str substring ..-1)' 'e>| str trim)' | save -f ${atuinNu}"
-    run ${nu} --commands "${starship} init nu | save -f ${xch}/nushell/extras/starship.nu"
+    run ${nu} --commands "${atuin}    init nu      | save -f ${atuinNu}"
+    run ${nu} --commands "${starship} init nu      | save -f ${xch}/nushell/extras/starship.nu"
     run ${nu} --commands "${zoxide}   init nushell | save -f ${xch}/nushell/extras/zoxide.nu"
   '';
 }
