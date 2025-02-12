@@ -123,18 +123,30 @@ let
 
 in
 {
-  "diagnostic.error" = {
-    underline.color = error.fg;
-  } // mod_underline // mod_bold;
-  "diagnostic.hint" = {
-    underline.color = hint.fg;
-  } // mod_underline // mod_bold;
-  "diagnostic.info" = {
-    underline.color = info.fg;
-  } // mod_underline // mod_bold;
-  "diagnostic.warning" = {
-    underline.color = warning.fg;
-  } // mod_underline // mod_bold;
+  "diagnostic.error" =
+    {
+      underline.color = error.fg;
+    }
+    // mod_underline
+    // mod_bold;
+  "diagnostic.hint" =
+    {
+      underline.color = hint.fg;
+    }
+    // mod_underline
+    // mod_bold;
+  "diagnostic.info" =
+    {
+      underline.color = info.fg;
+    }
+    // mod_underline
+    // mod_bold;
+  "diagnostic.warning" =
+    {
+      underline.color = warning.fg;
+    }
+    // mod_underline
+    // mod_bold;
   "diagnostic.unnecessary" = unnecessary;
   "diagnostic.deprecated" = deprecated;
   "error" = {
