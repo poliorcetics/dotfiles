@@ -209,6 +209,8 @@ let
       _ZO_DATA_DIR = "${config.xdg.stateHome}/zoxide";
     };
 
+    # === PROGRAMS ===
+
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 
@@ -226,7 +228,6 @@ let
     # TODO: directories for which to import the files directly since home-manager doesn't handle them well
     # - .config/fish
     # - .config/helix
-    # - .config/jj
     # - .config/nix
     # - .config/npm
     # - .config/nushell
@@ -239,4 +240,9 @@ let
     # - topgrade
     # - zellij
     # - starship
+
+    # === FILES ===
+
+    # Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
+    xdg.configFile."jj/config.toml".source = ./jj/config.toml;
   }

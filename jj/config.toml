@@ -1,0 +1,15 @@
+[snapshot]
+max-new-file-size = "10MB"
+
+[user]
+name = "Alexis (Poliorcetics) Bourget"
+email = "ab_jujutsu@poliorcetiq.eu"
+
+[aliases]
+c = ["commit"]
+cm = ["commit", "-m"]
+d = ["describe"]
+s = ["status"]
+
+[ui]
+default-command = "status"
