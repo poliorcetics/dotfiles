@@ -93,7 +93,7 @@ let
   ];
 
   # Import my helper functions
-  funcs = import ./home-manager/functions.nix { inherit config lib pkgs; };
+  funcs = import ./home-manager/functions.nix { inherit lib pkgs; };
 
   in
 
