@@ -13,6 +13,7 @@ let
     ./gh.nix
     ./git.nix
     ./helix
+    ./jujutsu.nix
     ./kitty.nix
     ./shell.nix
     ./starship.nix
@@ -271,14 +272,6 @@ let
     };
 
     # === FILES ===
-
-    # - Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
-    # - JJ signing can be configured by either embedding the key or giving the absolute path to the
-    #   .pub key file. Since `intoTOML` is not a builtin, I chose to do a search-and-replace for now
-    xdg.configFile."jj/config.toml".text = builtins.replaceStrings
-      ["%DISPLAY_NAME%"         "%EMAIL%"          "%SIGNING_SSH_KEY%"]
-      [userDetails.displayName  userDetails.email  "${config.home.homeDirectory}/.ssh/id_signing.pub"]
-      (builtins.readFile ./jj/config.toml);
 
     # NPM has ways to configure it to not use ~/.npm but it's apparently buggy, let's hope this one works
     xdg.configFile."npm/npmrc".text = ''
