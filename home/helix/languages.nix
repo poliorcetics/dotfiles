@@ -1,10 +1,7 @@
 # Language config for helix
-
 { config, lib, pkgs, ... }:
-let 
-
+let
   indent = { tab-width = 4; unit = "    "; };
-
 in
 {
   language-server = {
@@ -55,15 +52,16 @@ in
       };
 
       diagnostics.disabled = [
-          "inactive-code"
-          "inactive_code"
-          "unresolved-proc-macro"
-          "unresolved_proc_macro"
+        "inactive-code"
+        "inactive_code"
+        "unresolved-proc-macro"
+        "unresolved_proc_macro"
       ];
     };
 
     yaml-language-server.config.yaml.keyOrdering = false;
     clangd.args = ["--background-index"];
+    clangd.args = [ "--background-index" ];
   };
 
   language = [
@@ -81,9 +79,9 @@ in
       name = "gherkin";
       scope = "source.gherkin";
       injection-regex = "^(gherkin|feature)?$";
-      file-types = ["feature"];
+      file-types = [ "feature" ];
       comment-token = "#";
-      roots = [];
+      roots = [ ];
       inherit indent;
 
       auto-pairs = {
