@@ -154,6 +154,7 @@ in
   "ui.virtual" = { bg = inline_diagnostics.bg; };
   "ui.virtual.indent-guide" = indent_guide;
   "ui.virtual.inlay-hint" = inlay_hint;
+  "ui.virtual.jump-label" = { fg = mode_normal; bg = statusline; } // mod_bold;
   "ui.virtual.ruler" = { bg = cursorline_primary; };
   "ui.virtual.whitespace" = whitespace;
   "ui.virtual.wrap" = inlay_hint;
