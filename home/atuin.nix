@@ -1,9 +1,10 @@
 # Atuin configuration
 #
 # <https://atuin.sh>
-
+{ unstablePkgs, ... }:
 {
   programs.atuin.enable = true;
+  programs.atuin.package = unstablePkgs.atuin;
 
   # Settings: <https://atuin.sh/docs/config/>
   programs.atuin.settings = {
