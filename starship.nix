@@ -124,7 +124,7 @@
     gcloud.disabled = true;
     git_commit.disabled = true;
     git_metrics.disabled = true;
-    go.disabled = true;
+    golang.disabled = true;
     guix_shell.disabled = true;
     gradle.disabled = true;
     haskell.disabled = true;
@@ -151,7 +151,7 @@
     pijul_channel.disabled = true;
     pulumi.disabled = true;
     purescript.disabled = true;
-    r.disabled = true;
+    rlang.disabled = true;
     raku.disabled = true;
     red.disabled = true;
     ruby.disabled = true;
@@ -166,7 +166,7 @@
     terraform.disabled = true;
     typst.disabled = true;
     vagrant.disabled = true;
-    v.disabled = true;
+    vlang.disabled = true;
     vcsh.disabled = true;
     zig.disabled = true;
   };
