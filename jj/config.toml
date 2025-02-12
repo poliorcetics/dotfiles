@@ -12,11 +12,19 @@ cm = ["commit", "-m"]
 d = ["diff"]
 ds = ["describe"]
 l = ["log"]
+lb = ["log", "-r", "current()"]
+lo = ["log", "-r", "open()"]
 r = ["rebase"]
 s = ["status"]
 
 [git]
 push-branch-prefix = "ab/push-"
+
+[revset-aliases]
+'current()' = '(::@ ~ ::trunk())'
+'open()' = '(mine() ~ ::trunk())::'
+# Useful to rebase all branches with `jj r -s open_roots() -d main/master/develop/..`
+'open_roots()' = 'roots(open())'
 
 [template-aliases]
 # Override the default short ID to use the absolute shortest, making it easier to use `-r <id>`
