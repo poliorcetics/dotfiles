@@ -164,7 +164,7 @@ let
       XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
       XDG_STATE_HOME = "${config.home.homeDirectory}/.local/state";
 
-      # https://docs.helix-editor.com/install.html#configuring-helixs-runtime-files
+      # <https://docs.helix-editor.com/install.html#configuring-helixs-runtime-files>
       HELIX_RUNTIME = "${config.home.homeDirectory}/repos/tp/helix/runtime";
 
       JJ_CONFIG = "${XDG_CONFIG_HOME}/jj/config.toml";
