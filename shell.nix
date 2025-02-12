@@ -7,6 +7,34 @@ let
 
   xch = config.xdg.configHome;
 
+  initExtra = ''
+    # TODO: Check this is used on Linux too ?
+    if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+      source $HOME/.nix-profile/etc/profile.d/nix.sh
+    fi
+
+    if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+        source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    fi
+
+    mkdir -p "$XDG_RUNTIME_DIR"
+    export PATH="$HOME/.local/bin:$CARGO_HOME/bin:$XDG_DATA_HOME/npm/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+    export PATH="$(${lib.getExe config.programs.nushell.package} --commands '$env.PATH | uniq | str join :')"
+
+    if [ -f "$XDG_CONFIG_HOME/.env" ]; then
+      source "$XDG_CONFIG_HOME/.env"
+    fi
+
+    command nu
+  '';
+
+  shAliases = {
+    ls = "eza -F --colour-scale all --time-style long-iso --group-directories-first";
+    la = "eza -haF --colour-scale all --time-style long-iso --group-directories-first";
+    ll = "eza -lhaF --colour-scale all --time-style long-iso --group-directories-first";
+    lm = "clear; ll";
+  };
+
 in
 {
   home.shellAliases = {
@@ -33,41 +61,17 @@ in
     #
     # I also added a `source $XDG_CONFIG_HOME/.env` to load local env variables that I don't want to
     # share with the world, like API keys
-    initExtra = ''
-      # TODO: Check this is used on Linux too ?
-      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-        source $HOME/.nix-profile/etc/profile.d/nix.sh
-      fi
-
-      if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
-          source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-      fi
-
-      mkdir -p "$XDG_RUNTIME_DIR"
-      export PATH="$HOME/.local/bin:$CARGO_HOME/bin:$XDG_DATA_HOME/npm/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
-      export PATH="$(${lib.getExe config.programs.nushell.package} --commands '$env.PATH | uniq | str join :')"
-
-      if [ -f "$XDG_CONFIG_HOME/.env" ]; then
-        source "$XDG_CONFIG_HOME/.env"
-      fi
-
-      command nu
-    '';
+    initExtra = initExtra;
     historyFile = "${xch}/bash/history";
-    shellAliases = {
-      ls = "eza -F --colour-scale all --time-style long-iso --group-directories-first";
-      la = "eza -haF --colour-scale all --time-style long-iso --group-directories-first";
-      ll = "eza -lhaF --colour-scale all --time-style long-iso --group-directories-first";
-      lm = "clear; ll";
-    };
+    shellAliases = shAliases;
   };
 
   programs.zsh = {
     enable = true;
-    initExtra = config.programs.bash.initExtra;
+    initExtra = initExtra;
     dotDir = ".config/zsh";
     history.path = "${xch}/zsh/history";
-    shellAliases = config.programs.bash.shellAliases;
+    shellAliases = shAliases;
   };
 
   # === Nushell ===
