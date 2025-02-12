@@ -2,7 +2,7 @@
 #
 # <https://dystroy.org/bacon/>
 
-{ config, ... }:
+{ ... }:
 {
   programs.bacon.enable = true;
 

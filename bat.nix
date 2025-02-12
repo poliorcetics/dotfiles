@@ -2,7 +2,7 @@
 #
 # <https://github.com/sharkdp/bat>
 
-{ config, ... }:
+{ ... }:
 {
   programs.bat.enable = true;
 
