@@ -17,10 +17,10 @@ in
       command = "nixd";
       args = [ "--inlay-hints" ];
 
-      # <https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md>
+      # <https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md#configuration-overview>
       # By default there is no home-manager options completion, thus you can add this entry.
       # TODO: make this work on Linux
-      config.home-manager.expr = ''(builtins.getFlake "${userDetails.home}/.config/home-manager").darwinConfigurations.mac.options'';
+      config.home-manager.expr = ''(builtins.getFlake "${userDetails.home}/repos/me/dotfiles").darwinConfigurations.mac.options'';
     };
 
     rust-analyzer.command = "rust-analyzer-wrapper";
