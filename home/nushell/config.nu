@@ -76,7 +76,7 @@ def --wrapped npm [...rest] {
 
 # List all and trim down to some select columns
 def la [path: path = "."] -> record {
-    ls --all --long $path | sort-by type | select mode size user modified type name target
+    ls --all --long $path | sort-by type name | select mode size user modified type name target
 }
 
 # `la` but clearing the screen before
