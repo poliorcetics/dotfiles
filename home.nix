@@ -224,4 +224,21 @@ let
     };
 
     programs.gitui.enable = true;
+
+    # TODO: directories for which to import the files directly since home-manager doesn't handle them well
+    # - .config/fish
+    # - .config/helix
+    # - .config/jj
+    # - .config/nix
+    # - .config/npm
+    # - .config/nushell
+    # - .config/pijul
+    # - .config/python
+
+    # TODO: programs to port the config for
+    # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
+    # - kitty
+    # - topgrade
+    # - zellij
+    # - starship
   }
