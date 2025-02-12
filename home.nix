@@ -42,6 +42,9 @@ let
   #  - helix
   #  - rust-analyzer
   rustPackages = with pkgs; [
+    # Use rustup from nix but manage rust versions through rustup, not nix
+    rustup
+
     atuin
     bacon
     bat
