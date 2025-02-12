@@ -14,6 +14,7 @@ let
     ./git.nix
     ./shell.nix
     ./starship.nix
+    ./topgrade.nix
   ];
 
   # TODO: missing: cargo-upgrades cargo-instruments scm-record (with features for editor)
@@ -289,7 +290,6 @@ let
     # TODO: programs to port the config for
     # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
     # - kitty
-    # - topgrade
 
     # TODO: port font: Iosevka Custom
 
