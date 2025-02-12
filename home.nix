@@ -182,6 +182,11 @@ let
       #:    org.gradle.console=verbose
       #:    org.gradle.daemon.idletimeout=3600000
       #:  '';
+
+      ".local/bin/hm.nu" = {
+        source = ./scripts/hm.nu;
+        executable = true;
+      };
     };
 
     # Home Manager can also manage your environment variables through 'home.sessionVariables'. If
@@ -211,9 +216,6 @@ let
       # Where the tempdirs are created, if at all respected. The other XDG env vars are created
       # by the `xdg.enable = true` earlier
       XDG_RUNTIME_DIR = "/var/tmp/$(id -u)";
-
-      # <https://docs.helix-editor.com/install.html#configuring-helixs-runtime-files>
-      HELIX_RUNTIME = "${config.home.homeDirectory}/repos/tp/helix/runtime";
 
       JJ_CONFIG = "${config.xdg.configHome}/jj/config.toml";
 
