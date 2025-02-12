@@ -95,6 +95,9 @@ let
     yaml-language-server # LSP for YAML
   ];
 
+  # Import my helper functions
+  funcs = import ./home-manager/functions.nix { inherit config lib pkgs; };
+
   in
 
   {
@@ -112,7 +115,7 @@ let
     home.homeDirectory = userDetails.home;
 
     # Scripts to run on `home-manager switch`
-    home.activation = import ./home-manager/activation.nix { inherit config lib pkgs; };
+    home.activation = import ./home-manager/activation.nix { inherit config lib funcs; };
     home.sessionPath = [
       "${userDetails.home}/.local/bin"
       "${config.home.sessionVariables.CARGO_HOME}/bin"
