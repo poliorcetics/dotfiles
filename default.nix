@@ -36,9 +36,8 @@ let
     }
     .${platform};
 
-  specialArgs = rec {
+  specialArgs = {
     inherit self userDetails;
-    dotfilesDir = "${userDetails.home}/${userDetails.dotfilesSubDir}";
     unstablePkgs = import nixpkgs-unstable {
       inherit system;
     };
@@ -62,11 +61,12 @@ let
       {
         config,
         lib,
+        userDetails,
         ...
       }:
       {
         xdg.configFile."${program}/${file}".source = (if force then lib.mkForce else lib.id) (
-          config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/${kind}/home/programs/${program}/${file}"
+          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${userDetails.dotfilesSubDir}/${kind}/home/programs/${program}/${file}"
         );
       };
   };

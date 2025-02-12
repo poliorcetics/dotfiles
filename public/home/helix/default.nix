@@ -4,13 +4,11 @@
 #
 # I always use latest master so docs are at <https://docs.helix-editor.com/master/>.
 
-{ userDetails, ... }:
+{ config, ... }:
 {
   programs.helix.enable = true;
 
-  programs.helix.languages = import ./languages.nix {
-    inherit userDetails;
-  };
+  programs.helix.languages = import ./languages.nix config;
   programs.helix.settings = import ./config.nix;
   programs.helix.themes.poliorcetics = import ./theme.nix;
 
