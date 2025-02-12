@@ -2,6 +2,13 @@
 
 let 
 
+  atuin = lib.getExe config.programs.atuin.package;
+  nu = lib.getExe config.programs.nushell.package;
+  starship = lib.getExe config.programs.starship.package;
+  zoxide = lib.getExe config.programs.zoxide.package;
+
+  xch = config.xdg.configHome;
+
   # Import my helper functions
   funcs = import ./functions.nix { inherit config lib pkgs; };
 
@@ -33,5 +40,24 @@ in
     run mkdir -p ~/repos/tp/
     run mkdir -p ~/repos/work/priv/
     run mkdir -p ~/repos/work/pub/
+  '';
+
+  # === Nushell Files ===
+
+  # Create default nushell files
+  nushellDefaults = ''
+    run mkdir -p ${xch}/nushell/defaults/
+    run ${nu} --commands "config env --default | save -f ${xch}/nushell/defaults/env.nu"
+    run ${nu} --commands "config nu  --default | save -f ${xch}/nushell/defaults/config.nu"
+  '';
+
+  # Extras files for nushell
+  #
+  # Zoxide needs a fix for Nushell 0.89+: <https://github.com/ajeetdsouza/zoxide/pull/663>
+  nushellExtras = ''
+    run mkdir -p ${xch}/nushell/extras/
+    run ${nu} --commands "${atuin}    init nu | save -f ${xch}/nushell/extras/atuin.nu"
+    run ${nu} --commands "${starship} init nu | save -f ${xch}/nushell/extras/starship.nu"
+    run ${nu} --commands "${zoxide}   init nushell | str replace --all ' \$rest' ' ...\$rest' | save -f ${xch}/nushell/extras/zoxide.nu"
   '';
 }

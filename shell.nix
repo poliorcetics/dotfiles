@@ -3,6 +3,8 @@
 { config, lib, ... }:
 let
 
+  nuConfig = lib.readFile ./nushell/config.nu;
+
   xch = config.xdg.configHome;
 
 in
@@ -69,4 +71,37 @@ in
     history.path = "${xch}/zsh/history";
     shellAliases = config.programs.bash.shellAliases;
   };
+
+  # === Nushell ===
+  #
+  # I don't manage nushell through `programs.nushell.enable` because on macOS it will create its config
+  # file in `~/Library/Application Support/nushell` whereas I prefer them in `~/.config/nushell`.
+  #
+  # Additionally, for `atuin`, `starship`, `zoxide` and other such programs that need an extra file to
+  # source, the default `<prog>.nix` will recreate the file on each new shell, e.g.:
+  # <https://github.com/nix-community/home-manager/blob/5b9156fa9a8b8beba917b8f9adbfd27bf63e16af/modules/programs/atuin.nix#L133>
+  # which is very slow and should not be done that way (instead a `home.activation` script would
+  # probably be preferable, I should make a PR for that)
+
+  xdg.configFile."nushell/env.nu".text = ''
+    source-env ${xch}/nushell/defaults/env.nu
+  '';
+
+  xdg.configFile."nushell/config.nu".text = let
+    aliasesStr = lib.concatStringsSep "\n" (lib.mapAttrsToList (k: v: "alias ${k} = ${v}") config.home.shellAliases);
+  in
+    ''
+      source-env ${xch}/nushell/defaults/config.nu
+
+      ${nuConfig}
+
+      ${aliasesStr}
+
+      source ${xch}/nushell/extras/zoxide.nu
+      source ${xch}/nushell/extras/starship.nu
+      # https://atuin.sh/docs
+      #
+      # Waiting on https://github.com/nushell/nushell/issues/10414
+      source ${xch}/nushell/extras/atuin.nu
+    '';
 }

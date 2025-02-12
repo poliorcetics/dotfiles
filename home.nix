@@ -276,7 +276,6 @@ let
     # - .config/fish
     # - .config/helix
     # - .config/npm
-    # - .config/nushell
     # - .config/pijul
 
     # TODO: programs to port the config for
