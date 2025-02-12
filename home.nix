@@ -90,6 +90,7 @@ let
     gh # GitHub command line tools
     git # Git itself
     git-lfs # Support LFS in git
+    marksman # LSP for Markdown
     ninja # Compile C & C++ things
     poetry # Project manager / venv manager for Python
     yaml-language-server # LSP for YAML
