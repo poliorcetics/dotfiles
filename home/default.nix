@@ -232,12 +232,6 @@ in
   # Programs for which the config is not modified
   programs.bottom.enable = true;
 
-  programs.carapace = {
-    enable = true;
-    # I do my own carapace integration in Nushell
-    enableNushellIntegration = false;
-  };
-
   programs.gitui.enable = true;
 
   programs.tealdeer.enable = true;
