@@ -79,6 +79,8 @@ let
   };
 in
 {
+  home.sessionVariables.JJ_CONFIG = "${config.xdg.configHome}/jj/config.toml";
+
   # Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
   xdg.configFile."jj/config.toml".source = generateToml "jj-config.toml" settings;
 }
