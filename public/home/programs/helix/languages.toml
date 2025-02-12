@@ -1,0 +1,107 @@
+# === Languages ===
+
+[[language]]
+name = "bash"
+indent.tab-width = 4
+indent.unit = "    "
+
+[[language]]
+name = "c"
+indent.tab-width = 4
+indent.unit = "    "
+
+[[language]]
+name = "just"
+auto-format = false
+indent.tab-width = 4
+indent.unit = "    "
+
+[[language]]
+name = "markdown"
+soft-wrap.enable = true
+soft-wrap.wrap-at-text-width = true
+text-width = 150
+
+[[language]]
+name = "nix"
+auto-format = false
+formatter.command = "nixfmt"
+language-servers = ["nixd"]
+
+[[language]]
+name = "nu"
+indent.tab-width = 4
+indent.unit = "    "
+
+[[language]]
+name = "protobuf"
+indent.tab-width = 4
+indent.unit = "    "
+
+[[language]]
+name = "toml"
+auto-format = false
+indent.tab-width = 4
+indent.unit = "    "
+
+# === Language servers ===
+
+[language-server.clangd]
+args = ["--background-index"]
+
+[language-server.nixd]
+command = "nixd"
+args = ["--inlay-hints"]
+# TODO: make home-manager options completions work
+
+[language-server.yaml-language-server.config.yaml]
+keyOrdering = false
+
+# = Rust Analyzer =
+[language-server.rust-analyzer]
+command = "rust-analyzer-wrapper"
+
+[language-server.rust-analyzer.config]
+# Use in local configs:
+#
+#: check.targets = [
+#:   "aarch64-apple-darwin",
+#:   "x86_64-pc-windows-msvc",
+#:   "x86_64-unknown-linux-musl",
+#: ]
+#: cargo.target = "x86_64-unknown-linux-musl"
+#: cargo.target = "x86_64-pc-windows-msvc"
+#: cargo.target = "aarch64-apple-darwin"
+
+assist.importGranularity = "module"
+check.command = "clippy"
+completion.fullFunctionSignatures.enable = true
+diagnostics.disabled = [
+    "inactive-code",
+    "inactive_code",
+    "unresolved-proc-macro",
+    "unresolved_proc_macro",
+]
+hover.actions.references.enable = true
+lruCapacity = 256
+
+[language-server.rust-analyzer.config.inlayHints]
+closingBraceHints.minLines = 10
+closureReturnTypeHints.enable = "with_block"
+discriminantHints.enable = "fieldless"
+expressionAdjustmentHints.enable = "never"
+expressionAdjustmentHints.hideOutsideUnsafe = false
+expressionAdjustmentHints.mode = "prefer_prefix"
+lifetimeElisionHints.enable = "skip_trivial"
+typeHints.hideClosureInitialization = false
+
+[language-server.rust-analyzer.config.lens.references]
+adt.enable = true
+enumVariant.enable = true
+method.enable = true
+trait.enable = true
+
+[language-server.rust-analyzer.config.workspace.symbol.search]
+kind = "all_symbols"
+limit = 128
+scope = "workspace"

@@ -16,6 +16,7 @@
     ./programs/direnv
     ./programs/gh
     ./programs/git
+    ./programs/helix
     ./programs/jj
     ./programs/kitty
     ./programs/npm
@@ -25,7 +26,6 @@
     ./programs/zoxide
 
     # TODO: port over to programs/
-    ./helix
     ./shell.nix
 
     ./packages.nix

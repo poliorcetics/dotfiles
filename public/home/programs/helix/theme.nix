@@ -1,7 +1,12 @@
 # Theme configuration for helix
-
+#
+# Usually I would write this directly in TOML, but
+#
+# 1. I don't change it often
+# 2. The helix theme format is extremely bad at reducing duplication
+#
+# So Nix it is
 let
-
   error = {
     bg = "#cc241d";
     fg = "#cc241d";
@@ -112,76 +117,69 @@ let
     bg = "#6a329f";
   };
 
-  mod_bold = {
-    modifiers = [ "bold" ];
-  };
-  mod_underline = {
-    underline = {
-      style = "line";
-    };
-  };
-
+  mod_bold.modifiers = [ "bold" ];
+  mod_underline.underline.style = "line";
 in
 {
-  "diagnostic.error" =
-    {
-      underline.color = error.fg;
-    }
-    // mod_underline
-    // mod_bold;
-  "diagnostic.hint" =
-    {
-      underline.color = hint.fg;
-    }
-    // mod_underline
-    // mod_bold;
-  "diagnostic.info" =
-    {
-      underline.color = info.fg;
-    }
-    // mod_underline
-    // mod_bold;
-  "diagnostic.warning" =
-    {
-      underline.color = warning.fg;
-    }
-    // mod_underline
-    // mod_bold;
+  "diagnostic.error" = {
+    underline = {
+      inherit (mod_underline.underline) style;
+      color = error.fg;
+    };
+  } // mod_bold;
+  "diagnostic.hint" = {
+    underline = {
+      inherit (mod_underline.underline) style;
+      color = hint.fg;
+    };
+  } // mod_bold;
+  "diagnostic.info" = {
+    underline = {
+      inherit (mod_underline.underline) style;
+      color = info.fg;
+    };
+  } // mod_bold;
+  "diagnostic.warning" = {
+    underline = {
+      inherit (mod_underline.underline) style;
+      color = warning.fg;
+    };
+  } // mod_bold;
   "diagnostic.unnecessary" = unnecessary;
   "diagnostic.deprecated" = deprecated;
   "error" = {
-    fg = error.fg;
-    bg = inline_diagnostics.bg;
+    inherit (error) fg;
+    inherit (inline_diagnostics) bg;
   };
   "hint" = {
-    fg = hint.fg;
-    bg = inline_diagnostics.bg;
+    inherit (hint) fg;
+    inherit (inline_diagnostics) bg;
   };
   "info" = {
-    fg = info.fg;
-    bg = inline_diagnostics.bg;
+    inherit (info) fg;
+    inherit (inline_diagnostics) bg;
   };
   "warning" = {
-    fg = warning.fg;
-    bg = inline_diagnostics.bg;
+    inherit (warning) fg;
+    inherit (inline_diagnostics) bg;
   };
   "ui" = {
+    inherit (default) bg;
     fg = text;
-    bg = default.bg;
   };
   "ui.background" = {
-    bg = default.bg;
+    inherit (default) bg;
   };
   "ui.bufferline" = {
+    inherit (statusline_inactive) bg;
     fg = text;
-    bg = statusline_inactive.bg;
   };
   "ui.bufferline.active" = {
     fg = text;
     bg = statusline;
   } // mod_bold;
   "ui.bufferline.background" = {
-    bg = default.bg;
+    inherit (default) bg;
   };
   "ui.cursor" = {
     bg = cursor;
@@ -199,7 +197,7 @@ in
     bg = cursorline_secondary;
   };
   "ui.gutter.selected" = {
-    bg = selected.bg;
+    inherit (selected) bg;
   };
   "ui.help" = {
     bg = help;
@@ -222,7 +220,7 @@ in
     fg = text;
   } // mod_underline;
   "ui.picker.header.column.active" = {
-    fg = selected.fg;
+    inherit (selected) fg;
   } // mod_underline;
   "ui.popup" = {
     fg = text;
@@ -240,16 +238,16 @@ in
   };
   "ui.statusline.inactive" = statusline_inactive;
   "ui.statusline.insert" = {
+    inherit (mode) bg;
     fg = mode_insert;
-    bg = mode.bg;
   } // mod_bold;
   "ui.statusline.normal" = {
+    inherit (mode) bg;
     fg = mode_normal;
-    bg = mode.bg;
   } // mod_bold;
   "ui.statusline.select" = {
+    inherit (mode) bg;
     fg = mode_select;
-    bg = mode.bg;
   } // mod_bold;
   "ui.statusline.separator" = text;
   "ui.text" = text;
@@ -258,7 +256,7 @@ in
   "ui.text.inactive" = text_inactive;
   "ui.text.info" = text;
   "ui.virtual" = {
-    bg = inline_diagnostics.bg;
+    inherit (inline_diagnostics) bg;
   };
   "ui.virtual.indent-guide" = indent_guide;
   "ui.virtual.inlay-hint" = inlay_hint;
@@ -366,7 +364,7 @@ in
   } // mod_underline;
   "string.special.path" = special;
   "symbol" = {
-    bg = placeholder.bg;
+    inherit (placeholder) bg;
   };
   "tag" = keyword;
   "tag.error" = error.fg;

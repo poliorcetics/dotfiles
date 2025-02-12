@@ -1,0 +1,126 @@
+theme = "poliorcetics"
+
+[editor]
+# === Basics ===
+color-modes = true
+completion-trigger-len = 1
+cursorline = true
+idle-timeout = 250
+completion-timeout = 50
+line-number = "absolute"
+mouse = false
+rulers = [ 100, 120, 150 ]
+
+# === Diagnostics ===
+end-of-line-diagnostics = "hint" # Minimum severity of diagnostics rendered at the end of a line
+inline-diagnostics.cursor-line = "info" # Show warnings and errors on the cursor line inline
+
+# === File Picker ===
+file-picker.hidden = false
+
+[editor.lsp]
+display-inlay-hints = true
+display-messages = true
+
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+newline = "none"
+
+[editor.indent-guides]
+render = true
+character = "▏"
+
+[editor.statusline]
+left = [
+    "mode",
+    "spinner",
+    "read-only-indicator",
+    "file-modification-indicator",
+    "file-name",
+    "spacer",
+    "diagnostics",
+    "spacer",
+    "workspace-diagnostics",
+    "register",
+]
+center = [ "version-control" ]
+right = [
+    "file-encoding",
+    "file-type",
+    "separator",
+    "selections",
+    "separator",
+    "primary-selection-length",
+    "separator",
+    "position",
+    "separator",
+    "spacer",
+    "position-percentage",
+    "total-line-numbers",
+]
+
+[keys.normal]
+S-up = "jump_view_up"
+S-down = "jump_view_down"
+S-right = "jump_view_right"
+S-left = "jump_view_left"
+
+A-S-up = "swap_view_up"
+A-S-down = "swap_view_down"
+A-S-right = "swap_view_right"
+A-S-left = "swap_view_left"
+
+[keys.normal.space]
+n = "file_picker_in_current_buffer_directory"
+h = "file_picker_in_current_directory"
+
+t = "workspace_diagnostics_picker"
+z = "workspace_symbol_picker"
+
+"," = "command_palette"
+":" = "global_search"
+c = [ "kill_to_line_end", "insert_mode" ]
+m = "select_references_to_symbol_under_cursor"
+
+[keys.normal.g]
+up = "goto_first_diag"
+down = "goto_last_diag"
+right = "goto_next_diag"
+left = "goto_prev_diag"
+
+[keys.normal."'"]
+up = "goto_first_change"
+down = "goto_last_change"
+right = "goto_next_change"
+left = "goto_prev_change"
+
+[keys.normal."`"]
+up = "goto_first_change"
+down = "goto_last_change"
+right = "goto_next_change"
+left = "goto_prev_change"
+
+[keys.normal."]"]
+d = "no_op"
+D = "no_op"
+g = "no_op"
+G = "no_op"
+space = "no_op"
+
+[keys.normal."["]
+d = "no_op"
+D = "no_op"
+g = "no_op"
+G = "no_op"
+space = "no_op"
+
+[keys.insert]
+up = "no_op"
+down = "no_op"
+left = "no_op"
+right = "no_op"
+pageup = "no_op"
+pagedown = "no_op"
+home = "no_op"
+end = "no_op"

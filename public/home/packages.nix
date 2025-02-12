@@ -89,11 +89,6 @@ in
       (pkgs.writeScriptBin "rust-analyzer-wrapper" (builtins.readFile ./scripts/rust-analyzer-wrapper.nu))
       (pkgs.writeScriptBin "systemfiles" (builtins.readFile ./scripts/systemfiles.nu))
 
-      # Voluntarily override the helix from the nixpkgs source to allow building the one from master
-      # or any other dev branch easily
-      (overrideNixProvidedBinary "hx" (lib.getExe config.programs.helix.package)
-        "${config.home.sessionVariables.CARGO_HOME}/bin/hx"
-      )
       (overrideNixProvidedBinary "nu" (lib.getExe config.programs.nushell.package)
         "${config.home.sessionVariables.CARGO_HOME}/bin/nu"
       )

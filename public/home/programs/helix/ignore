@@ -1,0 +1,12 @@
+# VCS
+.git
+.jj
+
+# Direnv
+.direnv
+
+# Python
+.mypy_cache
+.pytest_cache
+.ruff_cache
+__pycache__
