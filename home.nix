@@ -224,6 +224,14 @@ let
       KUBECONFIG = "${config.xdg.configHome}/kube/config";
       KUBECACHEDIR = "${config.xdg.cacheHome}/kube";
 
+      LESS_TERMCAP_mb = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi green')";
+      LESS_TERMCAP_md = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi light_cyan_bold')"; # start bold
+      LESS_TERMCAP_me = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end bold
+      LESS_TERMCAP_se = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end standout
+      LESS_TERMCAP_so = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi light_yellow_reverse')"; # start standout
+      LESS_TERMCAP_ue = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end underline
+      LESS_TERMCAP_us = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi green_underline')"; # start underline
+
       # NPM, incapable of answering to `XDG` spec and creating at least 3 dirs in ~/
       NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
 
