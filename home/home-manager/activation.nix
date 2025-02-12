@@ -7,8 +7,7 @@ let
   starship = lib.getExe config.programs.starship.package;
   zoxide = lib.getExe config.programs.zoxide.package;
 
-  xch = config.xdg.configHome;
-  nudir = "${xch}/nushell";
+  nudir = "${config.xdg.configHome}/nushell";
 
 in
 {
@@ -32,16 +31,12 @@ in
   '';
 
   # Extras files nudir
-  Extras =
-    let
-      atuinNu = "${nudir}/extras/atuin.nu";
-    in
-    ''
-      run mkdir -p ${nudir}/extras/
-      run ${nu} --commands "${atuin}    init nu      | save -f ${atuinNu}"
-      run ${nu} --commands "${starship} init nu      | save -f ${nudir}/extras/starship.nu"
-      run ${nu} --commands "${zoxide}   init nushell | save -f ${nudir}/extras/zoxide.nu"
-    '';
+  Extras = ''
+    run mkdir -p ${nudir}/extras/
+    run ${nu} --commands "${atuin}    init nu      | save -f ${nudir}/extras/atuin.nu"
+    run ${nu} --commands "${starship} init nu      | save -f ${nudir}/extras/starship.nu"
+    run ${nu} --commands "${zoxide}   init nushell | save -f ${nudir}/extras/zoxide.nu"
+  '';
 
   nushellCompletions = ''
     run mkdir -p "${nudir}/completions"
