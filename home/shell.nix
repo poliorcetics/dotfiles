@@ -16,7 +16,7 @@ let
 
       mkdir -p "$XDG_RUNTIME_DIR"
 
-      export PATH="$(${lib.getExe config.programs.nushell.package} --commands '$env.PATH | uniq | str join :')"
+      export PATH="$($HOME/.nix-profile/bin/nu --commands '$env.PATH | uniq | str join :')"
 
       if [ -f "${xch}/.env" ]; then
         source "${xch}/.env"
@@ -25,7 +25,7 @@ let
       export __INIT_EXTRA_ALREADY_DONE=1
     fi
 
-    ${lib.getExe config.programs.nushell.package}
+    $HOME/.nix-profile/bin/nu
   '';
 
   shAliases = {
