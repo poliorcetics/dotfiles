@@ -6,14 +6,12 @@
   editor = {
     # === Basics ===
     color-modes = true;
-    completion-replace = true;
     completion-trigger-len = 1;
     cursorline = true;
     idle-timeout = 250;
     completion-timeout = 50;
     line-number = "absolute";
     mouse = false;
-    # preview-completion-insert = false;
     rulers = [
       100
       120
