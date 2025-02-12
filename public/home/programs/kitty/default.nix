@@ -4,7 +4,12 @@
 #
 # Config docs: <https://sw.kovidgoyal.net/kitty/conf/>
 
-{ config, isLinux, mkProgramFile, ... }:
+{
+  config,
+  isLinux,
+  mkProgramFile,
+  ...
+}:
 {
   imports = [
     (mkProgramFile { } "kitty" "kitty.conf")
