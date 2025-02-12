@@ -24,9 +24,11 @@
     ./programs/topgrade
     ./programs/zoxide
 
+    # TODO: port over to programs/
     ./helix
-    ./packages.nix
     ./shell.nix
+
+    ./packages.nix
     ./xdg.nix
   ];
 
