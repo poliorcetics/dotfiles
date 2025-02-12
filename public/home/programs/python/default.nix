@@ -1,16 +1,19 @@
 # Python configuration
 
-{ config, pkgs, ... }:
+{ config, pkgs, mkProgramFile, ... }:
 {
+  imports = [
+    # Workaround to ensure the python history is not in ~/
+    (mkProgramFile { } "python" "rc.py")
+  ];
+
   home.packages = with pkgs; [
     python3
-    python3Packages.python
     python3Packages.pip
+    python3Packages.python
+    uv
   ];
 
   home.sessionVariables.PYTHONSTARTUP = "${config.xdg.configHome}/python/rc.py";
   home.sessionVariables.VIRTUAL_ENV_DISABLE_PROMPT = 1;
-
-  # Workaround to ensure the python history is not in ~/
-  xdg.configFile."python/rc.py".source = ./rc.py;
 }

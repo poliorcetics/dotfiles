@@ -87,11 +87,11 @@ in
     ./programs/git
     ./programs/kitty
     ./programs/npm
+    ./programs/python
     ./programs/starship
 
     ./helix
     ./jujutsu.nix
-    ./python
     ./shell.nix
     ./topgrade.nix
     ./xdg.nix
