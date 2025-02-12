@@ -91,7 +91,7 @@ let
     # <https://martinvonz.github.io/jj/latest/config/#ssh-signing>
     signing = {
       backend = "ssh";
-      key = "${config.home.homeDirectory}/.ssh/id_signing.pub";
+      key = "~/.ssh/id_signing.pub";
       sign-all = true;
     };
 
