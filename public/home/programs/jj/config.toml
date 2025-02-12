@@ -1,0 +1,63 @@
+# Settings: <https://jj-vcs.github.io/jj/latest/config/>
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+# <https://jj-vcs.github.io/jj/latest/config/#aliases>
+[aliases]
+b = ["bookmark"]
+c = ["commit"]
+cm = ["commit", "-m"]
+d = ["diff"]
+ds = ["describe"]
+dt = ["diff", "--tool", "difft"]
+g = ["git"]
+gf = ["git", "fetch"]
+gp = ["git", "push"]
+gpa = ["git", "push", "--all"]
+l = ["log"]
+lb = ["log", "-r", "current()"]
+lm = ["log", "-r", "::@"]
+lo = ["log", "-r", "open()"]
+r = ["rebase"]
+rs = ["rebase", "--source", "all:open_roots()", "--destination"]
+s = ["status"]
+sq = ["squash"]
+
+# <https://jj-vcs.github.io/jj/latest/config/#git-settings>
+[git]
+private-commits = "description(glob:'local:*')"
+push-bookmark-prefix = "ab/push-"
+subprocess = true
+
+[merge-tools.difft]
+diff-args = ["--display", "side-by-side-show-both", "--color=always", "$left", "$right"]
+
+[revset-aliases]
+"current()" = "(::@ ~ ::trunk())"
+"open()" = "(mine() ~ ::trunk())::"
+# Useful to rebase all branches with `jj r -s "all:open_roots()" -d main/master/develop/..`
+"open_roots()" = "roots(open())"
+
+# <https://jj-vcs.github.io/jj/latest/config/#commit-signing>
+# <https://jj-vcs.github.io/jj/latest/config/#ssh-signing>
+[signing]
+backend = "ssh"
+key = "~/.ssh/id_signing.pub"
+sign-all = true
+
+# <https://jj-vcs.github.io/jj/latest/config/#snapshot-settings>
+[snapshot]
+max-new-file-size = "10MB"
+
+# Override the default short ID to use the absolute shortest, making it easier to use `-r <id>`
+# in various `jj` commands
+[template-aliases]
+"format_short_id(id)" = "id.shortest()"
+
+# <https://jj-vcs.github.io/jj/latest/config/#ui-settings>
+[ui]
+# <https://jj-vcs.github.io/jj/latest/conflicts/#alternative-conflict-marker-styles>
+conflict-marker-style = "snapshot"
+default-command = "status"
+# <https://jj-vcs.github.io/jj/latest/config/#diff-format>
+diff.format = "git"
+pager = "delta"

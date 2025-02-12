@@ -16,6 +16,7 @@
     ./programs/direnv
     ./programs/gh
     ./programs/git
+    ./programs/jj
     ./programs/kitty
     ./programs/npm
     ./programs/python
@@ -24,7 +25,6 @@
     ./programs/zoxide
 
     ./helix
-    ./jujutsu.nix
     ./packages.nix
     ./shell.nix
     ./xdg.nix
