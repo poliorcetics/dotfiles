@@ -10,9 +10,9 @@
     (lib.hiPrio (
       pkgs.writeShellScriptBin name ''
         if test -x "${replacement_path}"; then
-          "${replacement_path}" "$@"
+          builtin exec "${replacement_path}" "$@"
         else
-          "${nix_pkg}" "$@"
+          builtin exec "${nix_pkg}" "$@"
         fi
       ''
     ));
