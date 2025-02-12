@@ -3,17 +3,14 @@
 # <https://cli.github.com/manual/>
 
 {
-  config,
-  lib,
-  dotfilesDir,
+  mkProgramFile,
   ...
 }:
 {
-  programs.gh.enable = true;
+  imports = [
+    (mkProgramFile { force = true; } "gh" "config.yml")
+    (mkProgramFile { } "gh" "hosts.yml")
+  ];
 
-  xdg.configFile."gh/config.yml".source = lib.mkForce (
-    config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/public/home/programs/gh/config.yml"
-  );
-  xdg.configFile."gh/hosts.yml".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/public/home/programs/gh/hosts.yml";
+  programs.gh.enable = true;
 }

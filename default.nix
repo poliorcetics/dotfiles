@@ -36,12 +36,39 @@ let
     }
     .${platform};
 
-  specialArgs = {
+  specialArgs = rec {
     inherit self userDetails;
     dotfilesDir = "${userDetails.home}/${userDetails.dotfilesSubDir}";
     unstablePkgs = import nixpkgs-unstable {
       inherit system;
     };
+    # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{program}/{file}`
+    # to `{dotfilesDir}/public/home/programs/${program}/${file}`.
+    #
+    # Used as:
+    #
+    # ```
+    # imports = [
+    #   (mkProgramFile { force = true; } "gh" "config.yml")
+    #   (mkProgramFile { } "gh" "hosts.yml")
+    # ];
+    # ```
+    mkProgramFile =
+      {
+        force ? false,
+        kind ? "public",
+      }:
+      program: file:
+      {
+        config,
+        lib,
+        ...
+      }:
+      {
+        xdg.configFile."${program}/${file}".source = (if force then lib.mkForce else lib.id) (
+          config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/${kind}/home/programs/${program}/${file}"
+        );
+      };
   };
 
   systemModules = builtins.filter filterPaths [
@@ -78,12 +105,10 @@ mkSystem {
       # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useUserPackages>
       home-manager.useUserPackages = false;
 
-      home-manager.users.${userDetails.username} = {
-        imports = builtins.filter filterPaths [
-          ./public/home
-          ./work/home
-        ];
-      };
+      home-manager.users.${userDetails.username}.imports = builtins.filter filterPaths [
+        ./public/home
+        ./work/home
+      ];
       # Pass arguments to home.nix
       home-manager.extraSpecialArgs = specialArgs;
     }
