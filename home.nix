@@ -235,7 +235,6 @@ let
     # - .config/npm
     # - .config/nushell
     # - .config/pijul
-    # - .config/python
 
     # TODO: programs to port the config for
     # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
@@ -252,4 +251,7 @@ let
     # Usually tracking nix config is done via the user config in nixOS, or nix-darwin on macOS but I
     # don't want to have to install it too. This works for now.
     xdg.configFile."nix/nix.conf".source = ./nix/nix.conf;
+
+    # Workaround to ensure the python history is not in ~/
+    xdg.configFile."python/rc.py".source = ./python/rc.py;
   }
