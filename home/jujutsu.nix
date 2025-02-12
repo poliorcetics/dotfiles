@@ -101,6 +101,9 @@ let
 
     # <https://martinvonz.github.io/jj/latest/config/#ui-settings>
     ui = {
+      # <https://martinvonz.github.io/jj/latest/conflicts/#alternative-conflict-marker-styles>
+      conflict-marker-style = "snapshot";
+
       default-command = "status";
 
       pager = "delta";
