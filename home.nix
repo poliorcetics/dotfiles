@@ -124,6 +124,14 @@ let
         xdg_subdir = "pijul";
         app_support_link = "pijul";
       };
+
+      # Create my expected directories
+      makeDirs = ''
+        run mkdir -p ~/repos/me/
+        run mkdir -p ~/repos/tp/
+        run mkdir -p ~/repos/work/priv/
+        run mkdir -p ~/repos/work/pub/
+      '';
     };
 
     # XDG setup
