@@ -41,6 +41,7 @@ export module main {
 
             # Link kitty terminfo to their new place
             let link_dir = $env.XDG_DATA_HOME | path join "terminfo/78"
+            mkdir $link_dir
             /bin/ln -s /Applications/kitty.app/Contents/Resources/terminfo/78/xterm-kitty ($link_dir | path join xterm-kitty)
         }
 
