@@ -2,8 +2,8 @@
 max-new-file-size = "10MB"
 
 [user]
-name = "Alexis (Poliorcetics) Bourget"
-email = "ab_jujutsu@poliorcetiq.eu"
+name = "%DISPLAY_NAME%"
+email = "%EMAIL%"
 
 [aliases]
 b = ["branch"]

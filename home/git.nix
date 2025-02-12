@@ -2,12 +2,12 @@
 #
 # <https://git-scm.com/>
 
-{ config, ... }:
+{ config, userDetails, ... }:
 {
   programs.git.enable = true;
 
-  programs.git.userName = "Alexis (Poliorcetics) Bourget";
-  programs.git.userEmail = "ab_github@poliorcetiq.eu";
+  programs.git.userName = userDetails.displayName;
+  programs.git.userEmail = userDetails.email;
 
   programs.git.aliases = {
     a = "add";
@@ -190,9 +190,6 @@
     # XCode dirs
     "*.xcworkspace"
     "*.xcodeproj"
-
-    # Use a specific repo for RA to not interfere with CLI commands
-    "target-rust-analyzer"
 
     # YCM (vim plugin) files
     ".ycm_extra_conf.py"

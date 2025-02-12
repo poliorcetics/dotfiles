@@ -2,6 +2,11 @@
 
 The objective is to use [`home-manager`](https://nix-community.github.io/home-manager/index.xhtml) to manage my dotfiles. Let's hope this time I don't end up with a broken management system in a few months.
 
+## TODOS
+
+ - Update command now that I moved to nix-darwin
+ - Redo install procedure to use setup.sh
+
 ## Install procedure
 
 I use [`nushell`](https://www.nushell.sh/) as my primary shell but I do **not** set it as the default shell for my user (no `chsh`) to avoid issues with programs that expect the default shell to be `bash`-like. I simply launch `nushell` from the `.bashrc` or `.zshrc` in interactive mode.
