@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-def main [...args] {
+def --wrapped main [...args] {
     let target_dir = (
         cargo metadata --no-deps --format-version 1 --no-default-features --offline
         | from json
