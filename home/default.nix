@@ -12,7 +12,7 @@ let
     ./direnv.nix
     ./gh.nix
     ./git.nix
-    ./helix.nix
+    ./helix
     ./kitty.nix
     ./shell.nix
     ./starship.nix
