@@ -10,6 +10,7 @@ b = ["branch"]
 c = ["commit"]
 cm = ["commit", "-m"]
 d = ["diff"]
+dt = ["diff", "--tool", "difft"]
 ds = ["describe"]
 l = ["log"]
 lb = ["log", "-r", "current()"]
@@ -36,16 +37,17 @@ push-branch-prefix = "ab/push-"
 [ui]
 default-command = "status"
 
-diff.tool = [
-    "difft",
+pager = "delta"
+diff.format = "git"
+
+[merge-tools.difft]
+diff-args = [
     "--display",
     "side-by-side-show-both",
     "--color=always",
     "$left",
     "$right",
 ]
-
-paginate = "never"
 
 [signing]
 backend = "ssh"
