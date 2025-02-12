@@ -6,6 +6,7 @@ let
     ./atuin.nix
     ./bacon.nix
     ./bat.nix
+    ./gh.nix
     ./shell.nix
   ];
 
