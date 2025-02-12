@@ -30,16 +30,10 @@ let
     prettier # Code formatter, notably for Web technologies
   ];
 
-  pythonPackages = with pkgs.python3Packages; [
-    python
-    pip
-  ];
-
   rustPackages = with pkgs; [
     # Use rustup from nix but manage rust versions through rustup, not nix
     rustup
 
-    bat # cat(1) on wings
     bottom # like `top`
     delta # Nicer git diffs
     difftastic # Semantic (tree-sitter) diffs
@@ -57,27 +51,17 @@ let
     ripgrep # `grep` but 1000x better
     rnr # Rename things in bulk
     sd # `sed` but understandable
-    starship # A shell prompt for the stars
     tealdeer # Quick explanations of commands
     tokei # Count lines of code
-    topgrade # Upgrade everything
     tree-sitter # Make semantic things
     watchexec # Execute in loops based on FS changes
-    zoxide # `cd`, but with jumps and shortcuts
-  ] ++ [
-    unstablePkgs.atuin # Magical shell history
-    unstablePkgs.jujutsu # Nicer VCS than Git
   ];
 
   miscPackages = with pkgs; [
     bear # Compile commands for C & C++ projects
     carapace # Command completer
     cmake # Compiler orchestration
-    direnv # Setup env when entering/leaving directories
     fish # Used for the carapace completer in nushell
-    gh # GitHub command line tools
-    git # Git itself
-    git-lfs # Support LFS in git
     marksman # LSP for Markdown
     nixfmt-rfc-style # Official formatter for nix
     ninja # Compile C & C++ things
@@ -132,7 +116,6 @@ in
   home.packages =
     cargoPackages
     ++ nodePackages
-    ++ pythonPackages
     ++ rustPackages
     ++ miscPackages
     ++ [

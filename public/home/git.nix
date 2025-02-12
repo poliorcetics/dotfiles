@@ -5,6 +5,7 @@
 { config, userDetails, ... }:
 {
   programs.git.enable = true;
+  programs.git.lfs.enable = true;
 
   programs.git.userName = userDetails.displayName;
   programs.git.userEmail = userDetails.email;
@@ -212,6 +213,4 @@
   # Allow an override of the user-wide config for each machines. Can notably be used to change the
   # default user and email or add secret handling.
   programs.git.includes = [ { path = "${config.xdg.configHome}/git/config_local"; } ];
-
-  programs.git.lfs.enable = true;
 }
