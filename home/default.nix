@@ -283,10 +283,6 @@ let
       [userDetails.displayName  userDetails.email  "${config.home.homeDirectory}/.ssh/id_signing.pub"]
       (builtins.readFile ./jj/config.toml);
 
-    # Usually tracking nix config is done via the user config in nixOS, or nix-darwin on macOS but I
-    # don't want to have to install it too. This works for now.
-    xdg.configFile."nix/nix.conf".source = ./nix/nix.conf;
-
     # NPM has ways to configure it to not use ~/.npm but it's apparently buggy, let's hope this one works
     xdg.configFile."npm/npmrc".text = ''
       cache=~/.local/cache/npm
