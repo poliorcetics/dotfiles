@@ -273,6 +273,8 @@ let
     # - kitty
     # - topgrade
 
+    # TODO: port font: Iosevka Custom
+
     # === FILES ===
 
     # Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
