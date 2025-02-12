@@ -1,6 +1,6 @@
 # Language config for helix
 
-{ config, ... }:
+{ config, lib, pkgs, ... }:
 let 
 
   indent = { tab-width = 4; unit = "    "; };
@@ -103,6 +103,12 @@ in
 
       soft-wrap.enable = true;
       soft-wrap.wrap-at-text-width = true;
+    }
+
+    {
+      name = "nix";
+      auto-format = false;
+      formatter.command = lib.getExe pkgs.nixpkgs-fmt;
     }
 
     {
