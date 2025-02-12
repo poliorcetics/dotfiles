@@ -49,11 +49,10 @@ $env.config.history.isolation = true
 
 # Change CARGO_TARGET_DIR when PWD changes
 $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD | append {|_prev, new|
-    let new = ($new | path basename)
-    let new_target_dir = $"($env.XDG_CACHE_HOME)/cargo_target_dir/($new)"
     let current_target_dir = ($env | get --ignore-errors CARGO_TARGET_DIR | default "")
 
-    if $current_target_dir == "" or $current_target_dir =~ $"($env.XDG_CACHE_HOME)/cargo_target_dir/*" {
+    if $current_target_dir == "" or $current_target_dir =~ $"($env.XDG_CACHE_HOME)/target-dirs/cargo/*" {
+        let new_target_dir = $"($env.XDG_CACHE_HOME)/target-dirs/cargo/($new | path basename)"
         $env.CARGO_TARGET_DIR = $new_target_dir
     }
 })
