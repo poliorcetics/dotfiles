@@ -5,6 +5,7 @@ let
   imports = [
     ./atuin.nix
     ./bacon.nix
+    ./bat.nix
     ./shell.nix
   ];
 
