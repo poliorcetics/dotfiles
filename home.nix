@@ -158,7 +158,18 @@ let
       #:  '';
 
       ".local/bin/hm.nu" = {
+        # Keep the .nu to indicate this should not be run often after installing a new machine
         source = ./scripts/hm.nu;
+        executable = true;
+      };
+
+      ".local/bin/hn" = {
+        source = ./scripts/hn.nu;
+        executable = true;
+      };
+
+      ".local/bin/systemfiles" = {
+        source = ./scripts/systemfiles.nu;
         executable = true;
       };
     };
