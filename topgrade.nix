@@ -14,8 +14,7 @@ in {
   # Settings: <https://github.com/topgrade-rs/topgrade/blob/main/config.example.toml>
   programs.topgrade.settings = {
     commands = {
-      "1. Rustup - No Self Update" = "rustup update --no-self-update";
-      "2. Helix - Install from repo" = "cd ${helixRepo} && cargo +stable install --locked --path helix-term && hx --grammar fetch && hx --grammar build";
+      "1. Helix - Install from repo" = "cd ${helixRepo} && cargo +stable install --locked --path helix-term && hx --grammar fetch && hx --grammar build";
     };
 
     firmware.upgrade = false;
@@ -36,6 +35,7 @@ in {
 
         "nix"
         "home_manager"
+        "rustup"
         "cargo"
 
         "pip3"
