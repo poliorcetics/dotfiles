@@ -26,6 +26,7 @@ in
       config.home-manager.expr = ''(builtins.getFlake "${userDetails.home}/.config/home-manager").darwinConfigurations.mac.options'';
     };
 
+    rust-analyzer.command = "rust-analyzer-wrapper";
     rust-analyzer.config = {
       # Use in local configs:
       #
@@ -40,7 +41,6 @@ in
       #: cargo.target = "aarch64-apple-darwin"
 
       assist.importGranularity = "module";
-      cargo.extraEnv."CARGO_TARGET_DIR" = "${config.xdg.cacheHome}/rust-analyzer-target-dir";
       # A little slower than a simple check, but so useful
       check.command = "clippy";
       completion.fullFunctionSignatures.enable = true;
