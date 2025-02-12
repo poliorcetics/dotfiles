@@ -49,6 +49,10 @@ in
     rgi = "rg --no-ignore --hidden";
     rgh = "rg --hidden";
     fdi = "fd -IH";
+
+    # Calling `nix develop` with `--command` make the command be interpreted after the path
+    # modifications in in the nix env init script and so nushell picks up the new paths
+    nd = "nix develop --command ${lib.getExe config.programs.nushell.package}";
   };
 
   programs.bash = {
