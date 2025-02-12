@@ -12,6 +12,9 @@ d = ["describe"]
 l = ["log"]
 s = ["status"]
 
+[git]
+push-branch-prefix = "ab/push-"
+
 [template-aliases]
 # Override the default short ID to use the absolute shortest, making it easier to use `-r <id>`
 # in various `jj` commands
