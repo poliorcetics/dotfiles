@@ -1,10 +1,9 @@
 {
-  self,
   pkgs,
+  self,
   userDetails,
   ...
 }:
-
 let
   username = userDetails.username;
 in
@@ -46,11 +45,6 @@ in
     ];
   };
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  # environment.systemPackages = [];
-  # environment.darwinConfig = "${userDetails.home}/.config/nix/flake.nix";
-
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
@@ -73,12 +67,8 @@ in
     auto-optimise-store = false;
   };
 
-  # Create /etc/*rc that loads the nix-darwin environment.
-  programs = {
-    # bash.enable = true;
-    zsh.enable = true; # default shell on macOS
-    # fish.enable = true;
-  };
+  # Default shell on macOS
+  programs.zsh.enable = true;
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = self.rev or self.dirtyRev or null;

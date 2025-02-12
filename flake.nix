@@ -29,45 +29,40 @@
 
     let
       # Changing this should be enough to override every places depending on them in the config.
+      userDetails = {
+        username = "alexis";
+        home = "/Users/${userDetails.username}";
+        # Intended in Git/JJ configs.
+        displayName = "Alexis (Poliorcetics) Bourget";
+        email = "ab_contribs@poliorcetiq.eu";
+      };
 
-      mac =
-        let
-          userDetails = {
-            username = "alexis";
-            home = "/Users/${userDetails.username}";
-            # Intended in Git/JJ configs.
-            displayName = "Alexis (Poliorcetics) Bourget";
-            email = "ab_contribs@poliorcetiq.eu";
-          };
-        in
-        nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = [
-            ./darwin-configuration.nix
-            home-manager.darwinModules.home-manager
-            {
-              # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module> 
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = false;
+      mac = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          home-manager.darwinModules.home-manager
 
-              home-manager.users.${userDetails.username} = import ./home;
-              # Pass arguments to home.nix
-              home-manager.extraSpecialArgs = {
-                inherit userDetails;
-              };
-            }
-          ];
-          specialArgs = {
-            inherit self userDetails;
-          };
+          ./darwin-configuration.nix
+
+          {
+            # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module> 
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = false;
+
+            home-manager.users.${userDetails.username} = import ./home;
+            # Pass arguments to home.nix
+            home-manager.extraSpecialArgs.userDetails = userDetails;
+          }
+        ];
+        specialArgs = {
+          inherit self userDetails;
         };
+      };
     in
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#mac
-      darwinConfigurations = {
-        inherit mac;
-      };
+      darwinConfigurations.mac = mac;
 
       formatter =
         let
