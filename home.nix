@@ -219,4 +219,6 @@ let
       # I do my own carapace integration in Nushell
       enableNushellIntegration = false;
     };
+
+    programs.gitui.enable = true;
   }
