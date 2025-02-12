@@ -25,7 +25,7 @@ export module main {
         rustup toolchain install nightly
 
         # Regular cargo installs
-        cargo +stable install apple-codesign cargo-instruments cargo-update cargo-upgrades
+        cargo +stable install cargo-instruments cargo-update cargo-upgrades
         cargo +stable install scm-record -F scm-diff-editor
 
         # Git installs
