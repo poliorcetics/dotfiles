@@ -27,7 +27,7 @@
         source "$XDG_CONFIG_HOME/.env"
       fi
 
-      $HOME/.local/share/cargo/bin/nu
+      command nu
     '';
     historyFile = "${config.home.homeDirectory}/.config/bash/history";
   };
