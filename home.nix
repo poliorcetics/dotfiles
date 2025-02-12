@@ -3,6 +3,7 @@
 let
   # Imports other Nix files from the repo to configure various elements
   imports = [
+    ./atuin.nix
     ./shell.nix
   ];
 
