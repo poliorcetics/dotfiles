@@ -109,6 +109,7 @@ in
       source ${nu}/extras/atuin.nu
     '';
 
+  # TODO: add more completions, either by contributing and linking them here or by manually maintaining them.
   xdg.configFile."nushell/completions/hx.nu".source = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/helix-editor/helix/master/contrib/completion/hx.nu";
     sha256 = "17z9zbn80mrkrydwqrdbjii0mkiffpa2ziny21hk6apa2dhfkyw2";
