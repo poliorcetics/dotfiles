@@ -21,13 +21,13 @@
     ./programs/python
     ./programs/starship
     ./programs/topgrade
+    ./programs/zoxide
 
     ./helix
     ./jujutsu.nix
     ./packages.nix
     ./shell.nix
     ./xdg.nix
-    ./zoxide.nix
   ];
 
   # This value determines the Home Manager release that your configuration is compatible with. This
