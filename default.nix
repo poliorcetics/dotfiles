@@ -38,6 +38,8 @@ let
 
   specialArgs = {
     inherit self userDetails;
+    isLinux = platform == "linux";
+    isMacos = platform == "macos";
     unstablePkgs = import nixpkgs-unstable {
       inherit system;
     };
