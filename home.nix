@@ -18,7 +18,6 @@ let
     ./topgrade.nix
   ];
 
-  # TODO: missing: cargo-upgrades cargo-instruments scm-record (with features for editor)
   cargoPackages = with pkgs; [
     cargo-binutils
     cargo-deny
@@ -44,10 +43,6 @@ let
     pip
   ];
 
-  # TODO: missing: apple-codesign (outdated as heck)
-  # TODO: missing: git packages
-  #  - helix
-  #  - rust-analyzer
   rustPackages = with pkgs; [
     # Use rustup from nix but manage rust versions through rustup, not nix
     rustup
@@ -272,9 +267,6 @@ let
       enable = true;
       enableNushellIntegration = false;
     };
-
-    # TODO: directories for which to import the files directly since home-manager doesn't handle them well
-    # - .config/fish
 
     # TODO: programs to port the config for
     # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
