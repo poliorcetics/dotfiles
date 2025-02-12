@@ -49,7 +49,7 @@ in
 
   nix.gc = {
     automatic = true;
-    options = "--delete-older-than 10d";
+    options = "--delete-older-than 30d";
     interval = {
       Hour = 24;
       Minute = 00;
