@@ -157,15 +157,10 @@ let
 
         # Voluntarily override the helix from the nixpkgs source to allow building the one from master
         # or any other dev branch easily
-        (lib.hiPrio (pkgs.writeShellScriptBin "hx" ''
-          cargo_hx="${config.home.sessionVariables.CARGO_HOME}/bin/hx"
-          default_hx="${lib.getExe config.programs.helix.package}"
-          if test -x "$cargo_hx"; then
-            "$cargo_hx" "$@"
-          else
-            "$default_hx" "$@"
-          fi
-        ''))
+        (funcs.overrideNixProvidedBinary
+          "hx"
+          (lib.getExe config.programs.helix.package)
+          "${config.home.sessionVariables.CARGO_HOME}/bin/hx")
       ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage plain files is
