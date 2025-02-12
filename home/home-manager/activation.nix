@@ -1,14 +1,11 @@
 { config, lib, ... }:
-
 let
-
   atuin = lib.getExe config.programs.atuin.package;
   nu = lib.getExe config.programs.nushell.package;
   starship = lib.getExe config.programs.starship.package;
   zoxide = lib.getExe config.programs.zoxide.package;
 
   nudir = "${config.xdg.configHome}/nushell";
-
 in
 {
   # === Usual directories ===
@@ -22,13 +19,6 @@ in
   '';
 
   # === Nushell Files ===
-
-  # Create default nushell files
-  nushellDefaults = ''
-    run mkdir -p ${nudir}/defaults/
-    run ${nu} --commands "config env --default | save -f ${nudir}/defaults/env.nu"
-    run ${nu} --commands "config nu  --default | save -f ${nudir}/defaults/config.nu"
-  '';
 
   # Extras files nudir
   extras = ''

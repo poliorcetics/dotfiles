@@ -45,6 +45,8 @@ $env.config.show_banner = false
 $env.config.history.file_format = "sqlite"
 $env.config.history.isolation = true
 
+$env.config.hooks.env_change.PWD = ($env.config.hooks.env_change | default [] PWD | get PWD)
+
 # Change CARGO_TARGET_DIR when PWD changes
 $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD | append {|_prev, new|
     let current_target_dir = ($env | get --ignore-errors CARGO_TARGET_DIR | default "")
@@ -75,11 +77,11 @@ def --wrapped npm [...rest] {
 }
 
 # List all and trim down to some select columns
-def la [path: path = "."] -> record {
+def la [path: path = "."]: any -> table {
     ls --all --long $path | sort-by type name | select mode size user modified type name target
 }
 
 # `la` but clearing the screen before
-def lm [path: path = "."] -> record {
+def lm [path: path = "."]: any -> table {
     clear; la $path
 }
