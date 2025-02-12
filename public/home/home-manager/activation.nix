@@ -30,6 +30,6 @@ in
 
   nushellCompletions = ''
     run mkdir -p "${nudir}/completions"
-    run ${nu} ${./../scripts/install-completions.nu} "${nudir}/completions"
+    run ${nu} ${../scripts/install-completions.nu} "${nudir}/completions"
   '';
 }
