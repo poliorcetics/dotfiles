@@ -6,8 +6,22 @@
   ...
 }:
 let
-  # Import my helper functions
-  funcs = import ./home-manager/functions.nix { inherit lib pkgs; };
+  # Overrides a binary provided by Nix with one that ends up later in the $PATH order:
+  #
+  # ```nix
+  # overrideNixProvideBinary "hx" (lib.getExe config.programs.helix.package) "${config.home.sessionVariables.CARGO_HOME}/bin/hx";
+  # ```
+  overrideNixProvidedBinary =
+    name: nix_pkg: replacement_path:
+    (lib.hiPrio (
+      pkgs.writeShellScriptBin name ''
+        if test -x "${replacement_path}"; then
+          builtin exec "${replacement_path}" "$@"
+        else
+          builtin exec "${nix_pkg}" "$@"
+        fi
+      ''
+    ));
 in
 {
   home.packages =
@@ -77,13 +91,13 @@ in
 
       # Voluntarily override the helix from the nixpkgs source to allow building the one from master
       # or any other dev branch easily
-      (funcs.overrideNixProvidedBinary "hx" (lib.getExe config.programs.helix.package)
+      (overrideNixProvidedBinary "hx" (lib.getExe config.programs.helix.package)
         "${config.home.sessionVariables.CARGO_HOME}/bin/hx"
       )
-      (funcs.overrideNixProvidedBinary "nu" (lib.getExe config.programs.nushell.package)
+      (overrideNixProvidedBinary "nu" (lib.getExe config.programs.nushell.package)
         "${config.home.sessionVariables.CARGO_HOME}/bin/nu"
       )
-      (funcs.overrideNixProvidedBinary "rust-analyzer" "${pkgs.rustup}/bin/rust-analyzer"
+      (overrideNixProvidedBinary "rust-analyzer" "${pkgs.rustup}/bin/rust-analyzer"
         "${config.home.sessionVariables.CARGO_HOME}/bin/rust-analyzer"
       )
     ];
