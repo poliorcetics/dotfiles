@@ -66,7 +66,7 @@ let
     # <https://martinvonz.github.io/jj/latest/config/#git-settings>
     git = {
       private-commits = "description(glob:'local:*')";
-      push-branch-prefix = "ab/push-";
+      push-bookmark-prefix = "ab/push-";
     };
 
     merge-tools.difft.diff-args = [
