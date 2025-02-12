@@ -23,7 +23,7 @@ push-branch-prefix = "ab/push-"
 [revset-aliases]
 'current()' = '(::@ ~ ::trunk())'
 'open()' = '(mine() ~ ::trunk())::'
-# Useful to rebase all branches with `jj r -s open_roots() -d main/master/develop/..`
+# Useful to rebase all branches with `jj r -s all:open_roots() -d main/master/develop/..`
 'open_roots()' = 'roots(open())'
 
 [template-aliases]
