@@ -47,10 +47,21 @@ in
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
 
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 10d";
+    interval = {
+      Hour = 24;
+      Minute = 00;
+    };
+  };
+
   nix.settings = {
     # Necessary for using flakes on this system.
     experimental-features = "nix-command flakes";
     trusted-users = [ username ];
+    # Technically a GC config but not under nix.gc.
+    auto-optimise-store = true;
   };
 
   # Create /etc/*rc that loads the nix-darwin environment.
