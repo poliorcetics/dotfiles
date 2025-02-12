@@ -25,7 +25,7 @@ export module main {
         rustup toolchain install nightly
 
         # Regular cargo installs
-        cargo +stable install cargo-instruments cargo-update cargo-upgrades
+        cargo +stable install cargo-instruments cargo-upgrades
 
         # Git installs
         cargo +stable install --git https://github.com/rust-lang/rust-analyzer --branch master --force rust-analyzer

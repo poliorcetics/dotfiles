@@ -31,7 +31,7 @@ let
     cargo-outdated
     cargo-release
     cargo-show-asm
-    # cargo-update # See <https://github.com/NixOS/nixpkgs/issues/288053>
+    cargo-update
     cargo-watch
   ];
 
