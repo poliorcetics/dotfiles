@@ -19,6 +19,9 @@ tab-item .label {
 tab-item[data-current-uri^="https://crates.io"] .label-content {
   color: #3A832D;
 }
+tab-item[data-current-uri^="https://doc.rust-lang.org"] .label-content {
+  color: #D78D00;
+}
 tab-item[data-current-uri^="https://docs.rs"] .label-content {
   color: #C7AA19;
 }
