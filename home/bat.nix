@@ -11,6 +11,6 @@
 
   home.sessionVariables = {
     MANPAGER = "bash -c 'col -bx | bat --plain --language man'";
-    MANROFFOPT="-c";
+    MANROFFOPT = "-c";
   };
 }
