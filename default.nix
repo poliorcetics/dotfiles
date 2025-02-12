@@ -35,15 +35,43 @@ let
     }
     .${platform};
 
-  specialArgs = {
+  specialArgs = rec {
     inherit inputs userDetails;
     isLinux = platform == "linux";
     isMacos = platform == "macos";
     unstablePkgs = import nixpkgs-unstable {
       inherit system;
     };
+    # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{target}` to `{dotfilesDir}/${source}`.
+    #
+    # Used as:
+    #
+    # ```
+    # imports = [
+    #   (mkConfigLink { force = true; } "gh/config.yml" "config.yml")
+    #   (mkConfigLink { } "gh/hosts.yml" "hosts.yml")
+    # ];
+    # ```
+    mkConfigLink =
+      {
+        force ? false,
+      }:
+      target: source:
+      {
+        config,
+        lib,
+        userDetails,
+        ...
+      }:
+      {
+        xdg.configFile."${target}".source = (if force then lib.mkForce else lib.id) (
+          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${userDetails.dotfilesSubDir}/${source}"
+        );
+      };
     # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{program}/{file}`
     # to `{dotfilesDir}/public/home/programs/${program}/${file}`.
+    #
+    # Specialized version of `mkConfigLink`.
     #
     # Used as:
     #
@@ -59,17 +87,7 @@ let
         kind ? "public",
       }:
       program: file:
-      {
-        config,
-        lib,
-        userDetails,
-        ...
-      }:
-      {
-        xdg.configFile."${program}/${file}".source = (if force then lib.mkForce else lib.id) (
-          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${userDetails.dotfilesSubDir}/${kind}/home/programs/${program}/${file}"
-        );
-      };
+      mkConfigLink { inherit force; } "${program}/${file}" "${kind}/home/programs/${program}/${file}";
   };
 
   systemModules = builtins.filter filterPaths [
