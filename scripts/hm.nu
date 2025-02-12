@@ -26,7 +26,6 @@ export module main {
 
         # Regular cargo installs
         cargo +stable install cargo-instruments cargo-update cargo-upgrades
-        cargo +stable install scm-record -F scm-diff-editor
 
         # Git installs
         cargo +stable install --git https://github.com/rust-lang/rust-analyzer --branch master --force rust-analyzer

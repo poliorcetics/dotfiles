@@ -44,18 +44,6 @@ diff.tool = [
     "$right",
 ]
 
-diff-editor = "scm-diff-editor"
-merge-editor = "scm-diff-editor"
-
-[merge-tools.scm-diff-editor]
-edit-args = ["--dir-diff", "$left", "$right"]
-merge-args = [
-    "--dir-diff",
-    "--output", "$output",
-    "--base", "$base",
-    "$left", "$right",
-]
-
 [signing]
 backend = "ssh"
 key = "%SIGNING_SSH_KEY%"
