@@ -275,7 +275,6 @@ let
 
     # TODO: directories for which to import the files directly since home-manager doesn't handle them well
     # - .config/fish
-    # - .config/pijul
 
     # TODO: programs to port the config for
     # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
