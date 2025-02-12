@@ -46,7 +46,8 @@ sed -i -E "s:home.homeDirectory = \".*\";:home.homeDirectory = \"$HOME\";:" ~/.c
 home-manager switch
 
 # 8. In a new terminal
-~/.local/bin/hm.nu rust installs
+~/.local/bin/hm.nu rust installs # Custom rust program installs
+~/.local/bin/hm.nu iosevka build # Custom font
 ```
 
 ### macOS apps
