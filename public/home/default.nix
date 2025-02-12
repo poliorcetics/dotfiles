@@ -86,11 +86,11 @@ in
     ./programs/gh
     ./programs/git
     ./programs/kitty
+    ./programs/npm
     ./programs/starship
 
     ./helix
     ./jujutsu.nix
-    ./npm.nix
     ./python
     ./shell.nix
     ./topgrade.nix
