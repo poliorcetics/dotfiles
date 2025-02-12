@@ -61,7 +61,8 @@ in
     experimental-features = "nix-command flakes";
     trusted-users = [ username ];
     # Technically a GC config but not under nix.gc.
-    auto-optimise-store = true;
+    # Disabled after <https://github.com/NixOS/nix/issues/7273>.
+    auto-optimise-store = false;
   };
 
   # Create /etc/*rc that loads the nix-darwin environment.
