@@ -1,6 +1,6 @@
 { config, lib, funcs, ... }:
 
-let 
+let
 
   atuin = lib.getExe config.programs.atuin.package;
   nu = lib.getExe config.programs.nushell.package;
@@ -8,6 +8,7 @@ let
   zoxide = lib.getExe config.programs.zoxide.package;
 
   xch = config.xdg.configHome;
+  nudir = "${xch}/nushell";
 
 in
 {
@@ -25,18 +26,20 @@ in
 
   # Create default nushell files
   nushellDefaults = ''
-    run mkdir -p ${xch}/nushell/defaults/
-    run ${nu} --commands "config env --default | save -f ${xch}/nushell/defaults/env.nu"
-    run ${nu} --commands "config nu  --default | save -f ${xch}/nushell/defaults/config.nu"
+    run mkdir -p ${nudir}/defaults/
+    run ${nu} --commands "config env --default | save -f ${nudir}/defaults/env.nu"
+    run ${nu} --commands "config nu  --default | save -f ${nudir}/defaults/config.nu"
   '';
 
-  # Extras files for nushell
-  nushellExtras = let
-    atuinNu = "${xch}/nushell/extras/atuin.nu";
-  in ''
-    run mkdir -p ${xch}/nushell/extras/
-    run ${nu} --commands "${atuin}    init nu      | save -f ${atuinNu}"
-    run ${nu} --commands "${starship} init nu      | save -f ${xch}/nushell/extras/starship.nu"
-    run ${nu} --commands "${zoxide}   init nushell | save -f ${xch}/nushell/extras/zoxide.nu"
+  # Extras files nudir
+  Extras =
+    let
+      atuinNu = "${nudir}/extras/atuin.nu";
+    in
+    ''
+      run mkdir -p ${nudir}/extras/
+      run ${nu} --commands "${atuin}    init nu      | save -f ${atuinNu}"
+      run ${nu} --commands "${starship} init nu      | save -f ${nudir}/extras/starship.nu"
+      run ${nu} --commands "${zoxide}   init nushell | save -f ${nudir}/extras/zoxide.nu"
   '';
 }
