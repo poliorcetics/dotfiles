@@ -254,12 +254,7 @@ let
 
     programs.tealdeer.enable = true;
 
-    programs.zellij = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
-    };
+    programs.zellij.enable = true;
 
     # Avoid zoxide nushell integration as long as I'm not on a version with the changes from
     # <https://github.com/ajeetdsouza/zoxide/pull/663>
