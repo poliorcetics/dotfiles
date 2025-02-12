@@ -50,35 +50,35 @@ let
     # Use rustup from nix but manage rust versions through rustup, not nix
     rustup
 
-    atuin
-    bacon
-    bat
-    bottom
-    delta
-    difftastic
-    du-dust
-    eza
-    fd
-    gitui
-    hyperfine
-    jujutsu
-    jless
-    just
-    mdbook
-    nushell
-    pastel
-    procs
-    ripgrep
-    rnr
-    sd
-    starship
-    tealdeer
-    tokei
-    topgrade
-    tree-sitter
-    watchexec
-    zellij
-    zoxide
+    atuin # Magical shell history
+    bacon # Wrapper around cargo/rustc for compilation, TUI
+    bat # cat(1) on wings
+    bottom # like `top`
+    delta # Nicer git diffs
+    difftastic # Semantic (tree-sitter) diffs
+    du-dust # `du` reinvented
+    eza # `ls` reinvented
+    fd # `find` reinvented
+    gitui # TUI for git, inspired by `tig`
+    hyperfine # benchmarking made easy
+    jujutsu # Nicer VCS than Git
+    jless # `less` for JSON
+    just # Just a command runner
+    mdbook # Make HTML books out of markdown
+    nushell # A shell for the modern world
+    pastel # Colors, colors everywhere
+    procs # `ps` reinvented
+    ripgrep # `grep` but 1000x better
+    rnr # Rename things in bulk
+    sd # `sed` but understandable
+    starship # A shell prompt for the stars
+    tealdeer # Quick explanations of commands
+    tokei # Count lines of code
+    topgrade # Upgrade everything
+    tree-sitter # Make semantic things
+    watchexec # Execute in loops based on FS changes
+    zellij # `tmux` reinvented
+    zoxide # `cd`, but with jumps and shortcuts
   ];
 
   miscPackages = with pkgs; [
@@ -90,9 +90,9 @@ let
     gh # GitHub command line tools
     git # Git itself
     git-lfs # Support LFS in git
-    ninja # 
-    poetry
-    yaml-language-server
+    ninja # Compile C & C++ things
+    poetry # Project manager / venv manager for Python
+    yaml-language-server # LSP for YAML
   ];
 
   in
