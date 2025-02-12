@@ -1,0 +1,43 @@
+[alias]
+  a = "add"
+
+  b = "branch"
+
+  c = "commit"
+  ca = "commit --amend"
+  cm = "commit -m"
+
+  cp = "cherry-pick"
+
+  d = "diff"
+  dd = "difftool"
+  ddl = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
+  dds = "difftool --staged"
+  ds = "diff --staged"
+
+  lb = "log --pretty=format:'%Cred%h %Cblue%an %Cgreen%ai%C(yellow)%d%n%B' origin..HEAD"
+  lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all"
+  lgb = "!f(){ local currentbranch=$(git rev-parse --abbrev-ref HEAD); git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative \\\"$\\{1:-$currentbranch\\}\\\"; };f"
+
+  m = "merge"
+  ma = "merge --abort"
+  mc = "merge --continue"
+
+  p = "pull"
+
+  pf = "push --force-with-lease"
+  ps = "push"
+
+  r = "rebase"
+  ra = "rebase --abort"
+  rc = "rebase --continue"
+  ri = "rebase -i"
+
+  s = "status"
+
+  ssd = "!git stash && git stash drop"
+  st = "stash"
+
+  sw = "switch"
+
+  unstage = "reset HEAD --"

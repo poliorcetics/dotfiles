@@ -120,8 +120,8 @@ let
 
     # <https://martinvonz.github.io/jj/latest/config/#user-settings>
     user = {
-      email = userDetails.email;
-      name = userDetails.displayName;
+      email = userDetails.public.email;
+      name = userDetails.public.displayName;
     };
   };
 in

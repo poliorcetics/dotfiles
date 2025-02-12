@@ -1,0 +1,22 @@
+[delta]
+  features = "line-numbers decorations"
+  minus-style = "syntax \"#3f0001\""
+  plus-emph-style = "syntax \"#005600\""
+  plus-style = "syntax \"#002300\""
+  side-by-side = true
+  syntax-theme = "Dracula"
+
+[delta "decorations"]
+  commit-decoration-style = "bold yellow box ul"
+  file-decoration-style = "none"
+  file-style = "bold yellow ul"
+  hunk-header-decoration-style = "cyan box ul"
+
+[delta "line-numbers"]
+  line-numbers-left-style = "cyan"
+  line-numbers-minus-style = "bold 124"
+  line-numbers-plus-style = "bold 28"
+  line-numbers-right-style = "cyan"
+
+[interactive]
+  diffFilter = "delta --color-only"

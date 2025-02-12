@@ -1,0 +1,80 @@
+[core]
+  editor = "hx"
+  fsmonitor = false
+  pager = "delta"
+
+[commit]
+  gpgsign = true
+
+[credential "https://gist.github.com"]
+  helper = "gh auth git-credential"
+
+[credential "https://github.com"]
+  helper = "gh auth git-credential"
+
+[diff]
+  algorithm = "histogram"
+  tool = "difftastic"
+
+[difftool]
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = "difft --display side-by-side-show-both --tab-width 4 \"$BASE\" \"$LOCAL\" \"hash\" \"mode\" \"$REMOTE\" \"hash\" \"mode\""
+
+[fetch]
+  prune = true
+
+[gpg]
+  format = "ssh"
+
+[init]
+  defaultBranch = "main"
+
+[merge]
+  conflictstyle = "zdiff3"
+
+[pager]
+  difftool = true
+
+[pull]
+  rebase = true
+
+[push]
+  followtags = true
+
+[rebase]
+  autosquash = true
+  updateRefs = true
+
+[rerere]
+  enabled = true
+
+[status]
+  showUntrackedFiles = "all"
+
+[ui]
+  color = "auto"
+
+# Regular includes
+[include]
+  path = "includes/aliases"
+[include]
+  path = "includes/colors"
+[include]
+  path = "includes/delta"
+[include]
+  path = "includes/filters"
+
+# Default user config for Git
+[user]
+  signingkey = "~/.ssh/id_signing.pub"
+[include]
+  # Will contain default username and email
+  path = "public/user"
+
+[includeIf "gitdir:~/repos/work/"]
+  path = "work/user"
+# Extra work config, will not exist on most machines
+[include]
+  path = "work/config"
