@@ -115,6 +115,7 @@ let
     home.username = "alexis";
     home.homeDirectory = "/Users/alexis";
 
+    # Scripts to run on `home-manager switch`
     home.activation = {
       # Bacon doesn't respect XDG spec on macOS, force it to
       linkBaconConfig = funcs.createAppSupportSymlink {
