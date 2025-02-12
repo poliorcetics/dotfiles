@@ -54,3 +54,8 @@ merge-args = [
     "--base", "$base",
     "$left", "$right",
 ]
+
+[signing]
+backend = "ssh"
+key = "%SIGNING_SSH_KEY%"
+sign-all = true
