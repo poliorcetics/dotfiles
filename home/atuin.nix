@@ -2,7 +2,6 @@
 #
 # <https://atuin.sh>
 
-{ ... }:
 {
   programs.atuin.enable = true;
 

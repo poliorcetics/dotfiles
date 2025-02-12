@@ -1,8 +1,5 @@
 # Language config for helix
 {
-  config,
-  lib,
-  pkgs,
   userDetails,
   ...
 }:
