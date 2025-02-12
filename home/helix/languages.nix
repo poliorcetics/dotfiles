@@ -63,7 +63,7 @@ in
     };
 
     yaml-language-server.config.yaml.keyOrdering = false;
-    clangd.args = ["--inlay-hints" "--background-index"];
+    clangd.args = ["--background-index"];
   };
 
   language = [
