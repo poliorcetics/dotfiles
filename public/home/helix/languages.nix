@@ -1,6 +1,5 @@
 # Language config for helix
-  config
-:
+config:
 let
   indent = {
     tab-width = 4;

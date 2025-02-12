@@ -3,9 +3,8 @@
   nix-darwin,
   nixpkgs,
   nixpkgs-unstable,
-  self,
   ...
-}:
+}@inputs:
 system:
 let
   platform =
@@ -37,7 +36,7 @@ let
     .${platform};
 
   specialArgs = {
-    inherit self userDetails;
+    inherit inputs userDetails;
     isLinux = platform == "linux";
     isMacos = platform == "macos";
     unstablePkgs = import nixpkgs-unstable {
