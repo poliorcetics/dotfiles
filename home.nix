@@ -1,3 +1,7 @@
+# Home Manager config
+#
+# Main documentation: <https://nix-community.github.io/home-manager/index.xhtml>
+# All options: <https://nix-community.github.io/home-manager/options.xhtml>
 { config, pkgs, ... }:
 
 let
@@ -112,7 +116,7 @@ let
     #
     # You should not change this value, even if you update Home Manager. If you do want to update the
     # value, then make sure to first check the Home Manager release notes.
-    home.stateVersion = "23.11"; # Please read the comment before changing.
+    home.stateVersion = "24.05"; # Please read the comment before changing.
 
     # The home.packages option allows you to install Nix packages into your environment.
     home.packages =
