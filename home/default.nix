@@ -9,26 +9,7 @@
   userDetails,
   ...
 }:
-
 let
-  # Imports other Nix files from the repo to configure various elements
-  imports = [
-    ./atuin.nix
-    ./bat.nix
-    ./direnv.nix
-    ./gh.nix
-    ./git.nix
-    ./helix
-    ./jujutsu.nix
-    ./kitty.nix
-    ./npm.nix
-    ./python
-    ./shell.nix
-    ./starship.nix
-    ./topgrade.nix
-    ./zoxide.nix
-  ];
-
   cargoPackages = with pkgs; [
     cargo-binutils
     cargo-deny
@@ -105,11 +86,25 @@ let
 
   # Import my helper functions
   funcs = import ./home-manager/functions.nix { inherit lib pkgs; };
-
 in
-
 {
-  inherit imports;
+  # Imports other Nix files from the repo to configure various elements
+  imports = [
+    ./atuin.nix
+    ./bat.nix
+    ./direnv.nix
+    ./gh.nix
+    ./git.nix
+    ./helix
+    ./jujutsu.nix
+    ./kitty.nix
+    ./npm.nix
+    ./python
+    ./shell.nix
+    ./starship.nix
+    ./topgrade.nix
+    ./zoxide.nix
+  ];
 
   # This value determines the Home Manager release that your configuration is compatible with. This
   # helps avoid breakage when a new Home Manager release introduces backwards incompatible changes.
