@@ -23,6 +23,7 @@
       "$line_break"
       "$jobs"
       "$shell"
+      "$status"
       "$character"
     ];
 
@@ -31,8 +32,8 @@
     # Active modules
 
     character = {
-      error_symbol = "[✖](bold red) ";
-      success_symbol = "[❯](bold green) ";
+      error_symbol = "[✖](bold red)";
+      success_symbol = "[❯](bold green)";
     };
 
     cmd_duration = {
@@ -87,6 +88,11 @@
       zsh_indicator = "z";
       fish_indicator = "🐠";
       nu_indicator = "🐘";
+      disabled = false;
+    };
+
+    status = {
+      format = "[$status]($style) ";
       disabled = false;
     };
 
@@ -160,7 +166,6 @@
     singularity.disabled = true;
     solidity.disabled = true;
     spack.disabled = true;
-    status.disabled = true;
     sudo.disabled = true;
     swift.disabled = true;
     terraform.disabled = true;
