@@ -16,7 +16,7 @@ let
     ./starship.nix
   ];
 
-  # TODO: missing: cargo-upgrades cargo-instruments
+  # TODO: missing: cargo-upgrades cargo-instruments scm-record (with features for editor)
   cargoPackages = with pkgs; [
     cargo-binutils
     cargo-deny
