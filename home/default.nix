@@ -97,6 +97,7 @@ let
     git-lfs # Support LFS in git
     marksman # LSP for Markdown
     nixd # LSP for nix, actively maintained contrary to `nil`
+    nixfmt-rfc-style # Official formatter for nix
     ninja # Compile C & C++ things
     poetry # Project manager / venv manager for Python
     yaml-language-server # LSP for YAML
