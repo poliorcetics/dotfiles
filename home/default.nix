@@ -32,7 +32,6 @@ let
     cargo-release
     cargo-show-asm
     cargo-update
-    cargo-watch
   ];
 
   nodePackages = with pkgs.nodePackages; [
