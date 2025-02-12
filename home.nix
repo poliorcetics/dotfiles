@@ -229,6 +229,8 @@ let
 
     programs.gitui.enable = true;
 
+    programs.tealdeer.enable = true;
+
     # TODO: directories for which to import the files directly since home-manager doesn't handle them well
     # - .config/fish
     # - .config/helix
