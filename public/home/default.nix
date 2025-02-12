@@ -89,11 +89,11 @@ in
     ./programs/npm
     ./programs/python
     ./programs/starship
+    ./programs/topgrade
 
     ./helix
     ./jujutsu.nix
     ./shell.nix
-    ./topgrade.nix
     ./xdg.nix
     ./zoxide.nix
   ];

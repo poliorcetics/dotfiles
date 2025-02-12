@@ -1,0 +1,20 @@
+# Settings: <https://github.com/topgrade-rs/topgrade/blob/main/config.example.toml>
+[firmware]
+upgrade = false
+
+[misc]
+assume_yes = false
+cleanup = true
+display_time = true
+no_retry = true
+only = [
+    "brew_cask",
+    "brew_formula",
+    "git_repos",
+    "nix",
+    "rustup",
+    "cargo",
+    "pip3",
+    "tldr",
+    "custom_commands"
+]
