@@ -267,8 +267,6 @@ let
     # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
     # - kitty
 
-    # TODO: port font: Iosevka Custom
-
     # === FILES ===
 
     # Using file to get access to custom path: <https://github.com/nix-community/home-manager/issues/5001>
