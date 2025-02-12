@@ -26,7 +26,6 @@ in
 
   programs.bash = {
     enable = true;
-    sessionVariables = config.home.sessionVariables;
     # The path manipulations are done here because otherwise the default .bashrc/.zshrc will prepend
     # the PATH in `home.sessionVariables` with the systems paths, which is not what I want at all
     #
@@ -65,7 +64,6 @@ in
 
   programs.zsh = {
     enable = true;
-    sessionVariables = config.home.sessionVariables;
     initExtra = config.programs.bash.initExtra;
     dotDir = ".config/zsh";
     history.path = "${xch}/zsh/history";
