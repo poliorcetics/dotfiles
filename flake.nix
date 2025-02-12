@@ -18,59 +18,65 @@
     };
   };
 
-  outputs = {
-    self,
-    home-manager,
-    nix-darwin,
-    nixpkgs,
-    ...
-  }:
+  outputs =
+    {
+      self,
+      home-manager,
+      nix-darwin,
+      nixpkgs,
+      ...
+    }:
 
-  let
-    # Changing this should be enough to override every places depending on them in the config.
-
-    mac = let
-      userDetails = {
-        username = "alexis";
-        home = "/Users/${userDetails.username}";
-        # Intended in Git/JJ configs.
-        displayName = "Alexis (Poliorcetics) Bourget";
-        email = "ab_contribs@poliorcetiq.eu";
-      };
-    in
-      nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./darwin-configuration.nix
-          home-manager.darwinModules.home-manager
-          {
-          # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module> 
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = false;
-
-          home-manager.users.${userDetails.username} = import ./home;
-          # Pass arguments to home.nix
-          home-manager.extraSpecialArgs = { inherit userDetails; };
-          }
-        ];
-        specialArgs = { inherit self userDetails; };
-      };
-  in
-  {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#mac
-    darwinConfigurations = { inherit mac; };
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."mac".pkgs;
-
-    checks.aarch64-darwin.canBuild = mac.system;
-
-    formatter =
     let
-      makeFmt = system: { ${system} = (import nixpkgs { inherit system; }).nixfmt-rfc-style; };
+      # Changing this should be enough to override every places depending on them in the config.
+
+      mac =
+        let
+          userDetails = {
+            username = "alexis";
+            home = "/Users/${userDetails.username}";
+            # Intended in Git/JJ configs.
+            displayName = "Alexis (Poliorcetics) Bourget";
+            email = "ab_contribs@poliorcetiq.eu";
+          };
+        in
+        nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./darwin-configuration.nix
+            home-manager.darwinModules.home-manager
+            {
+              # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module> 
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = false;
+
+              home-manager.users.${userDetails.username} = import ./home;
+              # Pass arguments to home.nix
+              home-manager.extraSpecialArgs = {
+                inherit userDetails;
+              };
+            }
+          ];
+          specialArgs = {
+            inherit self userDetails;
+          };
+        };
     in
-    makeFmt "aarch64-darwin"
-    // makeFmt "aarch64-linux"
-    // makeFmt "x86_64-linux";
-  };
+    {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#mac
+      darwinConfigurations = {
+        inherit mac;
+      };
+      # Expose the package set, including overlays, for convenience.
+      darwinPackages = self.darwinConfigurations."mac".pkgs;
+
+      checks.aarch64-darwin.canBuild = mac.system;
+
+      formatter =
+        let
+          makeFmt = system: { ${system} = (import nixpkgs { inherit system; }).nixfmt-rfc-style; };
+        in
+        makeFmt "aarch64-darwin" // makeFmt "aarch64-linux" // makeFmt "x86_64-linux";
+    };
 }

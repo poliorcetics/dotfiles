@@ -12,9 +12,9 @@ let
   # Docs: <https://sw.kovidgoyal.net/kitty/conf/#fonts>
   fonts = {
     # <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.font_family>
-    font_family      = "Iosevka Custom Regular";
-    bold_font        = "Iosevka Custom Semibold";
-    italic_font      = "Iosevka Custom Oblique";
+    font_family = "Iosevka Custom Regular";
+    bold_font = "Iosevka Custom Semibold";
+    italic_font = "Iosevka Custom Oblique";
     bold_italic_font = "Iosevka Custom Semibold Oblique";
 
     # <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.font_size>
@@ -109,9 +109,9 @@ let
     tab_title_template = "{index}: {title} ({layout_name[:2].title()})";
 
     # <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.active_tab_foreground>
-    active_tab_foreground   = "#000";
-    active_tab_background   = "#aaa";
-    active_tab_font_style   = "normal";
+    active_tab_foreground = "#000";
+    active_tab_background = "#aaa";
+    active_tab_font_style = "normal";
     inactive_tab_foreground = "#8e8e8e";
     inactive_tab_background = "#3d3d3d";
     inactive_tab_font_style = "normal";
@@ -153,11 +153,11 @@ let
   # Docs: <https://sw.kovidgoyal.net/kitty/conf/#clipboard>
   kb_clipboard = {
     # <https://sw.kovidgoyal.net/kitty/conf/#shortcut-kitty.Copy-to-clipboard>
-    "super+c"     = "copy_to_clipboard";
+    "super+c" = "copy_to_clipboard";
     "kitty_mod+c" = "copy_to_clipboard";
 
     # <https://sw.kovidgoyal.net/kitty/conf/#shortcut-kitty.Paste-from-clipboard>
-    "super+v"     = "paste_from_clipboard";
+    "super+v" = "paste_from_clipboard";
     "kitty_mod+v" = "paste_from_clipboard";
   };
 
@@ -189,16 +189,16 @@ let
     "shift+super+w" = "close_os_window";
 
     # <https://sw.kovidgoyal.net/kitty/actions/#action-move_window>
-    "kitty_mod+up" =    "move_window up";
-    "kitty_mod+left" =  "move_window left";
+    "kitty_mod+up" = "move_window up";
+    "kitty_mod+left" = "move_window left";
     "kitty_mod+right" = "move_window right";
-    "kitty_mod+down" =  "move_window down";
+    "kitty_mod+down" = "move_window down";
 
     # <https://sw.kovidgoyal.net/kitty/actions/#action-neighboring_window>
-    "super+left" =  "neighboring_window left";
+    "super+left" = "neighboring_window left";
     "super+right" = "neighboring_window right";
-    "super+up" =    "neighboring_window up";
-    "super+down" =  "neighboring_window down";
+    "super+up" = "neighboring_window up";
+    "super+down" = "neighboring_window down";
   };
 
   # === KB: tab management ===
@@ -238,7 +238,7 @@ let
   kb_font_sizes = {
     # <https://sw.kovidgoyal.net/kitty/conf/#shortcut-kitty.Increase-font-size>
     "super+shift+equal" = "change_font_size all +1.0";
-    "super+plus" =        "change_font_size all +1.0";
+    "super+plus" = "change_font_size all +1.0";
 
     # <https://sw.kovidgoyal.net/kitty/conf/#shortcut-kitty.Decrease-font-size>
     "super+minus" = "change_font_size all -1.0";
@@ -286,8 +286,7 @@ in
     // color_scheme
     // advanced
     // os_specific_tweaks
-    // keybindings
-  ;
+    // keybindings;
 
   programs.kitty.keybindings =
     kb_clipboard
@@ -296,6 +295,5 @@ in
     // kb_tab_management
     // kb_layout_management
     // kb_font_sizes
-    // kb_miscellaneous
-  ;
+    // kb_miscellaneous;
 }

@@ -2,7 +2,13 @@
 #
 # Main documentation: <https://nix-community.github.io/home-manager/index.xhtml>
 # All options: <https://nix-community.github.io/home-manager/options.xhtml>
-{ config, lib, pkgs, userDetails, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  userDetails,
+  ...
+}:
 
 let
   # Imports other Nix files from the repo to configure various elements
@@ -99,156 +105,153 @@ let
   # Import my helper functions
   funcs = import ./home-manager/functions.nix { inherit lib pkgs; };
 
-  in
+in
 
-  {
-    inherit imports;
+{
+  inherit imports;
 
-    # This value determines the Home Manager release that your configuration is compatible with. This
-    # helps avoid breakage when a new Home Manager release introduces backwards incompatible changes.
-    #
-    # You should not change this value, even if you update Home Manager. If you do want to update the
-    # value, then make sure to first check the Home Manager release notes.
-    home.stateVersion = "24.05"; # Please read the comment before changing.
+  # This value determines the Home Manager release that your configuration is compatible with. This
+  # helps avoid breakage when a new Home Manager release introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do want to update the
+  # value, then make sure to first check the Home Manager release notes.
+  home.stateVersion = "24.05"; # Please read the comment before changing.
 
-    # Home Manager needs a bit of information about you and the paths it should manage.
-    home.username = userDetails.username;
-    home.homeDirectory = userDetails.home;
+  # Home Manager needs a bit of information about you and the paths it should manage.
+  home.username = userDetails.username;
+  home.homeDirectory = userDetails.home;
 
-    # Scripts to run on `home-manager switch`
-    home.activation = import ./home-manager/activation.nix { inherit config lib; };
-    home.sessionPath = [
-      "${userDetails.home}/.local/bin"
-      "${config.home.sessionVariables.CARGO_HOME}/bin"
-      "${config.xdg.dataHome}/npm/bin"
-      "/opt/homebrew/bin"
+  # Scripts to run on `home-manager switch`
+  home.activation = import ./home-manager/activation.nix { inherit config lib; };
+  home.sessionPath = [
+    "${userDetails.home}/.local/bin"
+    "${config.home.sessionVariables.CARGO_HOME}/bin"
+    "${config.xdg.dataHome}/npm/bin"
+    "/opt/homebrew/bin"
+  ];
+
+  # XDG setup
+  xdg.enable = true;
+  xdg.configHome = "${config.home.homeDirectory}/.config";
+  # Put all dirs in .local because I like having $HOME as clean as possible
+  xdg.cacheHome = "${config.home.homeDirectory}/.local/cache";
+  xdg.dataHome = "${config.home.homeDirectory}/.local/share";
+  xdg.stateHome = "${config.home.homeDirectory}/.local/state";
+
+  # The home.packages option allows you to install Nix packages into your environment.
+  home.packages =
+    cargoPackages
+    ++ nodePackages
+    ++ pythonPackages
+    ++ rustPackages
+    ++ miscPackages
+    ++ [
+      # It is sometimes useful to fine-tune packages, for example, by applying overrides. You can do
+      # that directly here, just don't forget the parentheses. Maybe you want to install Nerd Fonts
+      # with a limited number of fonts?
+      #: (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+
+      # You can also create simple shell scripts directly inside your configuration. For example,
+      # this adds a command 'my-hello' to your environment:
+      #: (pkgs.writeShellScriptBin "my-hello" ''
+      #:   echo "Hello, ${config.home.username}!"
+      #: '')
+
+      (pkgs.writeScriptBin "hn" (builtins.readFile ./scripts/hn.nu))
+      (pkgs.writeScriptBin "systemfiles" (builtins.readFile ./scripts/systemfiles.nu))
+
+      # Voluntarily override the helix from the nixpkgs source to allow building the one from master
+      # or any other dev branch easily
+      (funcs.overrideNixProvidedBinary "hx" (lib.getExe config.programs.helix.package)
+        "${config.home.sessionVariables.CARGO_HOME}/bin/hx"
+      )
+      (funcs.overrideNixProvidedBinary "nu" (lib.getExe config.programs.nushell.package)
+        "${config.home.sessionVariables.CARGO_HOME}/bin/nu"
+      )
+      (funcs.overrideNixProvidedBinary "rust-analyzer" "${pkgs.rustup}/bin/rust-analyzer"
+        "${config.home.sessionVariables.CARGO_HOME}/bin/rust-analyzer"
+      )
     ];
 
-    # XDG setup
-    xdg.enable = true;
-    xdg.configHome = "${config.home.homeDirectory}/.config";
-    # Put all dirs in .local because I like having $HOME as clean as possible
-    xdg.cacheHome = "${config.home.homeDirectory}/.local/cache";
-    xdg.dataHome = "${config.home.homeDirectory}/.local/share";
-    xdg.stateHome = "${config.home.homeDirectory}/.local/state";
+  # Home Manager is pretty good at managing dotfiles. The primary way to manage plain files is
+  # through 'home.file'.
+  home.file = {
+    # Building this configuration will create a copy of 'dotfiles/screenrc' in the Nix store.
+    # Activating the configuration will then make '~/.screenrc' a symlink to the Nix store copy.
+    #: ".screenrc".source = dotfiles/screenrc;
 
-    # The home.packages option allows you to install Nix packages into your environment.
-    home.packages =
-      cargoPackages
-      ++ nodePackages
-      ++ pythonPackages
-      ++ rustPackages
-      ++ miscPackages
-      ++ [
-        # It is sometimes useful to fine-tune packages, for example, by applying overrides. You can do
-        # that directly here, just don't forget the parentheses. Maybe you want to install Nerd Fonts
-        # with a limited number of fonts?
-        #: (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    # You can also set the file content immediately.
+    #:  ".gradle/gradle.properties".text = ''
+    #:    org.gradle.console=verbose
+    #:    org.gradle.daemon.idletimeout=3600000
+    #:  '';
+  };
 
-        # You can also create simple shell scripts directly inside your configuration. For example,
-        # this adds a command 'my-hello' to your environment:
-        #: (pkgs.writeShellScriptBin "my-hello" ''
-        #:   echo "Hello, ${config.home.username}!"
-        #: '')
+  # Home Manager can also manage your environment variables through 'home.sessionVariables'. If
+  # you don't want to manage your shell through Home Manager then you have to manually source
+  # 'hm-session-vars.sh' located at either
+  #
+  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  /etc/profiles/per-user/alexis/etc/profile.d/hm-session-vars.sh
+  #
+  # Those variables are only defined once, opening a new shell does not redefine them I think.
+  #
+  # The `imports` list above can also define additional members.
+  home.sessionVariables = {
+    EDITOR = "hx";
+    VISUAL = "hx";
 
-        (pkgs.writeScriptBin "hn" (builtins.readFile ./scripts/hn.nu))
-        (pkgs.writeScriptBin "systemfiles" (builtins.readFile ./scripts/systemfiles.nu))
+    LESS = "-R";
+    LESSHISTFILE = "-";
 
-        # Voluntarily override the helix from the nixpkgs source to allow building the one from master
-        # or any other dev branch easily
-        (funcs.overrideNixProvidedBinary
-          "hx"
-          (lib.getExe config.programs.helix.package)
-          "${config.home.sessionVariables.CARGO_HOME}/bin/hx")
-        (funcs.overrideNixProvidedBinary
-          "nu"
-          (lib.getExe config.programs.nushell.package)
-          "${config.home.sessionVariables.CARGO_HOME}/bin/nu")
-        (funcs.overrideNixProvidedBinary
-          "rust-analyzer"
-          "${pkgs.rustup}/bin/rust-analyzer"
-          "${config.home.sessionVariables.CARGO_HOME}/bin/rust-analyzer")
-      ];
+    # Where the tempdirs are created, if at all respected. The other XDG env vars are created
+    # by the `xdg.enable = true` earlier
+    XDG_RUNTIME_DIR = "/var/tmp/$(id -u)";
 
-    # Home Manager is pretty good at managing dotfiles. The primary way to manage plain files is
-    # through 'home.file'.
-    home.file = {
-      # Building this configuration will create a copy of 'dotfiles/screenrc' in the Nix store.
-      # Activating the configuration will then make '~/.screenrc' a symlink to the Nix store copy.
-      #: ".screenrc".source = dotfiles/screenrc;
+    # Kubernetes, is a mess regarding what use which env var but let's try to make it work
+    KUBECONFIG = "${config.xdg.configHome}/kube/config";
+    KUBECACHEDIR = "${config.xdg.cacheHome}/kube";
 
-      # You can also set the file content immediately.
-      #:  ".gradle/gradle.properties".text = ''
-      #:    org.gradle.console=verbose
-      #:    org.gradle.daemon.idletimeout=3600000
-      #:  '';
-    };
+    LESS_TERMCAP_mb = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi green')";
+    LESS_TERMCAP_md = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi light_cyan_bold')"; # start bold
+    LESS_TERMCAP_me = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end bold
+    LESS_TERMCAP_se = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end standout
+    LESS_TERMCAP_so = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi light_yellow_reverse')"; # start standout
+    LESS_TERMCAP_ue = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end underline
+    LESS_TERMCAP_us = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi green_underline')"; # start underline
 
-    # Home Manager can also manage your environment variables through 'home.sessionVariables'. If
-    # you don't want to manage your shell through Home Manager then you have to manually source
-    # 'hm-session-vars.sh' located at either
-    #
-    #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-    #
-    # or
-    #
-    #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-    #
-    # or
-    #
-    #  /etc/profiles/per-user/alexis/etc/profile.d/hm-session-vars.sh
-    #
-    # Those variables are only defined once, opening a new shell does not redefine them I think.
-    #
-    # The `imports` list above can also define additional members.
-    home.sessionVariables = {
-      EDITOR = "hx";
-      VISUAL = "hx";
+    # Rust
+    RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
+    CARGO_HOME = "${config.xdg.dataHome}/cargo";
 
-      LESS = "-R";
-      LESSHISTFILE = "-";
+    TERMINFO = "${config.xdg.dataHome}/terminfo";
+    TERMINFO_DIRS = "${config.xdg.dataHome}/terminfo:/usr/share/terminfo";
+  };
 
-      # Where the tempdirs are created, if at all respected. The other XDG env vars are created
-      # by the `xdg.enable = true` earlier
-      XDG_RUNTIME_DIR = "/var/tmp/$(id -u)";
+  # === PROGRAMS ===
+  #
+  # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
 
-      # Kubernetes, is a mess regarding what use which env var but let's try to make it work
-      KUBECONFIG = "${config.xdg.configHome}/kube/config";
-      KUBECACHEDIR = "${config.xdg.cacheHome}/kube";
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 
-      LESS_TERMCAP_mb = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi green')";
-      LESS_TERMCAP_md = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi light_cyan_bold')"; # start bold
-      LESS_TERMCAP_me = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end bold
-      LESS_TERMCAP_se = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end standout
-      LESS_TERMCAP_so = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi light_yellow_reverse')"; # start standout
-      LESS_TERMCAP_ue = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi reset')"; # end underline
-      LESS_TERMCAP_us = "$(${lib.getExe config.programs.nushell.package} --commands 'ansi green_underline')"; # start underline
+  # Programs for which the config is not modified
+  programs.bottom.enable = true;
 
-      # Rust
-      RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
-      CARGO_HOME = "${config.xdg.dataHome}/cargo";
+  programs.carapace = {
+    enable = true;
+    # I do my own carapace integration in Nushell
+    enableNushellIntegration = false;
+  };
 
-      TERMINFO = "${config.xdg.dataHome}/terminfo";
-      TERMINFO_DIRS = "${config.xdg.dataHome}/terminfo:/usr/share/terminfo";
-    };
+  programs.gitui.enable = true;
 
-    # === PROGRAMS ===
-    #
-    # NOTE: be careful of nushell integration, if I decide to use `nushell.enable = true`, I may need shenanigans
-
-    # Let Home Manager install and manage itself.
-    programs.home-manager.enable = true;
-
-    # Programs for which the config is not modified
-    programs.bottom.enable = true;
-
-    programs.carapace = {
-      enable = true;
-      # I do my own carapace integration in Nushell
-      enableNushellIntegration = false;
-    };
-
-    programs.gitui.enable = true;
-
-    programs.tealdeer.enable = true;
-  }
+  programs.tealdeer.enable = true;
+}

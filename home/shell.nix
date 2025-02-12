@@ -86,7 +86,9 @@ in
 
   xdg.configFile."nushell/config.nu".text =
     let
-      aliasesStr = lib.concatStringsSep "\n" (lib.mapAttrsToList (k: v: "alias ${k} = ${v}") config.home.shellAliases);
+      aliasesStr = lib.concatStringsSep "\n" (
+        lib.mapAttrsToList (k: v: "alias ${k} = ${v}") config.home.shellAliases
+      );
 
       nuConfig = lib.readFile ./nushell/config.nu;
 

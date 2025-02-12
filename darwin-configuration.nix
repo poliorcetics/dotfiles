@@ -1,7 +1,8 @@
-{ self
-, pkgs
-, userDetails
-, ...
+{
+  self,
+  pkgs,
+  userDetails,
+  ...
 }:
 
 let

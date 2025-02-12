@@ -15,7 +15,11 @@
     line-number = "absolute";
     mouse = false;
     # preview-completion-insert = false;
-    rulers = [100 120 150];
+    rulers = [
+      100
+      120
+      150
+    ];
 
     # === Diagnostics ===
     # Minimum severity of diagnostics rendered at the end of a line
@@ -44,31 +48,31 @@
     # === Statusline ===
     statusline = {
       left = [
-          "mode"
-          "spinner"
-          "read-only-indicator"
-          "file-modification-indicator"
-          "file-name"
-          "spacer"
-          "diagnostics"
-          "spacer"
-          "workspace-diagnostics"
-          "register"
+        "mode"
+        "spinner"
+        "read-only-indicator"
+        "file-modification-indicator"
+        "file-name"
+        "spacer"
+        "diagnostics"
+        "spacer"
+        "workspace-diagnostics"
+        "register"
       ];
       center = [ "version-control" ];
       right = [
-          "file-encoding"
-          "file-type"
-          "separator"
-          "selections"
-          "separator"
-          "primary-selection-length"
-          "separator"
-          "position"
-          "separator"
-          "spacer"
-          "position-percentage"
-          "total-line-numbers"
+        "file-encoding"
+        "file-type"
+        "separator"
+        "selections"
+        "separator"
+        "primary-selection-length"
+        "separator"
+        "position"
+        "separator"
+        "spacer"
+        "position-percentage"
+        "total-line-numbers"
       ];
     };
   };
@@ -95,7 +99,10 @@
 
         "," = "command_palette";
         ":" = "global_search";
-        c = ["kill_to_line_end" "insert_mode"];
+        c = [
+          "kill_to_line_end"
+          "insert_mode"
+        ];
         m = "select_references_to_symbol_under_cursor";
       };
 

@@ -1,7 +1,16 @@
 # Language config for helix
-{ config, lib, pkgs, userDetails, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  userDetails,
+  ...
+}:
 let
-  indent = { tab-width = 4; unit = "    "; };
+  indent = {
+    tab-width = 4;
+    unit = "    ";
+  };
 in
 {
   language-server = {
