@@ -58,12 +58,10 @@ in
   '';
 
   # Extras files for nushell
-  #
-  # Zoxide needs a fix for Nushell 0.89+: <https://github.com/ajeetdsouza/zoxide/pull/663>
   nushellExtras = ''
     run mkdir -p ${xch}/nushell/extras/
     run ${nu} --commands "${atuin}    init nu | save -f ${xch}/nushell/extras/atuin.nu"
     run ${nu} --commands "${starship} init nu | save -f ${xch}/nushell/extras/starship.nu"
-    run ${nu} --commands "${zoxide}   init nushell | str replace --all ' \$rest' ' ...\$rest' | save -f ${xch}/nushell/extras/zoxide.nu"
+    run ${nu} --commands "${zoxide}   init nushell | save -f ${xch}/nushell/extras/zoxide.nu"
   '';
 }
