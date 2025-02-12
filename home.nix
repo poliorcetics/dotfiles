@@ -99,7 +99,8 @@ let
     home.username = "alexis";
     home.homeDirectory = "/Users/alexis";
 
-    # # XDG setup
+    # XDG setup
+    xdg.enable = true;
     xdg.configHome = "${config.home.homeDirectory}/.config";
     # Put all dirs in .local because I like having $HOME as clean as possible
     xdg.cacheHome = "${config.home.homeDirectory}/.local/cache";
@@ -162,7 +163,7 @@ let
     #  /etc/profiles/per-user/alexis/etc/profile.d/hm-session-vars.sh
     #
     # Those variables are only defined once, opening a new shell does not redefine them I think
-    home.sessionVariables = rec {
+    home.sessionVariables = {
       EDITOR = "hx";
       VISUAL = "hx";
 
@@ -171,45 +172,41 @@ let
 
       VIRTUAL_ENV_DISABLE_PROMPT = 1;
 
-      # XDG setup
-      XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+      # Where the tempdirs are created, if at all respected. The other XDG env vars are created
+      # by the `xdg.enable = true` earlier
       XDG_RUNTIME_DIR = "/var/tmp/$(id -u)";
-      # Put all dirs in .local because I like having $HOME as clean as possible
-      XDG_CACHE_HOME = "${config.home.homeDirectory}/.local/cache";
-      XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
-      XDG_STATE_HOME = "${config.home.homeDirectory}/.local/state";
 
       # <https://docs.helix-editor.com/install.html#configuring-helixs-runtime-files>
       HELIX_RUNTIME = "${config.home.homeDirectory}/repos/tp/helix/runtime";
 
-      JJ_CONFIG = "${XDG_CONFIG_HOME}/jj/config.toml";
+      JJ_CONFIG = "${config.xdg.configHome}/jj/config.toml";
 
       # Kubernetes, is a mess regarding what use which env var but let's try to make it work
-      KUBECONFIG = "${XDG_CONFIG_HOME}/kube/config";
-      KUBECACHEDIR = "${XDG_CACHE_HOME}/kube";
+      KUBECONFIG = "${config.xdg.configHome}/kube/config";
+      KUBECACHEDIR = "${config.xdg.cacheHome}/kube";
 
       # NPM, incapable of answering to `XDG` spec and creating at least 3 dirs in ~/
-      NPM_CONFIG_USERCONFIG = "${XDG_CONFIG_HOME}/npm/npmrc";
+      NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
 
-      PYTHONSTARTUP = "${XDG_CONFIG_HOME}/python/rc.py";
+      PYTHONSTARTUP = "${config.xdg.configHome}/python/rc.py";
 
       # Rust
-      RUSTUP_HOME = "${XDG_CACHE_HOME}/rustup";
-      CARGO_HOME = "${XDG_DATA_HOME}/cargo";
+      RUSTUP_HOME = "${config.xdg.cacheHome}/rustup";
+      CARGO_HOME = "${config.xdg.dataHome}/cargo";
 
-      STARSHIP_CACHE = "${XDG_CACHE_HOME}/starship";
+      STARSHIP_CACHE = "${config.xdg.cacheHome}/starship";
 
-      SOLARGRAPH_CACHE = "${XDG_CACHE_HOME}/solargraph"; # Ruby LSP
+      SOLARGRAPH_CACHE = "${config.xdg.cacheHome}/solargraph"; # Ruby LSP
 
-      TERMINFO = "${XDG_DATA_HOME}/terminfo";
-      TERMINFO_DIRS = "${XDG_DATA_HOME}/terminfo:/usr/share/terminfo";
+      TERMINFO = "${config.xdg.dataHome}/terminfo";
+      TERMINFO_DIRS = "${config.xdg.dataHome}/terminfo:/usr/share/terminfo";
 
-      WORKON_HOME = "${XDG_CACHE_HOME}/virtualenvs";
+      WORKON_HOME = "${config.xdg.cacheHome}/virtualenvs";
 
-      ZELLIJ_CONFIG_DIR = "${XDG_CONFIG_HOME}/zellij";
-      ZELLIJ_CONFIG_FILE = "${XDG_CONFIG_HOME}/zellij/config.kdl";
+      ZELLIJ_CONFIG_DIR = "${config.xdg.configHome}/zellij";
+      ZELLIJ_CONFIG_FILE = "${config.xdg.configHome}/zellij/config.kdl";
 
-      _ZO_DATA_DIR = "${XDG_STATE_HOME}/zoxide";
+      _ZO_DATA_DIR = "${config.xdg.stateHome}/zoxide";
     };
 
     # Let Home Manager install and manage itself.
