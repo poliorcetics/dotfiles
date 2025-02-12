@@ -7,6 +7,7 @@ let
     ./bacon.nix
     ./bat.nix
     ./gh.nix
+    ./git.nix
     ./shell.nix
   ];
 
