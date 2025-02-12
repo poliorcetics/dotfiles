@@ -37,7 +37,7 @@ export module main {
 
     export module brew {
         export def casks [] {
-            brew install --cask appcleaner db-browser-for-sqlite firefox kitty macs-fan-control monitorcontrol orbstack rectangle transmission tunnelblick vlc zulip
+            brew install --cask appcleaner db-browser-for-sqlite firefox kitty macs-fan-control monitorcontrol orbstack rectangle signal transmission tunnelblick vlc zulip
 
             # Link kitty terminfo to their new place
             let link_dir = $env.XDG_DATA_HOME | path join "terminfo/78"
