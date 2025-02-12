@@ -12,5 +12,6 @@
     sync_frequency = "24h";
     filter_mode_shell_up_key_binding = "directory";
     enter_accept = true;
+    sync.records = true;
   };
 }
