@@ -10,6 +10,7 @@ let
     ./atuin.nix
     ./bacon.nix
     ./bat.nix
+    ./direnv.nix
     ./gh.nix
     ./git.nix
     ./helix.nix
