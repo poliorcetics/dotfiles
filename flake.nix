@@ -42,7 +42,7 @@
         modules = [
           home-manager.darwinModules.home-manager
 
-          ./darwin-configuration.nix
+          ./system/darwin
 
           {
             # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module> 
