@@ -25,7 +25,14 @@ push-branch-prefix = "ab/push-"
 [ui]
 default-command = "status"
 
-diff.tool = ["difft", "--color=always", "$left", "$right"]
+diff.tool = [
+    "difft",
+    "--display",
+    "side-by-side-show-both",
+    "--color=always",
+    "$left",
+    "$right",
+]
 
 diff-editor = "scm-diff-editor"
 merge-editor = "scm-diff-editor"
