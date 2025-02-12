@@ -58,6 +58,7 @@ On macOS, I like installing a few more apps. Since it's annoying to do it manual
 
 ```sh
 ~/.local/bin/hm.nu brew init
+~/.local/bin/hm.nu tm setup-exclusions
 ```
 
 I could use `home-manager` for some of those, but it doesn't sign nor install them in `/Applications` correctly so I prefer not to.

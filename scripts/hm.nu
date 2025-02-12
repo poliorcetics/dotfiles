@@ -66,6 +66,16 @@ export module main {
         nix shell nixpkgs#nodejs_21 nixpkgs#ttfautohint-nox --command npm install   --verbose
         nix shell nixpkgs#nodejs_21 nixpkgs#ttfautohint-nox --command npm run build --verbose -- contents::IosevkaCustom
     }
+
+    export module tm {
+        # Setup time machines exclusions 
+        export def setup-exclusions [] {
+            sudo /usr/bin/tmutil addexclusion -p $env.XDG_CACHE_HOME
+            sudo /usr/bin/tmutil addexclusion -p $env.XDG_STATE_HOME
+            sudo /usr/bin/tmutil addexclusion -p /nix/store
+            sudo /usr/bin/tmutil addexclusion -p /nix/var
+        }
+    }
 }
 
 export use main
