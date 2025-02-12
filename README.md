@@ -47,5 +47,5 @@ On macOS, I like installing a few more apps. Since it's annoying to do it manual
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install --cask appcleaner db-browser-for-sqlite firefox monitorcontrol orbstack transmission tunnelblick vlc zulip
+brew install --cask alacritty appcleaner db-browser-for-sqlite firefox kitty monitorcontrol orbstack transmission tunnelblick vlc zulip
 ```

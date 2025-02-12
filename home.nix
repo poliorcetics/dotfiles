@@ -22,7 +22,6 @@
     gh
     git
     git-lfs
-    kitty
     ninja
     poetry
     python3
@@ -37,7 +36,6 @@
     #  - helix
     #  - rust-analyzer
     # Missing: cargo-upgrades cargo-instruments apple-codesign (outdated as heck)
-    alacritty
     atuin
     bacon
     bat
