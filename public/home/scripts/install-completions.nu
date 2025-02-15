@@ -1,5 +1,3 @@
-use std assert
-
 # Downloads all my nushell completions in the expected place,
 # erroring when a hash has changed (and so the underlying file has changed)
 def main [

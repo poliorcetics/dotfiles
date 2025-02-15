@@ -37,8 +37,6 @@ let
 
   specialArgs = rec {
     inherit inputs userDetails;
-    isLinux = platform == "linux";
-    isMacos = platform == "macos";
     unstablePkgs = import nixpkgs-unstable {
       inherit system;
     };

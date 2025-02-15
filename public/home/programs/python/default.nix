@@ -1,6 +1,11 @@
 # Python configuration
 
-{ config, pkgs, mkProgramFile, ... }:
+{
+  config,
+  pkgs,
+  mkProgramFile,
+  ...
+}:
 {
   imports = [
     # Workaround to ensure the python history is not in ~/

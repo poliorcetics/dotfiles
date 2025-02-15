@@ -58,7 +58,6 @@ in
       jless # `less` for JSON
       just # Just a command runner
       mdbook # Make HTML books out of markdown
-      nushell # A shell for the modern world
       pastel # Colors, colors everywhere
       procs # `ps` reinvented
       ripgrep # `grep` but 1000x better
@@ -85,13 +84,9 @@ in
       unstablePkgs.nixd # LSP for nix, actively maintained contrary to `nil`
 
       # == Homemade packages ==
-      (pkgs.writeScriptBin "hn" (builtins.readFile ./scripts/hn.nu))
-      (pkgs.writeScriptBin "rust-analyzer-wrapper" (builtins.readFile ./scripts/rust-analyzer-wrapper.nu))
-      (pkgs.writeScriptBin "systemfiles" (builtins.readFile ./scripts/systemfiles.nu))
-
-      (overrideNixProvidedBinary "nu" (lib.getExe config.programs.nushell.package)
-        "${config.home.sessionVariables.CARGO_HOME}/bin/nu"
-      )
+      (pkgs.writeScriptBin "rust-analyzer-wrapper" (
+        builtins.readFile ../scripts/rust-analyzer-wrapper.nu
+      ))
       (overrideNixProvidedBinary "rust-analyzer" "${pkgs.rustup}/bin/rust-analyzer"
         "${config.home.sessionVariables.CARGO_HOME}/bin/rust-analyzer"
       )

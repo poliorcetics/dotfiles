@@ -11,8 +11,4 @@
     dataHome = "${config.home.homeDirectory}/.local/share";
     stateHome = "${config.home.homeDirectory}/.local/state";
   };
-
-  # Where the tempdirs are created, if at all respected. The other XDG env vars are created
-  # by the `xdg.enable = true` earlier
-  home.sessionVariables.XDG_RUNTIME_DIR = "/var/tmp/$(id -u)";
 }
