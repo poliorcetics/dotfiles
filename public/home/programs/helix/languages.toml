@@ -41,8 +41,6 @@ indent.unit = "    "
 [[language]]
 name = "toml"
 auto-format = false
-indent.tab-width = 4
-indent.unit = "    "
 
 # === Language servers ===
 
@@ -77,10 +75,10 @@ assist.importGranularity = "module"
 check.command = "clippy"
 completion.fullFunctionSignatures.enable = true
 diagnostics.disabled = [
-    "inactive-code",
-    "inactive_code",
-    "unresolved-proc-macro",
-    "unresolved_proc_macro",
+  "inactive-code",
+  "inactive_code",
+  "unresolved-proc-macro",
+  "unresolved_proc_macro",
 ]
 hover.actions.references.enable = true
 lruCapacity = 256

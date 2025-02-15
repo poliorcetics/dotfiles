@@ -8,12 +8,12 @@ cleanup = true
 display_time = true
 no_retry = true
 only = [
-    "brew_cask",
-    "brew_formula",
-    "git_repos",
-    "rustup",
-    "cargo",
-    "pip3",
-    "tldr",
-    "custom_commands"
+  "brew_cask",
+  "brew_formula",
+  "git_repos",
+  "rustup",
+  "cargo",
+  "pip3",
+  "tldr",
+  "custom_commands",
 ]

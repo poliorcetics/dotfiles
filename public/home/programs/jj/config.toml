@@ -29,7 +29,13 @@ push-bookmark-prefix = "ab/push-"
 subprocess = true
 
 [merge-tools.difft]
-diff-args = ["--display", "side-by-side-show-both", "--color=always", "$left", "$right"]
+diff-args = [
+  "--display",
+  "side-by-side-show-both",
+  "--color=always",
+  "$left",
+  "$right",
+]
 
 [revset-aliases]
 "current()" = "(::@ ~ ::trunk())"
