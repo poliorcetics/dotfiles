@@ -4,6 +4,7 @@
 #
 # Config docs: <https://sw.kovidgoyal.net/kitty/conf/>
 
+# TODO: consider configuring <https://sw.kovidgoyal.net/kitty/kittens/ssh/#real-world-ssh-kitten-config>
 {
   config,
   pkgs,
