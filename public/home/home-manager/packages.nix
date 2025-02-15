@@ -63,6 +63,7 @@ in
       ripgrep # `grep` but 1000x better
       rnr # Rename things in bulk
       sd # `sed` but understandable
+      taplo # TOML LSP
       tealdeer # Quick explanations of commands
       tokei # Count lines of code
       tree-sitter # Make semantic things
