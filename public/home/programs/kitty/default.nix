@@ -23,6 +23,6 @@
 
   xdg.configFile."kitty/includes/editor.conf".text = ''
     # <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.editor>
-    editor ${config.home.homeDirectory}/.nix-profile/bin/hx
+    editor ${config.home.sessionVariables.CARGO_HOME}/bin/hx
   '';
 }
