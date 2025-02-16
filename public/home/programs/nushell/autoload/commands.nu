@@ -13,12 +13,12 @@ export def hn [] {
 }
 
 # List all and trim down to some select columns
-export def la [path: path = "."]: any -> table {
+export def la [path: glob = "."]: any -> table {
     ls --all --long $path | sort-by type name | select mode size user modified type name target
 }
 
 # `la` but clearing the screen before
-export def lm [path: path = "."]: any -> table {
+export def lm [path: glob = "."]: any -> table {
     clear; la $path
 }
 
