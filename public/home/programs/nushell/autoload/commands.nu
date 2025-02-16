@@ -14,7 +14,7 @@ export def hn [] {
 
 # List all and trim down to some select columns
 export def la [path: glob = "."]: any -> table {
-    ls --all --long $path | sort-by type name | select mode size user modified type name target
+    ls --all --long $path | select mode size user modified type name target | sort-by type name
 }
 
 # `la` but clearing the screen before
