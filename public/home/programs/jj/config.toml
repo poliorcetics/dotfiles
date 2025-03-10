@@ -54,10 +54,9 @@ sign-all = true
 [snapshot]
 max-new-file-size = "10MB"
 
-# Override the default short ID to use the absolute shortest, making it easier to use `-r <id>`
-# in various `jj` commands
 [template-aliases]
-"format_short_id(id)" = "id.shortest()"
+# Use a minimum length of 8, ensuring my Kitty config can detect such IDs all the time
+"format_short_id(id)" = "id.shortest(8)"
 
 # <https://jj-vcs.github.io/jj/latest/config/#ui-settings>
 [ui]
