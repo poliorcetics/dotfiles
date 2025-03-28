@@ -1,6 +1,7 @@
 {
   imports = [
     ./homebrew.nix
+    ./nix.nix
   ];
 
   # The platform the configuration will be used on.
@@ -9,7 +10,8 @@
   # Default shell on macOS
   programs.zsh.enable = true;
 
-  # Technically a GC config but not under nix.gc.
-  # Disabled after <https://github.com/NixOS/nix/issues/7273>.
-  nix.settings.auto-optimise-store = false;
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-24.11/modules/system/version.nix#L34>
+  system.stateVersion = 4;
 }

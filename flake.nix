@@ -28,6 +28,7 @@
   outputs =
     {
       nixpkgs,
+      self,
       treefmt,
       ...
     }@inputs:
@@ -35,8 +36,12 @@
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#mac
       darwinConfigurations.mac = import ./. inputs "aarch64-darwin";
+      checks.aarch64-darwin.system = self.darwinConfigurations.mac.system;
 
-      nixosConfigurations.linux = import ./. inputs "aarch64-linux";
+      # Untested on Linux at this time
+      # nixosConfigurations.linux = import ./. inputs "aarch64-linux";
+      # checks.x86_64-linux.system = self.nixosConfigurations.linux.system;
+      # checks.aarch64-linux.system = self.nixosConfigurations.linux.system;
 
       formatter =
         let
