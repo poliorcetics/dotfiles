@@ -24,7 +24,7 @@ sq = ["squash"]
 
 # <https://jj-vcs.github.io/jj/latest/config/#git-settings>
 [git]
-private-commits = "description(glob:'local:*')"
+private-commits = "description(glob:'LOCAL:*')"
 push-bookmark-prefix = "ab/push-"
 subprocess = true
 
