@@ -13,7 +13,7 @@
   # To activate auto-updates, read the documentation linked below.
   #
   # You can find all configuration options here:
-  # <https://daiderd.com/nix-darwin/manual/index.html#opt-homebrew.enable>
+  # <https://nix-darwin.github.io/nix-darwin/manual/index.html#opt-homebrew.enable>
   homebrew = {
     enable = true;
     casks = [

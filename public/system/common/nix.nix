@@ -3,18 +3,18 @@
   nix.package = pkgs.nix;
 
   # <https://github.com/NixOS/nixpkgs/blob/nixos-24.11/nixos/modules/services/misc/nix-gc.nix>
-  # <https://github.com/LnL7/nix-darwin/blob/nix-darwin-24.11/modules/services/nix-gc/default.nix>
+  # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-24.11/modules/services/nix-gc/default.nix>
   nix.gc = {
     automatic = true;
     options = "--delete-older-than 30d";
   };
 
   # <https://github.com/NixOS/nixpkgs/blob/nixos-24.11/nixos/modules/services/misc/nix-optimise.nix>
-  # <https://github.com/LnL7/nix-darwin/blob/nix-darwin-24.11/modules/services/nix-optimise/default.nix>
+  # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-24.11/modules/services/nix-optimise/default.nix>
   nix.optimise.automatic = true;
 
   # <https://github.com/NixOS/nixpkgs/blob/nixos-24.11/nixos/modules/config/nix.nix>
-  # <https://github.com/LnL7/nix-darwin/blob/nix-darwin-24.11/modules/nix/default.nix>
+  # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-24.11/modules/nix/default.nix>
   nix.settings = {
     # Necessary for using flakes on this system.
     experimental-features = "nix-command flakes";
