@@ -7,13 +7,12 @@ completion-trigger-len = 1
 cursorline = true
 idle-timeout = 250
 completion-timeout = 50
-line-number = "absolute"
 mouse = false
 rulers = [100, 120, 150]
 
 # === Diagnostics ===
 end-of-line-diagnostics = "hint"        # Minimum severity of diagnostics rendered at the end of a line
-inline-diagnostics.cursor-line = "info" # Show warnings and errors on the cursor line inline
+inline-diagnostics.cursor-line = "info" # Show info to errors on the cursor line inline
 
 # === File Picker ===
 file-picker.hidden = false
