@@ -10,6 +10,10 @@ completion-timeout = 50
 mouse = false
 rulers = [100, 120, 150]
 
+# === Blank spaces ===
+trim-final-newlines = true
+trim-trailing-whitespace = true
+
 # === Diagnostics ===
 end-of-line-diagnostics = "hint"        # Minimum severity of diagnostics rendered at the end of a line
 inline-diagnostics.cursor-line = "info" # Show info to errors on the cursor line inline
