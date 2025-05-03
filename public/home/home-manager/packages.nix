@@ -77,7 +77,6 @@ in
       marksman # LSP for Markdown
       nixfmt-rfc-style # Official formatter for nix
       ninja # Compile C & C++ things
-      poetry # Project manager / venv manager for Python
       yaml-language-server # LSP for YAML
     ])
     ++ [
