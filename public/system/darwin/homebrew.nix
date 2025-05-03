@@ -25,6 +25,7 @@
       "kitty"
       "macs-fan-control"
       "monitorcontrol"
+      "obsidian"
       "orbstack"
       "rectangle"
       "signal"
