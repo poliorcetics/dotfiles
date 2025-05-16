@@ -39,7 +39,7 @@ diff-args = [
 
 [revset-aliases]
 "current()" = "(::@ ~ ::trunk())"
-"open()" = "(mine() ~ ::trunk())::"
+"open()" = "((::tracked_remote_bookmarks() | mine()) ~ ::trunk())::"
 # Useful to rebase all branches with `jj r -s "all:open_roots()" -d main/master/develop/..`
 "open_roots()" = "roots(open())"
 
