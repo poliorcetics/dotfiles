@@ -24,7 +24,9 @@
 {
   imports = [
     (mkProgramFile { } "nushell" "config.nu")
-    (mkProgramFile { } "nushell" "autoload")
+    # Do it per-file to allow for `work/home` to also add its own autoload stuff
+    (mkProgramFile { } "nushell" "autoload/commands.nu")
+    (mkProgramFile { } "nushell" "autoload/less-env.nu")
   ];
 
   programs.nushell.package = unstablePkgs.nushell;
