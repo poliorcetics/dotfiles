@@ -64,6 +64,8 @@ right = [
 ]
 
 [keys.normal]
+ret = "goto_word"
+
 S-up = "jump_view_up"
 S-down = "jump_view_down"
 S-right = "jump_view_right"
