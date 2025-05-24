@@ -27,7 +27,6 @@
       persistent-apps = [
         "/System/Applications/System Settings.app"
         "/Applications/Firefox.app"
-        "/Applications/Safari.app"
         "/System/Applications/Mail.app"
         "/Applications/kitty.app"
         "/Applications/Transmission.app"
