@@ -19,8 +19,7 @@ in
     makeDirs = ''
       run mkdir -p ~/repos/me/
       run mkdir -p ~/repos/tp/
-      run mkdir -p ~/repos/work/priv/
-      run mkdir -p ~/repos/work/pub/
+      run mkdir -p ~/repos/work/
     '';
 
     # === Nushell Files ===
