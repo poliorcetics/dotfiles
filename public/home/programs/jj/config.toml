@@ -64,5 +64,5 @@ max-new-file-size = "10MB"
 conflict-marker-style = "snapshot"
 default-command = "status"
 # <https://jj-vcs.github.io/jj/latest/config/#diff-format>
-diff.format = "git"
+diff-formatter = ":git"
 pager = "delta"
