@@ -50,10 +50,6 @@ backend = "ssh"
 behaviour = "own"
 key = "~/.ssh/id_signing.pub"
 
-# <https://jj-vcs.github.io/jj/latest/config/#snapshot-settings>
-[snapshot]
-max-new-file-size = "10MB"
-
 [template-aliases]
 # Use a minimum length of 8, ensuring my Kitty config can detect such IDs all the time
 "format_short_id(id)" = "id.shortest(8)"
