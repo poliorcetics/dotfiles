@@ -31,10 +31,7 @@
       "signal"
       "steam"
       "transmission"
-      "tunnelblick"
-      "utm"
       "vlc"
-      "zulip"
     ];
   };
 }
