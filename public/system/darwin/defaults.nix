@@ -5,14 +5,14 @@
 {
   system.defaults = {
     # Firewall configuration
-    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-24.11/modules/system/defaults/alf.nix>
+    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/system/defaults/alf.nix>
     alf = {
       globalstate = 1;
       stealthenabled = 1;
     };
 
     # Control center
-    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-24.11/modules/system/defaults/controlcenter.nix>
+    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/system/defaults/controlcenter.nix>
     controlcenter = {
       BatteryShowPercentage = true;
       Sound = false;
@@ -20,7 +20,7 @@
     };
 
     # Dock
-    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-24.11/modules/system/defaults/dock.nix>
+    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/system/defaults/dock.nix>
     #
     #     defaults read com.apple.dock
     dock = {
@@ -37,7 +37,7 @@
     };
 
     # Finder
-    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-24.11/modules/system/defaults/finder.nix>
+    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/system/defaults/finder.nix>
     #
     #     defaults read com.apple.finder
     finder = {
@@ -51,7 +51,7 @@
     };
 
     # Login windows
-    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-24.11/modules/system/defaults/loginwindow.nix>
+    # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/system/defaults/loginwindow.nix>
     #
     #     defaults read com.apple.finder
     loginwindow.GuestEnabled = false;

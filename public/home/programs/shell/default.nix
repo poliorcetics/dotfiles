@@ -17,9 +17,9 @@
   };
 
   programs.zsh = {
-    inherit (config.programs.bash) initExtra;
     enable = true;
     dotDir = ".config/zsh";
+    initContent = config.programs.bash.initExtra;
     history.path = "${config.xdg.configHome}/zsh/history";
   };
 }

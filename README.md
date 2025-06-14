@@ -15,7 +15,7 @@ Anyway, onwards to the installation:
 ## OPEN A NEW TERMINAL
 
 ## Install everything
-./dotfiles.sh update
+sudo -E ./dotfiles.sh update
 
 ## Secondary setup, after installing the requirement just above
 ./dotfiles.sh secondary-setup
