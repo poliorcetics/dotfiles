@@ -4,7 +4,7 @@
   ...
 }:
 let
-  username = userDetails.username;
+  inherit (userDetails) username;
 in
 {
   imports = [
