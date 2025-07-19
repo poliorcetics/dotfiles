@@ -25,7 +25,6 @@ sq = ["squash"]
 # <https://jj-vcs.github.io/jj/latest/config/#git-settings>
 [git]
 private-commits = "description(glob:'LOCAL:*')"
-push-bookmark-prefix = "ab/push-"
 subprocess = true
 
 [merge-tools.difft]
@@ -49,6 +48,9 @@ diff-args = [
 backend = "ssh"
 behaviour = "own"
 key = "~/.ssh/id_signing.pub"
+
+[templates]
+git_push_bookmark = '"ab/push-" ++ change_id.short()'
 
 [template-aliases]
 # Use a minimum length of 8, ensuring my Kitty config can detect such IDs all the time
