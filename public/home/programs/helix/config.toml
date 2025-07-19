@@ -84,7 +84,7 @@ n = "file_picker_in_current_buffer_directory"
 h = "file_picker_in_current_directory"
 
 t = "workspace_diagnostics_picker"
-z = "workspace_symbol_picker"
+z = "lsp_or_syntax_workspace_symbol_picker"
 
 "," = "command_palette"
 ":" = "global_search"
