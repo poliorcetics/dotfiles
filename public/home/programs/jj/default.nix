@@ -2,7 +2,6 @@
 #
 # <https://github.com/jj-vcs/jj>
 {
-  config,
   lib,
   mkProgramFile,
   unstablePkgs,
@@ -14,18 +13,15 @@
     (mkProgramFile { } "jj" "config.toml")
   ];
 
-  # When this variable is a directory, JJ reads all files inside as a single config
-  home.sessionVariables.JJ_CONFIG = "${config.xdg.configHome}/jj/";
-
   home.packages = [ unstablePkgs.jujutsu ];
 
-  xdg.configFile."jj/default-user.toml".text = ''
+  xdg.configFile."jj/conf.d/default-user.toml".text = ''
     [user]
     email = "${userDetails.public.email}"
     name = "${userDetails.public.displayName}"
   '';
 
-  xdg.configFile."jj/work-user.toml" = lib.mkIf (userDetails ? work) {
+  xdg.configFile."jj/conf.d/work-user.toml" = lib.mkIf (userDetails ? work) {
     text = ''
       [[--scope]]
       --when.repositories = ["~/repos/work"]
