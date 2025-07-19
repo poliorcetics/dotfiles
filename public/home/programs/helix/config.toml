@@ -132,3 +132,15 @@ pageup = "no_op"
 pagedown = "no_op"
 home = "no_op"
 end = "no_op"
+
+[keys.select.space]
+n = "file_picker_in_current_buffer_directory"
+h = "file_picker_in_current_directory"
+
+t = "workspace_diagnostics_picker"
+z = "lsp_or_syntax_workspace_symbol_picker"
+
+"," = "command_palette"
+":" = "global_search"
+c = ["kill_to_line_end", "insert_mode"]
+m = "select_references_to_symbol_under_cursor"
