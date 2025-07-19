@@ -63,6 +63,9 @@ right = [
   "total-line-numbers",
 ]
 
+[editor.word-completion]
+trigger-length = 3
+
 [keys.normal]
 ret = "goto_word"
 

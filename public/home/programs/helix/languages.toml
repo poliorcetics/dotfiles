@@ -21,6 +21,7 @@ name = "markdown"
 soft-wrap.enable = true
 soft-wrap.wrap-at-text-width = true
 text-width = 150
+word-completion.trigger-length = 3 # Override helix's default of 4
 
 [[language]]
 name = "nix"
