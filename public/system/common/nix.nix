@@ -1,4 +1,9 @@
-{ pkgs, userDetails, ... }:
+{
+  pkgs,
+  inputs,
+  userDetails,
+  ...
+}:
 {
   nix.package = pkgs.nix;
 
@@ -12,6 +17,28 @@
   # <https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/services/misc/nix-optimise.nix>
   # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/services/nix-optimise/default.nix>
   nix.optimise.automatic = true;
+
+  # <https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/config/nix-flakes.nix>
+  nix.registry = with inputs; {
+    # Stable goes by two names
+    nixpkgs.flake = nixpkgs;
+    stable.flake = nixpkgs;
+    # Installed unstable
+    unstable.flake = nixpkgs-unstable;
+    # Actual latest unstable, useful to test things without updating my whole config
+    latest = {
+      from = {
+        type = "indirect";
+        id = "latest";
+      };
+      to = {
+        type = "github";
+        owner = "nixos";
+        repo = "nixpkgs";
+        ref = "nixpkgs-unstable";
+      };
+    };
+  };
 
   # <https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/config/nix.nix>
   # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/nix/default.nix>
