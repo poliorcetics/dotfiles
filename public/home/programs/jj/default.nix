@@ -15,13 +15,13 @@
 
   home.packages = [ unstablePkgs.jujutsu ];
 
-  xdg.configFile."jj/conf.d/default-user.toml".text = ''
+  xdg.configFile."jj/conf.d/00-default-user.toml".text = ''
     [user]
     email = "${userDetails.public.email}"
     name = "${userDetails.public.displayName}"
   '';
 
-  xdg.configFile."jj/conf.d/work-user.toml" = lib.mkIf (userDetails ? work) {
+  xdg.configFile."jj/conf.d/00-work-user.toml" = lib.mkIf (userDetails ? work) {
     text = ''
       [[--scope]]
       --when.repositories = ["~/repos/work"]
