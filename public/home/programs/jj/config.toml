@@ -16,9 +16,9 @@ gpa = ["git", "push", "--all"]
 l = ["log"]
 lb = ["log", "-r", "current()"]
 lm = ["log", "-r", "::@"]
-lo = ["log", "-r", "open()"]
+lo = ["log", "-r", "visible_open()"]
 r = ["rebase"]
-rs = ["rebase", "--source", "all:open_roots()", "--destination"]
+rs = ["rebase", "--source", "all:visible_open_roots()", "--destination"]
 s = ["status"]
 sq = ["squash"]
 
@@ -39,8 +39,9 @@ diff-args = [
 [revset-aliases]
 "current()" = "(::@ ~ ::trunk())"
 "open()" = "((::tracked_remote_bookmarks() | mine()) ~ ::trunk())::"
-# Useful to rebase all branches with `jj r -s "all:open_roots()" -d main/master/develop/..`
-"open_roots()" = "roots(open())"
+"visible_open()" = "(open() & ::visible_heads())::"
+# Useful to rebase all branches with `jj r -s "all:visible_open_roots()" -d main/master/develop/..`
+"visible_open_roots()" = "roots(visible_open())"
 
 # <https://jj-vcs.github.io/jj/latest/config/#commit-signing>
 # <https://jj-vcs.github.io/jj/latest/config/#ssh-signing>
