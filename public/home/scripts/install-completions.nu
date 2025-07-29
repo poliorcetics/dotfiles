@@ -7,7 +7,7 @@ def main [
     (dl
         https://raw.githubusercontent.com/helix-editor/helix/master/contrib/completion/hx.nu
         ($completion_dir | path join hx.nu)
-        'baf1e7b97aca4970e75f4423438373d20b5d8b3302a6bfee05397aec83eb4f05')
+        '424bbd416f7f8deedd6bbfb71ebdf04481536640020bebef7b1c9218bb5de973')
 }
 
 def dl [
