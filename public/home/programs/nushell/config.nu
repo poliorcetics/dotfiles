@@ -17,7 +17,7 @@ $env.config.completions.external = {
     enable: true
     completer: {|spans: list<string>|
         # if the current command is an alias, get it's expansion
-        let expanded_alias = scope aliases | where name == $spans.0 | get -i 0 | get -i expansion
+        let expanded_alias = scope aliases | where name == $spans.0 | get -o 0 | get -o expansion
 
         # overwrite
         let spans = if $expanded_alias != null  {
@@ -42,7 +42,7 @@ $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change | default [] PW
 
 # Change CARGO_TARGET_DIR when PWD changes
 $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD | append {|_prev, new|
-    let current_target_dir = ($env | get --ignore-errors CARGO_TARGET_DIR | default "")
+    let current_target_dir = ($env | get --optional CARGO_TARGET_DIR | default "")
 
     if $current_target_dir == "" or $current_target_dir =~ $"($env.XDG_CACHE_HOME)/target-dirs/cargo/*" {
         let new_target_dir = $"($env.XDG_CACHE_HOME)/target-dirs/cargo/($new | path basename)"
