@@ -26,5 +26,15 @@ export def --wrapped npm [...rest] {
     PREFIX=$env.XDG_CONFIG_HOME ^npm ...$rest
 }
 
+# Garbage collect old nix and home manager profiles
+export def nix-config-gc [
+    --hm: string = "-1min", # Passed to `home-manager expire-generations <arg>`
+    --nix: string = "old", # Passed to `nix-env --delete-generations <arg>`
+] {
+    nix run stable#home-manager -- expire-generations $hm
+    nix-env --delete-generations $nix
+    nix-collect-garbage
+}
+
 export def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 export alias open = ^open
