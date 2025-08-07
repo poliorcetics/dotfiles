@@ -26,6 +26,8 @@ sq = ["squash"]
 [git]
 private-commits = "description(glob:'LOCAL:*')"
 subprocess = true
+# <https://jj-vcs.github.io/jj/latest/config/#automatically-signing-commits>
+sign-on-push = true
 
 [merge-tools.difft]
 diff-args = [
