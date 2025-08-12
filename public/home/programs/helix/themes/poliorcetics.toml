@@ -27,9 +27,6 @@
 
 # UI
 
-# Needs option `rainbow-brackets` to be visible
-"rainbow" = ["attribute", "#458588", "#cc241d", "#8ec07c"]
-
 "ui" = { fg = "text", bg = "default_bg" }
 "ui.background" = { bg = "default_bg" }
 "ui.bufferline" = { bg = "statusline_inactive_bg" }
