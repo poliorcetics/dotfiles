@@ -21,6 +21,9 @@ inline-diagnostics.cursor-line = "info" # Show info to errors on the cursor line
 # === File Picker ===
 file-picker.hidden = false
 
+# === Rainbows 🌈 ===
+rainbow-brackets = true
+
 [editor.lsp]
 display-inlay-hints = true
 display-messages = true

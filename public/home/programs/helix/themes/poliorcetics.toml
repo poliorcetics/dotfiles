@@ -78,6 +78,14 @@
 "ui.virtual.wrap" = { fg = "inlay_hint_fg", bg = "inlay_hint_bg" }
 "ui.window" = "text"
 
+rainbow = [
+  "#d3869b", # purple
+  "#a8c0b6", # blue
+  "#fbca58", # yellow
+  "#e69138", # orange
+  "#c83a29", # red
+]
+
 # Mixed Keys (UI & languages)
 
 "diff.delta" = "diff_delta"
