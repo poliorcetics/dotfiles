@@ -4,7 +4,6 @@
 
 command_timeout = 100
 format = """
-$time\
 $username\
 $hostname\
 $directory\
@@ -12,8 +11,10 @@ $git_branch\
 $git_state\
 $git_status\
 $python\
-$cmd_duration\
 $nix_shell\
+$fill \
+$cmd_duration\
+$time\
 $line_break\
 $jobs\
 $shell\
@@ -27,13 +28,19 @@ success_symbol = "[❯](bold green)"
 
 [cmd_duration]
 show_milliseconds = true
-style = "yellow"
+format = "[\\($duration\\)]($style) "
+style = "yellow italic"
 
 [directory]
 fish_style_pwd_dir_length = 1
-repo_root_style = "bold cyan"
+repo_root_style = "cyan"
 style = "cyan"
 truncation_length = 1
+
+[fill]
+disabled = false
+style = "grey"
+symbol = "—"
 
 [git_branch]
 format = "[$symbol$branch(:$remote_branch)]($style) "
