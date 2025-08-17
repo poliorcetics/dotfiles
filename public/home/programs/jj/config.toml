@@ -18,7 +18,7 @@ lb = ["log", "-r", "current()"]
 lm = ["log", "-r", "::@"]
 lo = ["log", "-r", "visible_open()"]
 r = ["rebase"]
-rs = ["rebase", "--source", "all:visible_open_roots()", "--destination"]
+rs = ["rebase", "--source", "visible_open_roots()", "--destination"]
 s = ["status"]
 sq = ["squash"]
 
