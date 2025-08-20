@@ -14,6 +14,7 @@
 {
   imports = [
     (mkProgramFile { } "kitty" "kitty.conf")
+    (mkProgramFile { } "kitty" "theme.conf")
     (mkProgramFile { } "kitty" "macos-launch-services-cmdline")
   ];
 
