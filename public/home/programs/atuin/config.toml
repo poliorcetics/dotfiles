@@ -1,6 +1,11 @@
 # Settings: <https://atuin.sh/docs/config/>
 enter_accept = true
+exit_mode = "return-query"
 filter_mode_shell_up_key_binding = "directory"
+inline_height = 0
+max_preview_height = 8
+search_mode = "skim"
+style = "compact"
 sync_frequency = "24h"
 update_check = false
 
