@@ -27,6 +27,7 @@ rainbow-brackets = true
 [editor.lsp]
 display-inlay-hints = true
 display-messages = true
+display-progress-messages = true
 
 [editor.whitespace.render]
 space = "all"
