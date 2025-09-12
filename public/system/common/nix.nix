@@ -19,12 +19,12 @@
   nix.optimise.automatic = true;
 
   # <https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/config/nix-flakes.nix>
-  nix.registry = with inputs; {
+  nix.registry = rec {
     # Stable goes by two names
-    nixpkgs.flake = nixpkgs;
-    stable.flake = nixpkgs;
+    nixpkgs.flake = inputs.nixpkgs;
+    stable.flake = inputs.nixpkgs;
     # Installed unstable
-    unstable.flake = nixpkgs-unstable;
+    unstable.flake = inputs.nixpkgs-unstable;
     # Actual latest unstable, useful to test things without updating my whole config
     latest = {
       from = {
@@ -38,6 +38,12 @@
         ref = "nixpkgs-unstable";
       };
     };
+
+    # Aliases, for less typing
+    l = latest;
+    n = nixpkgs;
+    s = stable;
+    u = unstable;
   };
 
   # <https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/config/nix.nix>
