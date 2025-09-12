@@ -39,6 +39,9 @@ in
       cargo-show-asm
       cargo-update
 
+      # == Nix ==
+      nix-output-monitor
+
       # == Node ==
       nodePackages.bash-language-server # LSP for bash
       nodePackages.prettier # Code formatter, notably for Web technologies
