@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     # Very useful for getting recent packages, try not to use it otherwise,
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/68ed3354133f549b9cb8e5231a126625dca4e724";
 
     # Home manager `master` branch follows nixpkgs-stable.
     home-manager = {
