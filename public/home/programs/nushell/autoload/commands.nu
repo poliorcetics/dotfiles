@@ -22,6 +22,7 @@ export def lm [path: glob = "."]: any -> table {
     clear; la $path
 }
 
+@complete external
 export def --wrapped npm [...rest] {
     PREFIX=$env.XDG_CONFIG_HOME ^npm ...$rest
 }

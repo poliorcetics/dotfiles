@@ -2,7 +2,7 @@
 #
 # Version: 0.4.2
 
-def color_categories [] { return ["always", "auto", "never"] }
+const color_categories = [ always auto never ]
 
 # RnR is a command-line tool to rename multiple files and directories that supports regular expressions
 export extern rnr [
@@ -18,9 +18,9 @@ export extern rnr [
     --silent(-s),       # Do not print any information
     --version(-V),      # Prints version information
 
-    --color: string@color_categories, # Set color output mode [default: auto]  [possible values: always, auto, never]
-    --max-depth(-d): int              # Set max depth in recursive mode
-    --replace-limit(-l): int          # Limit of replacements, all matches if set to 0 [default: 1]
+    --color: string@$color_categories, # Set color output mode [default: auto]  [possible values: always, auto, never]
+    --max-depth(-d): int               # Set max depth in recursive mode
+    --replace-limit(-l): int           # Limit of replacements, all matches if set to 0 [default: 1]
 
     expression: string,  # Expression to match (can be a regex)
     replacement: string, # Expression replacement
@@ -39,16 +39,16 @@ export extern "rnr from-file" [
     --undo(-u),         # Undo the operations from the dump file
     --version(-V),      # Prints version information
 
-    --color: string@color_categories, # Set color output mode [default: auto]  [possible values: always, auto, never]
+    --color: string@$color_categories, # Set color output mode [default: auto]  [possible values: always, auto, never]
 
     dumpfile: glob # Dumpfile to read
 ]
 
-def subcommand_categories [] { return ["from-file", "to-ascii"] }
+const subcommand_categories = [ from-file to-ascii ]
 
 # Prints base help message or the help of the given subcommand(s)
 export extern "rnr help" [
-    subcommand?: string@subcommand_categories # Print the help of the given subcommand
+    subcommand?: string@$subcommand_categories # Print the help of the given subcommand
 ]
 
 export extern "rnr to-ascii" [
@@ -64,8 +64,8 @@ export extern "rnr to-ascii" [
     --silent(-s),       # Do not print any information
     --version(-V),      # Prints version information
 
-    --color: string@color_categories, # Set color output mode [default: auto]  [possible values: always, auto, never]
-    --max-depth(-d): int              # Set max depth in recursive mode
+    --color: string@$color_categories, # Set color output mode [default: auto]  [possible values: always, auto, never]
+    --max-depth(-d): int               # Set max depth in recursive mode
 
     ...paths: glob,      # Target paths
 ]
