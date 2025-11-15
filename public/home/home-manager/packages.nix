@@ -39,6 +39,9 @@ in
       cargo-show-asm
       cargo-update
 
+      # == Kubernetes ==
+      kubectl
+
       # == Nix ==
       nix-output-monitor
 
