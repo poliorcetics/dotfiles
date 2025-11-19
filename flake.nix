@@ -5,7 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     # Very useful for getting recent packages, try not to use it otherwise,
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/68ed3354133f549b9cb8e5231a126625dca4e724";
 
     # Home manager `master` branch follows nixpkgs-stable.
     home-manager = {
@@ -37,15 +36,14 @@
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#mac
       darwinConfigurations.mac = import ./. inputs "aarch64-darwin";
-      checks.aarch64-darwin.system = self.darwinConfigurations.mac.system;
+      checks.aarch64-darwin.macos-darwin-system = self.darwinConfigurations.mac.system;
 
-      # Untested on Linux at this time
-      # nixosConfigurations.linux = import ./. inputs "aarch64-linux";
-      # checks.x86_64-linux.system = self.nixosConfigurations.linux.system;
-      # checks.aarch64-linux.system = self.nixosConfigurations.linux.system;
+      homeConfigurations.linux = import ./. inputs "aarch64-linux";
+      checks.aarch64-linux.linux-hm-system = self.homeConfigurations.linux.activationPackage;
 
       formatter =
         let
+          # TODO: treefmt is in regular nixpkgs, look into using that
           makeFmt = system: {
             ${system} =
               (treefmt.lib.evalModule (import nixpkgs { inherit system; }) {
