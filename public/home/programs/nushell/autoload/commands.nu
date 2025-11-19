@@ -1,6 +1,7 @@
 export alias cg = cargo
 export alias g = git
 export alias j = just
+export alias k = kubectl
 
 # Open a dated markdown note in ~/repos/notes/
 export def hn [] {
