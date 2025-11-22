@@ -3,8 +3,9 @@
   nix-darwin,
   nixpkgs,
   nixpkgs-unstable,
+  self,
   ...
-}@inputs:
+}:
 system:
 let
   platform =
@@ -20,7 +21,7 @@ let
   userDetails' =
     builtins.foldl' (acc: p: if builtins.pathExists p then acc // (import p) else acc) { }
       [
-        ./public/user.nix
+        ./public-modules/sh-personal-user.nix
         ./work/user.nix
       ];
   # Adapt the home path to the platform
@@ -32,63 +33,61 @@ let
     }
     .${platform};
 
-  specialArgs = rec {
-    inherit inputs userDetails;
-    unstablePkgs = import nixpkgs-unstable {
-      inherit system;
-    };
-    # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{target}` to `{dotfilesDir}/${source}`.
-    #
-    # Used as:
-    #
-    # ```
-    # imports = [
-    #   (mkConfigLink { force = true; } "gh/config.yml" "config.yml")
-    #   (mkConfigLink { } "gh/hosts.yml" "hosts.yml")
-    # ];
-    # ```
-    mkConfigLink =
-      {
-        force ? false,
-      }:
-      target: source:
-      {
-        config,
-        lib,
-        ...
-      }:
-      let
-        linked = "${config.home.homeDirectory}/${userDetails.dotfilesSubDir}/${source}";
-        target' = lib.info "${target} -> ${linked}" target;
-      in
-      {
-        xdg.configFile."${target'}".source = (if force then lib.mkForce else lib.id) (
-          config.lib.file.mkOutOfStoreSymlink linked
-        );
-      };
-    # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{program}/{file}`
-    # to `{dotfilesDir}/public-modules/hm-program-${program}/${file}`.
-    #
-    # Specialized version of `mkConfigLink`.
-    #
-    # Used as:
-    #
-    # ```
-    # imports = [
-    #   (mkProgramFile { force = true; } "gh" "config.yml")
-    #   (mkProgramFile { } "gh" "hosts.yml")
-    # ];
-    # ```
-    mkProgramFile =
-      {
-        force ? false,
-        kind ? "public",
-      }:
-      program: file:
-      mkConfigLink {
-        inherit force;
-      } "${program}/${file}" "${kind}-modules/hm-program-${program}/${file}";
+  unstablePkgs = import nixpkgs-unstable {
+    inherit system;
   };
+
+  # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{target}` to `{dotfilesDir}/${source}`.
+  #
+  # Used as:
+  #
+  # ```
+  # imports = [
+  #   (mkConfigLink { force = true; } "gh/config.yml" "config.yml")
+  #   (mkConfigLink { } "gh/hosts.yml" "hosts.yml")
+  # ];
+  # ```
+  mkConfigLink =
+    {
+      force ? false,
+    }:
+    target: source:
+    {
+      config,
+      lib,
+      ...
+    }:
+    let
+      linked = "${config.home.homeDirectory}/${userDetails.dotfilesSubDir}/${source}";
+      target' = lib.info "${target} -> ${linked}" target;
+    in
+    {
+      xdg.configFile."${target'}".source = (if force then lib.mkForce else lib.id) (
+        config.lib.file.mkOutOfStoreSymlink linked
+      );
+    };
+  # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{program}/{file}`
+  # to `{dotfilesDir}/public-modules/hm-program-${program}/${file}`.
+  #
+  # Specialized version of `mkConfigLink`.
+  #
+  # Used as:
+  #
+  # ```
+  # imports = [
+  #   (mkProgramFile { force = true; } "gh" "config.yml")
+  #   (mkProgramFile { } "gh" "hosts.yml")
+  # ];
+  # ```
+  mkProgramFile =
+    {
+      force ? false,
+      kind ? "public",
+    }:
+    program: file:
+    mkConfigLink {
+      inherit force;
+    } "${program}/${file}" "${kind}-modules/hm-program-${program}/${file}";
 
   sharedModules = [
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
@@ -101,7 +100,7 @@ let
   systemModules = [
     { nixpkgs.hostPlatform = system; }
 
-    (import ./public-modules/sy-system.nix { inherit (inputs) self; })
+    (import ./public-modules/sy-system.nix { inherit self; })
     (import ./public-modules/sy-user.nix { inherit (userDetails) home username; })
 
     ./public-modules/sy-nix-settings.nix
@@ -127,24 +126,22 @@ let
   # All options: <https://nix-community.github.io/home-manager/options.xhtml>
   hmModules = [
     (import ./public-modules/hm-generic.nix { inherit (userDetails) home username; })
-    (import ./public-modules/hm-packages specialArgs.unstablePkgs)
+    (import ./public-modules/hm-packages unstablePkgs)
 
     ./public-modules/hm-activation
     ./public-modules/hm-variables.nix
     ./public-modules/hm-xdg.nix
 
-    (import ./public-modules/hm-program-atuin { inherit (specialArgs) mkProgramFile unstablePkgs; })
-    (import ./public-modules/hm-program-gh { inherit (specialArgs) mkProgramFile; })
-    (import ./public-modules/hm-program-git { inherit (specialArgs) mkProgramFile userDetails; })
-    (import ./public-modules/hm-program-helix { inherit (specialArgs) mkProgramFile; })
-    (import ./public-modules/hm-program-jj {
-      inherit (specialArgs) mkProgramFile unstablePkgs userDetails;
-    })
-    (import ./public-modules/hm-program-kitty { inherit (specialArgs) mkProgramFile; })
-    (import ./public-modules/hm-program-nushell { inherit (specialArgs) mkProgramFile unstablePkgs; })
-    (import ./public-modules/hm-program-python { inherit (specialArgs) mkProgramFile; })
-    (import ./public-modules/hm-program-starship { inherit (specialArgs) mkConfigLink; })
-    (import ./public-modules/hm-program-topgrade { inherit (specialArgs) mkConfigLink; })
+    (import ./public-modules/hm-program-atuin { inherit mkProgramFile unstablePkgs; })
+    (import ./public-modules/hm-program-gh { inherit mkProgramFile; })
+    (import ./public-modules/hm-program-git { inherit mkProgramFile userDetails; })
+    (import ./public-modules/hm-program-helix { inherit mkProgramFile; })
+    (import ./public-modules/hm-program-jj { inherit mkProgramFile unstablePkgs userDetails; })
+    (import ./public-modules/hm-program-kitty { inherit mkProgramFile; })
+    (import ./public-modules/hm-program-nushell { inherit mkProgramFile unstablePkgs; })
+    (import ./public-modules/hm-program-python { inherit mkProgramFile; })
+    (import ./public-modules/hm-program-starship { inherit mkConfigLink; })
+    (import ./public-modules/hm-program-topgrade { inherit mkConfigLink; })
 
     ./public-modules/hm-program-bat
     ./public-modules/hm-program-direnv
@@ -163,12 +160,11 @@ let
     sharedModules
     ++ hmModules
     ++ builtins.filter filterPaths [
-      ./public/home
       ./work/home
     ];
 
   darwinFullSystem = nix-darwin.lib.darwinSystem {
-    inherit specialArgs system;
+    inherit system;
     modules =
       systemModules
       ++ systemDarwinModules
@@ -186,8 +182,6 @@ let
           home-manager.useUserPackages = false;
 
           home-manager.users.${userDetails.username}.imports = macosHmModules;
-          # Pass arguments to home.nix
-          home-manager.extraSpecialArgs = specialArgs;
         }
       ];
   };
@@ -195,7 +189,6 @@ let
   linuxHmSystem = home-manager.lib.homeManagerConfiguration {
     pkgs = import nixpkgs { inherit system; };
     modules = linuxHmModules;
-    extraSpecialArgs = specialArgs;
   };
 
   finalSystem =
