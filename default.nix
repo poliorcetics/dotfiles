@@ -86,6 +86,8 @@ let
   };
 
   systemModules = [
+    { nixpkgs.hostPlatform = system; }
+
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
     (import ./public-modules/sh-nix-settings.nix { inherit userDetails; })
 
