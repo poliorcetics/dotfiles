@@ -121,6 +121,7 @@ let
     (import ./public-modules/hm-packages specialArgs.unstablePkgs)
 
     ./public-modules/hm-activation
+    ./public-modules/hm-variables.nix
   ];
 
   macosHmModules =

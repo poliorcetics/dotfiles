@@ -1,5 +1,7 @@
 {
   config,
+  lib,
+  pkgs,
   ...
 }:
 {
@@ -7,7 +9,7 @@
   home.sessionPath = [
     "${config.home.homeDirectory}/.local/bin"
     "${config.home.sessionVariables.CARGO_HOME}/bin"
-    "/opt/homebrew/bin"
+    (lib.mkIf pkgs.stdenv.isDarwin "/opt/homebrew/bin")
   ];
 
   home.sessionVariables = {
