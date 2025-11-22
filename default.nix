@@ -88,6 +88,8 @@ let
   nixDarwinModules = [
     # TODO: pass every specialArgs and other such parameters via a module
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
+
+    ./public-modules/sh-nix-gc.nix
   ]
   ++ builtins.filter filterPaths [
     ./public/system/common
@@ -104,6 +106,8 @@ let
   linuxHmModules = [
     # TODO: pass every specialArgs and other such parameters via a module
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
+
+    ./public-modules/sh-nix-gc.nix
   ]
   ++ builtins.filter filterPaths [
     ./public/home
