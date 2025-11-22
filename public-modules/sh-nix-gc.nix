@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (pkgs.stdenv) isDarwin isLinux;
+  inherit (pkgs.stdenv) isLinux;
   inherit (lib) mkIf mkMerge;
 in
 {
@@ -13,14 +13,6 @@ in
       automatic = true;
       options = "--delete-older-than 30d";
     }
-
-    (mkIf isDarwin {
-      interval = {
-        Weekday = 7;
-        Hour = 23;
-        Minute = 59;
-      };
-    })
 
     (mkIf isLinux {
       dates = "weekly";
@@ -31,14 +23,6 @@ in
     {
       automatic = true;
     }
-
-    (mkIf isDarwin {
-      interval = {
-        Weekday = 7;
-        Hour = 23;
-        Minute = 59;
-      };
-    })
 
     (mkIf isLinux {
       dates = [ "weekly" ];

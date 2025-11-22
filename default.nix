@@ -89,24 +89,28 @@ let
     { nixpkgs.hostPlatform = system; }
 
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
-    (import ./public-modules/sh-nix-settings.nix { inherit userDetails; })
+    (import ./public-modules/sh-nix-settings.nix { inherit (userDetails) username; })
 
     ./public-modules/sh-nix-gc.nix
     ./public-modules/sh-nix-package.nix
 
-    (import ./public-modules/sy-macos-defaults.nix { inherit (userDetails) home; })
-    (import ./public-modules/sy-system.nix {
-      inherit (inputs) self;
-      inherit (userDetails) username;
-    })
+    (import ./public-modules/sy-system.nix { inherit (inputs) self; })
     (import ./public-modules/sy-user.nix { inherit (userDetails) home username; })
 
-    ./public-modules/sy-homebrew.nix
+    ./public-modules/sy-nix-settings.nix
   ]
   ++ builtins.filter filterPaths [
     ./public/system/${platform}
     ./work/system/common
     ./work/system/${platform}
+  ];
+
+  systemDarwinModules = [
+    (import ./public-modules/sy-darwin-defaults.nix { inherit (userDetails) home; })
+    (import ./public-modules/sy-darwin-system.nix { inherit (userDetails) username; })
+
+    ./public-modules/sy-darwin-homebrew.nix
+    ./public-modules/sy-darwin-nix-gc.nix
   ];
 
   macosHmModules = builtins.filter filterPaths [
@@ -128,24 +132,27 @@ let
 
   darwinFullSystem = nix-darwin.lib.darwinSystem {
     inherit specialArgs system;
-    modules = systemModules ++ [
-      home-manager.darwinModules.home-manager
+    modules =
+      systemModules
+      ++ systemDarwinModules
+      ++ [
+        home-manager.darwinModules.home-manager
 
-      # Configure home-manager to pick up both the public and work configurations (if they exist)
-      # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module>
-      {
-        # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useGlobalPkgs>
-        home-manager.useGlobalPkgs = true;
-        # Don't allow `users.users.<name>.packages = [ ... ]`, it avoids surprises like adding a
-        # package for only one user.
-        # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useUserPackages>
-        home-manager.useUserPackages = false;
+        # Configure home-manager to pick up both the public and work configurations (if they exist)
+        # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module>
+        {
+          # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useGlobalPkgs>
+          home-manager.useGlobalPkgs = true;
+          # Don't allow `users.users.<name>.packages = [ ... ]`, it avoids surprises like adding a
+          # package for only one user.
+          # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useUserPackages>
+          home-manager.useUserPackages = false;
 
-        home-manager.users.${userDetails.username}.imports = macosHmModules;
-        # Pass arguments to home.nix
-        home-manager.extraSpecialArgs = specialArgs;
-      }
-    ];
+          home-manager.users.${userDetails.username}.imports = macosHmModules;
+          # Pass arguments to home.nix
+          home-manager.extraSpecialArgs = specialArgs;
+        }
+      ];
   };
 
   linuxHmSystem = home-manager.lib.homeManagerConfiguration {
