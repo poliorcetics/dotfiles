@@ -5,7 +5,7 @@
 { config, mkConfigLink, ... }:
 {
   imports = [
-    (mkConfigLink { } "starship.toml" "public/home/programs/starship/config.toml")
+    (mkConfigLink { } "starship.toml" "public-modules/hm-program-starship/config.toml")
   ];
 
   programs.starship.enable = true;

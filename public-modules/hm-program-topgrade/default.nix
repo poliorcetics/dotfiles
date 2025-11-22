@@ -4,7 +4,7 @@
 { config, mkConfigLink, ... }:
 {
   imports = [
-    (mkConfigLink { } "topgrade.toml" "public/home/programs/topgrade/config.toml")
+    (mkConfigLink { } "topgrade.toml" "public-modules/hm-program-topgrade/config.toml")
   ];
 
   programs.topgrade.enable = true;

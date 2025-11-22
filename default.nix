@@ -58,13 +58,17 @@ let
         userDetails,
         ...
       }:
+      let
+        linked = "${config.home.homeDirectory}/${userDetails.dotfilesSubDir}/${source}";
+        target' = lib.info "${target} -> ${linked}" target;
+      in
       {
-        xdg.configFile."${target}".source = (if force then lib.mkForce else lib.id) (
-          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${userDetails.dotfilesSubDir}/${source}"
+        xdg.configFile."${target'}".source = (if force then lib.mkForce else lib.id) (
+          config.lib.file.mkOutOfStoreSymlink linked
         );
       };
     # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{program}/{file}`
-    # to `{dotfilesDir}/public/home/programs/${program}/${file}`.
+    # to `{dotfilesDir}/public-modules/hm-program-${program}/${file}`.
     #
     # Specialized version of `mkConfigLink`.
     #
@@ -82,7 +86,9 @@ let
         kind ? "public",
       }:
       program: file:
-      mkConfigLink { inherit force; } "${program}/${file}" "${kind}/home/programs/${program}/${file}";
+      mkConfigLink {
+        inherit force;
+      } "${program}/${file}" "${kind}-modules/hm-program-${program}/${file}";
   };
 
   sharedModules = [
@@ -116,6 +122,10 @@ let
     ./public-modules/sy-darwin-security.nix
   ];
 
+  # Home Manager config
+  #
+  # Main documentation: <https://nix-community.github.io/home-manager/index.xhtml>
+  # All options: <https://nix-community.github.io/home-manager/options.xhtml>
   hmModules = [
     (import ./public-modules/hm-generic.nix { inherit (userDetails) home username; })
     (import ./public-modules/hm-packages specialArgs.unstablePkgs)
@@ -123,12 +133,27 @@ let
     ./public-modules/hm-activation
     ./public-modules/hm-variables.nix
     ./public-modules/hm-xdg.nix
+
+    ./public-modules/hm-program-atuin
+    ./public-modules/hm-program-bat
+    ./public-modules/hm-program-direnv
+    ./public-modules/hm-program-gh
+    ./public-modules/hm-program-git
+    ./public-modules/hm-program-helix
+    ./public-modules/hm-program-jj
+    ./public-modules/hm-program-kitty
+    ./public-modules/hm-program-npm
+    ./public-modules/hm-program-nushell
+    ./public-modules/hm-program-python
+    ./public-modules/hm-program-shell
+    ./public-modules/hm-program-starship
+    ./public-modules/hm-program-topgrade
+    ./public-modules/hm-program-zoxide
   ];
 
   macosHmModules =
     hmModules
     ++ builtins.filter filterPaths [
-      ./public/home
       ./work/home
     ];
 
