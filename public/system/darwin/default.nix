@@ -1,8 +1,4 @@
 {
-  userDetails,
-  ...
-}:
-{
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -14,7 +10,4 @@
     touchIdAuth = true;
     watchIdAuth = true;
   };
-
-  # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/system/primary-user.nix>
-  system.primaryUser = userDetails.username;
 }

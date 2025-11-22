@@ -1,5 +1,6 @@
 {
   self,
+  username,
 }:
 {
   lib,
@@ -12,6 +13,9 @@ let
 in
 {
   system.configurationRevision = self.rev or self.dirtyRev or null;
+
+  # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/system/primary-user.nix>
+  system.primaryUser = mkIf isDarwin username;
 
   system.stateVersion = mkMerge [
     # Used for backwards compatibility, please read the changelog before changing.
