@@ -117,6 +117,7 @@ let
   ];
 
   hmModules = [
+    (import ./public-modules/hm-generic.nix { inherit (userDetails) home username; })
     (import ./public-modules/hm-packages specialArgs.unstablePkgs)
 
     ./public-modules/hm-activation
