@@ -116,13 +116,20 @@ let
     ./public-modules/sy-darwin-security.nix
   ];
 
-  macosHmModules = builtins.filter filterPaths [
-    ./public/home
-    ./work/home
+  hmModules = [
+    (import ./public-modules/hm-packages specialArgs.unstablePkgs)
   ];
+
+  macosHmModules =
+    hmModules
+    ++ builtins.filter filterPaths [
+      ./public/home
+      ./work/home
+    ];
 
   linuxHmModules =
     sharedModules
+    ++ hmModules
     ++ builtins.filter filterPaths [
       ./public/home
       ./work/home

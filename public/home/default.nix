@@ -8,7 +8,6 @@
     # Generic Home Manager options
     ./home-manager/activation.nix
     ./home-manager/generic.nix
-    ./home-manager/packages.nix
     ./home-manager/variables.nix
     ./home-manager/xdg.nix
     # Specific program configuration

@@ -1,8 +1,8 @@
+unstablePkgs:
 {
   config,
   lib,
   pkgs,
-  unstablePkgs,
   ...
 }:
 let
@@ -91,7 +91,7 @@ in
 
       # == Homemade packages ==
       (pkgs.writeScriptBin "rust-analyzer-wrapper" (
-        builtins.readFile ../scripts/rust-analyzer-wrapper.nu
+        builtins.readFile ./rust-analyzer-wrapper.nu
       ))
       (overrideNixProvidedBinary "rust-analyzer" "${pkgs.rustup}/bin/rust-analyzer"
         "${config.home.sessionVariables.CARGO_HOME}/bin/rust-analyzer"
