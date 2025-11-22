@@ -94,6 +94,8 @@ let
 
     (import ./public-modules/sy-user.nix { inherit (userDetails) home username; })
     (import ./public-modules/sy-system.nix { inherit (inputs) self; })
+
+    ./public-modules/sy-homebrew.nix
   ]
   ++ builtins.filter filterPaths [
     ./public/system/${platform}

@@ -5,7 +5,6 @@
 {
   imports = [
     ./defaults.nix
-    ./homebrew.nix
   ];
 
   # The platform the configuration will be used on.
