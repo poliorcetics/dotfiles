@@ -86,15 +86,16 @@ let
   };
 
   nixDarwinModules = [
-    # TODO: pass every specialArgs and other such parameters via a module
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
     (import ./public-modules/sh-nix-settings.nix { inherit userDetails; })
 
     ./public-modules/sh-nix-gc.nix
     ./public-modules/sh-nix-package.nix
+
+    (import ./public-modules/sy-user.nix { inherit (userDetails) home username; })
+    (import ./public-modules/sy-configuration-revision.nix { inherit (inputs) self; })
   ]
   ++ builtins.filter filterPaths [
-    ./public/system/common
     ./public/system/${platform}
     ./work/system/common
     ./work/system/${platform}
@@ -106,7 +107,6 @@ let
   ];
 
   linuxHmModules = [
-    # TODO: pass every specialArgs and other such parameters via a module
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
     (import ./public-modules/sh-nix-settings.nix { inherit userDetails; })
 
