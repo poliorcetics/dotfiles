@@ -85,7 +85,7 @@ let
       mkConfigLink { inherit force; } "${program}/${file}" "${kind}/home/programs/${program}/${file}";
   };
 
-  nixDarwinModules = [
+  systemModules = [
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
     (import ./public-modules/sh-nix-settings.nix { inherit userDetails; })
 
@@ -120,7 +120,7 @@ let
 
   darwinFullSystem = nix-darwin.lib.darwinSystem {
     inherit specialArgs system;
-    modules = nixDarwinModules ++ [
+    modules = systemModules ++ [
       home-manager.darwinModules.home-manager
 
       # Configure home-manager to pick up both the public and work configurations (if they exist)
