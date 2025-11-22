@@ -6,7 +6,6 @@
   # Imports other Nix files from the repo to configure various elements
   imports = [
     # Generic Home Manager options
-    ./home-manager/activation.nix
     ./home-manager/generic.nix
     ./home-manager/variables.nix
     ./home-manager/xdg.nix

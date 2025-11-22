@@ -118,6 +118,8 @@ let
 
   hmModules = [
     (import ./public-modules/hm-packages specialArgs.unstablePkgs)
+
+    ./public-modules/hm-activation
   ];
 
   macosHmModules =

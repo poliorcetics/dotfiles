@@ -1,5 +1,9 @@
 # Scripts to run on `home-manager switch`
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 let
   atuin = lib.getExe config.programs.atuin.package;
   nu = lib.getExe config.programs.nushell.package;
@@ -34,7 +38,7 @@ in
 
     nushellCompletions = ''
       run mkdir -p ${autoload}
-      run ${nu} ${../scripts/install-completions.nu} ${autoload}
+      run ${nu} ${./install-completions.nu} ${autoload}
     '';
   };
 }
