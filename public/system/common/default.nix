@@ -7,10 +7,6 @@ let
   inherit (userDetails) username;
 in
 {
-  imports = [
-    ./nix.nix
-  ];
-
   users.users.${username} = {
     inherit (userDetails) home;
     name = username;
