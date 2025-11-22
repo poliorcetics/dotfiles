@@ -90,9 +90,7 @@ in
       unstablePkgs.nixd # LSP for nix, actively maintained contrary to `nil`
 
       # == Homemade packages ==
-      (pkgs.writeScriptBin "rust-analyzer-wrapper" (
-        builtins.readFile ./rust-analyzer-wrapper.nu
-      ))
+      (pkgs.writeScriptBin "rust-analyzer-wrapper" (builtins.readFile ./rust-analyzer-wrapper.nu))
       (overrideNixProvidedBinary "rust-analyzer" "${pkgs.rustup}/bin/rust-analyzer"
         "${config.home.sessionVariables.CARGO_HOME}/bin/rust-analyzer"
       )

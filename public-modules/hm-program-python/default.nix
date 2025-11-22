@@ -1,9 +1,10 @@
 # Python configuration
-
+{
+  mkProgramFile,
+}:
 {
   config,
   pkgs,
-  mkProgramFile,
   ...
 }:
 {

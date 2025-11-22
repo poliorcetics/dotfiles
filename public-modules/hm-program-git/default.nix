@@ -2,9 +2,11 @@
 #
 # <https://git-scm.com/>
 {
-  lib,
   mkProgramFile,
   userDetails,
+}:
+{
+  lib,
   ...
 }:
 {

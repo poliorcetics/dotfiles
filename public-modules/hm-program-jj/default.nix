@@ -2,10 +2,12 @@
 #
 # <https://github.com/jj-vcs/jj>
 {
-  lib,
   mkProgramFile,
   unstablePkgs,
   userDetails,
+}:
+{
+  lib,
   ...
 }:
 {

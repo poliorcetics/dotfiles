@@ -1,7 +1,13 @@
 # Topgrade configuration
 #
 # <https://github.com/topgrade-rs/topgrade>
-{ config, mkConfigLink, ... }:
+{
+  mkConfigLink,
+}:
+{
+  config,
+  ...
+}:
 {
   imports = [
     (mkConfigLink { } "topgrade.toml" "public-modules/hm-program-topgrade/config.toml")

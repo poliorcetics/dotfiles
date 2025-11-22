@@ -55,7 +55,6 @@ let
       {
         config,
         lib,
-        userDetails,
         ...
       }:
       let
@@ -134,20 +133,23 @@ let
     ./public-modules/hm-variables.nix
     ./public-modules/hm-xdg.nix
 
-    ./public-modules/hm-program-atuin
+    (import ./public-modules/hm-program-atuin { inherit (specialArgs) mkProgramFile unstablePkgs; })
+    (import ./public-modules/hm-program-gh { inherit (specialArgs) mkProgramFile; })
+    (import ./public-modules/hm-program-git { inherit (specialArgs) mkProgramFile userDetails; })
+    (import ./public-modules/hm-program-helix { inherit (specialArgs) mkProgramFile; })
+    (import ./public-modules/hm-program-jj {
+      inherit (specialArgs) mkProgramFile unstablePkgs userDetails;
+    })
+    (import ./public-modules/hm-program-kitty { inherit (specialArgs) mkProgramFile; })
+    (import ./public-modules/hm-program-nushell { inherit (specialArgs) mkProgramFile unstablePkgs; })
+    (import ./public-modules/hm-program-python { inherit (specialArgs) mkProgramFile; })
+    (import ./public-modules/hm-program-starship { inherit (specialArgs) mkConfigLink; })
+    (import ./public-modules/hm-program-topgrade { inherit (specialArgs) mkConfigLink; })
+
     ./public-modules/hm-program-bat
     ./public-modules/hm-program-direnv
-    ./public-modules/hm-program-gh
-    ./public-modules/hm-program-git
-    ./public-modules/hm-program-helix
-    ./public-modules/hm-program-jj
-    ./public-modules/hm-program-kitty
     ./public-modules/hm-program-npm
-    ./public-modules/hm-program-nushell
-    ./public-modules/hm-program-python
     ./public-modules/hm-program-shell
-    ./public-modules/hm-program-starship
-    ./public-modules/hm-program-topgrade
     ./public-modules/hm-program-zoxide
   ];
 

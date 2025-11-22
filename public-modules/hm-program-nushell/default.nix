@@ -15,9 +15,11 @@
 # which is very slow and should not be done that way (instead a `home.activation` script would
 # probably be preferable, I should make a PR for that)
 {
-  config,
   mkProgramFile,
   unstablePkgs,
+}:
+{
+  config,
   ...
 }:
 

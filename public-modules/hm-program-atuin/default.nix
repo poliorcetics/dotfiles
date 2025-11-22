@@ -4,7 +4,6 @@
 {
   mkProgramFile,
   unstablePkgs,
-  ...
 }:
 {
   imports = [

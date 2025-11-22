@@ -1,8 +1,13 @@
 # Starship configuration
 #
 # <https://starship.rs>
-
-{ config, mkConfigLink, ... }:
+{
+  mkConfigLink,
+}:
+{
+  config,
+  ...
+}:
 {
   imports = [
     (mkConfigLink { } "starship.toml" "public-modules/hm-program-starship/config.toml")
