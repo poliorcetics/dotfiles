@@ -122,6 +122,7 @@ let
 
     ./public-modules/hm-activation
     ./public-modules/hm-variables.nix
+    ./public-modules/hm-xdg.nix
   ];
 
   macosHmModules =

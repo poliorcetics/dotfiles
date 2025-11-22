@@ -5,8 +5,6 @@
 {
   # Imports other Nix files from the repo to configure various elements
   imports = [
-    # Generic Home Manager options
-    ./home-manager/xdg.nix
     # Specific program configuration
     ./programs/atuin
     ./programs/bat
