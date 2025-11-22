@@ -103,7 +103,6 @@ let
   ]
   ++ sharedModules
   ++ builtins.filter filterPaths [
-    ./public/system/${platform}
     ./work/system/common
     ./work/system/${platform}
   ];
@@ -114,6 +113,7 @@ let
 
     ./public-modules/sy-darwin-homebrew.nix
     ./public-modules/sy-darwin-nix-gc.nix
+    ./public-modules/sy-darwin-security.nix
   ];
 
   macosHmModules = builtins.filter filterPaths [
