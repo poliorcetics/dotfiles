@@ -92,8 +92,9 @@ let
     ./public-modules/sh-nix-gc.nix
     ./public-modules/sh-nix-package.nix
 
-    (import ./public-modules/sy-user.nix { inherit (userDetails) home username; })
+    (import ./public-modules/sy-macos-defaults.nix { inherit (userDetails) home; })
     (import ./public-modules/sy-system.nix { inherit (inputs) self; })
+    (import ./public-modules/sy-user.nix { inherit (userDetails) home username; })
 
     ./public-modules/sy-homebrew.nix
   ]
