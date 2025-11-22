@@ -85,20 +85,23 @@ let
       mkConfigLink { inherit force; } "${program}/${file}" "${kind}/home/programs/${program}/${file}";
   };
 
-  systemModules = [
-    { nixpkgs.hostPlatform = system; }
-
+  sharedModules = [
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
     (import ./public-modules/sh-nix-settings.nix { inherit (userDetails) username; })
 
     ./public-modules/sh-nix-gc.nix
     ./public-modules/sh-nix-package.nix
+  ];
+
+  systemModules = [
+    { nixpkgs.hostPlatform = system; }
 
     (import ./public-modules/sy-system.nix { inherit (inputs) self; })
     (import ./public-modules/sy-user.nix { inherit (userDetails) home username; })
 
     ./public-modules/sy-nix-settings.nix
   ]
+  ++ sharedModules
   ++ builtins.filter filterPaths [
     ./public/system/${platform}
     ./work/system/common
@@ -118,17 +121,12 @@ let
     ./work/home
   ];
 
-  linuxHmModules = [
-    (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
-    (import ./public-modules/sh-nix-settings.nix { inherit userDetails; })
-
-    ./public-modules/sh-nix-gc.nix
-    ./public-modules/sh-nix-package.nix
-  ]
-  ++ builtins.filter filterPaths [
-    ./public/home
-    ./work/home
-  ];
+  linuxHmModules =
+    sharedModules
+    ++ builtins.filter filterPaths [
+      ./public/home
+      ./work/home
+    ];
 
   darwinFullSystem = nix-darwin.lib.darwinSystem {
     inherit specialArgs system;
