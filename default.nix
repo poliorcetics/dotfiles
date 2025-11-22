@@ -85,7 +85,11 @@ let
       mkConfigLink { inherit force; } "${program}/${file}" "${kind}/home/programs/${program}/${file}";
   };
 
-  nixDarwinModules = builtins.filter filterPaths [
+  nixDarwinModules = [
+    # TODO: pass every specialArgs and other such parameters via a module
+    (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
+  ]
+  ++ builtins.filter filterPaths [
     ./public/system/common
     ./public/system/${platform}
     ./work/system/common
@@ -97,13 +101,16 @@ let
     ./work/home
   ];
 
-  linuxHmModules = builtins.filter filterPaths [
+  linuxHmModules = [
+    # TODO: pass every specialArgs and other such parameters via a module
+    (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
+  ]
+  ++ builtins.filter filterPaths [
     ./public/home
     ./work/home
   ];
 
   darwinFullSystem = nix-darwin.lib.darwinSystem {
-
     inherit specialArgs system;
     modules = nixDarwinModules ++ [
       home-manager.darwinModules.home-manager
