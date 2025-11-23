@@ -61,14 +61,16 @@ let
   ++ sharedModules
   ++ workModules.systemModules;
 
-  darwinSystemModules = [
-    ./public-modules/sy-darwin-defaults.nix
-    ./public-modules/sy-darwin-homebrew.nix
-    ./public-modules/sy-darwin-nix-gc.nix
-    ./public-modules/sy-darwin-security.nix
-    ./public-modules/sy-darwin-system.nix
-  ]
-  ++ workModules.darwinSystemModules;
+  darwinSystemModules =
+    systemModules
+    ++ [
+      ./public-modules/sy-darwin-defaults.nix
+      ./public-modules/sy-darwin-homebrew.nix
+      ./public-modules/sy-darwin-nix-gc.nix
+      ./public-modules/sy-darwin-security.nix
+      ./public-modules/sy-darwin-system.nix
+    ]
+    ++ workModules.darwinSystemModules;
 
   # Home Manager config
   #
@@ -110,31 +112,28 @@ let
 
   darwinFullSystem = nix-darwin.lib.darwinSystem {
     inherit system;
-    modules =
-      systemModules
-      ++ darwinSystemModules
-      ++ [
-        home-manager.darwinModules.home-manager
+    modules = darwinSystemModules ++ [
+      home-manager.darwinModules.home-manager
 
-        # Configure home-manager to pick up both the public and work configurations (if they exist)
-        # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module>
-        (
-          {
-            config,
-            ...
-          }:
-          {
-            # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useGlobalPkgs>
-            home-manager.useGlobalPkgs = true;
-            # Don't allow `users.users.<name>.packages = [ ... ]`, it avoids surprises like adding a
-            # package for only one user.
-            # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useUserPackages>
-            home-manager.useUserPackages = false;
+      # Configure home-manager to pick up both the public and work configurations (if they exist)
+      # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module>
+      (
+        {
+          config,
+          ...
+        }:
+        {
+          # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useGlobalPkgs>
+          home-manager.useGlobalPkgs = true;
+          # Don't allow `users.users.<name>.packages = [ ... ]`, it avoids surprises like adding a
+          # package for only one user.
+          # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useUserPackages>
+          home-manager.useUserPackages = false;
 
-            home-manager.users.${config.personal.username}.imports = darwinHmModules;
-          }
-        )
-      ];
+          home-manager.users.${config.personal.username}.imports = darwinHmModules;
+        }
+      )
+    ];
   };
 
   linuxHmSystem = home-manager.lib.homeManagerConfiguration {
