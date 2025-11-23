@@ -1,10 +1,10 @@
 {
-  home,
-  username,
+  config,
+  ...
 }:
 {
-  users.users.${username} = {
-    inherit home;
-    name = username;
+  users.users.${config.personal.username} = {
+    inherit (config.personal) home;
+    name = config.personal.username;
   };
 }

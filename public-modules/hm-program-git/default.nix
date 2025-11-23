@@ -3,9 +3,9 @@
 # <https://git-scm.com/>
 {
   mkProgramFile,
-  userDetails,
 }:
 {
+  config,
   lib,
   ...
 }:
@@ -21,15 +21,15 @@
 
   xdg.configFile."git/public/user".text = ''
     [user]
-      email = "${userDetails.public.email}"
-      name = "${userDetails.public.displayName}"
+      email = "${config.personal.public.vcsEmail}"
+      name = "${config.personal.public.vcsDisplayName}"
   '';
 
-  xdg.configFile."git/work/user" = lib.mkIf (userDetails ? work) {
+  xdg.configFile."git/work/user" = lib.mkIf (config.personal.work.vcsEmail != null) {
     text = ''
       [user]
-        email = "${userDetails.work.email}"
-        name = "${userDetails.work.displayName}"
+        email = "${config.personal.work.vcsEmail}"
+        name = "${config.personal.work.vcsDisplayName}"
     '';
   };
 }

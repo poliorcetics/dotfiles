@@ -1,7 +1,10 @@
 # Configure macOS System Settings
 #
 # See also <https://macos-defaults.com>
-{ home }:
+{
+  config,
+  ...
+}:
 {
   system.defaults = {
     # Firewall configuration
@@ -32,7 +35,7 @@
         "/Applications/Transmission.app"
       ];
       persistent-others = [
-        "${home}/Downloads"
+        "${config.personal.home}/Downloads"
       ];
     };
 

@@ -1,6 +1,6 @@
 {
-  home,
-  username,
+  config,
+  ...
 }:
 {
   # Let Home Manager install and manage itself.
@@ -8,8 +8,8 @@
 
   home = {
     # Home Manager needs a bit of information about you and the paths it should manage.
-    inherit username;
-    homeDirectory = home;
+    inherit (config.personal) username;
+    homeDirectory = config.personal.home;
 
     # This value determines the Home Manager release that your configuration is compatible with. This
     # helps avoid breakage when a new Home Manager release introduces backwards incompatible changes.

@@ -4,9 +4,9 @@
 {
   mkProgramFile,
   unstablePkgs,
-  userDetails,
 }:
 {
+  config,
   lib,
   ...
 }:
@@ -19,17 +19,17 @@
 
   xdg.configFile."jj/conf.d/00-default-user.toml".text = ''
     [user]
-    email = "${userDetails.public.email}"
-    name = "${userDetails.public.displayName}"
+    email = "${config.personal.public.vcsEmail}"
+    name = "${config.personal.public.vcsDisplayName}"
   '';
 
-  xdg.configFile."jj/conf.d/00-work-user.toml" = lib.mkIf (userDetails ? work) {
+  xdg.configFile."jj/conf.d/00-work-user.toml" = lib.mkIf (config.personal.work.vcsEmail != null) {
     text = ''
       [[--scope]]
       --when.repositories = ["~/repos/work"]
       [--scope.user]
-      email = "${userDetails.work.email}"
-      name = "${userDetails.work.displayName}"
+      email = "${config.personal.work.vcsEmail}"
+      name = "${config.personal.work.vcsDisplayName}"
     '';
   };
 }

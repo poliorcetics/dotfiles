@@ -15,23 +15,16 @@ let
     }
     .${system};
 
-  filterPaths = path: builtins.pathExists "${builtins.toString path}/default.nix";
-
-  # Merge user details, favoritizing work ones
-  userDetails' =
-    builtins.foldl' (acc: p: if builtins.pathExists p then acc // (import p) else acc) { }
-      [
-        ./public-modules/sh-personal-user.nix
-        ./work/user.nix
-      ];
-  # Adapt the home path to the platform
-  userDetails =
-    userDetails'
+  workModules =
+    (if builtins.pathExists ./work-modules/default.nix then import ./work-modules/default.nix else { })
     // {
-      darwin.home = "/Users/${userDetails'.username}";
-      linux.home = "/home/${userDetails'.username}";
-    }
-    .${platform};
+      sharedModules = [ ];
+      systemModules = [ ];
+      darwinSystemModules = [ ];
+      hmModules = [ ];
+      darwinHmModules = [ ];
+      linuxHmSystem = [ ];
+    };
 
   unstablePkgs = import nixpkgs-unstable {
     inherit system;
@@ -58,7 +51,7 @@ let
       ...
     }:
     let
-      linked = "${config.home.homeDirectory}/${userDetails.dotfilesSubDir}/${source}";
+      linked = "${config.personal.dotfilesDir}/${source}";
       target' = lib.info "${target} -> ${linked}" target;
     in
     {
@@ -89,54 +82,60 @@ let
       inherit force;
     } "${program}/${file}" "${kind}-modules/hm-program-${program}/${file}";
 
+  # This module is special in that it is not imported via `sharedModules` but instead via
+  # both `systemModules` and `hmModules` since we need the values in it in both cases.
+  personalUserModule = import ./public-modules/sh-personal-user.nix platform;
+
   sharedModules = [
     (import ./public-modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
-    (import ./public-modules/sh-nix-settings.nix { inherit (userDetails) username; })
 
     ./public-modules/sh-nix-gc.nix
     ./public-modules/sh-nix-package.nix
-  ];
+    ./public-modules/sh-nix-settings.nix
+  ]
+  ++ workModules.sharedModules;
 
   systemModules = [
     { nixpkgs.hostPlatform = system; }
 
+    personalUserModule
+
     (import ./public-modules/sy-system.nix { inherit self; })
-    (import ./public-modules/sy-user.nix { inherit (userDetails) home username; })
 
     ./public-modules/sy-nix-settings.nix
+    ./public-modules/sy-user.nix
   ]
   ++ sharedModules
-  ++ builtins.filter filterPaths [
-    ./work/system/common
-    ./work/system/${platform}
-  ];
+  ++ workModules.systemModules;
 
-  systemDarwinModules = [
-    (import ./public-modules/sy-darwin-defaults.nix { inherit (userDetails) home; })
-    (import ./public-modules/sy-darwin-system.nix { inherit (userDetails) username; })
-
+  darwinSystemModules = [
+    ./public-modules/sy-darwin-defaults.nix
     ./public-modules/sy-darwin-homebrew.nix
     ./public-modules/sy-darwin-nix-gc.nix
     ./public-modules/sy-darwin-security.nix
-  ];
+    ./public-modules/sy-darwin-system.nix
+  ]
+  ++ workModules.darwinSystemModules;
 
   # Home Manager config
   #
   # Main documentation: <https://nix-community.github.io/home-manager/index.xhtml>
   # All options: <https://nix-community.github.io/home-manager/options.xhtml>
   hmModules = [
-    (import ./public-modules/hm-generic.nix { inherit (userDetails) home username; })
+    personalUserModule
+
     (import ./public-modules/hm-packages unstablePkgs)
 
     ./public-modules/hm-activation
+    ./public-modules/hm-generic.nix
     ./public-modules/hm-variables.nix
     ./public-modules/hm-xdg.nix
 
     (import ./public-modules/hm-program-atuin { inherit mkProgramFile unstablePkgs; })
     (import ./public-modules/hm-program-gh { inherit mkProgramFile; })
-    (import ./public-modules/hm-program-git { inherit mkProgramFile userDetails; })
+    (import ./public-modules/hm-program-git { inherit mkProgramFile; })
     (import ./public-modules/hm-program-helix { inherit mkProgramFile; })
-    (import ./public-modules/hm-program-jj { inherit mkProgramFile unstablePkgs userDetails; })
+    (import ./public-modules/hm-program-jj { inherit mkProgramFile unstablePkgs; })
     (import ./public-modules/hm-program-kitty { inherit mkProgramFile; })
     (import ./public-modules/hm-program-nushell { inherit mkProgramFile unstablePkgs; })
     (import ./public-modules/hm-program-python { inherit mkProgramFile; })
@@ -148,41 +147,39 @@ let
     ./public-modules/hm-program-npm
     ./public-modules/hm-program-shell
     ./public-modules/hm-program-zoxide
-  ];
+  ]
+  ++ workModules.hmModules;
 
-  macosHmModules =
-    hmModules
-    ++ builtins.filter filterPaths [
-      ./work/home
-    ];
+  darwinHmModules = hmModules ++ workModules.darwinHmModules;
 
-  linuxHmModules =
-    sharedModules
-    ++ hmModules
-    ++ builtins.filter filterPaths [
-      ./work/home
-    ];
+  linuxHmModules = sharedModules ++ hmModules ++ workModules.linuxHmModules;
 
   darwinFullSystem = nix-darwin.lib.darwinSystem {
     inherit system;
     modules =
       systemModules
-      ++ systemDarwinModules
+      ++ darwinSystemModules
       ++ [
         home-manager.darwinModules.home-manager
 
         # Configure home-manager to pick up both the public and work configurations (if they exist)
         # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module>
-        {
-          # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useGlobalPkgs>
-          home-manager.useGlobalPkgs = true;
-          # Don't allow `users.users.<name>.packages = [ ... ]`, it avoids surprises like adding a
-          # package for only one user.
-          # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useUserPackages>
-          home-manager.useUserPackages = false;
+        (
+          {
+            config,
+            ...
+          }:
+          {
+            # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useGlobalPkgs>
+            home-manager.useGlobalPkgs = true;
+            # Don't allow `users.users.<name>.packages = [ ... ]`, it avoids surprises like adding a
+            # package for only one user.
+            # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useUserPackages>
+            home-manager.useUserPackages = false;
 
-          home-manager.users.${userDetails.username}.imports = macosHmModules;
-        }
+            home-manager.users.${config.personal.username}.imports = darwinHmModules;
+          }
+        )
       ];
   };
 
