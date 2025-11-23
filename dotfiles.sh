@@ -6,20 +6,13 @@ set -euo pipefail
 
 /usr/bin/cd "$(/usr/bin/readlink -f "$0" | /usr/bin/xargs /usr/bin/dirname)"
 
-## ERROR HANDLING ##
-
-function error-exit() {
-  /bin/echo "$@" >&2
-  builtin exit 1
-}
-
 ## OS CHECK ##
 
 uname_os="$(/usr/bin/uname -s)"
 
 case "$uname_os" in
 Linux*)
-  error-exit "Known system: Linux, but unsupported, I haven't done everything needed"
+  /bin/echo "Known system: Linux"
   ;;
 
 Darwin*)
@@ -27,14 +20,15 @@ Darwin*)
   ;;
 
 *)
-  error-exit "Unknown system: $uname_os"
+  /bin/echo "Unknown system: $uname_os" >&2
+  builtin exit 1
   ;;
 esac
 
 ## HELPERS ##
 
-function run-nix() {
-  /run/current-system/sw/bin/nix --extra-experimental-features "flakes nix-command pipe-operators" "$@"
+function run-with-nix() {
+  /run/current-system/sw/bin/nix --show-trace --extra-experimental-features "flakes nix-command pipe-operators" "$@"
 }
 
 function run-linux-macos() {
@@ -53,6 +47,7 @@ function run-linux-macos() {
 
 function _initial-setup-nix-install() {
   /bin/echo "Installing nix"
+  # TODO: switch to Lix
   /bin/sh <(/usr/bin/curl -L https://nixos.org/nix/install) --daemon
 
   /bin/echo "Launch a new shell to get access to nix and call './dotfiles update'"
@@ -103,11 +98,11 @@ function secondary-setup-macos() {
 ## UPDATE ##
 
 function update-linux() {
-  error-exit "TODO"
+  run-with-nix run home-manager -- switch --show-trace --flake .#linux
 }
 
 function update-macos() {
-  run-nix run nix-darwin -- switch --flake .#mac
+  run-with-nix run nix-darwin -- switch --show-trace --flake .#mac
 }
 
 ## MAIN ##
@@ -125,11 +120,6 @@ update)
   run-linux-macos update-linux update-macos
   ;;
 
-upgrade)
-  run-nix flake update
-  run-linux-macos update-linux update-macos
-  ;;
-
 *)
   /bin/echo "Dotfiles handler:"
   /bin/echo ""
@@ -137,6 +127,5 @@ upgrade)
   /bin/echo "    initial-setup    Run the initial setup (installing nix & brew)"
   /bin/echo "    secondary-setup  Run the secondary setup (installing Helix, Iosevka, Rust toolchains, Rust-analyzer, ...)"
   /bin/echo "    update           Update based on the current state (ensure everything is installed)"
-  /bin/echo "    upgrade          Upgrade the lock file and run 'update'"
   ;;
 esac
