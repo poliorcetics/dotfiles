@@ -5,7 +5,7 @@
   nixpkgs-unstable,
   self,
   ...
-}:
+}@inputs:
 system:
 let
   platform =
@@ -15,8 +15,17 @@ let
     }
     .${system};
 
+  unstablePkgs = import nixpkgs-unstable {
+    inherit system;
+  };
+
   workModules =
-    (if builtins.pathExists ./work-modules/default.nix then import ./work-modules/default.nix else { })
+    (
+      if builtins.pathExists ./work-modules/default.nix then
+        (import ./work-modules/default.nix inputs { inherit platform system unstablePkgs; })
+      else
+        { }
+    )
     // {
       sharedModules = [ ];
       systemModules = [ ];
@@ -25,10 +34,6 @@ let
       darwinHmModules = [ ];
       linuxHmSystem = [ ];
     };
-
-  unstablePkgs = import nixpkgs-unstable {
-    inherit system;
-  };
 
   # This module is special in that it is not imported via `sharedModules` but instead via
   # both `systemModules` and `hmModules` since we need the values in it in both cases.
