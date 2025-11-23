@@ -3,13 +3,13 @@
 # <https://cli.github.com/manual/>
 
 {
-  mkProgramFile,
-}:
-{
-  imports = [
-    (mkProgramFile { force = true; } "gh" "config.yml")
-    (mkProgramFile { } "gh" "hosts.yml")
-  ];
-
   programs.gh.enable = true;
+
+  personal.links = {
+    "gh/config.yml" = {
+      target = "public-modules/hm-program-gh/config.yml";
+      force = true;
+    };
+    "gh/hosts.yml" = "public-modules/hm-program-gh/hosts.yml";
+  };
 }

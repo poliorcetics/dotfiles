@@ -15,24 +15,22 @@
 # which is very slow and should not be done that way (instead a `home.activation` script would
 # probably be preferable, I should make a PR for that)
 {
-  mkProgramFile,
   unstablePkgs,
 }:
 {
   config,
   ...
 }:
-
 {
-  imports = [
-    (mkProgramFile { } "nushell" "config.nu")
-    # Do it per-file to allow for `work/home` to also add its own autoload stuff
-    (mkProgramFile { } "nushell" "autoload/commands.nu")
-    (mkProgramFile { } "nushell" "autoload/less-env.nu")
-    (mkProgramFile { } "nushell" "autoload/rnr.nu")
-  ];
-
   programs.nushell.package = unstablePkgs.nushell;
+
+  personal.links = {
+    "nushell/config.nu" = "public-modules/hm-program-nushell/config.nu";
+    # Do it per-file to allow for `work/home` to also add its own autoload stuff
+    "nushell/autoload/commands.nu" = "public-modules/hm-program-nushell/autoload/commands.nu";
+    "nushell/autoload/less-env.nu" = "public-modules/hm-program-nushell/autoload/less-env.nu";
+    "nushell/autoload/rnr.nu" = "public-modules/hm-program-nushell/autoload/rnr.nu";
+  };
 
   home.packages = [
     config.programs.nushell.package

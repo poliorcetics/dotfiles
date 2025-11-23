@@ -30,58 +30,6 @@ let
     inherit system;
   };
 
-  # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{target}` to `{dotfilesDir}/${source}`.
-  #
-  # Used as:
-  #
-  # ```
-  # imports = [
-  #   (mkConfigLink { force = true; } "gh/config.yml" "config.yml")
-  #   (mkConfigLink { } "gh/hosts.yml" "hosts.yml")
-  # ];
-  # ```
-  mkConfigLink =
-    {
-      force ? false,
-    }:
-    target: source:
-    {
-      config,
-      lib,
-      ...
-    }:
-    let
-      linked = "${config.personal.dotfilesDir}/${source}";
-      target' = lib.info "${target} -> ${linked}" target;
-    in
-    {
-      xdg.configFile."${target'}".source = (if force then lib.mkForce else lib.id) (
-        config.lib.file.mkOutOfStoreSymlink linked
-      );
-    };
-  # Makes an out-of-store symlink from `XDG_CONFIG_HOME/{program}/{file}`
-  # to `{dotfilesDir}/public-modules/hm-program-${program}/${file}`.
-  #
-  # Specialized version of `mkConfigLink`.
-  #
-  # Used as:
-  #
-  # ```
-  # imports = [
-  #   (mkProgramFile { force = true; } "gh" "config.yml")
-  #   (mkProgramFile { } "gh" "hosts.yml")
-  # ];
-  # ```
-  mkProgramFile =
-    {
-      force ? false,
-      kind ? "public",
-    }:
-    program: file:
-    mkConfigLink {
-      inherit force;
-    } "${program}/${file}" "${kind}-modules/hm-program-${program}/${file}";
-
   # This module is special in that it is not imported via `sharedModules` but instead via
   # both `systemModules` and `hmModules` since we need the values in it in both cases.
   personalUserModule = import ./public-modules/sh-personal-user.nix platform;
@@ -127,24 +75,25 @@ let
     (import ./public-modules/hm-packages unstablePkgs)
 
     ./public-modules/hm-activation
+    ./public-modules/hm-config-links.nix
     ./public-modules/hm-generic.nix
     ./public-modules/hm-variables.nix
     ./public-modules/hm-xdg.nix
 
-    (import ./public-modules/hm-program-atuin { inherit mkProgramFile unstablePkgs; })
-    (import ./public-modules/hm-program-gh { inherit mkProgramFile; })
-    (import ./public-modules/hm-program-git { inherit mkProgramFile; })
-    (import ./public-modules/hm-program-helix { inherit mkProgramFile; })
-    (import ./public-modules/hm-program-jj { inherit mkProgramFile unstablePkgs; })
-    (import ./public-modules/hm-program-kitty { inherit mkProgramFile; })
-    (import ./public-modules/hm-program-nushell { inherit mkProgramFile unstablePkgs; })
-    (import ./public-modules/hm-program-python { inherit mkProgramFile; })
-    (import ./public-modules/hm-program-starship { inherit mkConfigLink; })
-    (import ./public-modules/hm-program-topgrade { inherit mkConfigLink; })
+    (import ./public-modules/hm-program-atuin { inherit unstablePkgs; })
+    (import ./public-modules/hm-program-jj { inherit unstablePkgs; })
+    (import ./public-modules/hm-program-nushell { inherit unstablePkgs; })
 
     ./public-modules/hm-program-bat
     ./public-modules/hm-program-direnv
+    ./public-modules/hm-program-gh
+    ./public-modules/hm-program-git
+    ./public-modules/hm-program-helix
+    ./public-modules/hm-program-kitty
     ./public-modules/hm-program-npm
+    ./public-modules/hm-program-python
+    ./public-modules/hm-program-starship
+    ./public-modules/hm-program-topgrade
     ./public-modules/hm-program-shell
     ./public-modules/hm-program-zoxide
   ]

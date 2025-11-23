@@ -1,17 +1,12 @@
 # Python configuration
 {
-  mkProgramFile,
-}:
-{
   config,
   pkgs,
   ...
 }:
 {
-  imports = [
-    # Workaround to ensure the python history is not in ~/
-    (mkProgramFile { } "python" "rc.py")
-  ];
+  # Workaround to ensure the python history is not in ~/
+  personal.links."python/rc.py" = "public-modules/hm-program-python/rc.py";
 
   home.packages = with pkgs; [
     python3

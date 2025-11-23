@@ -2,7 +2,6 @@
 #
 # <https://github.com/jj-vcs/jj>
 {
-  mkProgramFile,
   unstablePkgs,
 }:
 {
@@ -11,11 +10,9 @@
   ...
 }:
 {
-  imports = [
-    (mkProgramFile { } "jj" "config.toml")
-  ];
-
   home.packages = [ unstablePkgs.jujutsu ];
+
+  personal.links."jj/config.toml" = "public-modules/hm-program-jj/config.toml";
 
   xdg.configFile."jj/conf.d/00-default-user.toml".text = ''
     [user]

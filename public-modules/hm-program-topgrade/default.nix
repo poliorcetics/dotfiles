@@ -2,18 +2,13 @@
 #
 # <https://github.com/topgrade-rs/topgrade>
 {
-  mkConfigLink,
-}:
-{
   config,
   ...
 }:
 {
-  imports = [
-    (mkConfigLink { } "topgrade.toml" "public-modules/hm-program-topgrade/config.toml")
-  ];
-
   programs.topgrade.enable = true;
+
+  personal.links."topgrade.toml" = "public-modules/hm-program-topgrade/config.toml";
 
   xdg.configFile."topgrade.d/helix.toml".text =
     let

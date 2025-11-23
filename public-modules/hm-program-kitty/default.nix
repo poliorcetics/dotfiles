@@ -6,25 +6,22 @@
 
 # TODO: consider configuring <https://sw.kovidgoyal.net/kitty/kittens/ssh/#real-world-ssh-kitten-config>
 {
-  mkProgramFile,
-}:
-{
   config,
   lib,
   pkgs,
   ...
 }:
 {
-  # It's not a big deal to import this even on Linux
-  imports = [
-    (mkProgramFile { } "kitty" "kitty.conf")
-    (mkProgramFile { } "kitty" "theme.conf")
-    (mkProgramFile { } "kitty" "macos-launch-services-cmdline")
-  ];
-
   config = lib.mkIf pkgs.stdenv.isDarwin {
     # On macOS I use `brew` to manage Kitty and on Linux I don't use Kitty at all
     programs.kitty.enable = false;
+
+    personal.links = {
+      "kitty/kitty.conf" = "public-modules/hm-program-kitty/kitty.conf";
+      "kitty/theme.conf" = "public-modules/hm-program-kitty/theme.conf";
+      "kitty/macos-launch-services-cmdline" =
+        "public-modules/hm-program-kitty/macos-launch-services-cmdline";
+    };
 
     xdg.configFile."kitty/includes/editor.conf".text = ''
       # <https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.editor>

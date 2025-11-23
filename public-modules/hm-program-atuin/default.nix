@@ -2,14 +2,11 @@
 #
 # <https://atuin.sh>
 {
-  mkProgramFile,
   unstablePkgs,
 }:
 {
-  imports = [
-    (mkProgramFile { } "atuin" "config.toml")
-  ];
-
   programs.atuin.enable = true;
   programs.atuin.package = unstablePkgs.atuin;
+
+  personal.links."atuin/config.toml" = "public-modules/hm-program-atuin/config.toml";
 }

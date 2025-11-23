@@ -4,13 +4,10 @@
 #
 # I always use latest master so docs are at <https://docs.helix-editor.com/master/>.
 {
-  mkProgramFile,
-}:
-{
-  imports = [
-    (mkProgramFile { } "helix" "ignore")
-    (mkProgramFile { } "helix" "config.toml")
-    (mkProgramFile { } "helix" "languages.toml")
-    (mkProgramFile { } "helix" "themes/poliorcetics.toml")
-  ];
+  personal.links = {
+    "helix/config.toml" = "public-modules/hm-program-helix/config.toml";
+    "helix/ignore" = "public-modules/hm-program-helix/ignore";
+    "helix/languages.toml" = "public-modules/hm-program-helix/languages.toml";
+    "helix/themes/poliorcetics.toml" = "public-modules/hm-program-helix/themes/poliorcetics.toml";
+  };
 }
