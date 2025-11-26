@@ -13,10 +13,6 @@ in
       automatic = true;
       options = "--delete-older-than 30d";
     }
-
-    (mkIf isLinux {
-      dates = "weekly";
-    })
   ];
 
   nix.optimise = mkMerge [
