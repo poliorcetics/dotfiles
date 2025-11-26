@@ -9,7 +9,11 @@
   home.sessionPath = [
     "${config.home.homeDirectory}/.local/bin"
     "${config.home.sessionVariables.CARGO_HOME}/bin"
+    # I don't use homebrew on Linux
     (lib.mkIf pkgs.stdenv.isDarwin "/opt/homebrew/bin")
+    # Handled by nix-darwin on macOS
+    (lib.mkIf pkgs.stdenv.isLinux "${config.home.homeDirectory}/.nix-profile/bin")
+    (lib.mkIf pkgs.stdenv.isLinux "/nix/var/nix/profiles/default/bin")
   ];
 
   home.sessionVariables = {

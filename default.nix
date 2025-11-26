@@ -108,7 +108,9 @@ let
 
   darwinHmModules = hmModules ++ workModules.darwinHmModules;
 
-  linuxHmModules = sharedModules ++ hmModules ++ workModules.linuxHmModules;
+  linuxHmModules = sharedModules ++ hmModules ++ [
+    ./public-modules/hm-linux-env.nix
+  ] ++ workModules.linuxHmModules;
 
   darwinFullSystem = nix-darwin.lib.darwinSystem {
     inherit system;
