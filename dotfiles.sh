@@ -6,57 +6,25 @@ set -euo pipefail
 
 /usr/bin/cd "$(/usr/bin/readlink -f "$0" | /usr/bin/xargs /usr/bin/dirname)"
 
-## OS CHECK ##
-
-uname_os="$(/usr/bin/uname -s)"
-
-case "$uname_os" in
-Linux*)
-  /bin/echo "Known system: Linux"
-  ;;
-
-Darwin*)
-  /bin/echo "Known system: macOS"
-  ;;
-
-*)
-  /bin/echo "Unknown system: $uname_os" >&2
-  builtin exit 1
-  ;;
-esac
-
 ## HELPERS ##
 
+# The path of nix is not the same on Linux and Darwin,
 function run-with-nix() {
-  /run/current-system/sw/bin/nix --show-trace --extra-experimental-features "flakes nix-command" "$@"
-}
-
-function run-linux-macos() {
-  case "$uname_os" in
-  Linux*)
-    $1
-    ;;
-
-  Darwin*)
-    $2
-    ;;
-  esac
+  local nix_path
+  nix_path=$(/usr/bin/which nix)
+  /usr/bin/read -p "Nix used: $nix_path [Enter]"
+  nix --version
+  nix --show-trace --extra-experimental-features "flakes nix-command" "$@"
 }
 
 ### INITIAL SETUP ##
 
-function _initial-setup-nix-install() {
+function initial-setup-nix-install() {
   /bin/echo "Installing nix"
   # TODO: switch to Lix
   /bin/sh <(/usr/bin/curl -L https://nixos.org/nix/install) --daemon
 
-  /bin/echo "Launch a new shell to get access to nix and call './dotfiles update'"
-}
-
-function initial-setup-linux() {
-  _initial-setup-nix-install
-
-  /usr/bin/sudo /usr/bin/systemctl restart nix-daemon.service
+  /bin/echo "Launch a new shell to get access to nix and call 'sudo -E ./dotfiles update'"
 }
 
 # Lots of stuff to do on macOS
@@ -69,7 +37,7 @@ function initial-setup-macos() {
   /bin/echo "xcode-select Install"
   /usr/bin/xcode-select --install
 
-  _initial-setup-nix-install
+  initial-setup-nix-install
 
   /usr/bin/sudo /bin/launchctl kickstart -k system/org.nixos.nix-daemon
 
@@ -84,48 +52,46 @@ function initial-setup-macos() {
   /bin/ln -s /Applications/kitty.app/Contents/Resources/terminfo/78/xterm-kitty "$link_dir/xterm-kitty"
 }
 
-## SECONDARY SETUP ##
-
-function secondary-setup-linux() {
-  ./setup/secondary-setup.nu rust installs
-}
-
-function secondary-setup-macos() {
-  ./setup/secondary-setup.nu rust installs
-  ./setup/secondary-setup.nu tm setup-exclusions
-}
-
-## UPDATE ##
-
-function update-linux() {
-  run-with-nix run home-manager -- switch --show-trace --flake .#linux
-}
-
-function update-macos() {
-  run-with-nix run nix-darwin -- switch --show-trace --flake .#mac
-}
-
 ## MAIN ##
 
-case "$1" in
-initial-setup)
-  run-linux-macos initial-setup-linux initial-setup-macos
+uname_os="$(/usr/bin/uname -s)"
+
+case "$1,$uname_os" in
+initial-setup,Linux)
+  initial-setup-nix-install
+
+  /usr/bin/sudo /usr/bin/systemctl restart nix-daemon.service
+  ;;
+initial-setup,Darwin)
+  initial-setup-macos
   ;;
 
-secondary-setup)
-  run-linux-macos secondary-setup-linux secondary-setup-macos
+secondary-setup,Linux)
+  ./setup/secondary-setup.nu rust installs
+  ;;
+secondary-setup,Darwin)
+  ./setup/secondary-setup.nu rust installs
+  ./setup/secondary-setup.nu tm setup-exclusions
   ;;
 
-update)
-  run-linux-macos update-linux update-macos
+update,Linux)
+  run-with-nix run home-manager -- switch --show-trace --flake .#linux
+  ;;
+update,Darwin)
+  run-with-nix run nix-darwin -- switch --show-trace --flake .#mac
   ;;
 
-*)
+*,Linux | *,Darwin)
   /bin/echo "Dotfiles handler:"
   /bin/echo ""
   /bin/echo "Commands:"
   /bin/echo "    initial-setup    Run the initial setup (installing nix & brew)"
   /bin/echo "    secondary-setup  Run the secondary setup (installing Helix, Iosevka, Rust toolchains, Rust-analyzer, ...)"
   /bin/echo "    update           Update based on the current state (ensure everything is installed)"
+  ;;
+
+*)
+  /bin/echo "Unknown system: $uname_os" >&2
+  builtin exit 1
   ;;
 esac
