@@ -20,11 +20,11 @@ enables = [
 
   # === Actual ligations ===
   # Arrows
-  "arrow-l",        # Enable ligation set that forms left-pointing arrows.
-  "arrow-r",        # Enable ligation set that forms right-pointing arrows.
-  "arrow-lr",       # Enable ligation set that forms dual-pointing arrows.
-  "couter-arrow-l", # Enable ligation set that forms left-pointing counter-arrows.
-  "couter-arrow-r", # Enable ligation set that forms right-pointing counter-arrows.
+  "arrow-l",         # Enable ligation set that forms left-pointing arrows.
+  "arrow-r",         # Enable ligation set that forms right-pointing arrows.
+  "arrow-lr",        # Enable ligation set that forms dual-pointing arrows.
+  "counter-arrow-l", # Enable ligation set that forms left-pointing counter-arrows.
+  "counter-arrow-r", # Enable ligation set that forms right-pointing counter-arrows.
 
   # Equality
   "eqeqeq", # Enable special ligation for === with triple lines.
@@ -43,7 +43,7 @@ enables = [
   "kern-dotty", # Move connecting dotty punctuations closer, like for ::, ::: and ... .
 
   # < and > in ligations
-  "ltgt-diamong-tag", # Enable ligation for <> as diamond-shaped empty HTML/XML tag.
+  "ltgt-diamond-tag", # Enable ligation for <> as diamond-shaped empty HTML/XML tag.
   "llgg",             # Enable ligation for <<, >> and other angle-bracket chaining.
   "llggeq",           # Enable ligation for <<=, >>= as shift operator.
 

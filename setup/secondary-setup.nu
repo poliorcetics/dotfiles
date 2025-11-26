@@ -32,7 +32,7 @@ export def "main rust installs" [] {
     cargo +stable install cargo-instruments cargo-upgrades
 }
 
-export def "iosevka build" [] {
+export def "main iosevka build" [] {
     cd $env.XDG_CACHE_HOME
 
     git clone https://github.com/be5invis/Iosevka.git --single-branch --branch main --depth 1 iosevka
@@ -42,11 +42,11 @@ export def "iosevka build" [] {
 
     ln -s $"($env.XDG_CONFIG_HOME | path join home-manager extras $"iosevka-($plans)")" $"(pwd | path join $plans)"
 
-    nix shell nixpkgs#nodejs_21 nixpkgs#ttfautohint-nox --command npm install   --verbose
-    nix shell nixpkgs#nodejs_21 nixpkgs#ttfautohint-nox --command npm run build --verbose -- contents::IosevkaCustom
+    nix shell nixpkgs#nodejs_24 nixpkgs#ttfautohint-nox --command npm install   --verbose
+    nix shell nixpkgs#nodejs_24 nixpkgs#ttfautohint-nox --command npm run build --verbose -- contents::IosevkaCustom
 }
 
-# Setup time machines exclusions 
+# Setup time machines exclusions
 export def "main tm setup-exclusions" [] {
     /usr/bin/sudo /usr/bin/tmutil addexclusion -p $env.XDG_CACHE_HOME
     /usr/bin/sudo /usr/bin/tmutil addexclusion -p $env.XDG_STATE_HOME
