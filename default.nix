@@ -32,7 +32,7 @@ let
       darwinSystemModules = [ ];
       hmModules = [ ];
       darwinHmModules = [ ];
-      linuxHmSystem = [ ];
+      linuxHmModules = [ ];
     };
 
   # This module is special in that it is not imported via `sharedModules` but instead via
