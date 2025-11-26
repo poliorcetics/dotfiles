@@ -56,6 +56,17 @@ in
       '';
     };
 
+    nixFlavor = mkOption {
+      type = types.enum [
+        "lix"
+        "nix"
+      ];
+      default = "lix";
+      description = ''
+        Nix implementation to use for this machine.
+      '';
+    };
+
     public.vcsDisplayName = mkOption {
       type = types.nonEmptyStr;
       default = "Alexis (Poliorcetics) Bourget";

@@ -28,7 +28,7 @@ esac
 ## HELPERS ##
 
 function run-with-nix() {
-  /run/current-system/sw/bin/nix --show-trace --extra-experimental-features "flakes nix-command pipe-operators" "$@"
+  /run/current-system/sw/bin/nix --show-trace --extra-experimental-features "flakes nix-command" "$@"
 }
 
 function run-linux-macos() {
