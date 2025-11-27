@@ -19,21 +19,20 @@ let
     inherit system;
   };
 
-  workModules =
-    (
-      if builtins.pathExists ./work-modules/default.nix then
-        (import ./work-modules/default.nix inputs { inherit platform system unstablePkgs; })
-      else
-        { }
-    )
-    // {
-      sharedModules = [ ];
-      systemModules = [ ];
-      darwinSystemModules = [ ];
-      hmModules = [ ];
-      darwinHmModules = [ ];
-      linuxHmModules = [ ];
-    };
+  workModules = {
+    sharedModules = [ ];
+    systemModules = [ ];
+    darwinSystemModules = [ ];
+    hmModules = [ ];
+    darwinHmModules = [ ];
+    linuxHmModules = [ ];
+  }
+  // (
+    if builtins.pathExists ./work-modules/default.nix then
+      (import ./work-modules/default.nix inputs { inherit platform system unstablePkgs; })
+    else
+      { }
+  );
 
   # This module is special in that it is not imported via `sharedModules` but instead via
   # both `systemModules` and `hmModules` since we need the values in it in both cases.
