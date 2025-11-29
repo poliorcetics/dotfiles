@@ -42,8 +42,8 @@ export def "main iosevka build" [] {
 
     ln -s $"($env.XDG_CONFIG_HOME | path join home-manager extras $"iosevka-($plans)")" $"(pwd | path join $plans)"
 
-    nix shell nixpkgs#nodejs_24 nixpkgs#ttfautohint-nox --command npm install   --verbose
-    nix shell nixpkgs#nodejs_24 nixpkgs#ttfautohint-nox --command npm run build --verbose -- contents::IosevkaCustom
+    nix shell nixpkgs#nodejs_24 nixpkgs#ttfautohint-nox nixpkgs#woff2 --command npm install   --verbose
+    nix shell nixpkgs#nodejs_24 nixpkgs#ttfautohint-nox nixpkgs#woff2 --command npm run build --verbose -- contents::IosevkaCustom
 }
 
 # Setup time machines exclusions
