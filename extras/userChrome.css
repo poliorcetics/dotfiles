@@ -1,7 +1,8 @@
 /*
 Source: <https://github.com/piroor/treestyletab/wiki/Code-snippets-for-custom-style-rules#only-hide-horizontal-tabs-if-tree-style-tabs-sidebar-is-visible>
 
-MUST BE IN "~/Library/Application Support/Firefox/Profiles/PROFILE/chrome/userChrome.css"
+- macOS: <~/Library/Application Support/Firefox/Profiles/PROFILE/chrome/userChrome.css>
+- linux: <~/.mozilla/firefox/PROFILE/chrome/userChrome.css>
 
 Firefox settings in `about:config`: `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`.
 */
