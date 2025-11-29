@@ -8,6 +8,14 @@ I use [`nushell`](https://www.nushell.sh/) as my primary shell but I do **not** 
 
 Anyway, onwards to the installation:
 
+### Linux
+
+1. Install [`lix`](https://lix.systems) or [`nix`](https://nixos.org)
+2. Temporarily install Git `nix shell nixpkgs#git`
+3. `./dotfiles.sh update`
+
+### macOS
+
 ```sh
 ## Initial install
 ./dotfiles.sh initial-setup
@@ -16,7 +24,11 @@ Anyway, onwards to the installation:
 
 ## Install everything
 sudo -E ./dotfiles.sh update
+```
 
+### Common
+
+```sh
 ## Secondary setup, after installing the requirement just above
 ./dotfiles.sh secondary-setup
 
@@ -25,10 +37,6 @@ sudo -E ./dotfiles.sh update
 # Add to GitHub: <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account>
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "COMMENT"
 ssh-keygen -t ed25519 -f ~/.ssh/id_signing -C "COMMENT - Signing"
-
-ssh-agent -s
-ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-ssh-add --apple-use-keychain ~/.ssh/id_signing
 
 ## Sync Atuin
 #
@@ -40,3 +48,4 @@ atuin sync -f
 ### After the install
 
 - Connect Matrix account
+- Firefox extensions (TST and `userChrome.css` notably)
