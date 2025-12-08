@@ -73,6 +73,7 @@ command = "rust-analyzer-wrapper"
 #: cargo.target = "aarch64-apple-darwin"
 
 assist.importGranularity = "module"
+assist.preferSelf = true
 check.command = "clippy"
 completion.fullFunctionSignatures.enable = true
 diagnostics.disabled = [
