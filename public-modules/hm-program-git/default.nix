@@ -16,14 +16,14 @@
     "git/includes" = "public-modules/hm-program-git/includes";
   };
 
-  xdg.configFile."git/public/user".text = ''
+  xdg.configFile."git/public/user".text = /* git-config */ ''
     [user]
       email = "${config.personal.public.vcsEmail}"
       name = "${config.personal.public.vcsDisplayName}"
   '';
 
   xdg.configFile."git/work/user" = lib.mkIf (config.personal.work.vcsEmail != null) {
-    text = ''
+    text = /* git-config */ ''
       [user]
         email = "${config.personal.work.vcsEmail}"
         name = "${config.personal.work.vcsDisplayName}"

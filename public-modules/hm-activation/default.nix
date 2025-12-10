@@ -20,7 +20,7 @@ in
     # === Usual directories ===
 
     # Create my expected directories
-    makeDirs = ''
+    makeDirs = /* bash */ ''
       run mkdir -p ~/repos/me/
       run mkdir -p ~/repos/tp/
       run mkdir -p ~/repos/work/
@@ -29,14 +29,14 @@ in
     # === Nushell Files ===
 
     # Extras files nudir
-    extras = ''
+    extras = /* bash */ ''
       run mkdir -p ${autoload}
       run ${atuin}    init nu      > ${autoload}/atuin.nu
       run ${starship} init nu      > ${autoload}/starship.nu
       run ${zoxide}   init nushell > ${autoload}/zoxide.nu
     '';
 
-    nushellCompletions = ''
+    nushellCompletions = /* bash */ ''
       run mkdir -p ${autoload}
       run ${nu} ${./install-completions.nu} ${autoload}
     '';

@@ -6,7 +6,7 @@
   ...
 }:
 let
-  sourceSessionVariables = lib.optionalString pkgs.stdenv.isLinux ''
+  sourceSessionVariables = lib.optionalString pkgs.stdenv.isLinux /* bash */ ''
     . "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh"
   '';
 in
@@ -14,7 +14,7 @@ in
   programs.bash = {
     enable = true;
     # We use nushell to cleanup the path of duplicates.
-    initExtra = ''
+    initExtra = /* bash */ ''
       if [ -z "$__personal_extra_init_already_done" ]; then
         ${sourceSessionVariables}
         export PATH=$(${config.home.homeDirectory}/.nix-profile/bin/nu --commands '$env.PATH | uniq | str join :')

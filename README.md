@@ -11,8 +11,8 @@ Anyway, onwards to the installation:
 ### Linux
 
 1. Install [`lix`](https://lix.systems) or [`nix`](https://nixos.org)
-2. Temporarily install Git `nix shell nixpkgs#git`
-3. `./dotfiles.sh update`
+1. Temporarily install Git `nix shell nixpkgs#git`
+1. `./dotfiles.sh update`
 
 ### macOS
 

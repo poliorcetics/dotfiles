@@ -15,7 +15,7 @@
       helixRepo = "${config.xdg.cacheHome}/helix-repo";
       helixTarget = "${config.xdg.cacheHome}/target-dirs/topgrade/helix-repo";
     in
-    ''
+    /* toml */ ''
       [commands]
       "1. Helix - Install from repo" = """
           cd "${helixRepo}" \

@@ -14,14 +14,14 @@
 
   personal.links."jj/config.toml" = "public-modules/hm-program-jj/config.toml";
 
-  xdg.configFile."jj/conf.d/00-default-user.toml".text = ''
+  xdg.configFile."jj/conf.d/00-default-user.toml".text = /* toml */ ''
     [user]
     email = "${config.personal.public.vcsEmail}"
     name = "${config.personal.public.vcsDisplayName}"
   '';
 
   xdg.configFile."jj/conf.d/00-work-user.toml" = lib.mkIf (config.personal.work.vcsEmail != null) {
-    text = ''
+    text = /* toml */ ''
       [[--scope]]
       --when.repositories = ["~/repos/work"]
       [--scope.user]
