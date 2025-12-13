@@ -13,13 +13,32 @@
 #
 # <https://carapace-sh.github.io/carapace-bin/setup.html#nushell>
 # <https://www.nushell.sh/cookbook/external_completers.html#putting-it-all-together>
-$env.config.completions.external = {
-    enable: true
-    completer: {|spans: list<string>|
-        carapace $spans.0 nushell ...$spans
-            | from json
-            | if ($in | default [] | where value =~ '(.*ERR|^_)$' | is-empty) { $in } else { null }
+$env.config.completions.external.enable = true
+$env.config.completions.external.completer = {|spans: list<string>|
+    # <https://www.nushell.sh/cookbook/external_completers.html#carapace-completer>
+    def fish_completer [spans: list<string>] {
+        fish --command $"complete '--do-complete=($spans | str replace --all "'" "\\'" | str join ' ')'"
+        | from tsv --flexible --noheaders --no-infer
+        | rename value description
+        | update value {|row|
+          let value = $row.value
+          let need_quote = ['\' ',' '[' ']' '(' ')' ' ' '\t' "'" '"' "`"] | any {$in in $value}
+          if ($need_quote and ($value | path exists)) {
+            let expanded_path = if ($value starts-with ~) {$value | path expand --no-symlink} else {$value}
+            $'"($expanded_path | str replace --all "\"" "\\\"")"'
+          } else {
+            $value
+          }
+        }
     }
+
+    carapace $spans.0 nushell ...$spans
+        | from json
+        | if ($in | default [] | any {|| $in.display == 'ERR' or $in.display == '_' }) {
+            $in
+          } else {
+            fish_completer $spans
+          }
 }
 
 $env.config.show_banner = false
