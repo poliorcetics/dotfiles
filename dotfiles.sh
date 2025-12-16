@@ -2,10 +2,6 @@
 
 set -euo pipefail
 
-## EARLY SETUP ##
-
-/usr/bin/cd "$(/usr/bin/readlink -f "$0" | /usr/bin/xargs /usr/bin/dirname)"
-
 ## HELPERS ##
 
 # The path of nix is not the same on Linux and Darwin,
