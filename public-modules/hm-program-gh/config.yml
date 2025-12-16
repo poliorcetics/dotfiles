@@ -3,4 +3,4 @@ aliases:
 editor: hx
 git_protocol: ssh
 prompt: enabled
-version: '1'
+version: "1"

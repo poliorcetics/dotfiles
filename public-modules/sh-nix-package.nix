@@ -13,7 +13,7 @@ in
     (lib.mkIf (nixFlavor == "lix") {
       nixpkgs.overlays = [
         # <https://lix.systems/add-to-config/#advanced-change>
-        (final: prev: {
+        (_final: prev: {
           inherit (prev.lixPackageSets.${lixVersion})
             colmena
             nix-eval-jobs
