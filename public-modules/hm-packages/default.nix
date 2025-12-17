@@ -24,7 +24,7 @@ let
     ));
 in
 {
-  home.packages =
+  home.packages = lib.mkMerge [
     (with pkgs; [
       # == Cargo ==
       cargo-binutils
@@ -85,7 +85,8 @@ in
       ninja # Compile C & C++ things
       yaml-language-server # LSP for YAML
     ])
-    ++ [
+
+    [
       # == Unstable packages ==
       unstablePkgs.nixd # LSP for nix, actively maintained contrary to `nil`
 
@@ -94,5 +95,10 @@ in
       (overrideNixProvidedBinary "rust-analyzer" "${pkgs.rustup}/bin/rust-analyzer"
         "${config.home.sessionVariables.CARGO_HOME}/bin/rust-analyzer"
       )
-    ];
+    ]
+
+    (lib.mkIf pkgs.stdenv.isLinux [
+      pkgs.clang
+    ])
+  ];
 }
