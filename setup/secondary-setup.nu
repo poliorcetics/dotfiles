@@ -26,10 +26,10 @@ export def "main rust installs" [] {
     cargo +stable install --git https://github.com/rust-lang/rust-analyzer --branch master --force rust-analyzer
 
     # Custom installs
-    helix install
+    main helix install
 
     # Regular cargo installs
-    cargo +stable install cargo-instruments cargo-upgrades
+    cargo +stable install cargo-upgrades
 }
 
 export def "main iosevka build" [] {
