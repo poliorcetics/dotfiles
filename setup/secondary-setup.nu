@@ -33,6 +33,7 @@ export def "main rust installs" [] {
 }
 
 export def "main iosevka build" [] {
+    let dotfiles = pwd
     cd $env.XDG_CACHE_HOME
 
     git clone https://github.com/be5invis/Iosevka.git --single-branch --branch main --depth 1 iosevka
@@ -40,10 +41,10 @@ export def "main iosevka build" [] {
     cd iosevka
     let plans = "private-build-plans.toml"
 
-    ln -s $"($env.XDG_CONFIG_HOME | path join home-manager extras $"iosevka-($plans)")" $"(pwd | path join $plans)"
+    ln -s $"($dotfiles | path join $"extras/iosevka-($plans)")" $"(pwd | path join $plans)"
 
     nix shell nixpkgs#nodejs_24 nixpkgs#ttfautohint-nox nixpkgs#woff2 --command npm install   --verbose
-    nix shell nixpkgs#nodejs_24 nixpkgs#ttfautohint-nox nixpkgs#woff2 --command npm run build --verbose -- contents::IosevkaCustom
+    nix shell nixpkgs#nodejs_24 nixpkgs#ttfautohint-nox nixpkgs#woff2 --command npm run build --verbose -- --jCmd 4 contents::IosevkaCustom
 }
 
 # Setup time machines exclusions
