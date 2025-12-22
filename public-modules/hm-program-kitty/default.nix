@@ -7,6 +7,8 @@
 # TODO: consider configuring <https://sw.kovidgoyal.net/kitty/kittens/ssh/#real-world-ssh-kitten-config>
 {
   config,
+  lib,
+  pkgs,
   ...
 }:
 {
@@ -16,9 +18,13 @@
   personal.links = {
     "kitty/kitty.conf" = "public-modules/hm-program-kitty/kitty.conf";
     "kitty/theme.conf" = "public-modules/hm-program-kitty/theme.conf";
-    # Technically useless on Linux but it doesn't cost anything to symlink it anyway
     "kitty/macos-launch-services-cmdline" =
-      "public-modules/hm-program-kitty/macos-launch-services-cmdline";
+      lib.mkIf pkgs.stdenv.isDarwin "public-modules/hm-program-kitty/macos-launch-services-cmdline";
+
+    "kitty/includes/02-linux.conf" =
+      lib.mkIf pkgs.stdenv.isLinux "public-modules/hm-program-kitty/linux.conf";
+    "kitty/includes/02-macos.conf" =
+      lib.mkIf pkgs.stdenv.isDarwin "public-modules/hm-program-kitty/macos.conf";
   };
 
   xdg.configFile."kitty/includes/01-editor.conf".text = ''
