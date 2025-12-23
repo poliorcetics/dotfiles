@@ -96,6 +96,7 @@ let
     ./public-modules/hm-program-git
     ./public-modules/hm-program-helix
     ./public-modules/hm-program-kitty
+    ./public-modules/hm-program-niri
     ./public-modules/hm-program-npm
     ./public-modules/hm-program-python
     ./public-modules/hm-program-starship
