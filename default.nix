@@ -76,7 +76,9 @@ let
   # Main documentation: <https://nix-community.github.io/home-manager/index.xhtml>
   # All options: <https://nix-community.github.io/home-manager/options.xhtml>
   hmModules = [
+    # Modules defining new options are there
     personalUserModule
+    ./public-modules/hm-global-package.nix
 
     (import ./public-modules/hm-packages unstablePkgs)
 
