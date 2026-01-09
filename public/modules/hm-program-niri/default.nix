@@ -10,7 +10,7 @@
 {
   config = lib.mkIf pkgs.stdenv.isLinux {
     personal.links = {
-      "niri/config.kdl" = "public-modules/hm-program-niri/config.kdl";
+      "niri/config.kdl" = "public/modules/hm-program-niri/config.kdl";
     };
   };
 }

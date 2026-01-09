@@ -41,9 +41,9 @@ in
       Configuration symlinked from dotfiles dir to XDG Config Home.
     '';
     example = {
-      "gh/config.yml" = "public-modules/hm-program-gh/config.yml";
+      "gh/config.yml" = "public/modules/hm-program-gh/config.yml";
       "gh/hosts.yml" = {
-        target = "public-modules/hm-program-gh/hosts.yml";
+        target = "public/modules/hm-program-gh/hosts.yml";
         force = true;
       };
     };

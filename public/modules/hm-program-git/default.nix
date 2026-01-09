@@ -11,9 +11,9 @@
   programs.git.lfs.enable = true;
 
   personal.links = {
-    "git/config" = "public-modules/hm-program-git/config";
-    "git/ignore" = "public-modules/hm-program-git/ignore";
-    "git/includes" = "public-modules/hm-program-git/includes";
+    "git/config" = "public/modules/hm-program-git/config";
+    "git/ignore" = "public/modules/hm-program-git/ignore";
+    "git/includes" = "public/modules/hm-program-git/includes";
   };
 
   xdg.configFile."git/public/user".text = /* git-config */ ''

@@ -71,10 +71,10 @@ secondary-setup,Darwin)
   ;;
 
 update,Linux)
-  run-with-nix run home-manager -- switch --show-trace --flake .#linux
+  run-with-nix run home-manager -- switch --show-trace --flake .
   ;;
 update,Darwin)
-  run-with-nix run nix-darwin -- switch --show-trace --flake .#mac
+  run-with-nix run nix-darwin -- switch --show-trace --flake .
   ;;
 
 *,Linux | *,Darwin)

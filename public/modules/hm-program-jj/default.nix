@@ -12,7 +12,7 @@
 {
   home.packages = [ unstablePkgs.jujutsu ];
 
-  personal.links."jj/config.toml" = "public-modules/hm-program-jj/config.toml";
+  personal.links."jj/config.toml" = "public/modules/hm-program-jj/config.toml";
 
   xdg.configFile."jj/conf.d/00-default-user.toml".text = /* toml */ ''
     [user]

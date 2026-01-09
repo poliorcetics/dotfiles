@@ -25,11 +25,11 @@
   programs.nushell.package = unstablePkgs.nushell;
 
   personal.links = {
-    "nushell/config.nu" = "public-modules/hm-program-nushell/config.nu";
+    "nushell/config.nu" = "public/modules/hm-program-nushell/config.nu";
     # Do it per-file to allow for `work/home` to also add its own autoload stuff
-    "nushell/autoload/commands.nu" = "public-modules/hm-program-nushell/autoload/commands.nu";
-    "nushell/autoload/less-env.nu" = "public-modules/hm-program-nushell/autoload/less-env.nu";
-    "nushell/autoload/rnr.nu" = "public-modules/hm-program-nushell/autoload/rnr.nu";
+    "nushell/autoload/commands.nu" = "public/modules/hm-program-nushell/autoload/commands.nu";
+    "nushell/autoload/less-env.nu" = "public/modules/hm-program-nushell/autoload/less-env.nu";
+    "nushell/autoload/rnr.nu" = "public/modules/hm-program-nushell/autoload/rnr.nu";
   };
 
   home.packages = [
