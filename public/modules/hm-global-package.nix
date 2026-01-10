@@ -20,7 +20,7 @@ in
 
       Will fail if the name already exists and is not a link to the nix store.
     '';
-    default = {};
+    default = { };
   };
 
   config = lib.mkIf (builtins.length (builtins.attrNames global-packages) != 0) {

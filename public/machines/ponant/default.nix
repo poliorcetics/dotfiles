@@ -39,7 +39,14 @@ rec {
 
       ../../modules/sy-user.nix
 
-      { nixpkgs.hostPlatform = system; }
+      {
+        nixpkgs.hostPlatform = system;
+
+        # Used for backwards compatibility, please read the changelog before changing.
+        # $ darwin-rebuild changelog
+        # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/system/version.nix#L34>
+        system.stateVersion = 4;
+      }
 
       # <https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nix-darwin-module>
       (
@@ -82,6 +89,14 @@ rec {
 
             ../../modules/hm-variables.nix
             ../../modules/hm-xdg.nix
+
+            # This value determines the Home Manager release that your configuration is compatible
+            # with. This  helps avoid breakage when a new Home Manager release introduces backwards
+            # incompatible changes.
+            #
+            # You should not change this value, even if you update Home Manager. If you do want to
+            # update the  value, then make sure to first check the Home Manager release notes.
+            { home.stateVersion = "24.05"; }
           ];
         }
       )
