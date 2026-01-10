@@ -73,7 +73,6 @@ rec {
             ../../modules/hm-program-git
             ../../modules/hm-program-helix
             ../../modules/hm-program-kitty
-            ../../modules/hm-program-niri
             ../../modules/hm-program-npm
             ../../modules/hm-program-python
             ../../modules/hm-program-shell
