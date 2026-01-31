@@ -16,7 +16,7 @@ let
     inherit system;
   };
 in
-rec {
+{
   homeConfigurations.${machine} = home-manager.lib.homeManagerConfiguration {
     pkgs = import nixpkgs { inherit system; };
     modules = [
@@ -59,6 +59,4 @@ rec {
       { home.stateVersion = "25.05"; }
     ];
   };
-
-  checks.${system}.${machine} = homeConfigurations.${machine}.activationPackage;
 }

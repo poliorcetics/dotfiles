@@ -15,7 +15,7 @@ let
     inherit system;
   };
 in
-rec {
+{
   darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
     inherit system;
     modules = [
@@ -102,6 +102,4 @@ rec {
       )
     ];
   };
-
-  checks.${system}.${hostname} = darwinConfigurations.${hostname}.system;
 }

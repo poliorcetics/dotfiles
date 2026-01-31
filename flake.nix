@@ -32,15 +32,35 @@
       ...
     }@inputs:
     let
-      recursiveMerge = nixpkgs.lib.foldr nixpkgs.lib.recursiveUpdate { };
-      configs = inputs.nixpkgs.lib.pipe ./machines [
-        builtins.readDir
-        builtins.attrNames
-        (builtins.map (filename: import ./machines/${filename} inputs))
-      ];
+      inherit (nixpkgs) lib;
+
+      recursiveMerge = lib.foldr nixpkgs.lib.recursiveUpdate { };
+      # Resolve all configs first to allow automatically setting up the machine checks
+      configs = recursiveMerge (
+        lib.pipe ./machines [
+          builtins.readDir
+          builtins.attrNames
+          (builtins.map (filename: import ./machines/${filename} inputs))
+        ]
+      );
+
+      makeChecks =
+        configurations: checkedMember:
+        lib.pipe configurations [
+          lib.attrsToList
+          (builtins.map (
+            # machine name, machine configuration
+            { name, value }:
+            {
+              checks.${value.pkgs.system}.${name} = value.${checkedMember};
+            }
+          ))
+        ];
     in
-    recursiveMerge (
-      configs
+    configs
+    // recursiveMerge (
+      (makeChecks configs.homeConfigurations "activationPackage")
+      ++ (makeChecks configs.darwinConfigurations "system")
       ++ [
         {
           formatter =
