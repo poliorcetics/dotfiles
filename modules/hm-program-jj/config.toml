@@ -1,7 +1,7 @@
-# Settings: <https://jj-vcs.github.io/jj/latest/config/>
-"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+# Settings: <https://docs.jj-vcs.dev/latest/config/>
+"$schema" = "https://docs.jj-vcs.dev/latest/config-schema.json"
 
-# <https://jj-vcs.github.io/jj/latest/config/#aliases>
+# <https://docs.jj-vcs.dev/latest/config/#aliases>
 [aliases]
 b = ["bookmark"]
 c = ["commit"]
@@ -22,11 +22,11 @@ rs = ["rebase", "--source", "visible_open_roots()", "--destination"]
 s = ["status"]
 sq = ["squash"]
 
-# <https://jj-vcs.github.io/jj/latest/config/#git-settings>
+# <https://docs.jj-vcs.dev/latest/config/#git-settings>
 [git]
 private-commits = "description(glob:'LOCAL:*')"
 subprocess = true
-# <https://jj-vcs.github.io/jj/latest/config/#automatically-signing-commits>
+# <https://docs.jj-vcs.dev/latest/config/#automatically-signing-commits>
 sign-on-push = true
 
 [merge-tools.difft]
@@ -45,8 +45,8 @@ diff-args = [
 # Useful to rebase all branches with `jj r -s "all:visible_open_roots()" -d main/master/develop/..`
 "visible_open_roots()" = "roots(visible_open())"
 
-# <https://jj-vcs.github.io/jj/latest/config/#commit-signing>
-# <https://jj-vcs.github.io/jj/latest/config/#ssh-signing>
+# <https://docs.jj-vcs.dev/latest/config/#commit-signing>
+# <https://docs.jj-vcs.dev/latest/config/#ssh-signing>
 [signing]
 backend = "ssh"
 behaviour = "own"
@@ -59,11 +59,11 @@ git_push_bookmark = '"ab/push-" ++ change_id.short()'
 # Use a minimum length of 8, ensuring my Kitty config can detect such IDs all the time
 "format_short_id(id)" = "id.shortest(8)"
 
-# <https://jj-vcs.github.io/jj/latest/config/#ui-settings>
+# <https://docs.jj-vcs.dev/latest/config/#ui-settings>
 [ui]
-# <https://jj-vcs.github.io/jj/latest/conflicts/#alternative-conflict-marker-styles>
+# <https://docs.jj-vcs.dev/latest/conflicts/#alternative-conflict-marker-styles>
 conflict-marker-style = "snapshot"
 default-command = "status"
-# <https://jj-vcs.github.io/jj/latest/config/#diff-format>
+# <https://docs.jj-vcs.dev/latest/config/#diff-format>
 diff-formatter = ":git"
 pager = "delta"
