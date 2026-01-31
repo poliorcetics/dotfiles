@@ -11,12 +11,12 @@
   programs.git.lfs.enable = true;
 
   personal.links = {
-    "git/config" = "public/modules/hm-program-git/config";
-    "git/ignore" = "public/modules/hm-program-git/ignore";
-    "git/includes" = "public/modules/hm-program-git/includes";
+    "git/config" = "modules/hm-program-git/config";
+    "git/ignore" = "modules/hm-program-git/ignore";
+    "git/includes" = "modules/hm-program-git/includes";
   };
 
-  xdg.configFile."git/public/user".text = /* git-config */ ''
+  xdg.configFile."git/modules/user".text = /* git-config */ ''
     [user]
       email = "${config.personal.public.vcsEmail}"
       name = "${config.personal.public.vcsDisplayName}"

@@ -8,7 +8,7 @@
 {
   programs.topgrade.enable = true;
 
-  personal.links."topgrade.toml" = "public/modules/hm-program-topgrade/config.toml";
+  personal.links."topgrade.toml" = "modules/hm-program-topgrade/config.toml";
 
   xdg.configFile."topgrade.d/helix.toml".text =
     let

@@ -16,15 +16,14 @@
   programs.kitty.enable = false;
 
   personal.links = {
-    "kitty/kitty.conf" = "public/modules/hm-program-kitty/kitty.conf";
-    "kitty/theme.conf" = "public/modules/hm-program-kitty/theme.conf";
+    "kitty/kitty.conf" = "modules/hm-program-kitty/kitty.conf";
+    "kitty/theme.conf" = "modules/hm-program-kitty/theme.conf";
     "kitty/macos-launch-services-cmdline" =
-      lib.mkIf pkgs.stdenv.isDarwin "public/modules/hm-program-kitty/macos-launch-services-cmdline";
+      lib.mkIf pkgs.stdenv.isDarwin "modules/hm-program-kitty/macos-launch-services-cmdline";
 
-    "kitty/includes/02-linux.conf" =
-      lib.mkIf pkgs.stdenv.isLinux "public/modules/hm-program-kitty/linux.conf";
+    "kitty/includes/02-linux.conf" = lib.mkIf pkgs.stdenv.isLinux "modules/hm-program-kitty/linux.conf";
     "kitty/includes/02-macos.conf" =
-      lib.mkIf pkgs.stdenv.isDarwin "public/modules/hm-program-kitty/macos.conf";
+      lib.mkIf pkgs.stdenv.isDarwin "modules/hm-program-kitty/macos.conf";
   };
 
   xdg.configFile."kitty/includes/01-editor.conf".text = ''

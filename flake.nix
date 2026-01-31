@@ -1,5 +1,5 @@
 {
-  description = "Poliorcetics' macOS config";
+  description = "Poliorcetics' nix config";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -33,17 +33,14 @@
     }@inputs:
     let
       recursiveMerge = nixpkgs.lib.foldr nixpkgs.lib.recursiveUpdate { };
-      generateConfigs =
-        kind:
-        inputs.nixpkgs.lib.pipe kind [
-          (kind: if builtins.pathExists ./${kind}/machines then builtins.readDir ./${kind}/machines else { })
-          builtins.attrNames
-          (builtins.map (dirname: import ./${kind}/machines/${dirname} inputs))
-        ];
+      configs = inputs.nixpkgs.lib.pipe ./machines [
+        builtins.readDir
+        builtins.attrNames
+        (builtins.map (filename: import ./machines/${filename} inputs))
+      ];
     in
     recursiveMerge (
-      (generateConfigs "public")
-      ++ (generateConfigs "work")
+      configs
       ++ [
         {
           formatter =

@@ -71,7 +71,7 @@
   signingkey = "~/.ssh/id_signing.pub"
 [include]
   # Will contain default username and email
-  path = "public/user"
+  path = "modules/user"
 
 [includeIf "gitdir:~/repos/work/"]
   path = "work/user"
