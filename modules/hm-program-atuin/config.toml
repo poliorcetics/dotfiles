@@ -2,7 +2,6 @@
 enter_accept = true
 exit_mode = "return-query"
 filter_mode_shell_up_key_binding = "directory"
-inline_height = 0
 max_preview_height = 8
 search_mode = "skim"
 show_numeric_shortcuts = false

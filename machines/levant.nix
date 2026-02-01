@@ -22,12 +22,12 @@ in
     modules = [
       (import ../modules/hm-packages unstablePkgs)
       (import ../modules/hm-program-atuin { inherit unstablePkgs; })
+      (import ../modules/hm-program-fish { inherit unstablePkgs; })
       (import ../modules/hm-program-jj { inherit unstablePkgs; })
-      (import ../modules/hm-program-nushell { inherit unstablePkgs; })
       (import ../modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
       (import ../modules/sh-personal-user.nix "linux")
 
-      ../modules/hm-activation
+      ../modules/hm-activation.nix
       ../modules/hm-config-links.nix
       ../modules/hm-generic.nix
       ../modules/hm-global-package.nix

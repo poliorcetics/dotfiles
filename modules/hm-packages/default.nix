@@ -79,7 +79,6 @@ in
       bear # Compile commands for C & C++ projects
       carapace # Command completer
       cmake # Compiler orchestration
-      fish # Used for the carapace completer in nushell
       marksman # LSP for Markdown
       nixfmt-rfc-style # Official formatter for nix
       ninja # Compile C & C++ things

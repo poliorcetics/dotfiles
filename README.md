@@ -4,7 +4,7 @@ The objective is to use [`home-manager`](https://nix-community.github.io/home-ma
 
 ## Install procedure
 
-I use [`nushell`](https://www.nushell.sh/) as my primary shell but I do **not** set it as the default shell for my user (no `chsh`) to avoid issues with programs that expect the default shell to be `bash`-like. I simply launch `nushell` from the `.bashrc` or `.zshrc` in interactive mode.
+I use [`fish`](https://fishshell.com/) as my primary shell but I do **not** set it as the default shell for my user (no `chsh`) to avoid issues with programs that expect the default shell to be `bash`-like. I simply launch it from the `.bashrc` or `.zshrc` in interactive mode.
 
 Anyway, onwards to the installation:
 
