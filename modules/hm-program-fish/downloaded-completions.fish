@@ -3,9 +3,26 @@
 
 function download --argument-names source_url target_file expected_hash
     set --local temp_file (mktemp --dry-run)
-    trap "rm $temp_file; or true" EXIT
 
-    wcurl --output $temp_file --curl-options=--silent -- $source_url; or return 1
+    # Uses the system's curl to respect proxies and macOS certs automatically
+    curl \
+        --fail \
+        --globoff \
+        --location \
+        --proto-default https \
+        --remote-time \
+        --retry 5 \
+        --no-clobber \
+        --silent \
+        --output $temp_file \
+        $source_url
+    if test $status != 0
+        printf "Failed to download `%s` from `%s`\n" $target_file $source_url
+        return 1
+    end
+
+    # Now the file exists
+    trap "rm $temp_file; or true" EXIT
 
     echo "$expected_hash $temp_file" | sha256sum --status --strict --check -
     if test $status != 0
@@ -22,3 +39,4 @@ download \
     'https://raw.githubusercontent.com/helix-editor/helix/master/contrib/completion/hx.fish' \
     "$out_dir/hx.fish" \
     ffb227ba59f672156fe573f1d2518e361c8c2b98e76ce1f413a1c42721c86f74
+or echo 'Failed to download hx.fish, retry outside the dotfile update env to check for errors'

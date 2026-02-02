@@ -16,19 +16,6 @@ let
   fish = lib.getExe config.programs.fish.package;
   starship = lib.getExe config.programs.starship.package;
   zoxide = lib.getExe config.programs.zoxide.package;
-
-  downloaded-completions = pkgs.writeShellApplication {
-    name = "downloaded-completions";
-    runtimeInputs = [
-      config.programs.fish.package
-
-      pkgs.curl
-      pkgs.mktemp
-    ];
-    text = ''
-      fish ${./downloaded-completions.fish} ${completions}
-    '';
-  };
 in
 {
   programs.fish.package = unstablePkgs.fish;
@@ -48,8 +35,6 @@ in
 
     pkgs.eza
     pkgs.fish-lsp
-
-    downloaded-completions
   ];
 
   # IMPORTANT: when adding here, be sure to source in `config.fish`
@@ -64,6 +49,6 @@ in
     run ${atuin}    gen-completions --shell fish > ${completions}/atuin.fish
     run ${starship} completions fish             > ${completions}/starship.fish
 
-    run ${lib.getExe downloaded-completions}
+    run ${lib.getExe config.programs.fish.package} ${./downloaded-completions.fish} ${completions}
   '';
 }

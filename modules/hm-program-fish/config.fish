@@ -67,10 +67,10 @@ complete --command nix-config-gc --long-option nix --require-parameter --descrip
 source $XDG_CONFIG_HOME/fish/completions/hx.fish
 source $XDG_CONFIG_HOME/fish/completions/atuin.fish
 source $XDG_CONFIG_HOME/fish/completions/starship.fish
-source $XDG_CONFIG_HOME/fish/completions/zoxide.fish
 
 source $XDG_CONFIG_HOME/fish/inits/atuin.fish
 source $XDG_CONFIG_HOME/fish/inits/starship.fish
+source $XDG_CONFIG_HOME/fish/inits/zoxide.fish
 
 bind alt-backspace 'commandline -f backward-kill-word'
 bind alt-delete 'commandline -f backward-kill-word'

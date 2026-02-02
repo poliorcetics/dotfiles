@@ -34,7 +34,7 @@
     let
       inherit (nixpkgs) lib;
 
-      recursiveMerge = lib.foldr nixpkgs.lib.recursiveUpdate { };
+      recursiveMerge = lib.foldr lib.recursiveUpdate { };
       # Resolve all configs first to allow automatically setting up the machine checks
       configs = recursiveMerge (
         lib.pipe ./machines [
