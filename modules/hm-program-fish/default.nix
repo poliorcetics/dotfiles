@@ -9,19 +9,32 @@
   ...
 }:
 let
+  # <https://fishshell.com/docs/current/completions.html#where-to-put-completions>
   completions = "${config.xdg.configHome}/fish/completions";
-  inits = "${config.xdg.configHome}/fish/inits";
 
-  atuin = lib.getExe config.programs.atuin.package;
+  # Custom inits to avoid having to generate them every time a shell is opened
+  inits = "${config.xdg.cacheHome}/fish/personal";
+
   fish = lib.getExe config.programs.fish.package;
-  starship = lib.getExe config.programs.starship.package;
-  zoxide = lib.getExe config.programs.zoxide.package;
 in
 {
-  programs.fish.package = unstablePkgs.fish;
+  programs.fish = {
+    enable = true;
+    package = unstablePkgs.fish;
+    shellInitLast = /* fish */ ''
+      status is-interactive; and begin
+        source ${config.xdg.configHome}/fish/extra-config.fish
+      end
+    '';
+  };
+
+  # See `inits` definition above
+  programs.atuin.enableFishIntegration = false;
+  programs.starship.enableFishIntegration = false;
+  programs.zoxide.enableFishIntegration = false;
 
   personal.links = {
-    "fish/config.fish" = "modules/hm-program-fish/config.fish";
+    "fish/extra-config.fish" = "modules/hm-program-fish/extra-config.fish";
   };
 
   programs.bash.initExtra = /* bash */ ''
@@ -31,24 +44,20 @@ in
   '';
 
   home.packages = [
-    config.programs.fish.package
-
     pkgs.eza
     pkgs.fish-lsp
   ];
 
-  # IMPORTANT: when adding here, be sure to source in `config.fish`
-  home.activation.installFishCompletions = /* bash */ ''
+  home.activation.installFishScripts = /* bash */ ''
     run mkdir -p ${inits}
+    run rm ${inits}/*.fish || true # Ensure no cruft
 
-    run ${atuin}    init fish > ${inits}/atuin.fish
-    run ${starship} init fish > ${inits}/starship.fish
-    run ${zoxide}   init fish > ${inits}/zoxide.fish
+    # See `inits` definition above
+    run ${lib.getExe config.programs.atuin.package}    init fish                   > ${inits}/atuin.fish
+    run ${lib.getExe config.programs.starship.package} init fish --print-full-init > ${inits}/starship.fish
+    run ${lib.getExe config.programs.zoxide.package}   init fish                   > ${inits}/zoxide.fish
 
     run mkdir -p ${completions}
-    run ${atuin}    gen-completions --shell fish > ${completions}/atuin.fish
-    run ${starship} completions fish             > ${completions}/starship.fish
-
-    run ${lib.getExe config.programs.fish.package} ${./downloaded-completions.fish} ${completions}
+    run ${fish} ${./downloaded-completions.fish} ${completions}
   '';
 }

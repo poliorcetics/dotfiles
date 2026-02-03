@@ -64,13 +64,9 @@ end
 complete --command nix-config-gc --long-option hm --require-parameter --description "Argument to `home-manager expire-generations <arg>`"
 complete --command nix-config-gc --long-option nix --require-parameter --description "Argument to `nix-env --delete-generations <arg>`"
 
-source $XDG_CONFIG_HOME/fish/completions/hx.fish
-source $XDG_CONFIG_HOME/fish/completions/atuin.fish
-source $XDG_CONFIG_HOME/fish/completions/starship.fish
-
-source $XDG_CONFIG_HOME/fish/inits/atuin.fish
-source $XDG_CONFIG_HOME/fish/inits/starship.fish
-source $XDG_CONFIG_HOME/fish/inits/zoxide.fish
+for entry in $XDG_CACHE_HOME/fish/personal/*.fish
+    source $entry
+end
 
 bind alt-backspace 'commandline -f backward-kill-word'
 bind alt-delete 'commandline -f backward-kill-word'
