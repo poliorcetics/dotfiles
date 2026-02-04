@@ -6,7 +6,7 @@
 }:
 {
   # Workaround to ensure the python history is not in ~/
-  personal.links."python/rc.py" = "modules/hm-program-python/rc.py";
+  personal.links."python/rc.py" = "modules/home-manager/program-python/rc.py";
 
   home.packages = with pkgs; [
     python3

@@ -34,7 +34,7 @@ in
   programs.zoxide.enableFishIntegration = false;
 
   personal.links = {
-    "fish/extra-config.fish" = "modules/hm-program-fish/extra-config.fish";
+    "fish/extra-config.fish" = "modules/home-manager/program-fish/extra-config.fish";
   };
 
   programs.bash.initExtra = /* bash */ ''

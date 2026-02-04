@@ -8,5 +8,5 @@
   programs.atuin.enable = true;
   programs.atuin.package = unstablePkgs.atuin;
 
-  personal.links."atuin/config.toml" = "modules/hm-program-atuin/config.toml";
+  personal.links."atuin/config.toml" = "modules/home-manager/program-atuin/config.toml";
 }

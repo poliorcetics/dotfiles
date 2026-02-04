@@ -21,23 +21,23 @@ in
     modules = [
       home-manager.darwinModules.home-manager
 
-      (import ../modules/sh-personal-user.nix "darwin")
+      (import ../modules/shared/personal-user.nix "darwin")
 
-      (import ../modules/sh-nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
-      ../modules/sh-nix-gc.nix
-      ../modules/sh-nix-package.nix
-      ../modules/sh-nix-settings.nix
+      (import ../modules/shared/nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
+      ../modules/shared/nix-gc.nix
+      ../modules/shared/nix-package.nix
+      ../modules/shared/nix-settings.nix
 
-      (import ../modules/sy-system.nix { inherit self; })
-      ../modules/sy-nix-settings.nix
+      (import ../modules/system/system.nix { inherit self; })
+      ../modules/system/nix-settings.nix
 
-      ../modules/sy-darwin-defaults.nix
-      ../modules/sy-darwin-homebrew.nix
-      ../modules/sy-darwin-nix-gc.nix
-      ../modules/sy-darwin-security.nix
-      ../modules/sy-darwin-system.nix
+      ../modules/darwin/defaults.nix
+      ../modules/darwin/homebrew.nix
+      ../modules/darwin/nix-gc.nix
+      ../modules/darwin/security.nix
+      ../modules/darwin/system.nix
 
-      ../modules/sy-user.nix
+      ../modules/system/user.nix
 
       {
         nixpkgs.hostPlatform = system;
@@ -63,32 +63,32 @@ in
           home-manager.useUserPackages = false;
 
           home-manager.users.${config.personal.username}.imports = [
-            (import ../modules/sh-personal-user.nix "darwin")
+            (import ../modules/shared/personal-user.nix "darwin")
 
-            (import ../modules/hm-packages unstablePkgs)
-            ../modules/hm-activation.nix
-            ../modules/hm-config-links.nix
-            ../modules/hm-generic.nix
-            ../modules/hm-global-package.nix
+            (import ../modules/home-manager/packages unstablePkgs)
+            ../modules/home-manager/activation.nix
+            ../modules/home-manager/config-links.nix
+            ../modules/home-manager/generic.nix
+            ../modules/home-manager/global-package.nix
 
-            (import ../modules/hm-program-atuin { inherit unstablePkgs; })
-            (import ../modules/hm-program-fish { inherit unstablePkgs; })
-            (import ../modules/hm-program-jj { inherit unstablePkgs; })
-            ../modules/hm-program-bat
-            ../modules/hm-program-direnv
-            ../modules/hm-program-gh
-            ../modules/hm-program-git
-            ../modules/hm-program-helix
-            ../modules/hm-program-kitty
-            ../modules/hm-program-npm
-            ../modules/hm-program-python
-            ../modules/hm-program-shell
-            ../modules/hm-program-starship
-            ../modules/hm-program-topgrade
-            ../modules/hm-program-zoxide
+            (import ../modules/home-manager/program-atuin { inherit unstablePkgs; })
+            (import ../modules/home-manager/program-fish { inherit unstablePkgs; })
+            (import ../modules/home-manager/program-jj { inherit unstablePkgs; })
+            ../modules/home-manager/program-bat
+            ../modules/home-manager/program-direnv
+            ../modules/home-manager/program-gh
+            ../modules/home-manager/program-git
+            ../modules/home-manager/program-helix
+            ../modules/home-manager/program-kitty
+            ../modules/home-manager/program-npm
+            ../modules/home-manager/program-python
+            ../modules/home-manager/program-shell
+            ../modules/home-manager/program-starship
+            ../modules/home-manager/program-topgrade
+            ../modules/home-manager/program-zoxide
 
-            ../modules/hm-variables.nix
-            ../modules/hm-xdg.nix
+            ../modules/home-manager/variables.nix
+            ../modules/home-manager/xdg.nix
 
             # This value determines the Home Manager release that your configuration is compatible
             # with. This  helps avoid breakage when a new Home Manager release introduces backwards

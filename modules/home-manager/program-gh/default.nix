@@ -7,9 +7,9 @@
 
   personal.links = {
     "gh/config.yml" = {
-      target = "modules/hm-program-gh/config.yml";
+      target = "modules/home-manager/program-gh/config.yml";
       force = true;
     };
-    "gh/hosts.yml" = "modules/hm-program-gh/hosts.yml";
+    "gh/hosts.yml" = "modules/home-manager/program-gh/hosts.yml";
   };
 }
