@@ -1,7 +1,7 @@
 # Fish shell
 #
 # <https://fishshell.com/docs/>
-{ unstablePkgs }:
+unstablePkgs:
 {
   config,
   lib,

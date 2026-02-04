@@ -21,7 +21,8 @@
     "kitty/macos-launch-services-cmdline" =
       lib.mkIf pkgs.stdenv.isDarwin "modules/home-manager/program-kitty/macos-launch-services-cmdline";
 
-    "kitty/includes/02-linux.conf" = lib.mkIf pkgs.stdenv.isLinux "modules/home-manager/program-kitty/linux.conf";
+    "kitty/includes/02-linux.conf" =
+      lib.mkIf pkgs.stdenv.isLinux "modules/home-manager/program-kitty/linux.conf";
     "kitty/includes/02-macos.conf" =
       lib.mkIf pkgs.stdenv.isDarwin "modules/home-manager/program-kitty/macos.conf";
   };

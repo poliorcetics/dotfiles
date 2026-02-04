@@ -1,44 +1,23 @@
 {
   home-manager,
   nix-darwin,
-  nixpkgs,
-  nixpkgs-unstable,
-  self,
   ...
-}:
+}@inputs:
 let
   hostname = "ponant";
 
   system = "aarch64-darwin";
 
-  unstablePkgs = import nixpkgs-unstable {
-    inherit system;
-  };
+  allModules = import ../modules/all-modules.nix inputs system;
 in
 {
   darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
     inherit system;
     modules = [
       home-manager.darwinModules.home-manager
-
-      (import ../modules/shared/personal-user.nix "darwin")
-
-      (import ../modules/shared/nix-registry.nix { inherit nixpkgs nixpkgs-unstable; })
-      ../modules/shared/nix-gc.nix
-      ../modules/shared/nix-package.nix
-      ../modules/shared/nix-settings.nix
-
-      (import ../modules/system/system.nix { inherit self; })
-      ../modules/system/nix-settings.nix
-
-      ../modules/darwin/defaults.nix
-      ../modules/darwin/homebrew.nix
-      ../modules/darwin/nix-gc.nix
-      ../modules/darwin/security.nix
-      ../modules/darwin/system.nix
-
-      ../modules/system/user.nix
-
+    ]
+    ++ allModules.darwin.systemModules
+    ++ [
       {
         nixpkgs.hostPlatform = system;
 
@@ -62,34 +41,7 @@ in
           # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useUserPackages>
           home-manager.useUserPackages = false;
 
-          home-manager.users.${config.personal.username}.imports = [
-            (import ../modules/shared/personal-user.nix "darwin")
-
-            (import ../modules/home-manager/packages unstablePkgs)
-            ../modules/home-manager/activation.nix
-            ../modules/home-manager/config-links.nix
-            ../modules/home-manager/generic.nix
-            ../modules/home-manager/global-package.nix
-
-            (import ../modules/home-manager/program-atuin { inherit unstablePkgs; })
-            (import ../modules/home-manager/program-fish { inherit unstablePkgs; })
-            (import ../modules/home-manager/program-jj { inherit unstablePkgs; })
-            ../modules/home-manager/program-bat
-            ../modules/home-manager/program-direnv
-            ../modules/home-manager/program-gh
-            ../modules/home-manager/program-git
-            ../modules/home-manager/program-helix
-            ../modules/home-manager/program-kitty
-            ../modules/home-manager/program-npm
-            ../modules/home-manager/program-python
-            ../modules/home-manager/program-shell
-            ../modules/home-manager/program-starship
-            ../modules/home-manager/program-topgrade
-            ../modules/home-manager/program-zoxide
-
-            ../modules/home-manager/variables.nix
-            ../modules/home-manager/xdg.nix
-
+          home-manager.users.${config.personal.username}.imports = allModules.darwin.homeManagerModules ++ [
             # This value determines the Home Manager release that your configuration is compatible
             # with. This  helps avoid breakage when a new Home Manager release introduces backwards
             # incompatible changes.

@@ -1,11 +1,4 @@
-{
-  nixpkgs,
-  nixpkgs-unstable,
-}:
-let
-  inputs = { inherit nixpkgs nixpkgs-unstable; };
-in
-{
+inputs: {
   nix.registry = rec {
     # Stable goes by two names
     nixpkgs.flake = inputs.nixpkgs;

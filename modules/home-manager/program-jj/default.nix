@@ -1,9 +1,8 @@
 # Jujutsu configuration
 #
 # <https://github.com/jj-vcs/jj>
-{
-  unstablePkgs,
-}:
+
+unstablePkgs:
 {
   config,
   lib,

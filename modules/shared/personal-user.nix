@@ -1,7 +1,7 @@
-platform:
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -11,10 +11,11 @@ let
 
   baseHomeDir =
     {
-      darwin = "/Users";
-      linux = "/home";
+      aarch64-darwin = "/Users";
+      aarch64-linux = "/home";
+      x86_64-linux = "/home";
     }
-    .${platform};
+    .${pkgs.stdenv.system};
 in
 {
   options.personal = {
@@ -28,8 +29,6 @@ in
 
     home = mkOption {
       type = types.nonEmptyStr;
-      default = "${baseHomeDir}/${cfg.username}";
-      readOnly = true;
       description = ''
         Absolute path to home directory of user.
       '';
@@ -47,8 +46,6 @@ in
 
     dotfilesDir = mkOption {
       type = types.nonEmptyStr;
-      default = "${cfg.home}/${cfg.dotfilesSubDir}";
-      readOnly = true;
       description = ''
         Absolute path to dotfiles directory of user.
 
@@ -109,5 +106,8 @@ in
         message = "If `config.personal.work.vcsEmail` is set, `config.personal.work.vcsDisplayName` must be too";
       }
     ];
+
+    personal.home = "${baseHomeDir}/${cfg.username}";
+    personal.dotfilesDir = "${cfg.home}/${cfg.dotfilesSubDir}";
   };
 }
