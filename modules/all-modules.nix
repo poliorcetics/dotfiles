@@ -27,6 +27,8 @@ let
     ./system/user.nix
 
     (import ./system/system.nix inputs.self)
+
+    { nixpkgs.hostPlatform = system; }
   ];
 
   # ===============================================================================================
