@@ -64,6 +64,7 @@
 "ui.statusline.separator" = "text"
 "ui.text" = "text"
 "ui.text.directory" = "special"
+"ui.text.symlink" = "symlink"
 "ui.text.focus" = { fg = "selected_fg", bg = "selected_bg" }
 "ui.text.inactive" = "text_inactive"
 "ui.text.info" = "text"
@@ -242,6 +243,7 @@ markup_quote = "#93c47d"
 namespace = "#93c47d"
 operator = "#d3869b"
 special = "#d36c93"
+symlink = "#bd6cd3"
 string = "#b8bb26"
 type = "#fabd2f"
 
