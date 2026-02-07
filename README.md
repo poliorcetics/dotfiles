@@ -23,7 +23,7 @@ Anyway, onwards to the installation:
 ## OPEN A NEW TERMINAL
 
 ## Install everything
-sudo -E ./dotfiles.sh update
+./dotfiles.sh update
 ```
 
 ### Common

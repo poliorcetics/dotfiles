@@ -2,17 +2,6 @@
 
 set -euo pipefail
 
-## HELPERS ##
-
-# The path of nix is not the same on Linux and Darwin,
-function run-with-nix() {
-  local nix_path
-  nix_path=$(/usr/bin/which nix)
-  /usr/bin/read -p "Nix used: $nix_path [Enter]"
-  nix --version
-  nix --show-trace --extra-experimental-features "flakes nix-command" "$@"
-}
-
 ### INITIAL SETUP ##
 
 function initial-setup-nix-install() {
@@ -20,7 +9,7 @@ function initial-setup-nix-install() {
   # TODO: switch to Lix
   /bin/sh <(/usr/bin/curl -L https://nixos.org/nix/install) --daemon
 
-  /bin/echo "Launch a new shell to get access to nix and call 'sudo -E ./dotfiles update'"
+  /bin/echo "Launch a new shell to get access to nix and call './dotfiles update'"
 }
 
 # Lots of stuff to do on macOS
@@ -71,10 +60,10 @@ secondary-setup,Darwin)
   ;;
 
 update,Linux)
-  run-with-nix run home-manager -- switch --show-trace --flake .
+  ./setup/run-with-nix.sh run home-manager -- switch --show-trace --flake .
   ;;
 update,Darwin)
-  run-with-nix run nix-darwin -- switch --show-trace --flake .
+  /usr/bin/sudo -E ./setup/run-with-nix.sh run nix-darwin -- switch --show-trace --flake .
   ;;
 
 *,Linux | *,Darwin)
