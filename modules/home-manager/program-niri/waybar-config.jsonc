@@ -1,0 +1,4 @@
+{
+  // Could easily become outdated, don't necessarily trust it
+  "$schema": "https://raw.githubusercontent.com/Magniquick/waybar-config-schema/main/schema.json",
+}
