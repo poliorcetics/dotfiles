@@ -16,6 +16,7 @@ alias cg cargo
 alias g git
 alias j just
 alias k kubectl
+alias tf terraform
 
 function hn --description "Open a dated markdown note in ~/repos/notes/"
     set --local year (date +%Y)
