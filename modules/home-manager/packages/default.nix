@@ -39,15 +39,11 @@ in
       cargo-show-asm
       cargo-update
 
-      # == Kubernetes ==
+      # == DevOps ==
       kubectl
 
       # == Nix ==
       nix-output-monitor
-
-      # == Node ==
-      nodePackages.bash-language-server # LSP for bash
-      nodePackages.prettier # Code formatter, notably for Web technologies
 
       # == Rust ==
       # Use rustup from nix but manage rust versions through rustup, not nix
@@ -59,7 +55,6 @@ in
       du-dust # `du` reinvented
       eza # `ls` reinvented
       fd # `find` reinvented
-      gitui # TUI for git, inspired by `tig`
       hyperfine # benchmarking made easy
       jless # `less` for JSON
       jq # Json query
@@ -70,20 +65,23 @@ in
       ripgrep # `grep` but 1000x better
       rnr # Rename things in bulk
       sd # `sed` but understandable
-      taplo # TOML LSP
       tealdeer # Quick explanations of commands
       tokei # Count lines of code
       tree-sitter # Make semantic things
       watchexec # Execute in loops based on FS changes
 
+      # == Language servers ==
+      marksman # LSP for Markdown
+      nodePackages.bash-language-server # LSP for bash
+      taplo # TOML LSP
+      yaml-language-server # LSP for YAML
+
       # == Misc. ==
       bear # Compile commands for C & C++ projects
-      carapace # Command completer
       cmake # Compiler orchestration
-      marksman # LSP for Markdown
       nixfmt-rfc-style # Official formatter for nix
       ninja # Compile C & C++ things
-      yaml-language-server # LSP for YAML
+      nodePackages.prettier # Code formatter, notably for Web technologies
     ])
 
     [
