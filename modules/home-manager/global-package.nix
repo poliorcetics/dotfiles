@@ -21,6 +21,9 @@ in
       Will fail if the name already exists and is not a link to the nix store.
     '';
     default = { };
+    example = {
+      "example" = "/nix/store/00000000000000000000000000000000-example-1.0.0/bin/example";
+    };
   };
 
   config = lib.mkIf (builtins.length (builtins.attrNames global-packages) != 0) {
