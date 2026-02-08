@@ -53,6 +53,17 @@ behaviour = "own"
 key = "~/.ssh/id_signing.pub"
 
 [templates]
+# Template for `jj describe` (and so, `jj commit`)
+# NOTE: could become unwieldy with super large diffs or when editing multiple commits at once
+draft_commit_description = '''
+concat(
+  builtin_draft_commit_description,
+  "JJ: ====================================================================\n",
+  "JJ: ignore-rest\n",
+  diff.git(),
+)
+'''
+# Template for auto-generated bookmark names
 git_push_bookmark = '"ab/push-" ++ change_id.short()'
 
 [template-aliases]
