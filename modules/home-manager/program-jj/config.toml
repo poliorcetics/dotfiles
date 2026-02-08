@@ -5,7 +5,7 @@
 [aliases]
 b = ["bookmark"]
 c = ["commit"]
-cm = ["commit", "-m"]
+ci = ["commit", "--interactive"]
 d = ["diff"]
 ds = ["describe"]
 dt = ["diff", "--tool", "difft"]
