@@ -3,6 +3,7 @@
 
 # <https://docs.jj-vcs.dev/latest/config/#aliases>
 [aliases]
+a = ["absorb"]
 b = ["bookmark"]
 c = ["commit"]
 ci = ["commit", "--interactive"]
