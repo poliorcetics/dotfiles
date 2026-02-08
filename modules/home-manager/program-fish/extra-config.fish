@@ -12,6 +12,9 @@ function __my_env_change_pwd --on-variable PWD
     end
 end
 
+# Call it once to ensure CARGO_TARGET_DIR is set when initializing a new shell for the first time.
+__my_env_change_pwd
+
 alias cg cargo
 alias g git
 alias j just
@@ -48,8 +51,7 @@ function lm --wraps eza --description "Wraps `la`, clearing the screen first"
 end
 
 function npm --wraps npm --description "Wraps npm to make it behave non stupidly"
-    set --local --export PREFIX $XDG_CONFIG_HOME
-    command npm $argv
+    PREFIX="$XDG_CONFIG_HOME" command npm $argv
 end
 
 function nix-config-gc --description "Garbage collect old nix and home manager profiles"
@@ -66,6 +68,7 @@ complete --command nix-config-gc --long-option hm --require-parameter --descript
 complete --command nix-config-gc --long-option nix --require-parameter --description "Argument to `nix-env --delete-generations <arg>`"
 
 for entry in $XDG_CACHE_HOME/fish/personal/*.fish
+    echo -e "\e[037m:: sourcing :: $entry\e[0m"
     source $entry
 end
 
