@@ -61,7 +61,6 @@ let
     ./home-manager/activation.nix
     ./home-manager/config-links.nix
     ./home-manager/generic.nix
-    ./home-manager/global-package.nix
     ./home-manager/variables.nix
     ./home-manager/xdg.nix
 

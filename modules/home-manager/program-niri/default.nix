@@ -3,17 +3,11 @@
 # <https://yalter.github.io/niri/>
 
 {
-  config,
   lib,
   pkgs,
   ...
 }:
-let
-  cfg = config.personal.niri;
-in
 {
-  options.personal.niri.enable-extra-binaries = lib.mkEnableOption "extra binaries used by Niri";
-
   config = lib.mkIf pkgs.stdenv.isLinux {
     personal = {
       links = {
@@ -28,15 +22,6 @@ in
         # TODO: style waybar
         # <https://github.com/Alexays/Waybar/wiki/Styling>
         "waybar/style.css" = "modules/home-manager/programs-niri/waybar-style.css";
-      };
-
-      # By default don't install those through home-manager
-      global-packages = lib.mkIf cfg.enable-extra-binaries {
-        fuzzel = "${pkgs.fuzzel}/bin/fuzzel";
-        playerctl = "${pkgs.playerctl}/bin/playerctl";
-        swaylock = "${pkgs.swaylock}/bin/swaylock";
-        waybar = "${pkgs.waybar}/bin/waybar";
-        wpctl = "${pkgs.wireplumber}/bin/wpctl";
       };
     };
   };
