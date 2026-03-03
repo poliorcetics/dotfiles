@@ -19,6 +19,9 @@ in
     ++ allModules.darwin.systemModules
     ++ [
       {
+        _file = ./${hostname}.nix + ":stateVersion";
+        key = ./${hostname}.nix + ":stateVersion";
+
         # Used for backwards compatibility, please read the changelog before changing.
         # $ darwin-rebuild changelog
         # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.05/modules/system/version.nix#L34>
@@ -32,6 +35,9 @@ in
           ...
         }:
         {
+          _file = ./${hostname}.nix + ":hm";
+          key = ./${hostname}.nix + ":hm";
+
           # <https://nix-community.github.io/home-manager/nixos-options.xhtml#nixos-opt-home-manager.useGlobalPkgs>
           home-manager.useGlobalPkgs = true;
           # Don't allow `users.users.<name>.packages = [ ... ]`, it avoids surprises like adding a

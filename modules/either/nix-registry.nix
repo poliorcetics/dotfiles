@@ -1,4 +1,7 @@
 inputs: {
+  _file = ./nix-registry.nix;
+  key = ./nix-registry.nix;
+
   nix.registry = rec {
     # Stable goes by two names
     nixpkgs.flake = inputs.nixpkgs;

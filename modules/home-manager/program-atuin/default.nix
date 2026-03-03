@@ -2,6 +2,9 @@
 #
 # <https://atuin.sh>
 unstablePkgs: {
+  _file = ./default.nix;
+  key = ./default.nix;
+
   programs.atuin.enable = true;
   programs.atuin.package = unstablePkgs.atuin;
 

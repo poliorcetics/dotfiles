@@ -28,7 +28,12 @@ let
 
     (import ./system/system.nix inputs.self)
 
-    { nixpkgs.hostPlatform = system; }
+    {
+      _file = ./all-modules.nix;
+      key = ./all-modules.nix;
+
+      nixpkgs.hostPlatform = system;
+    }
   ];
 
   # ===============================================================================================

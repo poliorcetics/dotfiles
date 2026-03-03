@@ -9,6 +9,9 @@ unstablePkgs:
   ...
 }:
 {
+  _file = ./default.nix;
+  key = ./default.nix;
+
   home.packages = [ unstablePkgs.jujutsu ];
 
   personal.links."jj/config.toml" = "modules/home-manager/program-jj/config.toml";

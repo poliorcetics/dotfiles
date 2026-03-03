@@ -24,6 +24,9 @@ let
     ));
 in
 {
+  _file = ./default.nix;
+  key = ./default.nix;
+
   home.packages = lib.mkMerge [
     (with pkgs; [
       # == Cargo ==

@@ -18,6 +18,9 @@ let
   fish = lib.getExe config.programs.fish.package;
 in
 {
+  _file = ./default.nix;
+  key = ./default.nix;
+
   programs.fish = {
     enable = true;
     package = unstablePkgs.fish;
