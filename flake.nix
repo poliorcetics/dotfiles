@@ -2,19 +2,19 @@
   description = "Poliorcetics' nix config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     # Very useful for getting recent packages, try not to use it otherwise,
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Home manager `master` branch follows nixpkgs-stable.
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix-darwin is for macos
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -40,7 +40,7 @@
         lib.pipe ./machines [
           builtins.readDir
           builtins.attrNames
-          (builtins.map (filename: import ./machines/${filename} inputs))
+          (map (filename: import ./machines/${filename} inputs))
         ]
       );
 
@@ -48,7 +48,7 @@
         configurations: checkedMember:
         lib.pipe configurations [
           lib.attrsToList
-          (builtins.map (
+          (map (
             # machine name, machine configuration
             { name, value }:
             {

@@ -55,7 +55,7 @@ in
       bottom # like `top`
       delta # Nicer git diffs
       difftastic # Semantic (tree-sitter) diffs
-      du-dust # `du` reinvented
+      dust # `du` reinvented
       eza # `ls` reinvented
       fd # `find` reinvented
       hyperfine # benchmarking made easy

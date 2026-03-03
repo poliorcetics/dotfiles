@@ -37,6 +37,6 @@
     let
       vars = config.home.sessionVariables;
     in
-    builtins.map (var: ''env ${var}=${builtins.toString vars.${var}}'') (builtins.attrNames vars)
+    builtins.map (var: "env ${var}=${builtins.toString vars.${var}}") (builtins.attrNames vars)
   );
 }
