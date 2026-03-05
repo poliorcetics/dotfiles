@@ -15,7 +15,7 @@ let
       aarch64-linux = "/home";
       x86_64-linux = "/home";
     }
-    .${pkgs.stdenv.system};
+    .${pkgs.stdenv.hostPlatform.system};
 in
 {
   options.personal = {

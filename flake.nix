@@ -52,7 +52,7 @@
             # machine name, machine configuration
             { name, value }:
             {
-              checks.${value.pkgs.system}.${name} = value.${checkedMember};
+              checks.${value.pkgs.stdenv.hostPlatform.system}.${name} = value.${checkedMember};
             }
           ))
         ];
