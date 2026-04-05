@@ -47,6 +47,7 @@ in
 
       # == Nix ==
       nix-output-monitor
+      config.nix.package
 
       # == Rust ==
       # Use rustup from nix but manage rust versions through rustup, not nix
