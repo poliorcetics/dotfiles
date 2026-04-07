@@ -21,6 +21,10 @@ alias j just
 alias k kubectl
 alias tf terraform
 
+function nn --wraps nix --description "Run a nix command through nix-output-monitor (nom)"
+    nix --log-format internal-json --verbose $argv &| nom --json
+end
+
 function hn --description "Open a dated markdown note in ~/repos/notes/"
     set --local year (date +%Y)
     set --local note_dir "$HOME/repos/notes/$year"
