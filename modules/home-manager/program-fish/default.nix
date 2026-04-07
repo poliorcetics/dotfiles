@@ -40,11 +40,26 @@ in
     "fish/extra-config.fish" = "modules/home-manager/program-fish/extra-config.fish";
   };
 
-  programs.bash.initExtra = /* bash */ ''
-    # Replace the default shell with fish without overriding with `chsh` to keep a POSIX compatible
-    # shell there for programs expecting one
-    builtin exec ${fish}
-  '';
+  programs.bash = {
+    enable = pkgs.stdenv.isLinux;
+    historyFile = "${config.xdg.configHome}/bash/history";
+    initExtra = /* bash */ ''
+      # Replace the default shell with fish without overriding with `chsh` to keep a POSIX compatible
+      # shell there for programs expecting one
+      builtin exec ${fish}
+    '';
+  };
+
+  programs.zsh = {
+    enable = pkgs.stdenv.isDarwin;
+    dotDir = "${config.xdg.configHome}/zsh";
+    initContent = /* zsh */ ''
+      # Replace the default shell with fish without overriding with `chsh` to keep a POSIX compatible
+      # shell there for programs expecting one
+      builtin exec ${fish}
+    '';
+    history.path = "${config.xdg.configHome}/zsh/history";
+  };
 
   home.packages = [
     pkgs.eza

@@ -84,7 +84,6 @@ let
     ./home-manager/program-niri
     ./home-manager/program-npm
     ./home-manager/program-python
-    ./home-manager/program-shell
     ./home-manager/program-starship
     ./home-manager/program-topgrade
     ./home-manager/program-zoxide
