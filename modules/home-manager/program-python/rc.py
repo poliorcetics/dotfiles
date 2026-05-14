@@ -1,8 +1,8 @@
 # This script ensure the python history is not in $HOME, which is mightily annoying
 #
 # It needs 'PYTHONSTARTUP' to be set to the path of this script
-import os
 import atexit
+import os
 import readline
 
 hist_dir = os.path.join(os.path.expandvars("$XDG_STATE_HOME"), "python")
