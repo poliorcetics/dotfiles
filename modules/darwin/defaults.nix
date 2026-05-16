@@ -7,10 +7,9 @@
 }:
 {
   # Firewall configuration
-  # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.11/modules/networking/default.nix>
+  # <https://github.com/nix-darwin/nix-darwin/blob/nix-darwin-25.11/modules/networking/applicationFirewall.nix>
   networking.applicationFirewall = {
     enableStealthMode = true;
-    blockAllIncoming = true;
   };
 
   system.defaults = {
