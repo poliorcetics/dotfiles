@@ -65,11 +65,24 @@ concat(
 )
 '''
 # Template for auto-generated bookmark names
-git_push_bookmark = '"ab/push-" ++ change_id.short()'
+git_push_bookmark = '"ab/" ++ slugify(description) ++ "/" ++ change_id.short()'
 
 [template-aliases]
 # Use a minimum length of 8, ensuring my Kitty config can detect such IDs all the time
 "format_short_id(id)" = "id.shortest(8)"
+
+# Taken from <https://ddbeck.com/notes/jj-git-push-bookmark-template/>
+"slugify(str)" = '''
+  truncate_end(
+    65,
+    str.first_line()
+      .replace(regex:'[^[[:alnum:]].]', '-')
+      .replace(regex:'-{2,}', '-')
+      .replace(regex:'\.{2,}', '.')
+      .replace(regex:'(^-+|-+$)', '')
+      .lower()
+  )
+'''
 
 # <https://docs.jj-vcs.dev/latest/config/#ui-settings>
 [ui]
