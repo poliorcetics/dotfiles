@@ -5,6 +5,7 @@
 [aliases]
 a = ["absorb"]
 b = ["bookmark"]
+ba = ["bookmark", "advance", "--to", "@-"]
 c = ["commit"]
 ci = ["commit", "--interactive"]
 d = ["diff"]
