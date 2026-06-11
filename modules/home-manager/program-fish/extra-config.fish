@@ -15,16 +15,20 @@ end
 # Call it once to ensure CARGO_TARGET_DIR is set when initializing a new shell for the first time.
 __my_env_change_pwd
 
+# @fish-lsp-disable 2002
 alias cg cargo
 alias g git
 alias j just
 alias k kubectl
 alias tf terraform
 
+# `nom` doesn't support `nom flake check` for example
+# @fish-lsp-disable-next-line 4004
 function nn --wraps nix --description "Run a nix command through nix-output-monitor (nom)"
     nix --log-format internal-json --verbose $argv &| nom --json
 end
 
+# @fish-lsp-disable-next-line 4004
 function hn --description "Open a dated markdown note in ~/repos/notes/"
     set --local year (date +%Y)
     set --local note_dir "$HOME/repos/notes/$year"
@@ -49,6 +53,7 @@ function la --wraps eza --description "List all, trimmed down to some select col
         $argv
 end
 
+# @fish-lsp-disable-next-line 4004
 function lm --wraps eza --description "Wraps `la`, clearing the screen first"
     clear -x
     la $argv
