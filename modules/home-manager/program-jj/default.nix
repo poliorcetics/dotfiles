@@ -6,13 +6,24 @@ unstablePkgs:
 {
   config,
   lib,
+  pkgs,
   ...
 }:
+let
+  jj-fix-nix-fmt = pkgs.writeShellScriptBin "__jj_fix_nix_fmt" ''
+    target_path="$1"
+    CLICOLOR_FORCE=1 nix fmt --no-update-lock-file "$target_path"
+    cat "$target_path"
+  '';
+in
 {
   _file = ./default.nix;
   key = ./default.nix;
 
-  home.packages = [ unstablePkgs.jujutsu ];
+  home.packages = [
+    unstablePkgs.jujutsu
+    jj-fix-nix-fmt
+  ];
 
   personal.links."jj/config.toml" = "modules/home-manager/program-jj/config.toml";
 

@@ -23,6 +23,10 @@ rs = ["rebase", "--source", "visible_open_roots()", "--destination"]
 s = ["status"]
 sq = ["squash"]
 
+[fix.tools.nixfmt]
+command = ["__jj_fix_nix_fmt", "$path"]
+patterns = ["glob:'**/*'"]
+
 # <https://docs.jj-vcs.dev/latest/config/#git-settings>
 [git]
 private-commits = "description(glob:'LOCAL:*')"
