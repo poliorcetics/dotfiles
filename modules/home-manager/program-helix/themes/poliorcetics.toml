@@ -20,9 +20,21 @@
 ] }
 "diagnostic.unnecessary" = { modifiers = ["dim"] }
 "diagnostic.deprecated" = { modifiers = ["crossed_out"] }
+"error.diagnostic.inline" = { fg = "error_fg", bg = "inline_diagnostics_bg", modifiers = [
+  "dim",
+] }
 "error" = { fg = "error_fg", bg = "inline_diagnostics_bg" }
+"hint.diagnostic.inline" = { fg = "hint_fg", bg = "inline_diagnostics_bg", modifiers = [
+  "dim",
+] }
 "hint" = { fg = "hint_fg", bg = "inline_diagnostics_bg" }
+"info.diagnostic.inline" = { fg = "info_fg", bg = "inline_diagnostics_bg", modifiers = [
+  "dim",
+] }
 "info" = { fg = "info_fg", bg = "inline_diagnostics_bg" }
+"warning.diagnostic.inline" = { fg = "warning_fg", bg = "inline_diagnostics_bg", modifiers = [
+  "dim",
+] }
 "warning" = { fg = "warning_fg", bg = "inline_diagnostics_bg" }
 
 # UI
