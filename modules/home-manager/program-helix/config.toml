@@ -8,7 +8,10 @@ cursorline = true
 idle-timeout = 250
 completion-timeout = 50
 mouse = false
+
+# === Display ===
 rulers = [100, 120, 150]
+gutters = ["diagnostics", "code-action-hint", "line-numbers", "spacer", "diff"]
 
 # === Blank spaces ===
 trim-final-newlines = true
