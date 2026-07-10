@@ -76,7 +76,7 @@ in
 
       # == Language servers ==
       marksman # LSP for Markdown
-      nodePackages.bash-language-server # LSP for bash
+      bash-language-server # LSP for bash
       taplo # TOML LSP
       yaml-language-server # LSP for YAML
 
@@ -85,7 +85,7 @@ in
       cmake # Compiler orchestration
       nixfmt-rfc-style # Official formatter for nix
       ninja # Compile C & C++ things
-      nodePackages.prettier # Code formatter, notably for Web technologies
+      prettier # Code formatter, notably for Web technologies
     ])
 
     [

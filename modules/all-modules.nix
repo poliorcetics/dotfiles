@@ -72,11 +72,11 @@ let
     (import ./home-manager/packages unstablePkgs)
 
     (import ./home-manager/program-atuin unstablePkgs)
-    (import ./home-manager/program-fish unstablePkgs)
     (import ./home-manager/program-jj unstablePkgs)
 
     ./home-manager/program-bat
     ./home-manager/program-direnv
+    ./home-manager/program-fish
     ./home-manager/program-gh
     ./home-manager/program-git
     ./home-manager/program-helix

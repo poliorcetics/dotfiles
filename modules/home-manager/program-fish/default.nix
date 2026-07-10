@@ -1,7 +1,6 @@
 # Fish shell
 #
 # <https://fishshell.com/docs/>
-unstablePkgs:
 {
   config,
   lib,
@@ -23,7 +22,6 @@ in
 
   programs.fish = {
     enable = true;
-    package = unstablePkgs.fish;
     shellInitLast = /* fish */ ''
       status is-interactive; and begin
         source ${config.xdg.configHome}/fish/extra-config.fish
