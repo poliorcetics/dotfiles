@@ -12,5 +12,8 @@ update_check = false
 [ai]
 enabled = false
 
+[logs]
+dir = "~/.local/cache/atuin"
+
 [sync]
 records = true
