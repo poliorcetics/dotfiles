@@ -61,7 +61,7 @@ in
     pkgs.fish-lsp
   ];
 
-  home.activation.installFishScripts = /* bash */ ''
+  home.activation.makeFishInits = lib.hm.dag.entryAfter ["writeBoundary"] /* bash */ ''
     run mkdir -p ${inits}
     run rm ${inits}/*.fish || true # Ensure no cruft
 
@@ -69,7 +69,9 @@ in
     run ${lib.getExe config.programs.atuin.package}    init fish                   > ${inits}/atuin.fish
     run ${lib.getExe config.programs.starship.package} init fish --print-full-init > ${inits}/starship.fish
     run ${lib.getExe config.programs.zoxide.package}   init fish                   > ${inits}/zoxide.fish
+  '';
 
+  home.activation.makeFishCompletions = lib.hm.dag.entryAfter ["writeBoundary"] /* bash */ ''
     run mkdir -p ${completions}
 
     run ${lib.getExe config.programs.atuin.package}    gen-completions --shell fish > ${completions}/atuin.fish
