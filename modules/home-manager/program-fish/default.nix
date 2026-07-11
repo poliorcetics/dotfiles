@@ -78,6 +78,6 @@ in
     run ${lib.getExe config.programs.starship.package} completions fish             > ${completions}/starship.fish
 
     run ln -f ${config.xdg.cacheHome}/helix-repo/contrib/completion/hx.fish           ${completions}/hx.fish || true
-    run ln -f ~/repos/tp/helix/contrib/completion/hx.fish                             ${completions}/hx.fish || true
+    run ln -f ${config.home.homeDirectory}/repos/tp/helix/contrib/completion/hx.fish  ${completions}/hx.fish || true
   '';
 }
