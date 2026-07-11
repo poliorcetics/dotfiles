@@ -83,7 +83,7 @@ in
       # == Misc. ==
       bear # Compile commands for C & C++ projects
       cmake # Compiler orchestration
-      nixfmt-rfc-style # Official formatter for nix
+      nixfmt # Official formatter for nix
       ninja # Compile C & C++ things
       prettier # Code formatter, notably for Web technologies
     ])
