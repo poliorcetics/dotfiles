@@ -74,6 +74,11 @@ in
     run ${lib.getExe config.programs.zoxide.package}   init fish                   > ${inits}/zoxide.fish
 
     run mkdir -p ${completions}
-    run ${fish} ${./downloaded-completions.fish} ${completions}
+
+    run ${lib.getExe config.programs.atuin.package}    gen-completions --shell fish > ${completions}/atuin.fish
+    run ${lib.getExe config.programs.starship.package} completions fish             > ${completions}/starship.fish
+
+    run ln -f ${config.xdg.cacheHome}/helix-repo/contrib/completion/hx.fish           ${completions}/hx.fish || true
+    run ln -f ~/repos/tp/helix/contrib/completion/hx.fish                             ${completions}/hx.fish || true
   '';
 }
