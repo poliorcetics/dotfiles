@@ -66,7 +66,7 @@ in
     run rm ${inits}/*.fish || true # Ensure no cruft
 
     # See `inits` definition above
-    run ${lib.getExe config.programs.atuin.package}    init fish                   > ${inits}/atuin.fish
+    run ${lib.getExe config.programs.atuin.package}    init fish --disable-ai      > ${inits}/atuin.fish
     run ${lib.getExe config.programs.starship.package} init fish --print-full-init > ${inits}/starship.fish
     run ${lib.getExe config.programs.zoxide.package}   init fish                   > ${inits}/zoxide.fish
   '';

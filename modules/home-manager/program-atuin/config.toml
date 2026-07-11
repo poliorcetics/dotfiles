@@ -1,4 +1,4 @@
-# Settings: <https://atuin.sh/docs/config/>
+# Settings: <https://docs.atuin.sh/cli/configuration/config/>
 enter_accept = true
 exit_mode = "return-query"
 filter_mode_shell_up_key_binding = "directory"
@@ -8,6 +8,9 @@ show_numeric_shortcuts = false
 style = "compact"
 sync_frequency = "24h"
 update_check = false
+
+[ai]
+enabled = false
 
 [sync]
 records = true
