@@ -37,6 +37,9 @@ space = "all"
 tab = "all"
 newline = "none"
 
+[editor.workspace-trust]
+level = "none"
+
 [editor.indent-guides]
 render = true
 character = "▏"
