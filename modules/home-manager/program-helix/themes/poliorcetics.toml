@@ -118,7 +118,7 @@ rainbow = [
 "clean" = "keyword"
 "comment" = "comment"
 "comment.block.documentation" = "comment_doc"
-"comment.documentation" = "comment_doc"
+"comment.line.documentation" = "comment_doc"
 "constant" = "constant"
 "constant.builtin.boolean" = { fg = "constant", modifiers = ["bold"] }
 "constant.character.escape" = { fg = "text", modifiers = ["bold"] }
