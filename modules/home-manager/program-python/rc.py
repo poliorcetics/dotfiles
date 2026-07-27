@@ -24,16 +24,12 @@ try:
     readline.read_history_file(history)
 except OSError:
     pass
-except IOError:
-    pass
 
 
 def write_history():
     try:
         readline.write_history_file(history)
     except OSError:
-        pass
-    except IOError:
         pass
 
 
