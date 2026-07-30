@@ -101,6 +101,8 @@ z = "lsp_or_syntax_workspace_symbol_picker"
 c = ["kill_to_line_end", "insert_mode"]
 m = "select_references_to_symbol_under_cursor"
 
+"=" = ":reflow 100"
+
 [keys.normal.g]
 up = "goto_first_diag"
 down = "goto_last_diag"
